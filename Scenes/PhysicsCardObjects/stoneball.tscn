@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://b6vskc5v7mgjk"]
+
+[ext_resource type="PackedScene" uid="uid://bbsse1b5w57it" path="res://Scenes/PhysicsCardObjects/physics_object.tscn" id="1_uwe44"]
+[ext_resource type="Texture2D" uid="uid://bb4p0qmdm2y7f" path="res://Assets/Sprites/StoneBallLighting.png" id="2_jabpf"]
+[ext_resource type="Texture2D" uid="uid://cxvn8q43034sv" path="res://Assets/Sprites/StoneBallUnlit.png" id="3_h0owd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dujdr"]
+radius = 100.0
+
+[node name="StoneBall" instance=ExtResource("1_uwe44")]
+metadata/HoldOffset = 50.0
+
+[node name="RigidBody2D" type="RigidBody2D" parent="." index="0"]
+collision_layer = 5
+collision_mask = 3
+mass = 40.0
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D" index="0"]
+texture = ExtResource("3_h0owd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D" index="1"]
+shape = SubResource("CircleShape2D_dujdr")
+
+[node name="LockedSprite" type="Sprite2D" parent="." index="1"]
+position = Vector2(1, 1)
+texture = ExtResource("2_jabpf")
