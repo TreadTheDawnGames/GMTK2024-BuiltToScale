@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://3a0a7uvtuquw"]
+
+[ext_resource type="Texture2D" uid="uid://ccwdhphisddai" path="res://Assets/Sprites/PigArm.png" id="1_386sm"]
+
+[node name="PigHoldArm" type="Node2D"]
+
+[node name="PigArm" type="Sprite2D" parent="."]
+texture = ExtResource("1_386sm")
+centered = false
+offset = Vector2(-15, 0)
