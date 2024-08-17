@@ -1,0 +1,93 @@
+[gd_scene load_steps=5 format=3 uid="uid://b4n22hl22qqef"]
+
+[ext_resource type="Texture2D" uid="uid://dpvytd5bpms38" path="res://Assets/Sprites/Deck/Shoppe/ShopUI.png" id="1_qvxdu"]
+[ext_resource type="Texture2D" uid="uid://dee0m22qdydys" path="res://Assets/Sprites/Deck/Shoppe/CardPanel.png" id="2_umod0"]
+[ext_resource type="Script" path="res://Scenes/PhysicsCardObjects/Shop/PermShopSlot.cs" id="3_vtxsv"]
+[ext_resource type="Script" path="res://Scenes/PhysicsCardObjects/Shop/RandShopSlot.cs" id="4_ar5e3"]
+
+[node name="Shop" type="TextureRect"]
+texture = ExtResource("1_qvxdu")
+
+[node name="CardPanel1" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 207.0
+offset_top = 98.0
+offset_right = 389.0
+offset_bottom = 356.0
+texture = ExtResource("2_umod0")
+script = ExtResource("3_vtxsv")
+
+[node name="Marker2D" type="Marker2D" parent="CardPanel1"]
+position = Vector2(9, 9)
+
+[node name="CardPanel2" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 440.0
+offset_top = 102.0
+offset_right = 622.0
+offset_bottom = 360.0
+texture = ExtResource("2_umod0")
+script = ExtResource("3_vtxsv")
+
+[node name="Marker2D" type="Marker2D" parent="CardPanel2"]
+position = Vector2(9, 9)
+
+[node name="CardPanel3" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 698.0
+offset_top = 104.0
+offset_right = 880.0
+offset_bottom = 362.0
+texture = ExtResource("2_umod0")
+script = ExtResource("3_vtxsv")
+
+[node name="Marker2D" type="Marker2D" parent="CardPanel3"]
+position = Vector2(9, 9)
+
+[node name="CardPanel4" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 101.0
+offset_top = 449.0
+offset_right = 283.0
+offset_bottom = 707.0
+texture = ExtResource("2_umod0")
+script = ExtResource("4_ar5e3")
+
+[node name="Marker2D" type="Marker2D" parent="CardPanel4"]
+position = Vector2(9, 9)
+
+[node name="CardPanel5" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 350.0
+offset_top = 453.0
+offset_right = 532.0
+offset_bottom = 711.0
+texture = ExtResource("2_umod0")
+script = ExtResource("4_ar5e3")
+
+[node name="Marker2D" type="Marker2D" parent="CardPanel5"]
+position = Vector2(9, 9)
+
+[node name="CardPanel6" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 598.0
+offset_top = 458.0
+offset_right = 780.0
+offset_bottom = 716.0
+texture = ExtResource("2_umod0")
+script = ExtResource("4_ar5e3")
+
+[node name="Marker2D" type="Marker2D" parent="CardPanel6"]
+position = Vector2(9, 9)
+
+[node name="CardPanel7" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 831.0
+offset_top = 457.0
+offset_right = 1013.0
+offset_bottom = 715.0
+texture = ExtResource("2_umod0")
+script = ExtResource("4_ar5e3")
+
+[node name="Marker2D" type="Marker2D" parent="CardPanel7"]
+position = Vector2(9, 9)

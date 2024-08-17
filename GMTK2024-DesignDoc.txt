@@ -41,6 +41,14 @@ Programming
 	   - Objects
 	   - Stable Platform
 	   - Glue
+	- Character
+		- Hold/Drop Objects
+		- Movement
+	- Objects
+	   - Shop
+	   - Objects
+	   - Stable Platform
+	   - Glue
 
 
 Caspian
@@ -49,10 +57,20 @@ Caspian
 	- discard pile
 	- shuffle
 	   
+- Deck
+	- Cards
+	- Discard Pile
+	- Shuffle
+	   
 - Money
+	- Money Line
 	- Money Line
 
 - UI   
+	- Shop
+		- Selling/Spending
+		- Card Obtaining
+		- Inventory
 	- Shop
 		- Selling/Spending
 		- Card Obtaining
@@ -61,6 +79,9 @@ Caspian
 
 
 Whoever gets here first
+	- Menus
+		- Main
+		- Pause?
 	- Menus
 		- Main
 		- Pause?
@@ -78,6 +99,10 @@ Art
 	- Shop
 	- Main Menu
 	- Pause?
+	- Game
+	- Shop
+	- Main Menu
+	- Pause?
 
 
 
@@ -86,3 +111,4 @@ Sound
 - SFX
 
 Testing
+

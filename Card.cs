@@ -24,12 +24,11 @@ public partial class Card : Control
 
         var physObj = GD.Load<PackedScene>(Data.PathToPhysObj);
 
-        var scene = physObj.Instantiate();
-        var sprite = scene.GetNode<Sprite2D>("RigidBody2D/Sprite2D");
+        var scene = physObj.Instantiate<physics_object>();
 
         OGPos = Data.OGPosition;
 
-        symbol.Texture = sprite.Texture;
+        symbol.Texture = scene.symbol;
         // symbol.Hide();
 
         GrabbableSprite = GetNode<Area2D>("Backing");
