@@ -11,14 +11,23 @@ config_version=5
 [application]
 
 config/name="GMTK2024-BuiltToScale"
-config/features=PackedStringArray("4.2", "GL Compatibility")
+run/main_scene="res://Scenes/game_test_cards.tscn"
+config/features=PackedStringArray("4.2", "C#", "GL Compatibility")
 config/icon="res://Assets/Sprites/icon.svg"
 
 [dotnet]
 
 project/assembly_name="GMTK2024-BuiltToScale"
 
+[layer_names]
+
+2d_physics/layer_17="Cards"
+2d_physics/layer_18="DiscardPile"
+2d_physics/layer_19="PlayArea"
+2d_physics/layer_21="Mouse"
+
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"

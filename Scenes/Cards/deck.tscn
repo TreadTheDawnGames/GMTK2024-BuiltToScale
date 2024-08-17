@@ -1,0 +1,81 @@
+[gd_scene load_steps=8 format=3 uid="uid://xy71mg3ttuj1"]
+
+[ext_resource type="Texture2D" uid="uid://7pa05r4fslaa" path="res://Assets/Sprites/Deck/DeckButton.png" id="1_gayhq"]
+[ext_resource type="Script" path="res://Scripts/DeckManager.cs" id="1_u51mg"]
+[ext_resource type="Texture2D" uid="uid://cwjrm4jwsjdk3" path="res://Assets/Sprites/Deck/DeckButtonPressed.png" id="2_ke42w"]
+[ext_resource type="Texture2D" uid="uid://bvksys4xxk3g0" path="res://Assets/Sprites/Deck/DeckButtonHovered.png" id="3_xgnxo"]
+[ext_resource type="Script" path="res://Scenes/Cards/CardSlot.cs" id="5_6qoh6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cn5t3"]
+size = Vector2(282, 267.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_obl7v"]
+size = Vector2(124, 210)
+
+[node name="Deck" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_u51mg")
+
+[node name="DrawPile" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 930.0
+offset_top = 383.0
+offset_right = 1094.0
+offset_bottom = 623.0
+action_mode = 0
+texture_normal = ExtResource("1_gayhq")
+texture_pressed = ExtResource("2_ke42w")
+texture_hover = ExtResource("3_xgnxo")
+
+[node name="PlayArea" type="Area2D" parent="."]
+collision_layer = 262144
+collision_mask = 65536
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayArea"]
+position = Vector2(545, 227.25)
+shape = SubResource("RectangleShape2D_cn5t3")
+
+[node name="DiscardPile" type="Area2D" parent="."]
+collision_layer = 131072
+collision_mask = 65536
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DiscardPile"]
+position = Vector2(91, 506)
+shape = SubResource("RectangleShape2D_obl7v")
+
+[node name="Hand" type="Node2D" parent="."]
+position = Vector2(492, 430)
+
+[node name="CardSlot" type="Marker2D" parent="Hand"]
+position = Vector2(-269, -1)
+script = ExtResource("5_6qoh6")
+
+[node name="CardSlot2" type="Marker2D" parent="Hand"]
+position = Vector2(-113, -1)
+script = ExtResource("5_6qoh6")
+
+[node name="CardSlot3" type="Marker2D" parent="Hand"]
+script = ExtResource("5_6qoh6")
+
+[node name="CardSlot4" type="Marker2D" parent="Hand"]
+position = Vector2(134, 0)
+script = ExtResource("5_6qoh6")
+
+[node name="CardSlot5" type="Marker2D" parent="Hand"]
+position = Vector2(271, -2)
+script = ExtResource("5_6qoh6")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 58.0
+offset_top = 332.0
+offset_right = 121.0
+offset_bottom = 363.0
+text = "Shuffle
+"
