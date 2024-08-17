@@ -1,9 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://5y2u7m3xdh0d"]
+[gd_scene load_steps=3 format=3 uid="uid://cgun7c08vc4om"]
 
 [ext_resource type="PackedScene" uid="uid://bbsse1b5w57it" path="res://Scenes/PhysicsCardObjects/physics_object.tscn" id="1_5kt5b"]
-[ext_resource type="Texture2D" uid="uid://d1tq8vx6tj4rb" path="res://Assets/Sprites/Cone.png" id="2_1iwq7"]
+[ext_resource type="Texture2D" uid="uid://p0cd8ysugi3u" path="res://Assets/Sprites/Objects/Cone.png" id="2_1iwq7"]
 
 [node name="Crate" instance=ExtResource("1_5kt5b")]
+symbol = ExtResource("2_1iwq7")
 metadata/HoldOffset = 50.0
 
 [node name="RigidBody2D" type="RigidBody2D" parent="." index="0"]
