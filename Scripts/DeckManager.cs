@@ -40,7 +40,7 @@ public partial class DeckManager : Control
 
 		for (int i = 0; i < 5; i++)
 		{
-			deck.Enqueue(new CardData("This/is/a/path", "Card" + i));
+			deck.Enqueue(new CardData(GetRandType(), "Card" + i));
 			GD.Print(i + " cards in the deck");
 
 
@@ -55,32 +55,32 @@ public partial class DeckManager : Control
 
 	}
 
-	Texture2D GetRandType()
+	string GetRandType()
 	{
-        int rand = (int)GD.RandRange(0, 2);
+		int rand = 0;//(int)GD.RandRange(0, 2);
 
         GD.Print("Rand: " + rand);
-        Texture2D symbol;
+        string originPath = "res://Scenes/PhysicsCardObjects/";
         switch (rand)
         {
             case 0:
-                symbol = GD.Load<Texture2D>("res://Assets/Sprites/Objects/Log.png");
+                originPath += "crate.tscn";
                 break;
             case 1:
-                symbol = GD.Load<Texture2D>("res://Assets/Sprites/Objects/Bowl.png");
-                break;
+				originPath += "NextNode";
+				break;
             case 2:
-                symbol = GD.Load<Texture2D>("res://Assets/Sprites/Objects/Rock.png");
+                originPath += "AnotherNode";
                 break;
 
             default:
-                symbol = GD.Load<Texture2D>("res://Assets/Sprites/Objects/Bowl.png");
+                originPath += "crate.tscn";
                 GD.Print("GOT BAD NUMBER");
                 break;
 
         }
 
-		return symbol;
+		return originPath;
     }
 	
 
@@ -175,7 +175,7 @@ public partial class DeckManager : Control
 
 	void CheckForPlay()
 	{
-		if (discardArea.HasOverlappingAreas())
+		if (playArea.HasOverlappingAreas())
 		{
 			foreach (var area in discardArea.GetOverlappingAreas())
 			{
