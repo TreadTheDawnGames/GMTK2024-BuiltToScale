@@ -7,7 +7,12 @@ public partial class CardData : Node
     public string PathToPhysObj { get; private set; }
     string name;
     public bool discardable;
+    public bool playable;
     public CardSlot Slot;
+
+    public Vector2 OGPosition;
+
+    public int cost;
 
     public CardData(string obj, string name)
     {

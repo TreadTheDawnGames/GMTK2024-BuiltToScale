@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://bkqsm0gyrgae4"]
+[gd_scene load_steps=2 format=3 uid="uid://bbsse1b5w57it"]
 
 [ext_resource type="Script" path="res://Scripts/physics_object.cs" id="1_vc11m"]
 
 [node name="physicsObject" type="Node2D"]
 script = ExtResource("1_vc11m")
-metadata/StartRotation = 0.0
 metadata/HoldOffset = 0.0
+metadata/Static = false

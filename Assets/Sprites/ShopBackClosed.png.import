@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cwjrm4jwsjdk3"
-path="res://.godot/imported/DeckButtonPressed.png-f9b11d5c1f5d397dd71f875b8de8900d.ctex"
+uid="uid://dweceul1smcbl"
+path="res://.godot/imported/ShopBackClosed.png-0d5ff33788993a493749d8f51fe1370f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Deck/DeckButtonPressed.png"
-dest_files=["res://.godot/imported/DeckButtonPressed.png-f9b11d5c1f5d397dd71f875b8de8900d.ctex"]
+source_file="res://Assets/Sprites/ShopBackClosed.png"
+dest_files=["res://.godot/imported/ShopBackClosed.png-0d5ff33788993a493749d8f51fe1370f.ctex"]
 
 [params]
 

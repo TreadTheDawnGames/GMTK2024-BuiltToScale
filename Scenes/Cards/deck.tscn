@@ -1,11 +1,11 @@
 [gd_scene load_steps=11 format=3 uid="uid://xy71mg3ttuj1"]
 
-[ext_resource type="Texture2D" path="res://Assets/Sprites/Deck/DrawPile/DeckButton.png" id="1_gayhq"]
 [ext_resource type="Script" path="res://Scripts/DeckManager.cs" id="1_u51mg"]
-[ext_resource type="Texture2D" path="res://Assets/Sprites/Deck/DrawPile/DeckButtonPressed.png" id="2_ke42w"]
-[ext_resource type="Texture2D" path="res://Assets/Sprites/Deck/DrawPile/DeckButtonProgressBottom.png" id="2_xskko"]
-[ext_resource type="Texture2D" path="res://Assets/Sprites/Deck/DrawPile/DeckButtonProgressFill.png" id="3_cio11"]
-[ext_resource type="Texture2D" path="res://Assets/Sprites/Deck/DrawPile/DeckButtonHovered.png" id="3_xgnxo"]
+[ext_resource type="Texture2D" uid="uid://7pa05r4fslaa" path="res://Assets/Sprites/Deck/DrawPile/DeckButton.png" id="2_3bute"]
+[ext_resource type="Texture2D" uid="uid://b1rn8reqlgder" path="res://Assets/Sprites/Deck/DrawPile/DeckButtonProgressBottom.png" id="2_xskko"]
+[ext_resource type="Texture2D" uid="uid://dtntrds7s7tth" path="res://Assets/Sprites/Deck/DrawPile/DeckButtonProgressFill.png" id="3_cio11"]
+[ext_resource type="Texture2D" uid="uid://cwjrm4jwsjdk3" path="res://Assets/Sprites/Deck/DrawPile/DeckButtonPressed.png" id="3_ckwx1"]
+[ext_resource type="Texture2D" uid="uid://bvksys4xxk3g0" path="res://Assets/Sprites/Deck/DrawPile/DeckButtonHovered.png" id="4_tuf0p"]
 [ext_resource type="Script" path="res://Scenes/Cards/CardSlot.cs" id="5_6qoh6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cn5t3"]
@@ -44,9 +44,9 @@ offset_right = 164.0
 offset_bottom = 240.0
 focus_mode = 0
 action_mode = 0
-texture_normal = ExtResource("1_gayhq")
-texture_pressed = ExtResource("2_ke42w")
-texture_hover = ExtResource("3_xgnxo")
+texture_normal = ExtResource("2_3bute")
+texture_pressed = ExtResource("3_ckwx1")
+texture_hover = ExtResource("4_tuf0p")
 
 [node name="PlayArea" type="Area2D" parent="."]
 collision_layer = 262144

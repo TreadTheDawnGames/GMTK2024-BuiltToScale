@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://7pa05r4fslaa"
-path="res://.godot/imported/DeckButton.png-bcf242a262591e3e0f584d6b90b2a3e4.ctex"
+uid="uid://d2xgy3kxiitpx"
+path="res://.godot/imported/Shop.png-d68d6509a00acdac3e571f8e1825231c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Deck/DeckButton.png"
-dest_files=["res://.godot/imported/DeckButton.png-bcf242a262591e3e0f584d6b90b2a3e4.ctex"]
+source_file="res://Assets/Sprites/Shop.png"
+dest_files=["res://.godot/imported/Shop.png-d68d6509a00acdac3e571f8e1825231c.ctex"]
 
 [params]
 
