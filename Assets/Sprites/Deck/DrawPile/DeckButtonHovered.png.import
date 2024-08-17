@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bvksys4xxk3g0"
-path="res://.godot/imported/DeckButtonHovered.png-ad622c7bd95d6ce84303bc923e5bb311.ctex"
+path="res://.godot/imported/DeckButtonHovered.png-1b57946347289b2841a81b6fcc7a9661.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Deck/DeckButtonHovered.png"
-dest_files=["res://.godot/imported/DeckButtonHovered.png-ad622c7bd95d6ce84303bc923e5bb311.ctex"]
+source_file="res://Assets/Sprites/Deck/DrawPile/DeckButtonHovered.png"
+dest_files=["res://.godot/imported/DeckButtonHovered.png-1b57946347289b2841a81b6fcc7a9661.ctex"]
 
 [params]
 
