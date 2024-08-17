@@ -94,12 +94,13 @@ public partial class player_char : RigidBody2D
 
 		// Test spawn object
 		if (Input.IsActionJustPressed("Interact") && holding == null)
-			SpawnObject("res://Scenes/PhysicsCardObjects/crate.tscn");
+			SpawnObject("res://Scenes/PhysicsCardObjects/shop.tscn");
 
 		// Holding object
 		if (holding != null)
 		{
 			mySprite.Animation = "carry";
+			var rigid = holding.GetNode<RigidBody2D>("RigidBody2D");
 
 			// Handle pig arm position
 			pigArm.GlobalPosition = GlobalPosition;
@@ -138,10 +139,35 @@ public partial class player_char : RigidBody2D
 			if (Input.IsActionPressed("RotateRight"))
 				holding.Rotate((float)(2/(180/Math.PI)));
 
+			if (rigid.MoveAndCollide(new Vector2(0,.1f), true) == null &&
+				rigid.MoveAndCollide(new Vector2(0,-.1f), true) == null &&
+				rigid.MoveAndCollide(new Vector2(.1f,0), true) == null && 
+				rigid.MoveAndCollide(new Vector2(-.1f,0), true) == null &&
+				rigid.MoveAndCollide(new Vector2(.1f,.1f), true) == null &&
+				rigid.MoveAndCollide(new Vector2(.1f,-.1f), true) == null &&
+				rigid.MoveAndCollide(new Vector2(-.1f,-.1f), true) == null && 
+				rigid.MoveAndCollide(new Vector2(-.1f,.1f), true) == null)
+			{
+                var modu = holding.Modulate;
+                modu.R = 1;
+                modu.B = 1;
+				modu.G = 1;
+				modu.A = 0.5f;
+                holding.Modulate = modu;
+			}
+			else
+			{
+                var modu = holding.Modulate;
+                modu.R = 1;
+				modu.G = 0;
+                modu.B = 0;
+				modu.A = 0.5f;
+                holding.Modulate = modu;
+			}
+			
 			// Place held object
 			if (Input.IsActionJustPressed("Interact") && isHolding == true)
 			{
-				var rigid = holding.GetNode<RigidBody2D>("RigidBody2D");
 				rigid.SetCollisionMaskValue(3, true);
 				if (rigid.MoveAndCollide(new Vector2(0,.1f), true) == null &&
 					rigid.MoveAndCollide(new Vector2(0,-.1f), true) == null &&
@@ -152,7 +178,9 @@ public partial class player_char : RigidBody2D
 					rigid.MoveAndCollide(new Vector2(-.1f,-.1f), true) == null && 
 					rigid.MoveAndCollide(new Vector2(-.1f,.1f), true) == null)
 				{
-					rigid.Freeze = false;
+					if ((bool)holding.GetMeta("Static") == false)
+						rigid.Freeze = false;
+					((physics_object)holding).isHeld = false;
 					isHolding = false;
 					holding = null;
 					pigArm.QueueFree();
@@ -179,6 +207,8 @@ public partial class player_char : RigidBody2D
 		rigid.Freeze = true;
 		holding = inst;
 		
+		((physics_object)holding).isHeld = true;
+
 		ps = GD.Load<PackedScene>("res://Scenes/pig_hold_arm.tscn");
 		inst = ps.Instantiate<Node2D>();
 		GetTree().Root.AddChild(inst);
