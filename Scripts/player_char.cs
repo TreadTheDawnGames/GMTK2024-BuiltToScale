@@ -231,8 +231,10 @@ public partial class player_char : RigidBody2D
 		}
 	}
 
-	public void SpawnObject(string path)
+	public bool SpawnObject(string path)
 	{
+		if(holding!=null) return false;
+
 		var ps = GD.Load<PackedScene>(path);
 		var inst = ps.Instantiate<Node2D>();
 		GetTree().Root.AddChild(inst);
@@ -248,5 +250,7 @@ public partial class player_char : RigidBody2D
 		inst = ps.Instantiate<Node2D>();
 		GetTree().Root.AddChild(inst);
 		pigArm = inst;
+
+		return true;
 	}
 }

@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Medallion;
 using System.Linq;
+using System.IO;
 
 public partial class DeckManager : Control
 {
@@ -22,6 +23,9 @@ public partial class DeckManager : Control
 
 	TextureProgressBar cardCountBar;
 
+	AudioStreamPlayer shuffleSound;
+	AudioStreamPlayer flipSound;
+
 	public static DeckManager Instance { get; private set; }
 
 	public bool cardHeld = false;
@@ -31,8 +35,14 @@ public partial class DeckManager : Control
 	{
 		DrawPile = GetNode<TextureButton>("TextureProgressBar/DrawPile");
 		DrawPile.Pressed += DrawCard;
+		cardSlots = GetNode("Hand").GetChildren().OfType<CardSlot>().ToArray();
+        playArea = GetNode<Area2D>("PlayArea");
+		shuffleSound = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
+		flipSound = GetNode<AudioStreamPlayer>("CardFlipSound");
 
-		cardCountBar = GetNode<TextureProgressBar>("TextureProgressBar");
+        discardArea = GetNode<Area2D>("DiscardPile");
+
+        cardCountBar = GetNode<TextureProgressBar>("TextureProgressBar");
 
 		if(Instance == null)
 		{
@@ -41,51 +51,25 @@ public partial class DeckManager : Control
 
 		for (int i = 0; i < 10; i++)
 		{
-			deck.Enqueue(new CardData(GetRandType(), "Card" + i));
-			GD.Print(i + " cards in the deck");
+			deck.Enqueue(CardAssembler.Rand());
+		}
 
 
+		GD.Print(deck.Count  +" cards in deck");
+		for (int i = 0; i < cardSlots.GetLength(0); i++)
+		{
+			GD.Print(cardSlots.GetLength(0));
+			DrawCard();
 		}
 
 		cardCountBar.MaxValue = deck.Count;
 		cardCountBar.Value = deck.Count;
 
-		playArea = GetNode<Area2D>("PlayArea");
-		
 
-		discardArea = GetNode<Area2D>("DiscardPile");
-
-		cardSlots = GetNode("Hand").GetChildren().OfType<CardSlot>().ToArray();
 
 	}
 
-	string GetRandType()
-	{
-		int rand = 0;//(int)GD.RandRange(0, 2);
-
-        GD.Print("Rand: " + rand);
-        string originPath = "res://Scenes/PhysicsCardObjects/";
-        switch (rand)
-        {
-            case 0:
-                originPath += "crate.tscn";
-                break;
-            case 1:
-				originPath += "NextNode";
-				break;
-            case 2:
-                originPath += "AnotherNode";
-                break;
-
-            default:
-                originPath += "crate.tscn";
-                GD.Print("GOT BAD NUMBER");
-                break;
-
-        }
-
-		return originPath;
-    }
+	
 
 
 	void DrawCard()
@@ -131,7 +115,10 @@ public partial class DeckManager : Control
 		}
 
 		if (card == null)
+		{
+			GD.Print("CardData was null");
 			return;
+		}
 
 		
 
@@ -145,6 +132,18 @@ public partial class DeckManager : Control
 		hand.Add(card);
 		cardCountBar.Value = deck.Count;
 
+		PlayFlipSound();
+
+	}
+
+	void PlayFlipSound()
+	{
+		int rand = (int)(GD.Randi() % 2);
+		flipSound.Stream = GD.Load<AudioStream>("res://Assets/Sounds/Cards/FlipSounds/CardFlip" + rand + ".wav");
+
+		
+
+		flipSound.Play();
 	}
 
 
@@ -160,6 +159,7 @@ public partial class DeckManager : Control
 	void Shuffle()
 	{
 		GD.Print("SHUFFLED!");
+		shuffleSound.Play();
 		foreach(CardData card in discard.Shuffled().ToList<CardData>())
 		{
 			deck.Enqueue(card);
@@ -185,7 +185,7 @@ public partial class DeckManager : Control
 
     }
 
-	void CheckForDiscard()
+	bool CheckForDiscard()
 	{
         if (discardArea.HasOverlappingAreas())
         {
@@ -202,13 +202,15 @@ public partial class DeckManager : Control
                     {
                         GD.Print("Discarded");
                         DiscardCard(card);
+						return true;
                     }
                 }
             }
         }
+		return false;
     }
 
-	void CheckForPlay()
+	bool CheckForPlay()
 	{
 		if (playArea.HasOverlappingAreas())
 		{
@@ -217,26 +219,28 @@ public partial class DeckManager : Control
 				GD.Print("Got card");
 
 				Card card = (Card)area.Owner;
-                if (card.Data.playable)
+				if (card.Data.playable)
 				{
 					GD.Print("Playable");
 					if (!Input.IsMouseButtonPressed(MouseButton.Left))
 					{
-
-
-						GameManager.Instance.TriggerCard(card.Data.PathToPhysObj);
-						DiscardCard(card);
+						if (GameManager.Instance.TriggerCard(card.Data.PathToPhysObj))
+						{
+							DiscardCard(card);
+							return true;
+						}
 					}
 				}
 			}
 		}
+		return false;
 	}
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
 	{
-		CheckForDiscard();
+		if(CheckForDiscard()) return;
+		if(CheckForPlay()) return;
 
-		CheckForPlay();
 	}
 }
