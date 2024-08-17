@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://biecsihwn6q3l"]
 
-[ext_resource type="PackedScene" path="res://Scenes/player_char.tscn" id="2_4km2f"]
+[ext_resource type="PackedScene" uid="uid://c74uxnvapn034" path="res://Scenes/player_char.tscn" id="2_4km2f"]
 [ext_resource type="Texture2D" uid="uid://bxqc3wjmnxfkd" path="res://Assets/Sprites/Grass.png" id="2_sjrln"]
-[ext_resource type="PackedScene" path="res://Scenes/camera.tscn" id="3_buxj5"]
+[ext_resource type="PackedScene" uid="uid://n286cy3dbbn0" path="res://Scenes/camera.tscn" id="3_buxj5"]
 [ext_resource type="PackedScene" uid="uid://xy71mg3ttuj1" path="res://Scenes/Cards/deck.tscn" id="4_vv3gu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8l27s"]

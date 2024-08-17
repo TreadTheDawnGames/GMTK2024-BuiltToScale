@@ -28,6 +28,7 @@ offset_left = 930.0
 offset_top = 383.0
 offset_right = 1094.0
 offset_bottom = 623.0
+focus_mode = 0
 action_mode = 0
 texture_normal = ExtResource("1_gayhq")
 texture_pressed = ExtResource("2_ke42w")
