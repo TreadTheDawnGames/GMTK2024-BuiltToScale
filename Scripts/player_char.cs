@@ -18,6 +18,10 @@ public partial class player_char : RigidBody2D
 	bool isHolding = false;
 	Node2D pigArm;
 	Camera2D cam;
+	int spawn;
+	int coyoteTime = 0;
+	int coyoteTimeMax = 10;
+
 
 	public override void _Ready()
 	{
@@ -50,8 +54,19 @@ public partial class player_char : RigidBody2D
 		if (MoveAndCollide(new Vector2(0,1), true) != null)
 		{
 			spd = grndspd;
-			if (Input.IsActionJustPressed("Jump"))
-				ApplyImpulse(new Vector2(0,maxjump), new Vector2(Position.X, Position.Y + 10));
+			coyoteTime = coyoteTimeMax;
+		}
+		else
+		{
+			coyoteTime--;
+		}
+		
+		if (Input.IsActionJustPressed("Jump") && coyoteTime > 0)
+		{
+			linvel .Y = 0;
+			LinearVelocity = linvel;
+			ApplyImpulse(new Vector2(0,maxjump), new Vector2(Position.X, Position.Y + 10));
+			coyoteTime = 0;
 		}
 
 		// Horizontal movement
@@ -93,8 +108,22 @@ public partial class player_char : RigidBody2D
 		Position = pos;
 
 		// Test spawn object
-		//if (Input.IsActionJustPressed("Interact") && holding == null)
-			//SpawnObject("res://Scenes/PhysicsCardObjects/shop.tscn");
+		if (Input.IsActionJustPressed("Interact") && holding == null)
+		{
+			SpawnObject("res://Scenes/PhysicsCardObjects/toilet.tscn");
+			/*
+			if (spawn == 1)
+			{
+				SpawnObject("res://Scenes/PhysicsCardObjects/shop.tscn");
+				spawn = 0;
+			}
+			else
+			{
+				SpawnObject("res://Scenes/PhysicsCardObjects/crate.tscn");
+				spawn = 1;
+			}
+			*/
+		}
 
 		// Holding object
 		if (holding != null)
@@ -139,6 +168,8 @@ public partial class player_char : RigidBody2D
 			if (Input.IsActionPressed("RotateRight"))
 				holding.Rotate((float)(2/(180/Math.PI)));
 
+			rigid.SetCollisionMaskValue(3, true);
+			//rigid.SetCollisionMaskValue(4, true);
 			if (rigid.MoveAndCollide(new Vector2(0,.1f), true) == null &&
 				rigid.MoveAndCollide(new Vector2(0,-.1f), true) == null &&
 				rigid.MoveAndCollide(new Vector2(.1f,0), true) == null && 
@@ -164,11 +195,14 @@ public partial class player_char : RigidBody2D
 				modu.A = 0.5f;
                 holding.Modulate = modu;
 			}
+			rigid.SetCollisionMaskValue(3, false);
+			//rigid.SetCollisionMaskValue(4, false);
 			
 			// Place held object
 			if (Input.IsActionJustPressed("Interact") && isHolding == true)
 			{
 				rigid.SetCollisionMaskValue(3, true);
+				//rigid.SetCollisionMaskValue(4, true);
 				if (rigid.MoveAndCollide(new Vector2(0,.1f), true) == null &&
 					rigid.MoveAndCollide(new Vector2(0,-.1f), true) == null &&
 					rigid.MoveAndCollide(new Vector2(.1f,0), true) == null && 
@@ -186,6 +220,7 @@ public partial class player_char : RigidBody2D
 					pigArm.QueueFree();
 				}
 				rigid.SetCollisionMaskValue(3, false);
+				//rigid.SetCollisionMaskValue(4, false);
 			}
 			else
 				isHolding = true;
