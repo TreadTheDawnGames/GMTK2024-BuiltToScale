@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://b5nyuxct5ad2j"]
+
+[ext_resource type="Texture2D" uid="uid://21am7iwoanc6" path="res://Assets/Sprites/PigIdle.png" id="1_5kmbk"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uu7g5"]
+radius = 30.0
+height = 100.0
+
+[node name="CustomChar" type="RigidBody2D"]
+
+[node name="PigIdle" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(783, 633)
+texture = ExtResource("1_5kmbk")
+centered = false
+offset = Vector2(-43, -55)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(790, 638)
+shape = SubResource("CapsuleShape2D_uu7g5")

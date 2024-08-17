@@ -1,0 +1,88 @@
+Deck builder
+
+Player places physics objects to go up to get money, which he can use to buy cards, which spawn physics objects. Lose conditions are fall damage (and deck run out?)
+	Viewport NEVER goes down. If you fall off the bottom you die
+	Viewport goes up after player reaches center of screen
+
+
+Shop card spawns a physical one-use shop.
+Shop has basic cards (board, bucket, rock) which can be bought at any time the shop is open, and random cards which are replenished when bought.
+Rarity (*Fancy*)(?)
+
+deck is limited size (20 for now), when player trashes (sells) card they get a portion of its cost (22%?)
+
+cards bought go in discard which reshuffles after deck is depleated.
+
+when you buy a card if you exceed the deck limit (upgradable?) you must sell a card from your hand 
+
+When you play a card it spawns its object in Character’s hand. Once Character places it, it cannot be picked up again. It does not collide with Character until he leaves its hitbox. (remains transparent).
+
+a Stable Platform is a card which can be bought from the shop. It spawn a platform that has no gravity. VERY EXPENSIVE. Placed by mouse.
+
+Glue card?
+Used on a placed object. All other objects touching that cannot be detached from it.
+
+Money zone
+a line in the world which after you pass it gives you money based on its height. 
+They spawn exponentially higher. It should tell you where the next zone is.
+
+
+
+
+
+Ethan
+Programming
+- Physics
+	- Character
+		- Hold/Drop Objects
+		- Movement
+	- Objects
+	   - Shop
+	   - Objects
+	   - Stable Platform
+	   - Glue
+
+
+Caspian
+- deck
+	- cards
+	- discard pile
+	- shuffle
+	   
+- Money
+	- Money Line
+
+- UI   
+	- Shop
+		- Selling/Spending
+		- Card Obtaining
+		- Inventory
+
+
+
+Whoever gets here first
+	- Menus
+		- Main
+		- Pause?
+
+
+
+Art
+- Background art (Clouds)
+- card art
+- objects art
+- Character
+- Money Zone Line
+- UI
+	- Game
+	- Shop
+	- Main Menu
+	- Pause?
+
+
+
+Sound 
+- Music
+- SFX
+
+Testing

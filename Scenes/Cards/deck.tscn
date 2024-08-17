@@ -1,0 +1,94 @@
+[gd_scene load_steps=11 format=3 uid="uid://xy71mg3ttuj1"]
+
+[ext_resource type="Script" path="res://Scripts/DeckManager.cs" id="1_u51mg"]
+[ext_resource type="Texture2D" uid="uid://7pa05r4fslaa" path="res://Assets/Sprites/Deck/DrawPile/DeckButton.png" id="2_3bute"]
+[ext_resource type="Texture2D" uid="uid://b1rn8reqlgder" path="res://Assets/Sprites/Deck/DrawPile/DeckButtonProgressBottom.png" id="2_xskko"]
+[ext_resource type="Texture2D" uid="uid://dtntrds7s7tth" path="res://Assets/Sprites/Deck/DrawPile/DeckButtonProgressFill.png" id="3_cio11"]
+[ext_resource type="Texture2D" uid="uid://cwjrm4jwsjdk3" path="res://Assets/Sprites/Deck/DrawPile/DeckButtonPressed.png" id="3_ckwx1"]
+[ext_resource type="Texture2D" uid="uid://bvksys4xxk3g0" path="res://Assets/Sprites/Deck/DrawPile/DeckButtonHovered.png" id="4_tuf0p"]
+[ext_resource type="Script" path="res://Scenes/Cards/CardSlot.cs" id="5_6qoh6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cn5t3"]
+size = Vector2(1100, 224.875)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_obl7v"]
+size = Vector2(124, 210)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fp8rx"]
+size = Vector2(905, 86)
+
+[node name="Deck" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_u51mg")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+layout_mode = 0
+offset_left = 1702.0
+offset_top = 796.0
+offset_right = 1866.0
+offset_bottom = 1036.0
+max_value = 20.0
+fill_mode = 3
+texture_under = ExtResource("3_cio11")
+texture_progress = ExtResource("2_xskko")
+
+[node name="DrawPile" type="TextureButton" parent="TextureProgressBar"]
+layout_mode = 0
+offset_right = 164.0
+offset_bottom = 240.0
+focus_mode = 0
+action_mode = 0
+texture_normal = ExtResource("2_3bute")
+texture_pressed = ExtResource("3_ckwx1")
+texture_hover = ExtResource("4_tuf0p")
+
+[node name="PlayArea" type="Area2D" parent="."]
+collision_layer = 262144
+collision_mask = 65536
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayArea"]
+position = Vector2(956, 896.438)
+shape = SubResource("RectangleShape2D_cn5t3")
+
+[node name="DiscardPile" type="Area2D" parent="."]
+position = Vector2(10, 388)
+collision_layer = 131072
+collision_mask = 65536
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DiscardPile"]
+position = Vector2(91, 506)
+shape = SubResource("RectangleShape2D_obl7v")
+
+[node name="Hand" type="Area2D" parent="."]
+position = Vector2(900, -60)
+collision_layer = 0
+collision_mask = 589824
+
+[node name="Area2D" type="Marker2D" parent="Hand"]
+position = Vector2(-344, 0)
+script = ExtResource("5_6qoh6")
+
+[node name="Area2D2" type="Marker2D" parent="Hand"]
+position = Vector2(-172, 0)
+script = ExtResource("5_6qoh6")
+
+[node name="Area2D3" type="Marker2D" parent="Hand"]
+script = ExtResource("5_6qoh6")
+
+[node name="Area2D4" type="Marker2D" parent="Hand"]
+position = Vector2(172, 0)
+script = ExtResource("5_6qoh6")
+
+[node name="Area2D5" type="Marker2D" parent="Hand"]
+position = Vector2(344, 0)
+script = ExtResource("5_6qoh6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hand"]
+position = Vector2(83.5, 33)
+shape = SubResource("RectangleShape2D_fp8rx")
