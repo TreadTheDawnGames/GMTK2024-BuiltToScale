@@ -13,6 +13,7 @@ config_version=5
 config/name="GMTK2024-BuiltToScale"
 run/main_scene="res://Scenes/level.tscn"
 config/features=PackedStringArray("4.2", "C#", "GL Compatibility")
+config/icon="res://Assets/Sprites/icon.svg"
 
 [display]
 
@@ -60,6 +61,13 @@ RotateRight={
 [physics]
 
 2d/default_gravity=1500.0
+
+[layer_names]
+
+2d_physics/layer_17="Cards"
+2d_physics/layer_18="DiscardPile"
+2d_physics/layer_19="PlayArea"
+2d_physics/layer_21="Mouse"
 
 [rendering]
 
