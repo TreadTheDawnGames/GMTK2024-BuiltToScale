@@ -7,6 +7,7 @@ public partial class CardData : Node
     public string PathToPhysObj { get; private set; }
     string name;
     public bool discardable;
+    public bool playable;
     public CardSlot Slot;
 
     public CardData(string obj, string name)

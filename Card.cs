@@ -17,7 +17,14 @@ public partial class Card : Control
     {
         this.Data = data;
         symbol = GetNode<Sprite2D>("Backing/Symbol");
-        symbol.Texture = Data.PathToPhysObj.symbol;
+
+        var physObj = GD.Load<PackedScene>(Data.PathToPhysObj);
+
+        var scene = physObj.Instantiate();
+        var sprite = scene.GetNode<Sprite2D>("RigidBody2D/Sprite2D");
+        
+
+        symbol.Texture = sprite.Texture;
         // symbol.Hide();
         OGPos = Data.Slot.Position;
 
