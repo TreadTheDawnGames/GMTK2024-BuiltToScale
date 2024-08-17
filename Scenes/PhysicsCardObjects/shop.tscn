@@ -1,13 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://brpva5rhi0dwf"]
+[gd_scene load_steps=6 format=3 uid="uid://bsrtnp6ih7lqb"]
 
 [ext_resource type="PackedScene" uid="uid://bbsse1b5w57it" path="res://Scenes/PhysicsCardObjects/physics_object.tscn" id="1_gk17a"]
 [ext_resource type="Texture2D" uid="uid://bhj4qsv06m5p5" path="res://Assets/Sprites/ShopBack.png" id="2_k45xx"]
+[ext_resource type="Texture2D" uid="uid://dlls8difiu5js" path="res://Assets/Sprites/Objects/ShopSymbol.png" id="2_t2sac"]
 [ext_resource type="Texture2D" uid="uid://d2xgy3kxiitpx" path="res://Assets/Sprites/Shop.png" id="2_t7kam"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qkivg"]
 size = Vector2(188, 8)
 
 [node name="Shop" instance=ExtResource("1_gk17a")]
+symbol = ExtResource("2_t2sac")
 metadata/HoldOffset = 80.0
 
 [node name="RigidBody2D" type="RigidBody2D" parent="." index="0"]

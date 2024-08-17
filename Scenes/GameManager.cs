@@ -4,6 +4,7 @@ using System;
 public partial class GameManager : Node2D
 {
 	public static GameManager Instance { get; private set; }
+    player_char Rufus;
 
     public override void _Ready()
     {
@@ -12,10 +13,12 @@ public partial class GameManager : Node2D
         {
             Instance = this;
         }
+        Instance.Rufus = GetNode<player_char>("Rufus");
     }
-    public void TriggerCard(string CardPath)
+    public bool TriggerCard(string CardPath)
 	{
         GD.Print(CardPath);
+        return Rufus.SpawnObject(CardPath);
 	}
 
 }

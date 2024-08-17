@@ -3,6 +3,9 @@ using System;
 
 public partial class physics_object : Node2D
 {
+    [Export]
+    public Texture2D symbol;
+
     public bool isHeld = false;
     public override void _Process(double delta)
     {
