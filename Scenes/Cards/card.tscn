@@ -29,10 +29,13 @@ collision_layer = 1638400
 collision_mask = 393216
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Backing"]
+position = Vector2(1, 0)
 shape = SubResource("RectangleShape2D_405qn")
 
 [node name="Sprite2D" type="Sprite2D" parent="Backing"]
+position = Vector2(1, 0)
 texture = ExtResource("2_bwvv5")
 
 [node name="Symbol" type="Sprite2D" parent="Backing"]
+position = Vector2(1, 0)
 texture = ExtResource("4_6o67o")

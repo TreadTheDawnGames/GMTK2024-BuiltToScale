@@ -5,7 +5,6 @@ public partial class CardData : Node
 {
 
     public string PathToPhysObj { get; private set; }
-    string name;
     public bool discardable;
     public bool playable;
     public CardSlot Slot;
@@ -14,10 +13,11 @@ public partial class CardData : Node
 
     public int cost;
 
-    public CardData(string obj, string name)
+    public CardData(string obj)
     {
         this.PathToPhysObj = obj;
-        this.name = name;
+        discardable = false;
+        playable = false;
     }
 
     public override string ToString()
@@ -27,7 +27,7 @@ public partial class CardData : Node
         {
             other = PathToPhysObj.ToString();
         }
-        return "Name: " + name + " | Value: " + other;
+        return "Value: " + other;
     }
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()

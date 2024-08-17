@@ -26,6 +26,7 @@ Used on a placed object. All other objects touching that cannot be detached from
 
 Money zone
 a line in the world which after you pass it gives you money based on its height. 
+
 They spawn exponentially higher. It should tell you where the next zone is.
 
 
@@ -88,3 +89,9 @@ Sound
 - SFX
 
 Testing
+
+
+
+
+
+Shuffle Sound: https://www.soundjay.com/card-sounds-1.html
