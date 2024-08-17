@@ -19,7 +19,6 @@ config/icon="res://Assets/Sprites/icon.svg"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/size/mode=3
 
 [dotnet]
 
@@ -63,6 +62,7 @@ RotateRight={
 2d_physics/layer_17="Cards"
 2d_physics/layer_18="DiscardPile"
 2d_physics/layer_19="PlayArea"
+2d_physics/layer_20="Hand"
 2d_physics/layer_21="Mouse"
 
 [physics]
