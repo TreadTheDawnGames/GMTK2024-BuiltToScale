@@ -33,37 +33,37 @@ They spawn exponentially higher. It should tell you where the next zone is.
 Ethan
 Programming
 - Physics
-    - Character
-        - Hold/Drop Objects
-        - Movement
-    - Objects
-       - Shop
-       - Objects
-       - Stable Platform
-       - Glue
+	- Character
+		- Hold/Drop Objects
+		- Movement
+	- Objects
+	   - Shop
+	   - Objects
+	   - Stable Platform
+	   - Glue
 
 
 Caspian
-- Deck
-    - Cards
-    - Discard Pile
-    - Shuffle
-       
+- deck
+	- cards
+	- discard pile
+	- shuffle
+	   
 - Money
-    - Money Line
+	- Money Line
 
 - UI   
-    - Shop
-        - Selling/Spending
-        - Card Obtaining
-        - Inventory
+	- Shop
+		- Selling/Spending
+		- Card Obtaining
+		- Inventory
 
 
 
 Whoever gets here first
-    - Menus
-        - Main
-        - Pause?
+	- Menus
+		- Main
+		- Pause?
 
 
 
@@ -74,10 +74,10 @@ Art
 - Character
 - Money Zone Line
 - UI
-    - Game
-    - Shop
-    - Main Menu
-    - Pause?
+	- Game
+	- Shop
+	- Main Menu
+	- Pause?
 
 
 

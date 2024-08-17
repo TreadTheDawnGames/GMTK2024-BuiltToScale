@@ -10,6 +10,10 @@ public partial class CardData : Node
     public bool playable;
     public CardSlot Slot;
 
+    public Vector2 OGPosition;
+
+    public int cost;
+
     public CardData(string obj, string name)
     {
         this.PathToPhysObj = obj;

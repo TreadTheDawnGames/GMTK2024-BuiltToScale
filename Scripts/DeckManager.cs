@@ -9,7 +9,6 @@ public partial class DeckManager : Control
 {
 	
 	TextureButton DrawPile;
-	Button ShuffleButton;
 	PackedScene CardScene = GD.Load<PackedScene>("res://Scenes/Cards/card.tscn");
 
 	Queue<CardData> deck = new Queue<CardData>();
@@ -21,6 +20,8 @@ public partial class DeckManager : Control
 
 	CardSlot[] cardSlots = new CardSlot[5];
 
+	TextureProgressBar cardCountBar;
+
 	public static DeckManager Instance { get; private set; }
 
 	public bool cardHeld = false;
@@ -28,23 +29,26 @@ public partial class DeckManager : Control
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		DrawPile = GetNode<TextureButton>("DrawPile");
+		DrawPile = GetNode<TextureButton>("TextureProgressBar/DrawPile");
 		DrawPile.Pressed += DrawCard;
-		ShuffleButton = GetNode<Button>("Button");
-		ShuffleButton.Pressed += Shuffle;
+
+		cardCountBar = GetNode<TextureProgressBar>("TextureProgressBar");
 
 		if(Instance == null)
 		{
 			Instance = this;
 		}
 
-		for (int i = 0; i < 5; i++)
+		for (int i = 0; i < 10; i++)
 		{
 			deck.Enqueue(new CardData(GetRandType(), "Card" + i));
 			GD.Print(i + " cards in the deck");
 
 
 		}
+
+		cardCountBar.MaxValue = deck.Count;
+		cardCountBar.Value = deck.Count;
 
 		playArea = GetNode<Area2D>("PlayArea");
 		
@@ -82,16 +86,65 @@ public partial class DeckManager : Control
 
 		return originPath;
     }
-	
+
 
 	void DrawCard()
 	{
-		var card = deck.Dequeue();
-		SpawnCard(card);
+		
+		
+		CardSlot attempt;
+		int i = 0;
+		do
+		{
+
+
+			if (i > cardSlots.Length - 1)
+			{
+				GD.Print("Hand Full!");
+				return;
+			}
+			attempt = cardSlots[i++];
+
+
+
+		}
+		while (attempt.occupied);
+
+
+
+		CardData card = null;
+		try
+		{
+			card = deck.Dequeue();
+
+
+
+		}
+		catch
+		{
+			if (discard.Count > 0)
+			{
+
+				Shuffle();
+				DrawCard();
+			}
+		}
+
+		if (card == null)
+			return;
+
 		
 
+		attempt.occupied = true;
 
+		card.Slot = attempt;
+
+		card.OGPosition = attempt.Position;
+
+		SpawnCard(card);
 		hand.Add(card);
+		cardCountBar.Value = deck.Count;
+
 	}
 
 
@@ -101,23 +154,21 @@ public partial class DeckManager : Control
 		hand.Remove(card.Data);
 		discard.Add(card.Data);
 		card.QueueFree();
+		DrawCard();
 	}
 	
-	void PlayCard(CardData card)
-	{
-		hand.Remove(card);
-		discard.Add(card);
-	}
-
 	void Shuffle()
 	{
-
+		GD.Print("SHUFFLED!");
 		foreach(CardData card in discard.Shuffled().ToList<CardData>())
 		{
 			deck.Enqueue(card);
 			GD.Print(card.ToString());
 		}
-		discard.Clear();
+		cardCountBar.MaxValue = deck.Count;
+        cardCountBar.Value = deck.Count;
+
+        discard.Clear();
 
 	}
 
@@ -125,28 +176,12 @@ public partial class DeckManager : Control
 	{
 		var spawnedCard = CardScene.Instantiate<Card>();
 
-		CardSlot attempt;
-			int i = 0;
-		do
-		{
-			
-			if (i > cardSlots.Length)
-			{
-				GD.Print("Hand Full!");
-				return;
-			}
-			attempt = cardSlots[i++];
+        data.Slot.GetParent().AddChild(spawnedCard);
 
-			
-		}
-		while (attempt.occupied);
-
-		attempt.occupied = true;
-
-		attempt.GetParent().AddChild(spawnedCard);
-		data.Slot = attempt;
-		spawnedCard.Position = attempt.Position;
-        spawnedCard.SetUp(data);
+        spawnedCard.GlobalPosition = DrawPile.GlobalPosition;
+        
+		
+		spawnedCard.SetUp(data);
 
     }
 
@@ -177,13 +212,22 @@ public partial class DeckManager : Control
 	{
 		if (playArea.HasOverlappingAreas())
 		{
-			foreach (var area in discardArea.GetOverlappingAreas())
+			foreach (var area in playArea.GetOverlappingAreas())
 			{
 				GD.Print("Got card");
 
 				Card card = (Card)area.Owner;
+                if (card.Data.playable)
+				{
+					GD.Print("Playable");
+					if (!Input.IsMouseButtonPressed(MouseButton.Left))
+					{
 
-				GameManager.Instance.TriggerCard(card.Data.PathToPhysObj);
+
+						GameManager.Instance.TriggerCard(card.Data.PathToPhysObj);
+						DiscardCard(card);
+					}
+				}
 			}
 		}
 	}
