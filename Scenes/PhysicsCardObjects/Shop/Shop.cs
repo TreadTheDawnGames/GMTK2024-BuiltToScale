@@ -5,6 +5,8 @@ using static CardAssembler;
 
 public partial class Shop : TextureRect
 {
+	[Export]
+	Texture2D texNormal, highlighted;
     PermShopSlot[] permCardSlots = new PermShopSlot[3];
 	RandShopSlot[] randCardSlots = new RandShopSlot[4];
 
@@ -14,6 +16,12 @@ public partial class Shop : TextureRect
 	Area2D sellArea;
 
 	AudioStreamPlayer chaChing;
+
+	TextureRect sellPanel;
+
+	Node2D SellForNode;
+	RichTextLabel sellAmount;
+
 
 	int cardsBought = 0;
 	
@@ -29,6 +37,9 @@ public partial class Shop : TextureRect
 
 		cardsBought = 0;
 		sellArea = GetNode<Area2D>("SellPanelVisual/SellPanel");
+		sellPanel = GetNode<TextureRect>("SellPanelVisual");
+		SellForNode = GetNode<Node2D>("SellPanelVisual/SellFor");
+		sellAmount = GetNode<RichTextLabel>("SellPanelVisual/SellFor/Amount");
 
 		closeButton.Pressed += CloseShop;
 
@@ -98,10 +109,14 @@ public partial class Shop : TextureRect
 
         if (sellArea.HasOverlappingAreas())
         {
+			
+
+
             foreach (var area in sellArea.GetOverlappingAreas())
             {
                 Card card = (Card)area.Owner;
 
+				
 				if (card.Data.Type == CardType.shop)
 				{
 					int shopCount = 0;
@@ -121,9 +136,13 @@ public partial class Shop : TextureRect
 
                 if (card.Data.sellable)
                 {
+
+                    sellPanel.Texture = highlighted;
+					SellForNode.Show();
+					sellAmount.Text = Mathf.CeilToInt(card.Data.cost * 0.22f).ToString(); ;
                     if (!Input.IsMouseButtonPressed(MouseButton.Left))
                     {
-						if (GameManager.Instance.UpdateMoney((int)(card.Data.cost * 0.22f)))
+						if (GameManager.Instance.UpdateMoney(Mathf.CeilToInt(card.Data.cost * 0.22f)))
                         {
 							DeckManager.Instance.SellCard(card);
 							PlaySellSound();
@@ -133,6 +152,17 @@ public partial class Shop : TextureRect
                 }
             }
         }
+		else
+		{
+			if(sellPanel.Texture!= texNormal)
+			{
+				sellPanel.Texture = texNormal;
+            }
+			if(SellForNode.Visible)
+			{
+                SellForNode.Hide();
+			}
+		}
         return false;
     }
 

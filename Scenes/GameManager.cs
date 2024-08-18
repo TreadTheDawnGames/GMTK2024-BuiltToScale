@@ -47,8 +47,16 @@ public partial class GameManager : Node2D
     }
     public bool TriggerCard(string CardPath)
 	{
+        try
+        {
+
         GD.Print(CardPath);
         return Rufus.SpawnObject(CardPath);
+        }
+        catch
+        {
+            return false;
+        }
 	}
 
     public void SetPauseGame(bool isPaused)

@@ -1,11 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://b4n22hl22qqef"]
+[gd_scene load_steps=11 format=3 uid="uid://b4n22hl22qqef"]
 
 [ext_resource type="Texture2D" uid="uid://dpvytd5bpms38" path="res://Assets/Sprites/Deck/Shoppe/ShopUI.png" id="1_qvxdu"]
 [ext_resource type="Script" path="res://Scenes/PhysicsCardObjects/Shop/Shop.cs" id="2_fnms8"]
 [ext_resource type="Texture2D" uid="uid://dee0m22qdydys" path="res://Assets/Sprites/Deck/Shoppe/CardPanel.png" id="2_umod0"]
 [ext_resource type="Script" path="res://Scenes/PhysicsCardObjects/Shop/PermShopSlot.cs" id="3_vtxsv"]
 [ext_resource type="Script" path="res://Scenes/PhysicsCardObjects/Shop/RandShopSlot.cs" id="4_ar5e3"]
+[ext_resource type="Texture2D" uid="uid://mee366fanyh7" path="res://Assets/Sprites/Deck/Shoppe/SellPanelHighlighed.png" id="4_fwsi0"]
 [ext_resource type="Texture2D" uid="uid://c77u1o2sbgryt" path="res://Assets/Sprites/Deck/Shoppe/SellPanel.png" id="6_p2ua3"]
+[ext_resource type="Theme" uid="uid://m3ccdcobcrbi" path="res://MoneyTextShop.tres" id="8_bd07h"]
+[ext_resource type="Texture2D" uid="uid://dx1itckfovlu4" path="res://Assets/Sprites/Deck/Shoppe/Coin.png" id="9_kl2cq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_melnw"]
 size = Vector2(182, 258)
@@ -19,6 +22,8 @@ offset_bottom = 1071.0
 mouse_filter = 2
 texture = ExtResource("1_qvxdu")
 script = ExtResource("2_fnms8")
+texNormal = ExtResource("6_p2ua3")
+highlighted = ExtResource("4_fwsi0")
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
@@ -128,5 +133,26 @@ collision_mask = 65536
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SellPanelVisual/SellPanel"]
 position = Vector2(91, 129)
 shape = SubResource("RectangleShape2D_melnw")
+
+[node name="SellFor" type="Node2D" parent="SellPanelVisual"]
+position = Vector2(-5, -49)
+
+[node name="SellForTxt" type="RichTextLabel" parent="SellPanelVisual/SellFor"]
+offset_right = 198.0
+offset_bottom = 35.0
+theme = ExtResource("8_bd07h")
+text = "Sell for"
+
+[node name="shopCoin" type="Sprite2D" parent="SellPanelVisual/SellFor"]
+position = Vector2(136.75, 14.75)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("9_kl2cq")
+
+[node name="Amount" type="RichTextLabel" parent="SellPanelVisual/SellFor"]
+offset_left = 155.0
+offset_right = 195.0
+offset_bottom = 40.0
+theme = ExtResource("8_bd07h")
+text = "20"
 
 [node name="ChaChingSound" type="AudioStreamPlayer" parent="."]

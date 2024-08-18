@@ -19,7 +19,6 @@ public partial class CardData : Node
 
     public int cost;
     public Texture2D symbol;
-
     public CardData(string obj)
     {
         this.PathToPhysObj = obj;
