@@ -32,10 +32,17 @@ public partial class GameManager : Node2D
         moneyLabel = GetNode<RichTextLabel>("Camera/Deck/MoneyLabel");
         Instance.Rufus = GetNode<player_char>("Rufus");
         cam = GetNode<Camera2D>("Camera");
-        musicPlayer = GetNode<AudioStreamPlayer>("MusicPlayer");
-        musicPlayer.Stream = GD.Load<AudioStream>("res://Assets/Sounds/CalmPiggiesLoop.wav");
-        musicPlayer.VolumeDb = -40;
-        musicPlayer.Play();
+        if (!GetTree().Root.HasNode("MusicPlayer"))
+        {
+            musicPlayer = GetNode<AudioStreamPlayer>("MusicPlayer");
+            // musicPlayer.Reparent(GetTree().Root, false);
+            musicPlayer.CallDeferred("reparent", GetTree().Root, false);
+            musicPlayer.Stream = GD.Load<AudioStream>("res://Assets/Sounds/CalmPiggiesLoop.wav");
+            musicPlayer.VolumeDb = -40;
+            musicPlayer.Play();
+        }
+        else
+            musicPlayer = GetTree().Root.GetNode<AudioStreamPlayer>("MusicPlayer");
         UpdateMoney(0);
     }
     public bool TriggerCard(string CardPath)

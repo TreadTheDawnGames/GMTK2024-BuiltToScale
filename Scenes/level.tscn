@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bxqc3wjmnxfkd" path="res://Assets/Sprites/Grass.png" id="2_sjrln"]
 [ext_resource type="PackedScene" uid="uid://n286cy3dbbn0" path="res://Scenes/camera.tscn" id="3_buxj5"]
 [ext_resource type="PackedScene" uid="uid://xy71mg3ttuj1" path="res://Scenes/Cards/deck.tscn" id="4_vv3gu"]
-[ext_resource type="Theme" uid="uid://b8bd1luqflxfy" path="res://Scenes/Cards/MoneyTextWorld.tres" id="6_ood1v"]
+[ext_resource type="PackedScene" uid="uid://ddk7jw447tjdf" path="res://Scenes/reset_game_button.tscn" id="7_haaf3"]
 [ext_resource type="PackedScene" uid="uid://cj6chkdqmf72v" path="res://Scenes/money_line.tscn" id="7_w53ei"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8l27s"]
@@ -20,6 +20,7 @@ scale = Vector2(2, 2)
 transform = Transform2D(2, 0, 0, 2, 0, 0)
 follow_viewport_enabled = true
 follow_viewport_scale = 0.5
+scroll_offset = Vector2(238.164, 389.304)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground"]
 position = Vector2(960, -2500)
@@ -51,6 +52,9 @@ shape = SubResource("RectangleShape2D_8l27s")
 [node name="Camera" parent="." instance=ExtResource("3_buxj5")]
 position = Vector2(960, -460)
 
+[node name="ResetGameButton" parent="Camera" instance=ExtResource("7_haaf3")]
+position = Vector2(-883, 426)
+
 [node name="CanvasLayer" type="CanvasLayer" parent="Camera"]
 follow_viewport_enabled = true
 
@@ -64,18 +68,6 @@ offset_right = -960.0
 offset_bottom = -540.0
 grow_horizontal = 1
 grow_vertical = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="MoneyLabel" type="RichTextLabel" parent="Camera/Deck"]
-modulate = Color(0.26, 0.26, 0.26, 1)
-z_index = -2
-layout_mode = 0
-offset_left = 76.0
-offset_top = 277.0
-offset_right = 234.0
-offset_bottom = 337.0
-theme = ExtResource("6_ood1v")
-text = "Money"
 metadata/_edit_use_anchors_ = true
 
 [node name="AudioListener2D" type="AudioListener2D" parent="Camera"]

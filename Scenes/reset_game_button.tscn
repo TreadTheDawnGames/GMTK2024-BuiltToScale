@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://ddk7jw447tjdf"]
+
+[ext_resource type="Texture2D" uid="uid://csueqrbxpaw13" path="res://Assets/Sprites/Reset.png" id="1_0qq5i"]
+[ext_resource type="Script" path="res://Scenes/reset_button.cs" id="2_d3561"]
+
+[node name="ResetGameButton" type="Node2D"]
+z_index = 60
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_0qq5i")
+
+[node name="Button" type="Button" parent="."]
+light_mask = 0
+visibility_layer = 0
+offset_left = -48.0
+offset_top = -41.0
+offset_right = -40.0
+offset_bottom = -33.0
+scale = Vector2(12.0081, 10.2447)
+focus_mode = 0
+script = ExtResource("2_d3561")
+
+[connection signal="button_up" from="Button" to="Button" method="_on_button_up"]
