@@ -5,6 +5,7 @@
 
 [node name="Cone" instance=ExtResource("1_5kt5b")]
 symbol = ExtResource("2_1iwq7")
+cost = 5
 metadata/HoldOffset = 50.0
 
 [node name="RigidBody2D" type="RigidBody2D" parent="." index="0"]

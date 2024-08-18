@@ -13,6 +13,8 @@ public partial class Shop : TextureRect
 
 	Area2D sellArea;
 
+	AudioStreamPlayer chaChing;
+
 	int cardsBought = 0;
 	
 	//Called when the node enters the scene tree for the first time.
@@ -22,6 +24,8 @@ public partial class Shop : TextureRect
 		permCardSlots = GetChildren().OfType<PermShopSlot>().ToArray();
 		randCardSlots = GetChildren().OfType<RandShopSlot>().ToArray();
 		closeButton = GetNode<Button>("Button");
+
+		chaChing = GetNode<AudioStreamPlayer>("ChaChingSound");
 
 		cardsBought = 0;
 		sellArea = GetNode<Area2D>("SellPanelVisual/SellPanel");
@@ -48,7 +52,17 @@ public partial class Shop : TextureRect
 
     }
 
-	void CreateCard(CardAssembler.CardType type, CardSlot slot)
+    void PlaySellSound()
+    {
+        int rand = (int)(GD.Randi() % 2);
+        chaChing.Stream = GD.Load<AudioStream>("res://Assets/Sounds/ChaChing" + rand + ".wav");
+
+
+
+		chaChing.Play();
+    }
+
+    void CreateCard(CardAssembler.CardType type, CardSlot slot)
 	{
 		CardData data = CardAssembler.Create(type);
 		data.Slot = slot;
@@ -112,6 +126,7 @@ public partial class Shop : TextureRect
 						if (GameManager.Instance.UpdateMoney((int)(card.Data.cost * 0.22f)))
                         {
 							DeckManager.Instance.SellCard(card);
+							PlaySellSound();
                             return true;
                         }
                     }

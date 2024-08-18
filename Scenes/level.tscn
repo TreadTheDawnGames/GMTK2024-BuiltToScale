@@ -1,9 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://biecsihwn6q3l"]
 
 [ext_resource type="Script" path="res://Scenes/GameManager.cs" id="1_h1jex"]
-
 [ext_resource type="Texture2D" uid="uid://cikj82ey30kx5" path="res://Assets/Sprites/Clouds.png" id="2_1sfio"]
-[ext_resource type="PackedScene" uid="uid://c74uxnvapn034" path="res://Scenes/player_char.tscn" id="2_4km2f"]
+[ext_resource type="PackedScene" uid="uid://c74uxnvapn034" path="res://Scenes/rufus.tscn" id="2_4km2f"]
 [ext_resource type="Texture2D" uid="uid://bxqc3wjmnxfkd" path="res://Assets/Sprites/Grass.png" id="2_sjrln"]
 [ext_resource type="PackedScene" uid="uid://n286cy3dbbn0" path="res://Scenes/camera.tscn" id="3_buxj5"]
 [ext_resource type="PackedScene" uid="uid://xy71mg3ttuj1" path="res://Scenes/Cards/deck.tscn" id="4_vv3gu"]
@@ -33,7 +32,6 @@ offset = Vector2(-480, 0)
 position = Vector2(1641, -1000)
 
 [node name="Rufus" parent="." instance=ExtResource("2_4km2f")]
-
 process_mode = 0
 position = Vector2(647, -50)
 
@@ -69,7 +67,7 @@ grow_vertical = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="MoneyLabel" type="RichTextLabel" parent="Camera/Deck"]
-modulate = Color(0, 0, 0, 1)
+modulate = Color(0.26, 0.26, 0.26, 1)
 z_index = -2
 layout_mode = 0
 offset_left = 76.0

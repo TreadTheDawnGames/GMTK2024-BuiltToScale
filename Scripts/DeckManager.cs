@@ -231,7 +231,7 @@ public partial class DeckManager : Control
 			}
 		}
 
-
+		PlayFlipSound();
 		card.Data.Slot.occupied = false;
 		hand.Remove(card.Data);
 

@@ -6,6 +6,7 @@
 
 [node name="Crate" instance=ExtResource("1_lf78w")]
 symbol = ExtResource("2_oje7l")
+cost = 20
 metadata/HoldOffset = 80.0
 
 [node name="RigidBody2D" type="RigidBody2D" parent="." index="0"]
