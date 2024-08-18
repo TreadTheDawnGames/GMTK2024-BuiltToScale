@@ -34,7 +34,7 @@ position = Vector2(1641, -1000)
 
 [node name="Rufus" parent="." instance=ExtResource("2_4km2f")]
 process_mode = 0
-position = Vector2(647, -50)
+position = Vector2(647, -49)
 
 [node name="RigidBody2D2" type="StaticBody2D" parent="."]
 z_index = 50

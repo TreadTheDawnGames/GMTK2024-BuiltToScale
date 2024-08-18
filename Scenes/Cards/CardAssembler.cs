@@ -10,27 +10,36 @@ public static class CardAssembler
 
     public enum CardType { beachball, bowl, crate, lamp, mattress, obsidian, scaffleting, ship, shop, staircase, steelcrate, stoneball, table, toilet,trafficCone, tree,truck}
     public enum GuaranteedCardType {trafficCone, crate, scaffleting }
-    public enum StarterCardType { staircase, beachball, crate}
+    public enum StarterCardType { staircase, crate, bowl, lamp}
 
 	public static CardData Rand()
 	{
-        return new CardData(RandStringValue());
+        return new CardData(RandStringValue<CardType>());
 
         
 	}
 
-    public static CardType RandType()
+    public static T RandType<T>() where T : Enum
     {
-        int rand = (int)(GD.Randi() % 17);
-        return (CardType)rand;
+        if (!typeof(T).IsEnum)
+        {
+            throw new ArgumentException("T must be an enumerated type");
+        }
+
+
+        var values = Enum.GetValues(typeof(T));
+        int counter = values.Length;
+        
+        int rand = (int)(GD.Randi() % counter);
+
+        return (T)Enum.Parse(typeof(T), values.GetValue(rand).ToString());
 
     }
 
-    static string RandStringValue()
+    static string RandStringValue<T>() where T : Enum
     {
-        int rand = (int)(GD.Randi() % 7);
-        return GetObjectPath((CardType)rand);
-     }
+        return MakeCardPath(RandType<T>());
+    }
 
     static string GetRandStarter()
     {
@@ -40,7 +49,7 @@ public static class CardAssembler
 
     public static CardData Create(CardType type)
     {
-        return new CardData(GetObjectPath(type));
+        return new CardData(MakeCardPath(type));
     }
     public static CardData Create(StarterCardType type)
     {
@@ -63,25 +72,48 @@ public static class CardAssembler
         originPath += type.ToString();
         return originPath + ".tscn";
     }
-    static string GetObjectPath(CardType type)
+    public static string MakeCardPath(Enum type)
     {
+
+
         string originPath = "res://Scenes/PhysicsCardObjects/";
         originPath += type.ToString();
 
         return originPath + ".tscn";
     }
 
-    public static List<CardData> TestDeck()
+    public static List<CardData> ShopTestDeck(int deckSize)
     {
         List<CardData> starterDeck = new List<CardData>
         {
-            new CardData(GetObjectPath(CardType.obsidian)),
-            new CardData(GetObjectPath(CardType.shop))
+            new CardData(MakeCardPath(CardType.obsidian)),
+            new CardData(MakeCardPath(CardType.shop)),
+            new CardData(MakeCardPath(CardType.shop)),
+            new CardData(MakeCardPath(CardType.shop)),
+            new CardData(MakeCardPath(CardType.shop)),
+            new CardData(MakeCardPath(CardType.shop)),
+            new CardData(MakeCardPath(CardType.shop))
+        };
+        while (starterDeck.Count < deckSize)
+        {
+            starterDeck.Add(Rand());
+        }
+        return starterDeck;
+    }
+
+
+
+    public static List<CardData> FullRandDeck(int deckSize)
+    {
+        List<CardData> starterDeck = new List<CardData>
+        {
+            new CardData(MakeCardPath(CardType.obsidian)),
+            new CardData(MakeCardPath(CardType.shop))
         };
 
-        while (starterDeck.Count < 4)
+        while (starterDeck.Count < deckSize)
         {
-            starterDeck.Add(new CardData(GetRandStarter()));
+            starterDeck.Add(Rand());
         }
 
         foreach (CardData card in starterDeck)
@@ -93,12 +125,39 @@ public static class CardAssembler
         return starterDeck;
     }
 
+    public static List<CardData> BeachBallStarter(int deckSize)
+    {
+        List<CardData> starterDeck = new List<CardData>
+        {
+            new CardData(MakeCardPath(CardType.obsidian)),
+            new CardData(MakeCardPath(CardType.shop))
+        };
+
+        while (starterDeck.Count < deckSize/2)
+        {
+            starterDeck.Add(new CardData(MakeCardPath(RandType<StarterCardType>())));
+            
+        }
+        while (starterDeck.Count < deckSize)
+        {
+            starterDeck.Add(new CardData(MakeCardPath(CardType.beachball)));
+        }
+
+
+        foreach (CardData card in starterDeck)
+        {
+            card.inShop = false;
+        }
+
+        return starterDeck;
+    }
+
     public static List<CardData> Starter()
     {
         List<CardData> starterDeck = new List<CardData>
         {
-            new CardData(GetObjectPath(CardType.obsidian)),
-            new CardData(GetObjectPath(CardType.shop))
+            new CardData(MakeCardPath(CardType.obsidian)),
+            new CardData(MakeCardPath(CardType.shop))
         };
 
         while (starterDeck.Count < 10)
@@ -122,7 +181,7 @@ public static class CardAssembler
 
         foreach (CardType type in Enum.GetValues(typeof(CardType)))
         {
-            oneEach.Add(new CardData(GetObjectPath(type)));
+            oneEach.Add(new CardData(MakeCardPath(type)));
         }
 
         return oneEach;

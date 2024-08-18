@@ -67,7 +67,6 @@ public partial class GameManager : Node2D
         try
         {
 
-        GD.Print(CardPath);
         return Rufus.SpawnObject(CardPath);
         }
         catch
@@ -111,12 +110,20 @@ public partial class GameManager : Node2D
         }
     }
 
+    public bool CanBuy(int speculatedCost)
+    {
+        GD.Print(speculatedCost + " | " + moneyOwned);
+        return moneyOwned >= speculatedCost;
+    }
+
     public bool UpdateMoney(int amount)
     {
         moneyOwned += amount;
         if(moneyOwned < 0)
         {
             moneyOwned = 0;
+            moneyLabel.Text = moneyOwned.ToString();
+
             return false;
         }
         moneyLabel.Text = moneyOwned.ToString();

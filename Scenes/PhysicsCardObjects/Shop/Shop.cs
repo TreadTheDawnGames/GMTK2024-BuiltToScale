@@ -98,6 +98,8 @@ public partial class Shop : TextureRect
 		DeckManager.Instance.ReplenishHand();
         DeckManager.Instance.atShop = false;
 
+		DeckManager.Instance.FillWithBeachBalls();
+
 		GameManager.Instance.SetPauseGame(false);
 
         CallDeferred("queue_free");

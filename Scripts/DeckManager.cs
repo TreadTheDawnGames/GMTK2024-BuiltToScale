@@ -8,7 +8,7 @@ using System.IO;
 
 public partial class DeckManager : Control
 {
-	
+
 	PackedScene CardScene = GD.Load<PackedScene>("res://Scenes/Cards/card.tscn");
 
 	Queue<CardData> deck = new Queue<CardData>();
@@ -28,30 +28,37 @@ public partial class DeckManager : Control
 	Sprite2D discardSprite;
 	Godot.RichTextLabel discardMoneyLabel;
 
-    RichTextLabel buyForAmount;
-    Node2D buyForNode;
+	RichTextLabel buyForAmount;
+	Node2D buyForNode;
+	Sprite2D deckFullWarning;
 
-    public bool atShop = false;
+	public bool atShop = false;
 
-    public RichTextLabel scoreLabel;
-    public RichTextLabel highScoreLabel;
+	public RichTextLabel scoreLabel;
+	public RichTextLabel highScoreLabel;
+
+	Sprite2D notEnoughCashWarning;
 
 
-    public List<CardData> AllCards
+
+	[Export]
+	public int deckSize { get; private set; } = 20;
+
+	public List<CardData> AllCards
 	{
 		get
 		{
 			List<CardData> cards = new();
 
-			foreach(CardData card in discard)
+			foreach (CardData card in discard)
 			{
 				cards.Add(card);
 			}
-			foreach(CardData card in hand)
+			foreach (CardData card in hand)
 			{
 				cards.Add(card);
 			}
-			foreach(CardData card in deck)
+			foreach (CardData card in deck)
 			{
 				cards.Add(card);
 			}
@@ -59,56 +66,60 @@ public partial class DeckManager : Control
 		}
 	}
 
-    private static DeckManager instance = null;
+	private static DeckManager instance = null;
 
-    private DeckManager()
-    {
-    }
+	private DeckManager()
+	{
+	}
 
-    public static DeckManager Instance
-    {
-        get
-        {
-            if (instance == null)
-            {
-                instance = new DeckManager();
-            }
-            return instance;
-        }
-    }
-    public bool cardHeld = false;
+	public static DeckManager Instance
+	{
+		get
+		{
+			if (instance == null)
+			{
+				instance = new DeckManager();
+			}
+			return instance;
+		}
+	}
+	public bool cardHeld = false;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		instance = this;
 		cardSlots = GetNode("Hand").GetChildren().OfType<CardSlot>().ToArray();
-        playArea = GetNode<Area2D>("PlayArea");
+		playArea = GetNode<Area2D>("PlayArea");
 		shuffleSound = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
 		flipSound = GetNode<AudioStreamPlayer>("CardFlipSound");
 
-        scoreLabel = GetNode<RichTextLabel>("Scores/ScoreLabel");
-        highScoreLabel = GetNode<RichTextLabel>("Scores/HighScoreLabel");
+		scoreLabel = GetNode<RichTextLabel>("Scores/ScoreLabel");
+		highScoreLabel = GetNode<RichTextLabel>("Scores/HighScoreLabel");
 
 
-        discardArea = GetNode<Area2D>("DiscardPile");
+		discardArea = GetNode<Area2D>("DiscardPile");
 		discardSprite = GetNode<Sprite2D>("DiscardPile/Sprite/Symbol");
 		discardMoneyLabel = (Godot.RichTextLabel)GetNode<Godot.RichTextLabel>("DiscardPile/Sprite/DiscardMoneyText");
 		buyForNode = GetNode<Node2D>("DiscardPile/BuyForNode");
 		buyForAmount = GetNode<RichTextLabel>("DiscardPile/BuyForNode/BuyForAmount");
+		deckFullWarning = GetNode<Sprite2D>("DiscardPile/DeckFullWarning");
+		notEnoughCashWarning = GetNode<Sprite2D>("DiscardPile/NotEnoughCashWarning");
+
+		deckFullWarning.Hide();
+		notEnoughCashWarning.Hide();
+
+		cardCountBar = GetNode<TextureProgressBar>("TextureProgressBar");
+
+		SetupDeck(CardAssembler.ShopTestDeck(deckSize));
+
+		discardSprite.GetParent<Sprite2D>().Hide();
 
 
-        cardCountBar = GetNode<TextureProgressBar>("TextureProgressBar");
-
-		SetupDeck(CardAssembler.Starter());
-		
-        discardSprite.GetParent<Sprite2D>().Hide();
-
-		
-    }
+	}
 
 
-    void UpdateDiscardSprite(Card card)
+	void UpdateDiscardSprite(Card card)
 	{
 		if (discard.Count == 0)
 		{
@@ -116,8 +127,8 @@ public partial class DeckManager : Control
 		}
 		else
 		{
-			if(!card.Data.singleUse)
-            discardSprite.GetParent<Sprite2D>().Show();
+			//if(!card.Data.singleUse)
+			discardSprite.GetParent<Sprite2D>().Show();
 			discardSprite.Texture = card.Data.symbol;
 			discardMoneyLabel.Text = card.Data.cost.ToString();
 		}
@@ -125,8 +136,8 @@ public partial class DeckManager : Control
 
 	public void DrawCard()
 	{
-		
-		
+
+
 		CardSlot attempt;
 		int i = 0;
 		do
@@ -171,7 +182,7 @@ public partial class DeckManager : Control
 			return;
 		}
 
-		
+
 
 		attempt.occupied = true;
 
@@ -192,63 +203,78 @@ public partial class DeckManager : Control
 		int rand = (int)(GD.Randi() % 2);
 		flipSound.Stream = GD.Load<AudioStream>("res://Assets/Sounds/Cards/FlipSounds/CardFlip" + rand + ".wav");
 
-		
+
 
 		flipSound.Play();
 	}
 
-    public void SellCard(Card card)
-    {
-        card.Data.Slot.occupied = false;
-        hand.Remove(card.Data);
-        card.QueueFree();
+	public void SellCard(Card card)
+	{
+		card.Data.Slot.occupied = false;
+		hand.Remove(card.Data);
+		card.QueueFree();
 
-    }
-    void DiscardCard(Card card)
+	}
+	void DiscardCard(Card card)
 	{
 
-		if(!card.Data.inShop && !card.Data.playable)
+		if (!card.Data.inShop && !card.Data.playable)
 		{
 			return;
 		}
-		
-		if(discard.Count + hand.Count + deck.Count >= 20)
+
+		if (discard.Count + hand.Count + deck.Count >= 20 && !card.Data.playable)
 		{
 			GD.Print("Deck Full!");
 
 			return;
-			//shop.hide
-			//prompt sell
 		}
 
 		if (card.Data.inShop)
 		{
-			GD.Print("Bought card: " + card.Name);
-			if (!GameManager.Instance.UpdateMoney(-card.Data.cost))
+			if (!GameManager.Instance.CanBuy(card.Data.cost))
 			{
+				GD.Print("Insufficient funds: " + card.Name);
+
 				return;
 			}
+			else
+			{
+
+				GameManager.Instance.UpdateMoney(-card.Data.cost);
+
+			}
 		}
+		GD.Print("Bought card: " + card.Name);
+
 
 		PlayFlipSound();
 		card.Data.Slot.occupied = false;
 		hand.Remove(card.Data);
 
-		if (!card.Data.singleUse)
+
+		if (!atShop)
 		{
-			discard.Add(card.Data);
-		}
-
-		
-		
-		card.QueueFree();
-
-		if(!atShop) 
-		{ 
 			DrawCard();
 		}
-			UpdateDiscardSprite(card);
-	}
+
+		if (card.Data.singleUse)
+		{
+			FillWithBeachBalls();
+			card.QueueFree();
+			return;
+		}
+
+		discard.Add(card.Data);
+
+
+		UpdateDiscardSprite(card);
+
+
+		card.QueueFree();
+
+
+	} 
 	
 	void Shuffle()
 	{
@@ -279,15 +305,53 @@ public partial class DeckManager : Control
 
 	bool CheckForDiscard()
 	{
+        if (buyForNode.Visible)
+        {
+            buyForNode.Hide();
+        }
+        if (deckFullWarning.Visible)
+        {
+            deckFullWarning.Hide();
+        }
+        if (notEnoughCashWarning.Visible)
+        {
+            notEnoughCashWarning.Hide();
+        }
+
         if (discardArea.HasOverlappingAreas())
         {
             foreach (var area in discardArea.GetOverlappingAreas())
             {
                 Card card = (Card)area.Owner;
-                if (card.Data.discardable)
+                if (card.Data.buyable)
                 {
-					buyForNode.Show();
-					buyForAmount.Text = card.Data.cost.ToString(); ;
+                    if (AllCards.Count >= deckSize && !card.Data.playable)
+                    {
+						deckFullWarning.Show();
+					}
+					else
+					{
+						if (!GameManager.Instance.CanBuy(card.Data.cost))
+						{
+							notEnoughCashWarning.Show();
+						}
+						else
+						{
+
+							if (deckFullWarning.Visible)
+							{
+								deckFullWarning.Hide();
+							}if (notEnoughCashWarning.Visible)
+							{
+                                notEnoughCashWarning.Hide();
+							}
+							buyForNode.Show();
+							buyForAmount.Text = card.Data.cost.ToString(); ;
+						}
+
+					}
+                    
+
 
                     if (!Input.IsMouseButtonPressed(MouseButton.Left))
                     {
@@ -297,14 +361,7 @@ public partial class DeckManager : Control
                 }
             }
         }
-        else
-        {
-            
-            if (buyForNode.Visible)
-            {
-                buyForNode.Hide();
-            }
-        }
+       
         return false;
     }
 
@@ -318,7 +375,8 @@ public partial class DeckManager : Control
 				Card card = (Card)area.Owner;
 				if (card.Data.playable)
 				{
-					if (!Input.IsMouseButtonPressed(MouseButton.Left))
+
+                    if (!Input.IsMouseButtonPressed(MouseButton.Left))
 					{
 						if (GameManager.Instance.TriggerCard(card.Data.PathToPhysObj))
 						{
@@ -387,5 +445,12 @@ public partial class DeckManager : Control
         cardCountBar.Value = deck.Count;
     }
 
+	public void FillWithBeachBalls()
+	{
+		while (AllCards.Count < deckSize)
+		{
+			discard.Add(new CardData(CardAssembler.MakeCardPath(CardAssembler.CardType.beachball)));
+		}
+	}
 
 }

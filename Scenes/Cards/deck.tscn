@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://xy71mg3ttuj1"]
+[gd_scene load_steps=17 format=3 uid="uid://xy71mg3ttuj1"]
 
 [ext_resource type="Script" path="res://Scripts/DeckManager.cs" id="1_u51mg"]
 [ext_resource type="Theme" uid="uid://b8bd1luqflxfy" path="res://Scenes/Cards/MoneyTextWorld.tres" id="2_7hk6u"]
@@ -8,6 +8,8 @@
 [ext_resource type="Theme" uid="uid://bm0muy2q7xt1" path="res://Scenes/Cards/MoneyTextCards.tres" id="3_1a2np"]
 [ext_resource type="Texture2D" uid="uid://cu73ef0gxoet1" path="res://Assets/Sprites/Deck/DrawPile/NoHardHatBack.png" id="3_guryp"]
 [ext_resource type="Script" path="res://Scenes/Cards/CardSlot.cs" id="5_6qoh6"]
+[ext_resource type="Texture2D" uid="uid://dbih7ngl7800f" path="res://Assets/Sprites/Deck/Cards/DeckFullOverlay.png" id="6_ji3aj"]
+[ext_resource type="Texture2D" uid="uid://bjdedygc13mer" path="res://Assets/Sprites/Deck/Cards/NotEnoughCashWarning.png" id="7_xb5ja"]
 [ext_resource type="Texture2D" uid="uid://dx1itckfovlu4" path="res://Assets/Sprites/Deck/Shoppe/Coin.png" id="8_lpnid"]
 [ext_resource type="AudioStream" uid="uid://dpqkeu2ds8j4v" path="res://Assets/Sounds/Shuffle.wav" id="9_rsq27"]
 [ext_resource type="AudioStream" uid="uid://o7rpxltnbfq5" path="res://Assets/Sounds/Cards/FlipSounds/CardFlip1.wav" id="10_qmvli"]
@@ -51,7 +53,7 @@ position = Vector2(10, 388)
 collision_layer = 131072
 collision_mask = 65536
 
-[node name="Sprite2D" type="Sprite2D" parent="DiscardPile"]
+[node name="DiscardArea" type="Sprite2D" parent="DiscardPile"]
 z_index = -2
 position = Vector2(101, -252)
 texture = ExtResource("2_gnwxr")
@@ -103,7 +105,17 @@ position = Vector2(105, -120)
 scale = Vector2(0.847223, 0.847223)
 texture = ExtResource("8_lpnid")
 
+[node name="NotEnoughCashWarning" type="Sprite2D" parent="DiscardPile"]
+position = Vector2(101, -252)
+texture = ExtResource("7_xb5ja")
+
+[node name="DeckFullWarning" type="Sprite2D" parent="DiscardPile"]
+z_index = -2
+position = Vector2(101, -252)
+texture = ExtResource("6_ji3aj")
+
 [node name="Coin" type="Sprite2D" parent="."]
+z_index = -2
 position = Vector2(45, 299)
 scale = Vector2(2, 2)
 texture = ExtResource("8_lpnid")
@@ -167,6 +179,7 @@ position = Vector2(0, 991)
 
 [node name="HighScoreLabel" type="RichTextLabel" parent="Scores"]
 modulate = Color(0.313726, 0.313726, 0.313726, 1)
+z_index = -2
 offset_left = 10.0
 offset_top = -655.0
 offset_right = 466.0
@@ -176,6 +189,7 @@ text = "High Score: 1500"
 
 [node name="ScoreLabel" type="RichTextLabel" parent="Scores"]
 modulate = Color(0.313726, 0.313726, 0.313726, 1)
+z_index = -2
 offset_left = 10.0
 offset_top = -600.0
 offset_right = 297.0

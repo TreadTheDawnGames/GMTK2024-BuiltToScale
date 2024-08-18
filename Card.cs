@@ -192,7 +192,7 @@ public partial class Card : Control
         ReadyToSell();
                 break;
         }
-        usable = (Data.discardable || Data.playable || Data.sellable);
+        usable = (Data.buyable || Data.playable || Data.sellable);
 
     }
 
@@ -212,23 +212,23 @@ public partial class Card : Control
         UnreadyToSell();
                 break;
         }
-        usable = (Data.discardable || Data.playable || Data.sellable);
+        usable = (Data.buyable || Data.playable || Data.sellable);
     }
 
 
     void ReadyToDiscard()
     {
-        if (!grabbed || !Data.inShop)
+        if (!Data.inShop)
             return;
-        Data.discardable = true;
+        Data.buyable = true;
         GD.Print("Discardable");
     }
 
     void UnreadyToDiscard()
     {
-        if (!grabbed || !Data.inShop)
+        if (!Data.inShop)
             return;
-        Data.discardable = false;
+        Data.buyable = false;
         GD.Print("NOT Discardable");
 
     }
@@ -270,6 +270,11 @@ public partial class Card : Control
 
     }
 
+    public override string ToString()
+    {
+
+        return Data.ToString() ;
+    }
 
 
 }
