@@ -8,6 +8,10 @@ public partial class GameManager : Node2D
     Camera2D cam;
 
     int moneyOwned = 20;
+
+    int score = 0;
+    int highScore;
+
     private GameManager()
     {
     }
@@ -54,6 +58,10 @@ public partial class GameManager : Node2D
             }
         }
         UpdateMoney(0);
+
+        highScore = PlayerPrefs.GetInt("HighScore", 0);
+            DeckManager.Instance.highScoreLabel.Text = "High Score: " + (-highScore - 49).ToString();
+            DeckManager.Instance.scoreLabel.Text = "Score: " + (-score-49).ToString();
     }
     public bool TriggerCard(string CardPath)
 	{
@@ -99,7 +107,14 @@ public partial class GameManager : Node2D
             inst.AddToGroup("PhysicsObjects");
             GetTree().Root.AddChild(inst);
         }
-        
+
+        UpdateScore();
+
+        if (Input.IsActionJustPressed("Debug-ResetSavedData"))
+        {
+            PlayerPrefs.DeleteAll();
+            GD.Print("Deleted PlayerPrefs");
+        }
     }
 
     public bool UpdateMoney(int amount)
@@ -114,5 +129,23 @@ public partial class GameManager : Node2D
             return true;
     }
 
+    void UpdateScore()
+    {
+        
+        if (Mathf.CeilToInt(Rufus.GlobalPosition.Y)<score)
+        {
+            score = Mathf.CeilToInt(Rufus.GlobalPosition.Y);
+            DeckManager.Instance.scoreLabel.Text = "Score: " + (-score-49).ToString();
+        }
+        
+
+        if(score < highScore)
+        {
+            highScore = score;
+            DeckManager.Instance.highScoreLabel.Text = "High Score: " + (-highScore-49).ToString();
+            PlayerPrefs.SetInt("HighScore", highScore);
+        }
+    }
+    
 
 }
