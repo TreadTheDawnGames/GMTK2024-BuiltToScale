@@ -29,6 +29,7 @@ public partial class GameManager : Node2D
     }
     player_char Rufus;
     RichTextLabel moneyLabel;
+    public Node2D gameOverInst;
     public override void _Ready()
     {
         base._Ready();
@@ -91,14 +92,19 @@ public partial class GameManager : Node2D
     public override void _Process(double delta)
     {
         base._Process(delta);
-        if (musicPlayer.VolumeDb < -5)
+        if (musicPlayer.VolumeDb < -20)
             musicPlayer.VolumeDb += 2 * (float)delta;
         if (Instance.HasNode("Rufus") && Instance.Rufus.GlobalPosition.Y > cam.GlobalPosition.Y + 1080/2+60)
         {
-            musicPlayer.VolumeDb = -10;
+            musicPlayer.VolumeDb = -15;
             musicPlayer.Stream = GD.Load<AudioStream>("res://Assets/Sounds/GameOver.wav");
             musicPlayer.Play();
             Instance.Rufus.QueueFree();
+            
+		    var ps = GD.Load<PackedScene>("res://Scenes/game_over.tscn");
+            var inst = ps.Instantiate<Node2D>();
+            inst.AddToGroup("PhysicsObjects");
+            GetTree().Root.AddChild(inst);
         }
 
         UpdateScore();
@@ -133,7 +139,7 @@ public partial class GameManager : Node2D
     void UpdateScore()
     {
         
-        if (Mathf.CeilToInt(Rufus.GlobalPosition.Y)<score)
+        if (Instance.HasNode("Rufus") && Mathf.CeilToInt(Rufus.GlobalPosition.Y)<score)
         {
             score = Mathf.CeilToInt(Rufus.GlobalPosition.Y);
             DeckManager.Instance.scoreLabel.Text = "Score: " + (-score-49).ToString();
