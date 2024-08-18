@@ -42,7 +42,13 @@ public partial class GameManager : Node2D
             musicPlayer.Play();
         }
         else
+        {
             musicPlayer = GetTree().Root.GetNode<AudioStreamPlayer>("MusicPlayer");
+            musicPlayer.Stop();
+            musicPlayer.Stream = GD.Load<AudioStream>("res://Assets/Sounds/CalmPiggiesLoop.wav");
+            musicPlayer.VolumeDb = -40;
+            musicPlayer.Play();
+        }
         UpdateMoney(0);
     }
     public bool TriggerCard(string CardPath)

@@ -36,6 +36,7 @@ script = ExtResource("1_u51mg")
 [node name="MoneyLabel" type="RichTextLabel" parent="."]
 modulate = Color(0.26, 0.26, 0.26, 1)
 z_index = -2
+layout_mode = 0
 offset_left = 76.0
 offset_top = 277.0
 offset_right = 234.0

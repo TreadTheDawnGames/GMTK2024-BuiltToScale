@@ -16,14 +16,12 @@ public partial class reset_button : Button
 
 	public void _on_button_up()
 	{
-		GetTree().ReloadCurrentScene();
-		/*GD.Print("Game reset start");
+		GD.Print("Game reset start");
 		foreach (var physObj in GetTree().GetNodesInGroup("PhysicsObjects"))
 		{
 			if (physObj.Name != "Rufus")
 				physObj.QueueFree();
 		}
-		var deck = GetTree().Root.GetNode<DeckManager>("LevelField/Camera/Deck");
-		// deck.Reset();*/
+		GetTree().ReloadCurrentScene();
 	}
 }
