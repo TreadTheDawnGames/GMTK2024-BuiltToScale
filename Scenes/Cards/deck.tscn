@@ -64,6 +64,32 @@ scroll_active = false
 position = Vector2(101, -252)
 shape = SubResource("RectangleShape2D_obl7v")
 
+[node name="BuyForNode" type="Node2D" parent="DiscardPile"]
+position = Vector2(17, 0)
+
+[node name="BuyForText" type="RichTextLabel" parent="DiscardPile/BuyForNode"]
+modulate = Color(0.258824, 0.258824, 0.258824, 1)
+offset_left = 36.0
+offset_top = -127.0
+offset_right = 200.0
+offset_bottom = -108.0
+theme = ExtResource("3_1a2np")
+text = "Buy for"
+
+[node name="BuyForAmount" type="RichTextLabel" parent="DiscardPile/BuyForNode"]
+modulate = Color(0.258824, 0.258824, 0.258824, 1)
+offset_left = 117.0
+offset_top = -127.0
+offset_right = 151.0
+offset_bottom = -108.0
+theme = ExtResource("3_1a2np")
+text = "20"
+
+[node name="Coin" type="Sprite2D" parent="DiscardPile/BuyForNode"]
+position = Vector2(105, -120)
+scale = Vector2(0.847223, 0.847223)
+texture = ExtResource("8_lpnid")
+
 [node name="Coin" type="Sprite2D" parent="."]
 position = Vector2(45, 299)
 scale = Vector2(2, 2)

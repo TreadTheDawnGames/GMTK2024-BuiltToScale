@@ -116,14 +116,13 @@ Testing
 
 TODO:
 Programming:
-Card highlight when hover
 Deck display on start (and when discard is clicked?)
 Display current, round best, and highest best score (display world best?)
 Current/max cards in deck display
 Glue
 Game over (finish)
 Shop button prompt
-Highlight sell panel
+
 
 Sound:
 Shop open/close

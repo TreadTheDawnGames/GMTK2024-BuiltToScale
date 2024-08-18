@@ -10,7 +10,7 @@ public static class CardAssembler
 
     public enum CardType { beachball, bowl, crate, lamp, mattress, obsidian, scaffleting, ship, shop, staircase, steelcrate, stoneball, table, toilet,trafficCone, tree,truck}
     public enum GuaranteedCardType {trafficCone, crate, scaffleting }
-    public enum StarterCardType { crate, beachball, scaffleting}
+    public enum StarterCardType { staircase, beachball, crate}
 
 	public static CardData Rand()
 	{

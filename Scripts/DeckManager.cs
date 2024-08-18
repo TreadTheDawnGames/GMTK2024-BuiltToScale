@@ -28,7 +28,10 @@ public partial class DeckManager : Control
 	Sprite2D discardSprite;
 	Godot.RichTextLabel discardMoneyLabel;
 
-	public bool atShop = false;
+    RichTextLabel buyForAmount;
+    Node2D buyForNode;
+
+    public bool atShop = false;
 
 	public List<CardData> AllCards
 	{
@@ -83,26 +86,14 @@ public partial class DeckManager : Control
 		discardArea = GetNode<Area2D>("DiscardPile");
 		discardSprite = GetNode<Sprite2D>("DiscardPile/Sprite/Symbol");
 		discardMoneyLabel = (Godot.RichTextLabel)GetNode<Godot.RichTextLabel>("DiscardPile/Sprite/DiscardMoneyText");
+		buyForNode = GetNode<Node2D>("DiscardPile/BuyForNode");
+		buyForAmount = GetNode<RichTextLabel>("DiscardPile/BuyForNode/BuyForAmount");
+
 
         cardCountBar = GetNode<TextureProgressBar>("TextureProgressBar");
 
-		discard = CardAssembler.Starter();
-		Shuffle();
-
-		foreach (CardData card in discard)
-		{
-			deck.Enqueue(card);
-		}
-
-
-		for (int i = 0; i < cardSlots.GetLength(0); i++)
-		{
-			DrawCard();
-		}
-
-		cardCountBar.MaxValue = deck.Count;
-		cardCountBar.Value = deck.Count;
-
+		SetupDeck(CardAssembler.Starter());
+		
         discardSprite.GetParent<Sprite2D>().Hide();
 
 		
@@ -273,7 +264,6 @@ public partial class DeckManager : Control
         data.Slot.GetParent().AddChild(spawnedCard);
 
         spawnedCard.GlobalPosition = spawnPosition;
-        
 		
 		spawnedCard.SetUp(data);
 		return spawnedCard;
@@ -286,7 +276,8 @@ public partial class DeckManager : Control
             foreach (var area in discardArea.GetOverlappingAreas())
             {
                 Card card = (Card)area.Owner;
-
+				buyForNode.Show();
+                buyForAmount.Text = card.Data.cost.ToString(); ;
                 if (card.Data.discardable)
                 {
 
@@ -298,7 +289,15 @@ public partial class DeckManager : Control
                 }
             }
         }
-		return false;
+        else
+        {
+            
+            if (buyForNode.Visible)
+            {
+                buyForNode.Hide();
+            }
+        }
+        return false;
     }
 
 	bool CheckForPlay()
@@ -351,4 +350,32 @@ public partial class DeckManager : Control
             DeckManager.Instance.AddChild(shop);
 			DeckManager.Instance.MoveChild(shop, 3);
         }
+
+	void SetupDeck(List<CardData> setupDeck)
+	{
+
+		
+
+		deck.Clear();
+		hand.Clear();
+		discard.Clear();
+
+
+        discard = setupDeck;
+        Shuffle();
+
+        foreach (CardData card in discard)
+        {
+            deck.Enqueue(card);
+        }
+
+
+        for (int i = 0; i < cardSlots.GetLength(0); i++)
+        {
+            DrawCard();
+        }
+
+        cardCountBar.MaxValue = deck.Count;
+        cardCountBar.Value = deck.Count;
+    }
 }

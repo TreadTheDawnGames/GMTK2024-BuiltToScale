@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Data.Common;
 
 public partial class Card : Control
 {
@@ -19,6 +20,8 @@ public partial class Card : Control
     Vector2 grabbedOffset;
     public Vector2 OGPos;
 
+    bool usable;
+
     uint OGMask;
 
     Godot.RichTextLabel moneyLabel;
@@ -26,7 +29,7 @@ public partial class Card : Control
     public void SetUp(CardData data)
     {
         this.Data = data;
-        symbol = GetNode<Sprite2D>("Backing/Symbol");
+        symbol = GetNode<Sprite2D>("Backing/Background/Symbol");
         background = GetNode<Sprite2D>("Backing/Background");
 
         if (data.singleUse)
@@ -46,7 +49,7 @@ public partial class Card : Control
 
         symbol.Texture = scene.symbol;
 
-        moneyLabel = (Godot.RichTextLabel)GetNode<Godot.RichTextLabel>("MoneyText");
+        moneyLabel = (Godot.RichTextLabel)GetNode<Godot.RichTextLabel>("Backing/Background/MoneyText");
         moneyLabel.Text = data.cost.ToString();
         // symbol.Hide();
 
@@ -75,32 +78,43 @@ public partial class Card : Control
 
         base._Process(delta);
 
-            if (hovered)
+        if (hovered)
+        {
+            if (!usable)
             {
-            if(!Data.playable)
-                Scale = Scale.Lerp(new Vector2(1.25f, 1.25f), 0.25f);
+                if(grabbed)
+                {
+                    background.Scale = background.Scale.Lerp(new Vector2(1.33f, 1.33f), 0.25f);
+
+                }
+                else
+                {
+                    background.Scale = background.Scale.Lerp(new Vector2(1.25f, 1.25f), 0.25f);
+
+                }
+            }
             else
             {
-                Scale = Scale.Lerp(new Vector2(0.75f, 0.75f), 0.25f);
+                background.Scale = background.Scale.Lerp(new Vector2(0.75f, 0.75f), 0.25f);
 
             }
 
             if (Input.IsMouseButtonPressed(MouseButton.Left) && !grabbed)
+            {
+                if (IsOnTop())
                 {
-                    if (IsOnTop())
-                    {
-                        grabbedOffset = Position - GetGlobalMousePosition();
-                        grabbed = true;
-                    }
+                    grabbedOffset = Position - GetGlobalMousePosition();
+                    grabbed = true;
                 }
-                else if (!Input.IsMouseButtonPressed(MouseButton.Left) && grabbed)
-                {
-                    grabbed = false;
-                }
+            }
+            else if (!Input.IsMouseButtonPressed(MouseButton.Left) && grabbed)
+            {
+                grabbed = false;
+            }
         }
         else
         {
-            Scale = Scale.Lerp(new Vector2(1, 1), 0.25f);
+            background.Scale = background.Scale.Lerp(new Vector2(1, 1), 0.25f);
 
         }
 
@@ -178,8 +192,10 @@ public partial class Card : Control
         ReadyToSell();
                 break;
         }
+        usable = (Data.discardable || Data.playable || Data.sellable);
+
     }
-    
+
     void CardExitedZone(Node2D node)
     {
         switch (node.Name)
@@ -196,21 +212,24 @@ public partial class Card : Control
         UnreadyToSell();
                 break;
         }
+        usable = (Data.discardable || Data.playable || Data.sellable);
     }
 
 
     void ReadyToDiscard()
     {
-        if (!grabbed)
+        if (!grabbed || !Data.inShop)
             return;
         Data.discardable = true;
+        GD.Print("Discardable");
     }
 
     void UnreadyToDiscard()
     {
-        if (!grabbed)
+        if (!grabbed || !Data.inShop)
             return;
         Data.discardable = false;
+        GD.Print("NOT Discardable");
 
     }
 
@@ -219,27 +238,27 @@ public partial class Card : Control
         if (!grabbed || Data.inShop)
             return;
         Data.playable = true;
+        GD.Print("Playable");
+
     }
 
     void UnreadyToPlay()
     {
-        GD.Print(grabbed, Data.inShop);
-        if (grabbed || Data.inShop)
+        if (Data.inShop)
             return; 
         Data.playable = false;
+        GD.Print("NOT Playable");
 
     }
 
     void ReadyToSell()
     {
-        if (Data.Type == CardAssembler.CardType.shop)
-        {
-            
-        }
-
+        
         if (!grabbed || Data.inShop)
             return;
         Data.sellable = true;
+        GD.Print("Sellable");
+
     }
 
     void UnreadyToSell()
@@ -247,8 +266,10 @@ public partial class Card : Control
         if (!grabbed || Data.inShop)
             return; 
         Data.sellable = false;
+        GD.Print("NOT Sellable");
+
     }
-    
+
 
 
 }

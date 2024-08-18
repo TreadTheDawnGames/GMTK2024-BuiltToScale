@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://m3ccdcobcrbi"]
+
+[ext_resource type="FontFile" uid="uid://badl23bpj0qyr" path="res://Assets/Fonts/TinyUnicodeGMTK.ttf" id="1_o56tg"]
+
+[resource]
+default_font = ExtResource("1_o56tg")
+default_font_size = 32

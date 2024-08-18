@@ -41,16 +41,14 @@ shape = SubResource("RectangleShape2D_405qn")
 position = Vector2(1, 0)
 texture = ExtResource("2_bwvv5")
 
-[node name="Symbol" type="Sprite2D" parent="Backing"]
-position = Vector2(1, 0)
+[node name="Symbol" type="Sprite2D" parent="Backing/Background"]
 
-[node name="MoneyText" type="RichTextLabel" parent="."]
+[node name="MoneyText" type="RichTextLabel" parent="Backing/Background"]
 modulate = Color(0, 0, 0, 1)
-layout_mode = 0
-offset_left = 50.0
-offset_top = 192.0
-offset_right = 90.0
-offset_bottom = 207.0
+offset_left = -32.0
+offset_top = 72.0
+offset_right = 8.0
+offset_bottom = 87.0
 theme = ExtResource("4_o12m5")
 text = "20"
 scroll_active = false
