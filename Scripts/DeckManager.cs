@@ -33,7 +33,11 @@ public partial class DeckManager : Control
 
     public bool atShop = false;
 
-	public List<CardData> AllCards
+    public RichTextLabel scoreLabel;
+    public RichTextLabel highScoreLabel;
+
+
+    public List<CardData> AllCards
 	{
 		get
 		{
@@ -83,7 +87,11 @@ public partial class DeckManager : Control
 		shuffleSound = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
 		flipSound = GetNode<AudioStreamPlayer>("CardFlipSound");
 
-		discardArea = GetNode<Area2D>("DiscardPile");
+        scoreLabel = GetNode<RichTextLabel>("Scores/ScoreLabel");
+        highScoreLabel = GetNode<RichTextLabel>("Scores/HighScoreLabel");
+
+
+        discardArea = GetNode<Area2D>("DiscardPile");
 		discardSprite = GetNode<Sprite2D>("DiscardPile/Sprite/Symbol");
 		discardMoneyLabel = (Godot.RichTextLabel)GetNode<Godot.RichTextLabel>("DiscardPile/Sprite/DiscardMoneyText");
 		buyForNode = GetNode<Node2D>("DiscardPile/BuyForNode");
@@ -108,7 +116,7 @@ public partial class DeckManager : Control
 		}
 		else
 		{
-
+			if(!card.Data.singleUse)
             discardSprite.GetParent<Sprite2D>().Show();
 			discardSprite.Texture = card.Data.symbol;
 			discardMoneyLabel.Text = card.Data.cost.ToString();
@@ -276,10 +284,10 @@ public partial class DeckManager : Control
             foreach (var area in discardArea.GetOverlappingAreas())
             {
                 Card card = (Card)area.Owner;
-				buyForNode.Show();
-                buyForAmount.Text = card.Data.cost.ToString(); ;
                 if (card.Data.discardable)
                 {
+					buyForNode.Show();
+					buyForAmount.Text = card.Data.cost.ToString(); ;
 
                     if (!Input.IsMouseButtonPressed(MouseButton.Left))
                     {
@@ -378,4 +386,6 @@ public partial class DeckManager : Control
         cardCountBar.MaxValue = deck.Count;
         cardCountBar.Value = deck.Count;
     }
+
+
 }

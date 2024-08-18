@@ -36,6 +36,7 @@ script = ExtResource("1_u51mg")
 [node name="MoneyLabel" type="RichTextLabel" parent="."]
 modulate = Color(0.26, 0.26, 0.26, 1)
 z_index = -2
+layout_mode = 0
 offset_left = 76.0
 offset_top = 277.0
 offset_right = 234.0
@@ -160,3 +161,24 @@ stream = ExtResource("9_rsq27")
 
 [node name="CardFlipSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_qmvli")
+
+[node name="Scores" type="Node2D" parent="."]
+position = Vector2(0, 991)
+
+[node name="HighScoreLabel" type="RichTextLabel" parent="Scores"]
+modulate = Color(0.313726, 0.313726, 0.313726, 1)
+offset_left = 10.0
+offset_top = -655.0
+offset_right = 466.0
+offset_bottom = -601.0
+theme = ExtResource("2_7hk6u")
+text = "High Score: 1500"
+
+[node name="ScoreLabel" type="RichTextLabel" parent="Scores"]
+modulate = Color(0.313726, 0.313726, 0.313726, 1)
+offset_left = 10.0
+offset_top = -600.0
+offset_right = 297.0
+offset_bottom = -511.0
+theme = ExtResource("2_7hk6u")
+text = "Score: 1000"
