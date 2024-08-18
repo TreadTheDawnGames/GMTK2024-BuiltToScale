@@ -132,7 +132,7 @@ public partial class GameManager : Node2D
     void UpdateScore()
     {
         
-        if (Mathf.CeilToInt(Rufus.GlobalPosition.Y)<score)
+        if (Instance.HasNode("Rufus") && Mathf.CeilToInt(Rufus.GlobalPosition.Y)<score)
         {
             score = Mathf.CeilToInt(Rufus.GlobalPosition.Y);
             DeckManager.Instance.scoreLabel.Text = "Score: " + (-score-49).ToString();
