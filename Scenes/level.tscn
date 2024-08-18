@@ -5,8 +5,13 @@
 [ext_resource type="Texture2D" uid="uid://bxqc3wjmnxfkd" path="res://Assets/Sprites/Grass.png" id="2_sjrln"]
 [ext_resource type="PackedScene" uid="uid://n286cy3dbbn0" path="res://Scenes/camera.tscn" id="3_buxj5"]
 [ext_resource type="PackedScene" uid="uid://xy71mg3ttuj1" path="res://Scenes/Cards/deck.tscn" id="4_vv3gu"]
+<<<<<<< HEAD
 [ext_resource type="Theme" uid="uid://b8bd1luqflxfy" path="res://Scenes/Cards/MoneyTextWorld.tres" id="6_ood1v"]
 [ext_resource type="PackedScene" uid="uid://dox1j03g43vlv" path="res://Scenes/money_line.tscn" id="7_w53ei"]
+=======
+[ext_resource type="Theme" path="res://Scenes/Cards/MoneyTextWorld.tres" id="6_ood1v"]
+[ext_resource type="PackedScene" uid="uid://cj6chkdqmf72v" path="res://Scenes/money_line.tscn" id="7_w53ei"]
+>>>>>>> cas/balance
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8l27s"]
 size = Vector2(4255, 300)

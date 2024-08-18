@@ -63,6 +63,7 @@ public partial class Shop : TextureRect
 		DeckManager.Instance.ReplenishHand();
         DeckManager.Instance.atShop = false;
 
+
         CallDeferred("queue_free");
     }
 

@@ -1,6 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://xy71mg3ttuj1"]
 
 [ext_resource type="Script" path="res://Scripts/DeckManager.cs" id="1_u51mg"]
+<<<<<<< HEAD
 [ext_resource type="Texture2D" uid="uid://bjkxdukeknrp" path="res://Assets/Sprites/Deck/Cards/DiscardArea.png" id="2_gnwxr"]
 [ext_resource type="Texture2D" uid="uid://ddtv7683ht0ki" path="res://Assets/Sprites/Deck/Cards/CardFront.png" id="2_ktmqk"]
 [ext_resource type="Texture2D" uid="uid://c3m02jj6u4sqb" path="res://Assets/Sprites/Deck/DrawPile/NoHardHatBackDesat.png" id="2_pajc5"]
@@ -8,6 +9,15 @@
 [ext_resource type="Texture2D" uid="uid://cu73ef0gxoet1" path="res://Assets/Sprites/Deck/DrawPile/NoHardHatBack.png" id="3_guryp"]
 [ext_resource type="Script" path="res://Scenes/Cards/CardSlot.cs" id="5_6qoh6"]
 [ext_resource type="Texture2D" uid="uid://dx1itckfovlu4" path="res://Assets/Sprites/Deck/Shoppe/Coin.png" id="8_lpnid"]
+=======
+[ext_resource type="Texture2D" path="res://Assets/Sprites/Deck/Cards/DiscardArea.png" id="2_gnwxr"]
+[ext_resource type="Texture2D" uid="uid://ddtv7683ht0ki" path="res://Assets/Sprites/Deck/Cards/CardFront.png" id="2_ktmqk"]
+[ext_resource type="Texture2D" path="res://Assets/Sprites/Deck/DrawPile/NoHardHatBackDesat.png" id="2_pajc5"]
+[ext_resource type="Theme" path="res://Scenes/Cards/MoneyTextCards.tres" id="3_1a2np"]
+[ext_resource type="Texture2D" path="res://Assets/Sprites/Deck/DrawPile/NoHardHatBack.png" id="3_guryp"]
+[ext_resource type="Script" path="res://Scenes/Cards/CardSlot.cs" id="5_6qoh6"]
+[ext_resource type="Texture2D" path="res://Assets/Sprites/Deck/Shoppe/Coin.png" id="8_lpnid"]
+>>>>>>> cas/balance
 [ext_resource type="AudioStream" uid="uid://dpqkeu2ds8j4v" path="res://Assets/Sounds/Shuffle.wav" id="9_rsq27"]
 [ext_resource type="AudioStream" uid="uid://o7rpxltnbfq5" path="res://Assets/Sounds/Cards/FlipSounds/CardFlip1.wav" id="10_qmvli"]
 
@@ -33,6 +43,10 @@ mouse_filter = 1
 script = ExtResource("1_u51mg")
 
 [node name="DiscardPile" type="Area2D" parent="."]
+<<<<<<< HEAD
+=======
+process_mode = 3
+>>>>>>> cas/balance
 position = Vector2(10, 388)
 collision_layer = 131072
 collision_mask = 65536

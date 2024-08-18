@@ -185,6 +185,10 @@ public partial class DeckManager : Control
     }
     void DiscardCard(Card card)
 	{
+<<<<<<< HEAD
+=======
+		GD.Print("Tried to Discard");
+>>>>>>> cas/balance
 		if(!card.Data.inShop && !card.Data.playable)
 		{
 			return;
@@ -259,6 +263,10 @@ public partial class DeckManager : Control
 
                 if (card.Data.discardable)
                 {
+<<<<<<< HEAD
+=======
+					GD.Print("Discardable");
+>>>>>>> cas/balance
                     if (!Input.IsMouseButtonPressed(MouseButton.Left))
                     {
                         DiscardCard(card);
@@ -309,11 +317,6 @@ public partial class DeckManager : Control
 		if(CheckForDiscard()) return;
 		if(CheckForPlay()) return;
 
-
-        if (Input.IsActionJustPressed("Debug-OpenShop"))
-		{
-			OpenShop();
-		}
 
 
     }
