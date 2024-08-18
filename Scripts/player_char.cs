@@ -261,6 +261,7 @@ public partial class player_char : RigidBody2D
 
 		ps = GD.Load<PackedScene>("res://Scenes/pig_hold_arm.tscn");
 		inst = ps.Instantiate<Node2D>();
+		inst.AddToGroup("PhysicsObjects", false);
 		GetTree().Root.AddChild(inst);
 		pigArm = inst;
 

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dnyr2kr2o15bu"]
+
+[ext_resource type="Texture2D" uid="uid://cikj82ey30kx5" path="res://Assets/Sprites/Clouds.png" id="1_jf1nf"]
+
+[node name="Sprite2D" type="Sprite2D"]
+modulate = Color(1, 1, 1, 0.619608)
+position = Vector2(960, -2500)
+texture = ExtResource("1_jf1nf")
