@@ -1,6 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://xy71mg3ttuj1"]
+[gd_scene load_steps=15 format=3 uid="uid://xy71mg3ttuj1"]
 
 [ext_resource type="Script" path="res://Scripts/DeckManager.cs" id="1_u51mg"]
+[ext_resource type="Theme" uid="uid://b8bd1luqflxfy" path="res://Scenes/Cards/MoneyTextWorld.tres" id="2_7hk6u"]
 [ext_resource type="Texture2D" uid="uid://bjkxdukeknrp" path="res://Assets/Sprites/Deck/Cards/DiscardArea.png" id="2_gnwxr"]
 [ext_resource type="Texture2D" uid="uid://ddtv7683ht0ki" path="res://Assets/Sprites/Deck/Cards/CardFront.png" id="2_ktmqk"]
 [ext_resource type="Texture2D" uid="uid://c3m02jj6u4sqb" path="res://Assets/Sprites/Deck/DrawPile/NoHardHatBackDesat.png" id="2_pajc5"]
@@ -31,6 +32,17 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_u51mg")
+
+[node name="MoneyLabel" type="RichTextLabel" parent="."]
+modulate = Color(0.26, 0.26, 0.26, 1)
+z_index = -2
+offset_left = 76.0
+offset_top = 277.0
+offset_right = 234.0
+offset_bottom = 337.0
+theme = ExtResource("2_7hk6u")
+text = "Money"
+metadata/_edit_use_anchors_ = true
 
 [node name="DiscardPile" type="Area2D" parent="."]
 process_mode = 3
