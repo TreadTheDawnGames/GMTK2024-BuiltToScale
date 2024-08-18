@@ -31,6 +31,7 @@ public partial class player_char : RigidBody2D
 		mySprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		cam = GetTree().Root.GetNode<Camera2D>("LevelField/Camera");
 		stepSound = GetNode<AudioStreamPlayer>("StepSoundPlayer");
+		AddToGroup("PhysicsObjects", false);
 	}
 
     public override void _PhysicsProcess(double delta)
@@ -92,7 +93,7 @@ public partial class player_char : RigidBody2D
 			coyoteTime--;
 		}
 		
-		if (Input.IsActionPressed("Jump") && coyoteTime > 0)
+		if (Input.IsActionJustPressed("Jump") && coyoteTime > 0)
 		{
 			PlayJumpSound();
 			linvel .Y = 0;
@@ -250,6 +251,7 @@ public partial class player_char : RigidBody2D
 		var inst = ps.Instantiate<Node2D>();
 		GetTree().Root.AddChild(inst);
 		var rigid = inst.GetNode<RigidBody2D>("RigidBody2D");
+		inst.AddToGroup("PhysicsObjects", false);
 		rigid.SetCollisionLayerValue(1, false);
 		rigid.SetCollisionMaskValue(2, false);
 		rigid.Freeze = true;
