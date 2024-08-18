@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/physics_object.cs" id="1_vc11m"]
 
 [node name="physicsObject" type="Node2D"]
+process_mode = 1
 script = ExtResource("1_vc11m")
 metadata/HoldOffset = 0.0
 metadata/Static = false

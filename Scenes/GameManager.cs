@@ -37,6 +37,10 @@ public partial class GameManager : Node2D
         return Rufus.SpawnObject(CardPath);
 	}
 
+    public void SetPauseGame(bool isPaused)
+    {
+        GetTree().Paused = isPaused;
+    }
     public override void _Process(double delta)
     {
         base._Process(delta);

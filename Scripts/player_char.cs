@@ -21,6 +21,8 @@ public partial class player_char : RigidBody2D
 	int spawn;
 	int coyoteTime = 0;
 	int coyoteTimeMax = 10;
+	int soundTick = 2;
+	AudioStreamPlayer stepSound;
 
 
 	public override void _Ready()
@@ -28,6 +30,7 @@ public partial class player_char : RigidBody2D
 		vel = new Vector2();
 		mySprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		cam = GetTree().Root.GetNode<Camera2D>("LevelField/Camera");
+		stepSound = GetNode<AudioStreamPlayer>("StepSoundPlayer");
 	}
 
     public override void _PhysicsProcess(double delta)
@@ -50,10 +53,38 @@ public partial class player_char : RigidBody2D
 		linvel.X /= 1.25f;
 		LinearVelocity = linvel;
 
+		// Get animation tick rate
+		tickRate = Math.Abs(linvel.X)/100;
+
+		// Handle animation
+		if (MoveAndCollide(new Vector2(0,1), true) == null)
+		{
+			curFrame = 1;
+			soundTick = 0;
+		}
+		else if (Math.Abs(linvel.X) > 0.5)
+		{
+			if (ticker >= tickerMax)
+			{
+				ticker = 0;
+				curFrame += 1;
+				if (curFrame == 1 || curFrame == 3)
+					PlayStepSound();
+				curFrame %= 4;
+			}
+			else
+				ticker+=tickRate;
+		}
+		else
+			curFrame = 0;
+		mySprite.Frame = curFrame;
+
 		// Jump movement
 		if (MoveAndCollide(new Vector2(0,1), true) != null)
 		{
 			spd = grndspd;
+			if (coyoteTime < coyoteTimeMax)
+				PlayLandSound();
 			coyoteTime = coyoteTimeMax;
 		}
 		else
@@ -61,8 +92,9 @@ public partial class player_char : RigidBody2D
 			coyoteTime--;
 		}
 		
-		if (Input.IsActionJustPressed("Jump") && coyoteTime > 0)
+		if (Input.IsActionPressed("Jump") && coyoteTime > 0)
 		{
+			PlayJumpSound();
 			linvel .Y = 0;
 			LinearVelocity = linvel;
 			ApplyImpulse(new Vector2(0,maxjump), new Vector2(Position.X, Position.Y + 10));
@@ -81,27 +113,6 @@ public partial class player_char : RigidBody2D
 			ApplyForce(new Vector2(-spd,0));
 		}
 
-		// Get animation tick rate
-		tickRate = Math.Abs(linvel.X)/100;
-
-		// Handle animation
-		if (MoveAndCollide(new Vector2(0,1), true) == null)
-			curFrame = 1;
-		else if (Math.Abs(linvel.X) > 0.5)
-		{
-			if (ticker >= tickerMax)
-			{
-				ticker = 0;
-				curFrame += 1;
-				curFrame %= 4;
-			}
-			else
-				ticker+=tickRate;
-		}
-		else
-			curFrame = 0;
-		mySprite.Frame = curFrame;
-
 		// Clamp position
 		var pos = Position;
 		pos.X = Math.Clamp(pos.X,0,1920);
@@ -110,8 +121,8 @@ public partial class player_char : RigidBody2D
 		// Test spawn object
 		/*if (Input.IsActionJustPressed("Interact") && holding == null)
 		{
-			SpawnObject("res://Scenes/PhysicsCardObjects/toilet.tscn");
-			*//*
+			//SpawnObject("res://Scenes/PhysicsCardObjects/steelcrate.tscn");
+			/*
 			if (spawn == 1)
 			{
 				SpawnObject("res://Scenes/PhysicsCardObjects/shop.tscn");
@@ -251,6 +262,48 @@ public partial class player_char : RigidBody2D
 		GetTree().Root.AddChild(inst);
 		pigArm = inst;
 
+		// Handle pig arm position
+		pigArm.GlobalPosition = GlobalPosition;
+
+		// Get direction to mouse
+		var dir = GlobalPosition.DirectionTo(GetGlobalMousePosition());
+		var mag = (float)holding.GetMeta("HoldOffset");
+
+		// Set object held position
+		if (GetGlobalMousePosition().DistanceTo(GlobalPosition) < mag)
+			holding.GlobalPosition = GetGlobalMousePosition();
+		else
+			holding.GlobalPosition = new Vector2(
+				GlobalPosition.X + dir.X * mag,
+				GlobalPosition.Y + dir.Y * mag
+			);
+
 		return true;
+	}
+
+	void PlayStepSound()
+	{
+		//if (soundTick != 0)
+		//{
+			soundTick = soundTick==1 ? 2 : 1;
+			stepSound.Stream = GD.Load<AudioStream>("res://Assets/Sounds/soStep" + soundTick + ".wav");
+
+			stepSound.Play();
+		//}
+		//else
+			//soundTick = 2;
+	}
+
+	void PlayJumpSound()
+	{
+		stepSound.Stream = GD.Load<AudioStream>("res://Assets/Sounds/soJump.wav");
+
+		stepSound.Play();
+	}
+	void PlayLandSound()
+	{
+		stepSound.Stream = GD.Load<AudioStream>("res://Assets/Sounds/soLand.wav");
+
+		stepSound.Play();
 	}
 }

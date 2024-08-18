@@ -3,11 +3,12 @@
 [ext_resource type="PackedScene" uid="uid://bbsse1b5w57it" path="res://Scenes/PhysicsCardObjects/physics_object.tscn" id="1_5kt5b"]
 [ext_resource type="Texture2D" uid="uid://p0cd8ysugi3u" path="res://Assets/Sprites/Objects/Cone.png" id="2_1iwq7"]
 
-[node name="Crate" instance=ExtResource("1_5kt5b")]
+[node name="Cone" instance=ExtResource("1_5kt5b")]
 symbol = ExtResource("2_1iwq7")
 metadata/HoldOffset = 50.0
 
 [node name="RigidBody2D" type="RigidBody2D" parent="." index="0"]
+position = Vector2(0, -10)
 collision_layer = 5
 collision_mask = 3
 mass = 3.0
@@ -18,4 +19,4 @@ centered = false
 offset = Vector2(-36, -29)
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="RigidBody2D" index="1"]
-polygon = PackedVector2Array(-36, 19, -29, 19, -5, -29, 5, -29, 29, 19, 36, 19, 36, 30, -36, 30)
+polygon = PackedVector2Array(-36, 19, -29, 19, -5, -29, 5, -29, 29, 19, 36, 19, 36, 30, 27, 30, 0, -23, 0, -23, -27, 30, -36, 30)
