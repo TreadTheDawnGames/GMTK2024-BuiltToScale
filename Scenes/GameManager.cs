@@ -3,17 +3,33 @@ using System;
 
 public partial class GameManager : Node2D
 {
-	public static GameManager Instance { get; private set; }
-    player_char Rufus;
+    private static GameManager instance = null;
 
+    int moneyOwned = 20;
+    private GameManager()
+    {
+    }
+
+    public static GameManager Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = new GameManager();
+            }
+            return instance;
+        }
+    }
+    player_char Rufus;
+    RichTextLabel moneyLabel;
     public override void _Ready()
     {
         base._Ready();
-        if (Instance == null)
-        {
-            Instance = this;
-        }
+        instance = this;
+        moneyLabel = GetNode<RichTextLabel>("Camera/Deck/MoneyLabel");
         Instance.Rufus = GetNode<player_char>("Rufus");
+        UpdateMoney(0);
     }
     public bool TriggerCard(string CardPath)
 	{
@@ -25,4 +41,23 @@ public partial class GameManager : Node2D
     {
         GetTree().Paused = isPaused;
     }
+    public override void _Process(double delta)
+    {
+        base._Process(delta);
+
+        
+    }
+
+    public bool UpdateMoney(int amount)
+    {
+        moneyOwned += amount;
+        if(moneyOwned < 0)
+        {
+            moneyOwned = 0;
+            return false;
+        }
+        moneyLabel.Text = moneyOwned.ToString();
+            return true;
+    }
+
 }

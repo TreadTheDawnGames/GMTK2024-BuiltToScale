@@ -17,6 +17,6 @@ public partial class CardSlot : Marker2D
     {
         Card card = (Card)node.Owner;
         card.SetDrawn(true);
-
+        card.Data.inShop = false;
     }
 }

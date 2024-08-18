@@ -17,6 +17,8 @@ public partial class Card : Control
 
     uint OGMask;
 
+    Godot.RichTextLabel moneyLabel;
+
     public void SetUp(CardData data)
     {
         this.Data = data;
@@ -29,13 +31,14 @@ public partial class Card : Control
         OGPos = Data.OGPosition;
 
         symbol.Texture = scene.symbol;
+
+        moneyLabel = (Godot.RichTextLabel)GetNode<Godot.RichTextLabel>("MoneyText");
+        moneyLabel.Text = data.cost.ToString();
         // symbol.Hide();
 
         GrabbableSprite = GetNode<Area2D>("Backing");
-        GrabbableSprite.AreaEntered += (node) => DiscardReady();
-        GrabbableSprite.AreaExited += (node) => DiscardUnready();
-        GrabbableSprite.AreaEntered += (node) => ReadyToPlay();
-        GrabbableSprite.AreaExited += (node) => UnreadyToPlay();
+        GrabbableSprite.AreaEntered += CardEnteredZone;
+        GrabbableSprite.AreaExited += CardExitedZone;
         MouseEntered +=   Hovered;
         MouseExited +=  Unhovered;
 
@@ -66,17 +69,13 @@ public partial class Card : Control
                 {
                     if (IsOnTop())
                     {
-
-                        GD.Print("Pressed");
                         grabbedOffset = Position - GetGlobalMousePosition();
                         grabbed = true;
                         GetParent().MoveChild(this, GetParent().GetChildCount() - 1);
-
                     }
                 }
                 else if (!Input.IsMouseButtonPressed(MouseButton.Left) && grabbed)
                 {
-                    GD.Print("Unpressed");
                     grabbed = false;
                 }
             }
@@ -117,7 +116,6 @@ public partial class Card : Control
         if (Input.IsMouseButtonPressed(MouseButton.Left))
             return;
         
-        GD.Print("Hovered");
         AddToGroup("DraggableHovered");
 
         hovered = true;
@@ -137,40 +135,87 @@ public partial class Card : Control
         return base._GetDragData(atPosition);
     }
 
+    void CardEnteredZone(Node2D node)
+    {
+        switch (node.Name)
+        {
+            case "PlayArea":
+        ReadyToPlay();
+                break;
 
-    void DiscardReady()
+            case "DiscardPile":
+        ReadyToDiscard();
+                break;
+
+            case "SellPanel":
+        ReadyToSell();
+                break;
+        }
+    }
+    
+    void CardExitedZone(Node2D node)
+    {
+        switch (node.Name)
+        {
+            case "PlayArea":
+        UnreadyToPlay();
+                break;
+
+            case "DiscardPile":
+        UnreadyToDiscard();
+                break;
+
+            case "SellPanel":
+        UnreadyToSell();
+                break;
+        }
+    }
+
+
+    void ReadyToDiscard()
     {
         if (!grabbed)
             return;
         Data.discardable = true;
-        GD.Print("Discardable");
     }
 
-    void DiscardUnready()
+    void UnreadyToDiscard()
     {
         if (!grabbed)
             return;
         Data.discardable = false;
-        GD.Print("NOT discardable");
 
     }
 
     void ReadyToPlay()
     {
-        if (!grabbed)
+        if (!grabbed || Data.inShop)
             return;
         Data.playable = true;
-        GD.Print("Playable");
     }
 
     void UnreadyToPlay()
     {
-        if (!grabbed)
+        if (!grabbed || Data.inShop)
             return; 
         Data.playable = false;
-        GD.Print("NOT Playable");
 
     }
+
+    void ReadyToSell()
+    {
+        if (!grabbed || Data.inShop)
+            return;
+        Data.sellable = true;
+    }
+
+    void UnreadyToSell()
+    {
+        if (!grabbed || Data.inShop)
+            return; 
+        Data.sellable = false;
+    }
+    
 
 
 }

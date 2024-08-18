@@ -11,6 +11,7 @@ size = Vector2(188, 8)
 
 [node name="Shop" instance=ExtResource("1_gk17a")]
 symbol = ExtResource("2_t2sac")
+cost = 75
 metadata/HoldOffset = 80.0
 
 [node name="RigidBody2D" type="RigidBody2D" parent="." index="0"]

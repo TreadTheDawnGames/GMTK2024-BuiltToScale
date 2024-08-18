@@ -7,17 +7,24 @@ public partial class CardData : Node
     public string PathToPhysObj { get; private set; }
     public bool discardable;
     public bool playable;
+    public bool sellable;
     public CardSlot Slot;
 
     public Vector2 OGPosition;
+    public bool inShop = true;
 
     public int cost;
+    public Texture2D symbol;
 
     public CardData(string obj)
     {
         this.PathToPhysObj = obj;
         discardable = false;
         playable = false;
+        sellable = false;
+       var ps = GD.Load<PackedScene>(obj);
+        cost = ps.Instantiate<physics_object>().cost;
+        symbol = ps.Instantiate<physics_object>().symbol;
     }
 
     public override string ToString()
