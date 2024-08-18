@@ -5,20 +5,14 @@
 [ext_resource type="Texture2D" uid="uid://dee0m22qdydys" path="res://Assets/Sprites/Deck/Shoppe/CardPanel.png" id="2_umod0"]
 [ext_resource type="Script" path="res://Scenes/PhysicsCardObjects/Shop/PermShopSlot.cs" id="3_vtxsv"]
 [ext_resource type="Script" path="res://Scenes/PhysicsCardObjects/Shop/RandShopSlot.cs" id="4_ar5e3"]
-<<<<<<< HEAD
-[ext_resource type="Texture2D" uid="uid://c77u1o2sbgryt" path="res://Assets/Sprites/Deck/Shoppe/SellPanel.png" id="6_p2ua3"]
-=======
 [ext_resource type="Texture2D" path="res://Assets/Sprites/Deck/Shoppe/SellPanel.png" id="6_p2ua3"]
->>>>>>> cas/balance
+
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_melnw"]
 size = Vector2(182, 258)
 
 [node name="Shop" type="TextureRect"]
-<<<<<<< HEAD
-=======
 process_mode = 3
->>>>>>> cas/balance
 offset_left = 370.0
 offset_top = 235.0
 offset_right = 1516.0

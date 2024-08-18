@@ -3,11 +3,7 @@
 [ext_resource type="Script" path="res://Card.cs" id="1_tylxe"]
 [ext_resource type="Texture2D" uid="uid://ddtv7683ht0ki" path="res://Assets/Sprites/Deck/Cards/CardFront.png" id="2_bwvv5"]
 [ext_resource type="Texture2D" uid="uid://cegaoxtd0pse4" path="res://Assets/Sprites/Objects/Bowl.png" id="4_6o67o"]
-<<<<<<< HEAD
-[ext_resource type="Theme" uid="uid://bm0muy2q7xt1" path="res://Scenes/Cards/MoneyTextCards.tres" id="4_o12m5"]
-=======
 [ext_resource type="Theme" path="res://Scenes/Cards/MoneyTextCards.tres" id="4_o12m5"]
->>>>>>> cas/balance
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_405qn"]
 size = Vector2(164, 240)

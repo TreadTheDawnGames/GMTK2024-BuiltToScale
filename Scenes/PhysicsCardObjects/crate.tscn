@@ -1,11 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://baurohj70urn3"]
 
 [ext_resource type="PackedScene" uid="uid://bbsse1b5w57it" path="res://Scenes/PhysicsCardObjects/physics_object.tscn" id="1_3wt6l"]
-<<<<<<< HEAD
-[ext_resource type="Texture2D" uid="uid://ckwvnujyfbm05" path="res://Assets/Sprites/Objects/Crate.png" id="2_6lsux"]
-=======
 [ext_resource type="Texture2D" path="res://Assets/Sprites/Objects/Crate.png" id="2_6lsux"]
->>>>>>> cas/balance
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2avjj"]
 size = Vector2(86, 86)
