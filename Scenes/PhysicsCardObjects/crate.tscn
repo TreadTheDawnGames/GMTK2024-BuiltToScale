@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://baurohj70urn3"]
 
 [ext_resource type="PackedScene" uid="uid://bbsse1b5w57it" path="res://Scenes/PhysicsCardObjects/physics_object.tscn" id="1_3wt6l"]
-[ext_resource type="Texture2D" uid="uid://diujqnrhfts6g" path="res://Assets/Sprites/Crate.png" id="2_6lsux"]
+[ext_resource type="Texture2D" uid="uid://ckwvnujyfbm05" path="res://Assets/Sprites/Objects/Crate.png" id="2_6lsux"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2avjj"]
 size = Vector2(86, 86)
@@ -13,7 +13,7 @@ metadata/HoldOffset = 50.0
 [node name="RigidBody2D" type="RigidBody2D" parent="." index="0"]
 collision_layer = 5
 collision_mask = 3
-mass = 10.0
+mass = 5.0
 
 [node name="Sprite2D" type="Sprite2D" parent="RigidBody2D" index="0"]
 texture = ExtResource("2_6lsux")
