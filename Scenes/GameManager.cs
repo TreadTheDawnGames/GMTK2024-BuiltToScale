@@ -21,4 +21,8 @@ public partial class GameManager : Node2D
         return Rufus.SpawnObject(CardPath);
 	}
 
+    public void SetPauseGame(bool isPaused)
+    {
+        GetTree().Paused = isPaused;
+    }
 }

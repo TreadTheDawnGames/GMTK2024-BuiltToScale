@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://xy71mg3ttuj1" path="res://Scenes/Cards/deck.tscn" id="4_vv3gu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8l27s"]
-size = Vector2(1920, 300)
+size = Vector2(4255, 300)
 
 [node name="LevelField" type="Node2D"]
 script = ExtResource("1_h1jex")
@@ -24,7 +24,7 @@ position = Vector2(960, 760)
 texture = ExtResource("2_sjrln")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D2"]
-position = Vector2(960, 1150)
+position = Vector2(970.5, 1150)
 shape = SubResource("RectangleShape2D_8l27s")
 
 [node name="Camera" parent="." instance=ExtResource("3_buxj5")]
@@ -34,6 +34,7 @@ position = Vector2(960, 540)
 follow_viewport_enabled = true
 
 [node name="Deck" parent="Camera" instance=ExtResource("4_vv3gu")]
+process_mode = 3
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0

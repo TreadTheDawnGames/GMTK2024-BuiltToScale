@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://do0mmxloy75jq"]
+
+[ext_resource type="PackedScene" uid="uid://bbsse1b5w57it" path="res://Scenes/PhysicsCardObjects/physics_object.tscn" id="1_kqsuy"]
+[ext_resource type="Texture2D" uid="uid://bdtc77b0biqer" path="res://Assets/Sprites/Matress.png" id="2_mpa6p"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_7c7np"]
+bounce = 0.85
+
+[node name="Crate" instance=ExtResource("1_kqsuy")]
+metadata/HoldOffset = 50.0
+
+[node name="RigidBody2D" type="RigidBody2D" parent="." index="0"]
+position = Vector2(0, -10)
+collision_layer = 5
+collision_mask = 3
+mass = 40.0
+physics_material_override = SubResource("PhysicsMaterial_7c7np")
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D" index="0"]
+position = Vector2(0, 10)
+texture = ExtResource("2_mpa6p")
+centered = false
+offset = Vector2(-105, -29)
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="RigidBody2D" index="1"]
+polygon = PackedVector2Array(-105, -2, -104, -9, -100, -12, -95, -14, -64, -12, -30, -16, 21, -15, 30, -14, 39, -15, 73, -19, 97, -19, 102, -14, 106, 15, 106, 24, 105, 29, 98, 38, 64, 38, 34, 37, 4, 38, -13, 39, -62, 39, -81, 38, -91, 36, -95, 33, -98, 30, -104, 8, -105, 0)

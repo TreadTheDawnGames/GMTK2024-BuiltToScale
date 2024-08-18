@@ -60,7 +60,8 @@ radius = 30.0
 height = 100.0
 
 [node name="PlayerChar" type="RigidBody2D"]
-collision_layer = 2
+process_mode = 1
+collision_layer = 34
 collision_mask = 3
 physics_material_override = SubResource("PhysicsMaterial_pu1om")
 lock_rotation = true
@@ -75,3 +76,6 @@ offset = Vector2(-50, -60)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_qvtxl")
+
+[node name="StepSoundPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -20.07
