@@ -1,13 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://biecsihwn6q3l"]
+[gd_scene load_steps=10 format=3 uid="uid://biecsihwn6q3l"]
 
 [ext_resource type="Script" path="res://Scenes/GameManager.cs" id="1_h1jex"]
+[ext_resource type="Texture2D" uid="uid://cikj82ey30kx5" path="res://Assets/Sprites/Clouds.png" id="2_1sfio"]
 [ext_resource type="PackedScene" uid="uid://c74uxnvapn034" path="res://Scenes/player_char.tscn" id="2_4km2f"]
 [ext_resource type="Texture2D" uid="uid://bxqc3wjmnxfkd" path="res://Assets/Sprites/Grass.png" id="2_sjrln"]
 [ext_resource type="PackedScene" uid="uid://n286cy3dbbn0" path="res://Scenes/camera.tscn" id="3_buxj5"]
 [ext_resource type="PackedScene" uid="uid://xy71mg3ttuj1" path="res://Scenes/Cards/deck.tscn" id="4_vv3gu"]
-[ext_resource type="Theme" path="res://Scenes/Cards/MoneyTextWorld.tres" id="6_ood1v"]
+[ext_resource type="Theme" uid="uid://b8bd1luqflxfy" path="res://Scenes/Cards/MoneyTextWorld.tres" id="6_ood1v"]
 [ext_resource type="PackedScene" uid="uid://cj6chkdqmf72v" path="res://Scenes/money_line.tscn" id="7_w53ei"]
-
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8l27s"]
 size = Vector2(4255, 300)
@@ -15,10 +15,24 @@ size = Vector2(4255, 300)
 [node name="LevelField" type="Node2D"]
 script = ExtResource("1_h1jex")
 
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+scale = Vector2(2, 2)
+transform = Transform2D(2, 0, 0, 2, 0, 0)
+follow_viewport_enabled = true
+follow_viewport_scale = 0.5
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground"]
+position = Vector2(960, -2500)
+texture = ExtResource("2_1sfio")
+offset = Vector2(-480, 0)
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+
 [node name="MoneyLine2" parent="." instance=ExtResource("7_w53ei")]
 position = Vector2(1641, -600)
 
 [node name="Rufus" parent="." instance=ExtResource("2_4km2f")]
+process_mode = 0
 position = Vector2(647, -50)
 
 [node name="RigidBody2D2" type="StaticBody2D" parent="."]
