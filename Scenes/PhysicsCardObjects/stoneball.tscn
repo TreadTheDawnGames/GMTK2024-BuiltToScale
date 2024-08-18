@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://b6vskc5v7mgjk"]
+[gd_scene load_steps=5 format=3 uid="uid://cds53pvfg7epf"]
 
 [ext_resource type="PackedScene" uid="uid://bbsse1b5w57it" path="res://Scenes/PhysicsCardObjects/physics_object.tscn" id="1_uwe44"]
 [ext_resource type="Texture2D" uid="uid://bb4p0qmdm2y7f" path="res://Assets/Sprites/StoneBallLighting.png" id="2_jabpf"]
