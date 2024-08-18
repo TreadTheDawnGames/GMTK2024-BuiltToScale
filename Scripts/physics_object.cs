@@ -5,6 +5,8 @@ public partial class physics_object : Node2D
 {
     [Export]
     public Texture2D symbol;
+    [Export]
+    public int cost = 10;
 
     public bool isHeld = false;
     public bool NeverCheckAgain = false;

@@ -108,10 +108,10 @@ public partial class player_char : RigidBody2D
 		Position = pos;
 
 		// Test spawn object
-		if (Input.IsActionJustPressed("Interact") && holding == null)
+		/*if (Input.IsActionJustPressed("Interact") && holding == null)
 		{
 			SpawnObject("res://Scenes/PhysicsCardObjects/toilet.tscn");
-			/*
+			*//*
 			if (spawn == 1)
 			{
 				SpawnObject("res://Scenes/PhysicsCardObjects/shop.tscn");
@@ -122,8 +122,8 @@ public partial class player_char : RigidBody2D
 				SpawnObject("res://Scenes/PhysicsCardObjects/crate.tscn");
 				spawn = 1;
 			}
-			*/
-		}
+			*//*
+		}*/
 
 		// Holding object
 		if (holding != null)

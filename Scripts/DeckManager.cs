@@ -9,7 +9,6 @@ using System.IO;
 public partial class DeckManager : Control
 {
 	
-	TextureButton DrawPile;
 	PackedScene CardScene = GD.Load<PackedScene>("res://Scenes/Cards/card.tscn");
 
 	Queue<CardData> deck = new Queue<CardData>();
@@ -26,53 +25,84 @@ public partial class DeckManager : Control
 	AudioStreamPlayer shuffleSound;
 	AudioStreamPlayer flipSound;
 
-	public static DeckManager Instance { get; private set; }
+	Sprite2D discardSprite;
+	Godot.RichTextLabel discardMoneyLabel;
 
-	public bool cardHeld = false;
+	public bool atShop = false;
+
+    private static DeckManager instance = null;
+
+    private DeckManager()
+    {
+    }
+
+    public static DeckManager Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = new DeckManager();
+            }
+            return instance;
+        }
+    }
+    public bool cardHeld = false;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		DrawPile = GetNode<TextureButton>("TextureProgressBar/DrawPile");
-		DrawPile.Pressed += DrawCard;
+		instance = this;
 		cardSlots = GetNode("Hand").GetChildren().OfType<CardSlot>().ToArray();
         playArea = GetNode<Area2D>("PlayArea");
 		shuffleSound = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
 		flipSound = GetNode<AudioStreamPlayer>("CardFlipSound");
 
-        discardArea = GetNode<Area2D>("DiscardPile");
+		discardArea = GetNode<Area2D>("DiscardPile");
+		discardSprite = GetNode<Sprite2D>("DiscardPile/Sprite/Symbol");
+		discardMoneyLabel = (Godot.RichTextLabel)GetNode<Godot.RichTextLabel>("DiscardPile/Sprite/DiscardMoneyText");
 
         cardCountBar = GetNode<TextureProgressBar>("TextureProgressBar");
 
-		if(Instance == null)
+		discard = CardAssembler./*TestDeck();//*/Starter();
+		Shuffle();
+
+		foreach (CardData card in discard)
 		{
-			Instance = this;
+			deck.Enqueue(card);
 		}
 
-		for (int i = 0; i < 10; i++)
-		{
-			deck.Enqueue(CardAssembler.Rand());
-		}
 
-
-		GD.Print(deck.Count  +" cards in deck");
 		for (int i = 0; i < cardSlots.GetLength(0); i++)
 		{
-			GD.Print(cardSlots.GetLength(0));
 			DrawCard();
 		}
 
 		cardCountBar.MaxValue = deck.Count;
 		cardCountBar.Value = deck.Count;
 
+        discardSprite.GetParent<Sprite2D>().Hide();
 
 
+    }
+
+
+    void UpdateDiscardSprite(Card card)
+	{
+		if (discard.Count == 0)
+		{
+			discardSprite.GetParent<Sprite2D>().Hide();
+		}
+		else
+		{
+
+            discardSprite.GetParent<Sprite2D>().Show();
+			discardSprite.Texture = card.Data.symbol;
+			discardMoneyLabel.Text = card.Data.cost.ToString();
+		}
 	}
 
-	
-
-
-	void DrawCard()
+	public void DrawCard()
 	{
 		
 		
@@ -128,7 +158,7 @@ public partial class DeckManager : Control
 
 		card.OGPosition = attempt.Position;
 
-		SpawnCard(card);
+		SpawnCard(card, cardCountBar.GlobalPosition);
 		hand.Add(card);
 		cardCountBar.Value = deck.Count;
 
@@ -146,14 +176,49 @@ public partial class DeckManager : Control
 		flipSound.Play();
 	}
 
+    public void SellCard(Card card)
+    {
+        card.Data.Slot.occupied = false;
+        hand.Remove(card.Data);
+        card.QueueFree();
 
-	void DiscardCard(Card card)
+    }
+    void DiscardCard(Card card)
 	{
+		if(!card.Data.inShop && !card.Data.playable)
+		{
+			return;
+		}
+		
+		if(discard.Count + hand.Count + deck.Count >= 20)
+		{
+			GD.Print("Deck Full!");
+
+			return;
+			//shop.hide
+			//prompt sell
+		}
+
+		if (card.Data.inShop)
+		{
+			GD.Print("Bought card: " + card.Name);
+			if (!GameManager.Instance.UpdateMoney(-card.Data.cost))
+			{
+				return;
+			}
+		}
+
+
 		card.Data.Slot.occupied = false;
 		hand.Remove(card.Data);
 		discard.Add(card.Data);
 		card.QueueFree();
-		DrawCard();
+
+		if(!atShop) 
+		{ 
+			DrawCard();
+		}
+			UpdateDiscardSprite(card);
 	}
 	
 	void Shuffle()
@@ -163,7 +228,6 @@ public partial class DeckManager : Control
 		foreach(CardData card in discard.Shuffled().ToList<CardData>())
 		{
 			deck.Enqueue(card);
-			GD.Print(card.ToString());
 		}
 		cardCountBar.MaxValue = deck.Count;
         cardCountBar.Value = deck.Count;
@@ -172,17 +236,17 @@ public partial class DeckManager : Control
 
 	}
 
-	void SpawnCard(CardData data)
+	public Card SpawnCard(CardData data, Vector2 spawnPosition)
 	{
 		var spawnedCard = CardScene.Instantiate<Card>();
 
         data.Slot.GetParent().AddChild(spawnedCard);
 
-        spawnedCard.GlobalPosition = DrawPile.GlobalPosition;
+        spawnedCard.GlobalPosition = spawnPosition;
         
 		
 		spawnedCard.SetUp(data);
-
+		return spawnedCard;
     }
 
 	bool CheckForDiscard()
@@ -191,16 +255,12 @@ public partial class DeckManager : Control
         {
             foreach (var area in discardArea.GetOverlappingAreas())
             {
-                GD.Print("Got card");
-
                 Card card = (Card)area.Owner;
 
                 if (card.Data.discardable)
                 {
-                    GD.Print("Discardable");
                     if (!Input.IsMouseButtonPressed(MouseButton.Left))
                     {
-                        GD.Print("Discarded");
                         DiscardCard(card);
 						return true;
                     }
@@ -216,12 +276,10 @@ public partial class DeckManager : Control
 		{
 			foreach (var area in playArea.GetOverlappingAreas())
 			{
-				GD.Print("Got card");
 
 				Card card = (Card)area.Owner;
 				if (card.Data.playable)
 				{
-					GD.Print("Playable");
 					if (!Input.IsMouseButtonPressed(MouseButton.Left))
 					{
 						if (GameManager.Instance.TriggerCard(card.Data.PathToPhysObj))
@@ -236,11 +294,35 @@ public partial class DeckManager : Control
 		return false;
 	}
 
+	public void ReplenishHand()
+	{
+
+        for (int i = 0; i < cardSlots.GetLength(0); i++)
+        {
+            DrawCard();
+        }
+    }
+
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
 	{
 		if(CheckForDiscard()) return;
 		if(CheckForPlay()) return;
 
-	}
+
+        if (Input.IsActionJustPressed("Debug-OpenShop"))
+		{
+			OpenShop();
+		}
+
+
+    }
+	
+	void OpenShop()
+        {
+            var packedScene = GD.Load<PackedScene>("res://Scenes/PhysicsCardObjects/Shop/Shop.tscn");
+            var shop = packedScene.Instantiate();
+            DeckManager.Instance.AddChild(shop);
+			DeckManager.Instance.MoveChild(shop, 3);
+        }
 }

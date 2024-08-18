@@ -9,6 +9,7 @@ size = Vector2(430, 43)
 
 [node name="Obsidian" instance=ExtResource("1_ifh3u")]
 symbol = ExtResource("2_pkrib")
+cost = 100
 metadata/HoldOffset = 2000.0
 metadata/Static = true
 
