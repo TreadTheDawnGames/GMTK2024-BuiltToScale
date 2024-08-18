@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://r6t1tqle0d2b"]
 
 [ext_resource type="PackedScene" uid="uid://bbsse1b5w57it" path="res://Scenes/PhysicsCardObjects/physics_object.tscn" id="1_7utca"]
-[ext_resource type="Texture2D" uid="uid://barpyeifwx51i" path="res://Assets/Sprites/Crate.png" id="2_t62lw"]
+[ext_resource type="Texture2D" uid="uid://diujqnrhfts6g" path="res://Assets/Sprites/Crate.png" id="2_t62lw"]
 [ext_resource type="Texture2D" uid="uid://by7f4pcq7sy23" path="res://Assets/Sprites/BowlBase.png" id="3_fmjqw"]
 [ext_resource type="Texture2D" uid="uid://cb3fbgppse6fl" path="res://Assets/Sprites/BowlBack.png" id="4_ql141"]
 

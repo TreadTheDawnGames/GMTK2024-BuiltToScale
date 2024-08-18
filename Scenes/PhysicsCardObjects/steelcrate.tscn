@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://ddyikx5noijau"]
 
 [ext_resource type="PackedScene" uid="uid://bbsse1b5w57it" path="res://Scenes/PhysicsCardObjects/physics_object.tscn" id="1_hb87e"]
-[ext_resource type="Texture2D" uid="uid://barpyeifwx51i" path="res://Assets/Sprites/Crate.png" id="2_kmwj8"]
+[ext_resource type="Texture2D" uid="uid://diujqnrhfts6g" path="res://Assets/Sprites/Crate.png" id="2_kmwj8"]
 [ext_resource type="Texture2D" uid="uid://c2wn66y3mb2yy" path="res://Assets/Sprites/Steelcrate.png" id="3_7tk3u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2avjj"]

@@ -40,7 +40,6 @@ position = Vector2(960, -460)
 follow_viewport_enabled = true
 
 [node name="Deck" parent="Camera" instance=ExtResource("4_vv3gu")]
-process_mode = 3
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
