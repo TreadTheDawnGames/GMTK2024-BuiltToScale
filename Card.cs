@@ -77,22 +77,32 @@ public partial class Card : Control
 
             if (hovered)
             {
+            if(!Data.playable)
+                Scale = Scale.Lerp(new Vector2(1.25f, 1.25f), 0.25f);
+            else
+            {
+                Scale = Scale.Lerp(new Vector2(0.75f, 0.75f), 0.25f);
 
+            }
 
-                if (Input.IsMouseButtonPressed(MouseButton.Left) && !grabbed)
+            if (Input.IsMouseButtonPressed(MouseButton.Left) && !grabbed)
                 {
                     if (IsOnTop())
                     {
                         grabbedOffset = Position - GetGlobalMousePosition();
                         grabbed = true;
-                        GetParent().MoveChild(this, GetParent().GetChildCount() - 1);
                     }
                 }
                 else if (!Input.IsMouseButtonPressed(MouseButton.Left) && grabbed)
                 {
                     grabbed = false;
                 }
-            }
+        }
+        else
+        {
+            Scale = Scale.Lerp(new Vector2(1, 1), 0.25f);
+
+        }
 
         if (grabbed)
         {
@@ -131,6 +141,7 @@ public partial class Card : Control
             return;
         
         AddToGroup("DraggableHovered");
+        GetParent().MoveChild(this, GetParent().GetChildCount() - 1);
 
         hovered = true;
     }
@@ -140,6 +151,8 @@ public partial class Card : Control
         if (Input.IsMouseButtonPressed(MouseButton.Left))
             return;
         RemoveFromGroup("DraggableHovered");
+
+
 
         hovered = false;
     }
@@ -210,7 +223,8 @@ public partial class Card : Control
 
     void UnreadyToPlay()
     {
-        if (!grabbed || Data.inShop)
+        GD.Print(grabbed, Data.inShop);
+        if (grabbed || Data.inShop)
             return; 
         Data.playable = false;
 

@@ -22,6 +22,7 @@ offset_right = 82.0
 offset_bottom = 120.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(82, 120)
 mouse_filter = 1
 script = ExtResource("1_tylxe")
 reg = ExtResource("2_bwvv5")
