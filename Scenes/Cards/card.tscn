@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://Card.cs" id="1_tylxe"]
 [ext_resource type="Texture2D" uid="uid://ddtv7683ht0ki" path="res://Assets/Sprites/Deck/Cards/CardFront.png" id="2_bwvv5"]
-[ext_resource type="Texture2D" uid="uid://cegaoxtd0pse4" path="res://Assets/Sprites/Objects/Bowl.png" id="4_6o67o"]
-[ext_resource type="Theme" path="res://Scenes/Cards/MoneyTextCards.tres" id="4_o12m5"]
+[ext_resource type="Texture2D" uid="uid://ugl1w3serw6x" path="res://Assets/Sprites/Deck/Cards/CardFrontSingleUse.png" id="3_qnq5i"]
+[ext_resource type="Theme" uid="uid://bm0muy2q7xt1" path="res://Scenes/Cards/MoneyTextCards.tres" id="4_o12m5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_405qn"]
 size = Vector2(164, 240)
@@ -24,6 +24,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_tylxe")
+reg = ExtResource("2_bwvv5")
+singleUse = ExtResource("3_qnq5i")
 
 [node name="Backing" type="Area2D" parent="."]
 position = Vector2(81, 120)
@@ -34,13 +36,12 @@ collision_mask = 2490368
 position = Vector2(1, 0)
 shape = SubResource("RectangleShape2D_405qn")
 
-[node name="Sprite2D" type="Sprite2D" parent="Backing"]
+[node name="Background" type="Sprite2D" parent="Backing"]
 position = Vector2(1, 0)
 texture = ExtResource("2_bwvv5")
 
 [node name="Symbol" type="Sprite2D" parent="Backing"]
 position = Vector2(1, 0)
-texture = ExtResource("4_6o67o")
 
 [node name="MoneyText" type="RichTextLabel" parent="."]
 modulate = Color(0, 0, 0, 1)

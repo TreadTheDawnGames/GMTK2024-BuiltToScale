@@ -1,12 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://bqeaupawgtp01"]
+[gd_scene load_steps=5 format=3 uid="uid://dwqmjqetbm3di"]
 
 [ext_resource type="PackedScene" uid="uid://bbsse1b5w57it" path="res://Scenes/PhysicsCardObjects/physics_object.tscn" id="1_ec5dk"]
-[ext_resource type="Texture2D" uid="uid://barpyeifwx51i" path="res://Assets/Sprites/Crate.png" id="2_q6a1s"]
+[ext_resource type="Texture2D" uid="uid://6dwmla6fleug" path="res://Assets/Sprites/Objects/ShipIcon.png" id="2_s3l6j"]
 [ext_resource type="Texture2D" uid="uid://dkxrcyjopgkvs" path="res://Assets/Sprites/ShipBase.png" id="3_efll1"]
 [ext_resource type="Texture2D" uid="uid://ciiremhnuqclr" path="res://Assets/Sprites/ShipSail.png" id="4_qwf1k"]
 
 [node name="Crate" instance=ExtResource("1_ec5dk")]
-symbol = ExtResource("2_q6a1s")
+symbol = ExtResource("2_s3l6j")
 metadata/HoldOffset = 50.0
 
 [node name="RigidBody2D" type="RigidBody2D" parent="." index="0"]

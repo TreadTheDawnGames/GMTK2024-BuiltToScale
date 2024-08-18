@@ -2,8 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bbsse1b5w57it" path="res://Scenes/PhysicsCardObjects/physics_object.tscn" id="1_d2y63"]
 [ext_resource type="Texture2D" uid="uid://do44gxri1p4h3" path="res://Assets/Sprites/Toilet.png" id="2_q08gk"]
-[ext_resource type="Texture2D" path="res://Assets/Sprites/Objects/Toilet.png" id="2_wojaf"]
-
+[ext_resource type="Texture2D" uid="uid://cq36m0ck3wl00" path="res://Assets/Sprites/Objects/ToiletIcon.png" id="2_wojaf"]
 
 [node name="Crate" instance=ExtResource("1_d2y63")]
 symbol = ExtResource("2_wojaf")

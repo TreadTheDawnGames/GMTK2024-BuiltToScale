@@ -1,10 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://ddlplckd2hw7j"]
+[gd_scene load_steps=4 format=3 uid="uid://0t3dawan26jq"]
 
 [ext_resource type="PackedScene" uid="uid://bbsse1b5w57it" path="res://Scenes/PhysicsCardObjects/physics_object.tscn" id="1_hegvx"]
 [ext_resource type="Texture2D" uid="uid://ba283hkod0sq3" path="res://Assets/Sprites/lamp.png" id="2_5jnss"]
+[ext_resource type="Texture2D" uid="uid://doe5u43sd65c2" path="res://Assets/Sprites/Objects/lampIcon.png" id="2_plkvp"]
 
 [node name="lamp" instance=ExtResource("1_hegvx")]
-symbol = ExtResource("2_5jnss")
+symbol = ExtResource("2_plkvp")
 metadata/HoldOffset = 50.0
 
 [node name="RigidBody2D" type="RigidBody2D" parent="." index="0"]

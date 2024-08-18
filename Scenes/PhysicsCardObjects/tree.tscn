@@ -1,11 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://bpeogf7ci3atd"]
+[gd_scene load_steps=4 format=3 uid="uid://bny2bjbwieh4r"]
 
 [ext_resource type="PackedScene" uid="uid://bbsse1b5w57it" path="res://Scenes/PhysicsCardObjects/physics_object.tscn" id="1_sjgog"]
-[ext_resource type="Texture2D" uid="uid://ba283hkod0sq3" path="res://Assets/Sprites/lamp.png" id="2_e85n7"]
+[ext_resource type="Texture2D" uid="uid://s1i1kvrgpo6l" path="res://Assets/Sprites/Objects/TreeIcon.png" id="2_0kjng"]
 [ext_resource type="Texture2D" uid="uid://cessfn6xoublu" path="res://Assets/Sprites/Tree.png" id="3_iifsr"]
 
 [node name="lamp" instance=ExtResource("1_sjgog")]
-symbol = ExtResource("2_e85n7")
+symbol = ExtResource("2_0kjng")
 metadata/HoldOffset = 50.0
 
 [node name="RigidBody2D" type="RigidBody2D" parent="." index="0"]

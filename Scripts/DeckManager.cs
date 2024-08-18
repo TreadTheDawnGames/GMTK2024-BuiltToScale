@@ -30,6 +30,28 @@ public partial class DeckManager : Control
 
 	public bool atShop = false;
 
+	public List<CardData> AllCards
+	{
+		get
+		{
+			List<CardData> cards = new();
+
+			foreach(CardData card in discard)
+			{
+				cards.Add(card);
+			}
+			foreach(CardData card in hand)
+			{
+				cards.Add(card);
+			}
+			foreach(CardData card in deck)
+			{
+				cards.Add(card);
+			}
+			return cards;
+		}
+	}
+
     private static DeckManager instance = null;
 
     private DeckManager()
@@ -64,7 +86,7 @@ public partial class DeckManager : Control
 
         cardCountBar = GetNode<TextureProgressBar>("TextureProgressBar");
 
-		discard = CardAssembler./*TestDeck();//*/Starter();
+		discard = CardAssembler.Starter();
 		Shuffle();
 
 		foreach (CardData card in discard)
@@ -83,7 +105,7 @@ public partial class DeckManager : Control
 
         discardSprite.GetParent<Sprite2D>().Hide();
 
-
+		
     }
 
 
@@ -212,7 +234,14 @@ public partial class DeckManager : Control
 
 		card.Data.Slot.occupied = false;
 		hand.Remove(card.Data);
-		discard.Add(card.Data);
+
+		if (!card.Data.singleUse)
+		{
+			discard.Add(card.Data);
+		}
+
+		
+		
 		card.QueueFree();
 
 		if(!atShop) 

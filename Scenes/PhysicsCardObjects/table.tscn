@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://crlh2omcyo746"]
+[gd_scene load_steps=6 format=3 uid="uid://cp22oy4fpvb8w"]
 
 [ext_resource type="PackedScene" uid="uid://bbsse1b5w57it" path="res://Scenes/PhysicsCardObjects/physics_object.tscn" id="1_12sn5"]
-[ext_resource type="Texture2D" uid="uid://barpyeifwx51i" path="res://Assets/Sprites/Crate.png" id="2_h3hw4"]
+[ext_resource type="Texture2D" uid="uid://cd607uj74bjuu" path="res://Assets/Sprites/Objects/TableIcon.png" id="2_430qa"]
 [ext_resource type="Texture2D" uid="uid://cscckw4guu6kb" path="res://Assets/Sprites/Table.png" id="3_m4tnl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2avjj"]
@@ -11,7 +11,7 @@ size = Vector2(17, 34)
 size = Vector2(176, 21)
 
 [node name="table" instance=ExtResource("1_12sn5")]
-symbol = ExtResource("2_h3hw4")
+symbol = ExtResource("2_430qa")
 metadata/HoldOffset = 50.0
 
 [node name="RigidBody2D" type="RigidBody2D" parent="." index="0"]

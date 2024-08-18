@@ -3,9 +3,13 @@ using System;
 
 public partial class Card : Control
 {
-    
+    [Export]
+    Texture2D reg, singleUse;
+
     Area2D GrabbableSprite;
     public CardData Data{get; private set;}
+
+    Sprite2D background;
     Sprite2D symbol;
 
     bool grabbed = false;
@@ -23,6 +27,16 @@ public partial class Card : Control
     {
         this.Data = data;
         symbol = GetNode<Sprite2D>("Backing/Symbol");
+        background = GetNode<Sprite2D>("Backing/Background");
+
+        if (data.singleUse)
+        {
+            background.Texture = singleUse;
+        }
+        else
+        {
+            background.Texture = reg;
+        }
 
         var physObj = GD.Load<PackedScene>(Data.PathToPhysObj);
 
@@ -204,6 +218,11 @@ public partial class Card : Control
 
     void ReadyToSell()
     {
+        if (Data.Type == CardAssembler.CardType.shop)
+        {
+            
+        }
+
         if (!grabbed || Data.inShop)
             return;
         Data.sellable = true;

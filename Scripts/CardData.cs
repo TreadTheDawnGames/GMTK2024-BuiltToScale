@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using static CardAssembler;
 
 public partial class CardData : Node
 {
@@ -9,6 +10,9 @@ public partial class CardData : Node
     public bool playable;
     public bool sellable;
     public CardSlot Slot;
+    public bool singleUse;
+
+    public CardAssembler.CardType Type;
 
     public Vector2 OGPosition;
     public bool inShop = true;
@@ -23,8 +27,20 @@ public partial class CardData : Node
         playable = false;
         sellable = false;
        var ps = GD.Load<PackedScene>(obj);
-        cost = ps.Instantiate<physics_object>().cost;
-        symbol = ps.Instantiate<physics_object>().symbol;
+        var myObject = ps.Instantiate<physics_object>();
+        cost = myObject.cost;
+        symbol = myObject.symbol;
+        singleUse = myObject.singleUse;
+
+        foreach (CardType type in Enum.GetValues(typeof(CardType)))
+        {
+            if (obj.Contains(type.ToString()))
+            {
+                Type = type;
+                break;
+            }
+        }
+
     }
 
     public override string ToString()

@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Linq;
+using static CardAssembler;
 
 public partial class Shop : TextureRect
 {
@@ -34,13 +35,13 @@ public partial class Shop : TextureRect
 			GD.Print(slot.GetIndex());
 		}
 
-		CreateCard(CardAssembler.CardType.Crate, (CardSlot)permCardSlots[0]);
-		CreateCard(CardAssembler.CardType.TrafficCone, (CardSlot)permCardSlots[1]);
-		CreateCard(CardAssembler.CardType.Toilet, (CardSlot)permCardSlots[2]);
+		CreateGuaranteedCard((GuaranteedCardType)0, (CardSlot)permCardSlots[0]);
+        CreateGuaranteedCard((GuaranteedCardType)1, (CardSlot)permCardSlots[1]);
+        CreateGuaranteedCard((GuaranteedCardType)2, (CardSlot)permCardSlots[2]);
 		
 		foreach(var slot in randCardSlots)
 		{
-			CreateCard(CardAssembler.RandType(), slot);
+			CreateCard(CardAssembler.GetWeightedRand(), slot);
 		}
 
 		DeckManager.Instance.atShop = true;
@@ -48,6 +49,15 @@ public partial class Shop : TextureRect
     }
 
 	void CreateCard(CardAssembler.CardType type, CardSlot slot)
+	{
+		CardData data = CardAssembler.Create(type);
+		data.Slot = slot;
+		data.OGPosition = data.Slot.Position;
+		Card card = DeckManager.Instance.SpawnCard(data, data.Slot.GlobalPosition);
+		card.SetDrawn(true);
+	}
+	
+	void CreateGuaranteedCard(CardAssembler.GuaranteedCardType type, CardSlot slot)
 	{
 		CardData data = CardAssembler.Create(type);
 		data.Slot = slot;
@@ -70,12 +80,30 @@ public partial class Shop : TextureRect
     bool CheckForSell()
     {
 		
+
         if (sellArea.HasOverlappingAreas())
         {
             foreach (var area in sellArea.GetOverlappingAreas())
             {
-
                 Card card = (Card)area.Owner;
+
+				if (card.Data.Type == CardType.shop)
+				{
+					int shopCount = 0;
+					foreach(CardData data in DeckManager.Instance.AllCards)
+					{
+						if(data.Type == CardType.shop)
+						{
+							shopCount++;
+						}
+					}
+					if (shopCount < 2) 
+					{
+						return false;
+					}
+					
+				}
+
                 if (card.Data.sellable)
                 {
                     if (!Input.IsMouseButtonPressed(MouseButton.Left))

@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bbsse1b5w57it" path="res://Scenes/PhysicsCardObjects/physics_object.tscn" id="1_ifh3u"]
 [ext_resource type="Texture2D" uid="uid://cmg1mthgo0yra" path="res://Assets/Sprites/Obsidian.png" id="2_cft7a"]
-[ext_resource type="Texture2D" uid="uid://ckfb1x5s0wfq5" path="res://Assets/Sprites/Objects/ObsidianSymbol.png" id="2_pkrib"]
+[ext_resource type="Texture2D" uid="uid://ckfb1x5s0wfq5" path="res://Assets/Sprites/Objects/ObsidianIcon.png" id="2_pkrib"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7f8u8"]
 size = Vector2(430, 43)
@@ -10,6 +10,7 @@ size = Vector2(430, 43)
 [node name="Obsidian" instance=ExtResource("1_ifh3u")]
 symbol = ExtResource("2_pkrib")
 cost = 100
+singleUse = true
 metadata/HoldOffset = 2000.0
 metadata/Static = true
 

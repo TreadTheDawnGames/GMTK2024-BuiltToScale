@@ -1,12 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://do0mmxloy75jq"]
+[gd_scene load_steps=5 format=3 uid="uid://7k3sqljhj4di"]
 
 [ext_resource type="PackedScene" uid="uid://bbsse1b5w57it" path="res://Scenes/PhysicsCardObjects/physics_object.tscn" id="1_kqsuy"]
+[ext_resource type="Texture2D" uid="uid://chwy7tpsokfrd" path="res://Assets/Sprites/Objects/MatressIcon.png" id="2_bnlmp"]
 [ext_resource type="Texture2D" uid="uid://bdtc77b0biqer" path="res://Assets/Sprites/Matress.png" id="2_mpa6p"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_7c7np"]
 bounce = 0.85
 
 [node name="Crate" instance=ExtResource("1_kqsuy")]
+symbol = ExtResource("2_bnlmp")
 metadata/HoldOffset = 50.0
 
 [node name="RigidBody2D" type="RigidBody2D" parent="." index="0"]
