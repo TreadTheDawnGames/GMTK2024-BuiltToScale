@@ -155,6 +155,7 @@ public partial class Card : Control
     
     void CardExitedZone(Node2D node)
     {
+        GD.Print("EnteredZone");
         switch (node.Name)
         {
             case "PlayArea":
@@ -174,6 +175,7 @@ public partial class Card : Control
 
     void ReadyToDiscard()
     {
+        GD.Print("ReadyToDiscard");
         if (!grabbed)
             return;
         Data.discardable = true;

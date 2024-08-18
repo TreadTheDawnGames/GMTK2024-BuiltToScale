@@ -25,9 +25,9 @@ public partial class ShopArea : Area2D
 
 		if (isInteractable == true && used == false && rigid.GetCollisionLayerValue(1) == true)
 		{
-			if (Input.IsActionJustPressed("OpenShop"))
+			if (Input.IsActionJustPressed("Debug-OpenShop"))
 			{
-				//OpenShop();
+				OpenShop();
 				GameManager.Instance.SetPauseGame(true);
 				used = true;
 			}

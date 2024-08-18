@@ -39,7 +39,8 @@ public partial class GameManager : Node2D
 
     public void SetPauseGame(bool isPaused)
     {
-        GetTree().Paused = isPaused;
+        //GetTree().Paused = isPaused;
+
     }
     public override void _Process(double delta)
     {

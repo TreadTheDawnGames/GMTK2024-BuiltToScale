@@ -1,9 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dox1j03g43vlv"]
+[gd_scene load_steps=6 format=3 uid="uid://cj6chkdqmf72v"]
 
-[ext_resource type="Texture2D" uid="uid://bosbiab1nule0" path="res://Assets/Sprites/Deck/Shoppe/MoneyLine.png" id="1_ougc3"]
-[ext_resource type="Theme" uid="uid://b8bd1luqflxfy" path="res://Scenes/Cards/MoneyTextWorld.tres" id="2_a3uee"]
+[ext_resource type="Texture2D" path="res://Assets/Sprites/Deck/Shoppe/MoneyLine.png" id="1_ougc3"]
+[ext_resource type="Theme" path="res://Scenes/Cards/MoneyTextWorld.tres" id="2_a3uee"]
 [ext_resource type="Script" path="res://Scenes/MoneyLine.cs" id="3_dnqo3"]
-[ext_resource type="AudioStream" uid="uid://b54dvq17hdy0i" path="res://Assets/Sounds/CoinDing.wav" id="4_sjv0u"]
+[ext_resource type="AudioStream" path="res://Assets/Sounds/CoinDing.wav" id="4_sjv0u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_85y7o"]
 size = Vector2(5558, 20)

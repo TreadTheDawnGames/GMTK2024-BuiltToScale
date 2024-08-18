@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://cds53pvfg7epf"]
 
 [ext_resource type="PackedScene" uid="uid://bbsse1b5w57it" path="res://Scenes/PhysicsCardObjects/physics_object.tscn" id="1_uwe44"]
-[ext_resource type="Texture2D" uid="uid://drodfbhotmxqb" path="res://Assets/Sprites/Objects/StoneBall.png" id="2_astvo"]
+[ext_resource type="Texture2D" path="res://Assets/Sprites/Objects/StoneBall.png" id="2_astvo"]
 [ext_resource type="Texture2D" uid="uid://bb4p0qmdm2y7f" path="res://Assets/Sprites/StoneBallLighting.png" id="2_jabpf"]
 [ext_resource type="Texture2D" uid="uid://cxvn8q43034sv" path="res://Assets/Sprites/StoneBallUnlit.png" id="3_h0owd"]
 
@@ -10,7 +10,6 @@ radius = 100.0
 
 [node name="StoneBall" instance=ExtResource("1_uwe44")]
 symbol = ExtResource("2_astvo")
-cost = 20
 metadata/HoldOffset = 60.0
 
 [node name="RigidBody2D" type="RigidBody2D" parent="." index="0"]
