@@ -25,6 +25,7 @@ public partial class player_char : RigidBody2D
 	int soundTick = 2;
 	AudioStreamPlayer stepSound;
     AnimatedSprite2D shiftyThought;
+	bool CanMakeLandSound = false;
 
 	public override void _Ready()
 	{
@@ -83,6 +84,9 @@ public partial class player_char : RigidBody2D
 			curFrame = 0;
 		mySprite.Frame = curFrame;
 
+		if (MoveAndCollide(new Vector2(0,5), true) == null)
+			CanMakeLandSound = true;
+
 		var hit = MoveAndCollide(new Vector2(0,1), true);
 		// Jump movement
 		if (hit != null)
@@ -103,8 +107,11 @@ public partial class player_char : RigidBody2D
 				ApplyForce(new Vector2(0,(int)ProjectSettings.GetSetting("physics/2d/default_gravity")), new Vector2(Position.X, Position.Y - 10));
 			}
 			spd = grndspd;
-			if (coyoteTime < coyoteTimeMax)
+			if (coyoteTime < coyoteTimeMax && CanMakeLandSound)
+			{
 				PlayLandSound();
+				CanMakeLandSound = false;
+			}
 			coyoteTime = coyoteTimeMax;
 		}
 		else
