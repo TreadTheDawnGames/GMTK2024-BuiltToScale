@@ -58,14 +58,14 @@ z_index = -2
 position = Vector2(101, -252)
 texture = ExtResource("2_gnwxr")
 
-[node name="Sprite" type="Sprite2D" parent="DiscardPile"]
+[node name="Backing" type="Sprite2D" parent="DiscardPile"]
 z_index = -2
 position = Vector2(101, -252)
 texture = ExtResource("2_ktmqk")
 
-[node name="Symbol" type="Sprite2D" parent="DiscardPile/Sprite"]
+[node name="Symbol" type="Sprite2D" parent="DiscardPile/Backing"]
 
-[node name="DiscardMoneyText" type="RichTextLabel" parent="DiscardPile/Sprite"]
+[node name="DiscardMoneyText" type="RichTextLabel" parent="DiscardPile/Backing"]
 modulate = Color(0, 0, 0, 1)
 offset_left = -32.0
 offset_top = 72.0

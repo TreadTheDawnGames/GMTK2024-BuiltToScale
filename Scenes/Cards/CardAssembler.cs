@@ -86,11 +86,6 @@ public static class CardAssembler
     {
         List<CardData> starterDeck = new List<CardData>
         {
-            new CardData(MakeCardPath(CardType.obsidian)),
-            new CardData(MakeCardPath(CardType.shop)),
-            new CardData(MakeCardPath(CardType.shop)),
-            new CardData(MakeCardPath(CardType.shop)),
-            new CardData(MakeCardPath(CardType.shop)),
             new CardData(MakeCardPath(CardType.shop)),
             new CardData(MakeCardPath(CardType.shop))
         };

@@ -25,8 +25,9 @@ public partial class DeckManager : Control
 	AudioStreamPlayer shuffleSound;
 	AudioStreamPlayer flipSound;
 
-	Sprite2D discardSprite;
-	Godot.RichTextLabel discardMoneyLabel;
+	Sprite2D discardSpriteSymbol;
+	Sprite2D discardSpriteBacking;
+    Godot.RichTextLabel discardMoneyLabel;
 
 	RichTextLabel buyForAmount;
 	Node2D buyForNode;
@@ -99,8 +100,9 @@ public partial class DeckManager : Control
 
 
 		discardArea = GetNode<Area2D>("DiscardPile");
-		discardSprite = GetNode<Sprite2D>("DiscardPile/Sprite/Symbol");
-		discardMoneyLabel = (Godot.RichTextLabel)GetNode<Godot.RichTextLabel>("DiscardPile/Sprite/DiscardMoneyText");
+		discardSpriteSymbol = GetNode<Sprite2D>("DiscardPile/Backing/Symbol");
+		discardSpriteBacking = GetNode<Sprite2D>("DiscardPile/Backing");
+		discardMoneyLabel = (Godot.RichTextLabel)GetNode<Godot.RichTextLabel>("DiscardPile/Backing/DiscardMoneyText");
 		buyForNode = GetNode<Node2D>("DiscardPile/BuyForNode");
 		buyForAmount = GetNode<RichTextLabel>("DiscardPile/BuyForNode/BuyForAmount");
 		deckFullWarning = GetNode<Sprite2D>("DiscardPile/DeckFullWarning");
@@ -111,9 +113,9 @@ public partial class DeckManager : Control
 
 		cardCountBar = GetNode<TextureProgressBar>("TextureProgressBar");
 
-		SetupDeck(CardAssembler.ShopTestDeck(deckSize));
+		SetupDeck(CardAssembler.ShopTestDeck(5));
 
-		discardSprite.GetParent<Sprite2D>().Hide();
+		discardSpriteBacking.Hide();
 
 
 	}
@@ -123,13 +125,16 @@ public partial class DeckManager : Control
 	{
 		if (discard.Count == 0)
 		{
-			discardSprite.GetParent<Sprite2D>().Hide();
+            discardSpriteBacking.Hide();
 		}
 		else
 		{
-			//if(!card.Data.singleUse)
-			discardSprite.GetParent<Sprite2D>().Show();
-			discardSprite.Texture = card.Data.symbol;
+            //if(!card.Data.singleUse)
+            discardSpriteBacking.Show();
+
+			discardSpriteBacking.Texture = card.backing.Texture;
+			discardSpriteSymbol.Texture = card.symbol.Texture;
+			
 			discardMoneyLabel.Text = card.Data.cost.ToString();
 		}
 	}
@@ -258,7 +263,7 @@ public partial class DeckManager : Control
 			DrawCard();
 		}
 
-		if (card.Data.singleUse)
+		if (card.Data.singleUse && !card.Data.buyable)
 		{
 			FillWithBeachBalls();
 			card.QueueFree();
@@ -405,7 +410,13 @@ public partial class DeckManager : Control
 		if(CheckForDiscard()) return;
 		if(CheckForPlay()) return;
 
-
+		if (Input.IsActionJustPressed("Debug-PrintDeckData"))
+		{
+			foreach(CardData card in AllCards)
+			{
+				GD.Print(card.Type);
+			}
+		}
 
     }
 	

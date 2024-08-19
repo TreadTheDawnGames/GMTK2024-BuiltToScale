@@ -11,7 +11,7 @@ public partial class Shop : TextureRect
 	RandShopSlot[] randCardSlots = new RandShopSlot[4];
 
 	CollisionShape2D playArea;
-	Button closeButton;
+    TextureButton closeButton;
 
 	Area2D sellArea;
 
@@ -31,7 +31,7 @@ public partial class Shop : TextureRect
 		playArea = GetNode<CollisionShape2D>(GetParent().GetPath()+"/PlayArea/CollisionShape2D");
 		permCardSlots = GetChildren().OfType<PermShopSlot>().ToArray();
 		randCardSlots = GetChildren().OfType<RandShopSlot>().ToArray();
-		closeButton = GetNode<Button>("Button");
+		closeButton = GetNode<TextureButton>("Button");
 
 		chaChing = GetNode<AudioStreamPlayer>("ChaChingSound");
 
@@ -50,7 +50,9 @@ public partial class Shop : TextureRect
 			GD.Print(slot.GetIndex());
 		}
 
-		CreateGuaranteedCard((GuaranteedCardType)0, (CardSlot)permCardSlots[0]);
+        CreateCard(CardType.obsidian, (CardSlot)permCardSlots[0]);
+
+        //CreateGuaranteedCard((GuaranteedCardType)0, (CardSlot)permCardSlots[0]);
         CreateGuaranteedCard((GuaranteedCardType)1, (CardSlot)permCardSlots[1]);
         CreateGuaranteedCard((GuaranteedCardType)2, (CardSlot)permCardSlots[2]);
 		

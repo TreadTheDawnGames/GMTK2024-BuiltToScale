@@ -3,11 +3,14 @@ using System;
 
 public partial class GameManager : Node2D
 {
+    [Export]
+    int startingMoney = 20;
+
     private static GameManager instance = null;
 	AudioStreamPlayer musicPlayer;
     Camera2D cam;
 
-    int moneyOwned = 20;
+    int moneyOwned;
 
     int score = 0;
     int highScore;
@@ -57,7 +60,7 @@ public partial class GameManager : Node2D
                 musicPlayer.Play();
             }
         }
-        UpdateMoney(0);
+        UpdateMoney(startingMoney);
 
         highScore = PlayerPrefs.GetInt("HighScore", 0);
             DeckManager.Instance.highScoreLabel.Text = "High Score: " + (-highScore - 49).ToString();
