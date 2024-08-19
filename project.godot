@@ -81,6 +81,7 @@ Debug-PrintDeckData={
 2d_physics/layer_20="Hand"
 2d_physics/layer_21="Mouse"
 2d_physics/layer_22="SellPanel"
+2d_physics/layer_23="DiscardSlot"
 
 [physics]
 

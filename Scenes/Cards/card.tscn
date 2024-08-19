@@ -31,7 +31,7 @@ singleUse = ExtResource("3_qnq5i")
 [node name="Backing" type="Area2D" parent="."]
 position = Vector2(81, 120)
 collision_layer = 1638400
-collision_mask = 2490368
+collision_mask = 6684672
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Backing"]
 position = Vector2(1, 0)

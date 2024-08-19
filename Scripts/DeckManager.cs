@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Medallion;
 using System.Linq;
 using System.IO;
+using System.Diagnostics;
 
 public partial class DeckManager : Control
 {
@@ -39,6 +40,7 @@ public partial class DeckManager : Control
 	public RichTextLabel highScoreLabel;
 
 	Sprite2D notEnoughCashWarning;
+	DiscardSlot discardSlot;
 
 
 
@@ -103,6 +105,7 @@ public partial class DeckManager : Control
 		discardSpriteSymbol = GetNode<Sprite2D>("DiscardPile/Backing/Symbol");
 		discardSpriteBacking = GetNode<Sprite2D>("DiscardPile/Backing");
 		discardMoneyLabel = (Godot.RichTextLabel)GetNode<Godot.RichTextLabel>("DiscardPile/Backing/DiscardMoneyText");
+		discardSlot = GetNode<DiscardSlot>("DiscardPile/DiscardSlot");
 		buyForNode = GetNode<Node2D>("DiscardPile/BuyForNode");
 		buyForAmount = GetNode<RichTextLabel>("DiscardPile/BuyForNode/BuyForAmount");
 		deckFullWarning = GetNode<Sprite2D>("DiscardPile/DeckFullWarning");
@@ -113,7 +116,7 @@ public partial class DeckManager : Control
 
 		cardCountBar = GetNode<TextureProgressBar>("TextureProgressBar");
 
-		SetupDeck(CardAssembler.ShopTestDeck(5));
+		SetupDeck(CardAssembler.BeachBallStarter(deckSize));
 
 		discardSpriteBacking.Hide();
 
@@ -220,7 +223,7 @@ public partial class DeckManager : Control
 		card.QueueFree();
 
 	}
-	void DiscardCard(Card card)
+	public void DiscardCard(Card card)
 	{
 
 		if (!card.Data.inShop && !card.Data.playable)
@@ -235,19 +238,23 @@ public partial class DeckManager : Control
 			return;
 		}
 
-		if (card.Data.inShop)
+		if (!card.Data.aesthetic)
 		{
-			if (!GameManager.Instance.CanBuy(card.Data.cost))
+
+			if (card.Data.inShop)
 			{
-				GD.Print("Insufficient funds: " + card.Name);
+				if (!GameManager.Instance.CanBuy(card.Data.cost))
+				{
+					GD.Print("Insufficient funds: " + card.Name);
 
-				return;
-			}
-			else
-			{
+					return;
+				}
+				else
+				{
 
-				GameManager.Instance.UpdateMoney(-card.Data.cost);
+					GameManager.Instance.UpdateMoney(-card.Data.cost);
 
+				}
 			}
 		}
 		GD.Print("Bought card: " + card.Name);
@@ -265,7 +272,7 @@ public partial class DeckManager : Control
 
 		if (card.Data.singleUse && !card.Data.buyable)
 		{
-			FillWithBeachBalls();
+			AddCardToDeckFromBank();
 			card.QueueFree();
 			return;
 		}
@@ -296,15 +303,14 @@ public partial class DeckManager : Control
 
 	}
 
-	public Card SpawnCard(CardData data, Vector2 spawnPosition)
+	public Card SpawnCard(CardData data, Vector2 spawnPosition, bool isAesthetic = false)
 	{
 		var spawnedCard = CardScene.Instantiate<Card>();
 
         data.Slot.GetParent().AddChild(spawnedCard);
 
         spawnedCard.GlobalPosition = spawnPosition;
-		
-		spawnedCard.SetUp(data);
+		spawnedCard.SetUp(data, isAesthetic);
 		return spawnedCard;
     }
 
@@ -456,11 +462,26 @@ public partial class DeckManager : Control
         cardCountBar.Value = deck.Count;
     }
 
-	public void FillWithBeachBalls()
+	public void AddCardToDeckFromBank(CardAssembler.CardType type = CardAssembler.CardType.beachball)
 	{
-		while (AllCards.Count < deckSize)
+		
+			var card = new CardData(CardAssembler.MakeCardPath(type));
+
+			card.Slot = discardSlot ;
+
+            SpawnCard(card, new Vector2(960+GD.RandRange(-400,400),500), true);
+			//discard.Add(card);
+			
+		
+	}
+
+	public void RefillDeckWith(CardAssembler.CardType type = CardAssembler.CardType.beachball)
+	{
+		int cardsToDraw = deckSize - AllCards.Count;
+		GD.Print(cardsToDraw);
+		for (int i=0; i < cardsToDraw; i++)
 		{
-			discard.Add(new CardData(CardAssembler.MakeCardPath(CardAssembler.CardType.beachball)));
+			AddCardToDeckFromBank(type);
 		}
 	}
 

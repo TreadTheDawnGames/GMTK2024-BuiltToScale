@@ -7,7 +7,7 @@ public partial class Card : Control
     [Export]
     Texture2D reg, singleUse;
 
-    Area2D GrabbableSprite;
+    Area2D GrabbableArea;
     public CardData Data{get; private set;}
 
     public Sprite2D backing { get; private set; }
@@ -26,9 +26,11 @@ public partial class Card : Control
 
     Godot.RichTextLabel moneyLabel;
 
-    public void SetUp(CardData data)
+    public void SetUp(CardData data, bool isAesthetic = false)
     {
+        data.aesthetic = isAesthetic;
         this.Data = data;
+
         symbol = GetNode<Sprite2D>("Backing/Background/Symbol");
         backing = GetNode<Sprite2D>("Backing/Background");
 
@@ -53,21 +55,25 @@ public partial class Card : Control
         moneyLabel.Text = data.cost.ToString();
         // symbol.Hide();
 
-        GrabbableSprite = GetNode<Area2D>("Backing");
-        GrabbableSprite.AreaEntered += CardEnteredZone;
-        GrabbableSprite.AreaExited += CardExitedZone;
-        MouseEntered +=   Hovered;
-        MouseExited +=  Unhovered;
+        GrabbableArea = GetNode<Area2D>("Backing");
+        GrabbableArea.AreaEntered += CardEnteredZone;
+        GrabbableArea.AreaExited += CardExitedZone;
+        if (!isAesthetic)
+        {
 
-        OGMask = GrabbableSprite.CollisionMask;
-        SetDrawn(false);
+            MouseEntered += Hovered;
+            MouseExited += Unhovered;
+        }
+
+        OGMask = GrabbableArea.CollisionMask;
+        SetDrawn(isAesthetic);
     }
 
     public void SetDrawn(bool isDrawn)
     {
-        GrabbableSprite.CollisionMask = isDrawn ? OGMask : 0;
+        GrabbableArea.CollisionMask = isDrawn ? OGMask : 0;
         //GrabbableSprite.SetCollisionMaskValue(20, true);
-        GrabbableSprite.SetCollisionLayerValue(17, isDrawn);
+        GrabbableArea.SetCollisionLayerValue(17, isDrawn);
 
         beingDrawn = !isDrawn;
     }
@@ -178,6 +184,19 @@ public partial class Card : Control
 
     void CardEnteredZone(Node2D node)
     {
+        GD.Print(node.Name);
+        if (Data.aesthetic)
+        {
+            if(node.Name == "DiscardSlotArea")
+            {
+                DeckManager.Instance.DiscardCard(this);
+                GD.Print("DiscardSlotArea");
+            }
+        }
+        else
+        {
+
+
         switch (node.Name)
         {
             case "PlayArea":
@@ -191,9 +210,11 @@ public partial class Card : Control
             case "SellPanel":
         ReadyToSell();
                 break;
+            
         }
         usable = (Data.buyable || Data.playable || Data.sellable);
 
+        }
     }
 
     void CardExitedZone(Node2D node)

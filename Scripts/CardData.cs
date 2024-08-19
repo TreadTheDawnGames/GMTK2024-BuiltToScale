@@ -19,6 +19,7 @@ public partial class CardData : Node
 
     public int cost;
     public Texture2D symbol;
+    public bool aesthetic;
     public CardData(string obj)
     {
         this.PathToPhysObj = obj;
@@ -30,6 +31,7 @@ public partial class CardData : Node
         cost = myObject.cost;
         symbol = myObject.symbol;
         singleUse = myObject.singleUse;
+        aesthetic = false;
 
         foreach (CardType type in Enum.GetValues(typeof(CardType)))
         {

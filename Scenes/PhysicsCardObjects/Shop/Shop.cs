@@ -15,7 +15,7 @@ public partial class Shop : TextureRect
 
 	Area2D sellArea;
 
-	AudioStreamPlayer chaChing;
+	AudioStreamPlayer shopSound;
 
 	TextureRect sellPanel;
 
@@ -33,7 +33,7 @@ public partial class Shop : TextureRect
 		randCardSlots = GetChildren().OfType<RandShopSlot>().ToArray();
 		closeButton = GetNode<TextureButton>("Button");
 
-		chaChing = GetNode<AudioStreamPlayer>("ChaChingSound");
+		shopSound = (AudioStreamPlayer)GetTree().GetFirstNodeInGroup("ShopAudio");
 
 		cardsBought = 0;
 		sellArea = GetNode<Area2D>("SellPanelVisual/SellPanel");
@@ -62,17 +62,17 @@ public partial class Shop : TextureRect
 		}
 
 		DeckManager.Instance.atShop = true;
-
+		PlayRandSound("res://Assets/Sounds/DoorOpen");
     }
 
-    void PlaySellSound()
+    void PlayRandSound(string pathTo)
     {
         int rand = (int)(GD.Randi() % 2);
-        chaChing.Stream = GD.Load<AudioStream>("res://Assets/Sounds/ChaChing" + rand + ".wav");
+        shopSound.Stream = GD.Load<AudioStream>(pathTo + rand + ".wav");
 
 
 
-		chaChing.Play();
+		shopSound.Play();
     }
 
     void CreateCard(CardAssembler.CardType type, CardSlot slot)
@@ -100,9 +100,11 @@ public partial class Shop : TextureRect
 		DeckManager.Instance.ReplenishHand();
         DeckManager.Instance.atShop = false;
 
-		DeckManager.Instance.FillWithBeachBalls();
+
+		DeckManager.Instance.RefillDeckWith();
 
 		GameManager.Instance.SetPauseGame(false);
+        PlayRandSound("res://Assets/Sounds/DoorClose");
 
         CallDeferred("queue_free");
     }
@@ -149,7 +151,7 @@ public partial class Shop : TextureRect
 						if (GameManager.Instance.UpdateMoney(Mathf.CeilToInt(card.Data.cost * 0.22f)))
                         {
 							DeckManager.Instance.SellCard(card);
-							PlaySellSound();
+							PlayRandSound("res://Assets/Sounds/ChaChing");
                             return true;
                         }
                     }

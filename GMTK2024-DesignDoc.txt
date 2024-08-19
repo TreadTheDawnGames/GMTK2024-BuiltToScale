@@ -117,23 +117,17 @@ Testing
 TODO:
 Programming:
 Deck display on start (and when discard is clicked?)
-Display current, round best, and highest best score (display world best?)
 Current/max cards in deck display
 Glue
-Game over (finish)
 Shop button prompt
-always 20 cards. cards are replaced with beach ball if no card bought. beach ball cannot be spawned in shop.
 
 Sound:
-Shop open/close
 Place object
 
 Art
 Piano(?)
 Glue(?)
 Gravityhamster 
-Main menu
-How to
 New best sticker to put on game over screen
 
 Testing

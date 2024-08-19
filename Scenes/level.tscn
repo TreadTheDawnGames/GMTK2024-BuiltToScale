@@ -74,3 +74,5 @@ grow_vertical = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="AudioListener2D" type="AudioListener2D" parent="Camera"]
+
+[node name="ShopSound" type="AudioStreamPlayer" parent="." groups=["ShopAudio"]]
