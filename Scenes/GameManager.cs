@@ -3,11 +3,14 @@ using System;
 
 public partial class GameManager : Node2D
 {
+    [Export]
+    int startingMoney = 20;
+
     private static GameManager instance = null;
 	AudioStreamPlayer musicPlayer;
     Camera2D cam;
 
-    int moneyOwned = 20;
+    int moneyOwned;
 
     int score = 0;
     int highScore;
@@ -57,7 +60,7 @@ public partial class GameManager : Node2D
                 musicPlayer.Play();
             }
         }
-        UpdateMoney(0);
+        UpdateMoney(startingMoney);
 
         highScore = PlayerPrefs.GetInt("HighScore", 0);
             DeckManager.Instance.highScoreLabel.Text = "High Score: " + (-highScore - 49).ToString();
@@ -68,7 +71,6 @@ public partial class GameManager : Node2D
         try
         {
 
-        GD.Print(CardPath);
         return Rufus.SpawnObject(CardPath);
         }
         catch
@@ -117,12 +119,20 @@ public partial class GameManager : Node2D
         }
     }
 
+    public bool CanBuy(int speculatedCost)
+    {
+        GD.Print(speculatedCost + " | " + moneyOwned);
+        return moneyOwned >= speculatedCost;
+    }
+
     public bool UpdateMoney(int amount)
     {
         moneyOwned += amount;
         if(moneyOwned < 0)
         {
             moneyOwned = 0;
+            moneyLabel.Text = moneyOwned.ToString();
+
             return false;
         }
         moneyLabel.Text = moneyOwned.ToString();

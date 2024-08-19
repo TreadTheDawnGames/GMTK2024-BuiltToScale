@@ -10,8 +10,8 @@ public partial class Card : Control
     Area2D GrabbableSprite;
     public CardData Data{get; private set;}
 
-    Sprite2D background;
-    Sprite2D symbol;
+    public Sprite2D backing { get; private set; }
+    public Sprite2D symbol { get; private set; }
 
     bool grabbed = false;
     bool hovered = false;
@@ -30,15 +30,15 @@ public partial class Card : Control
     {
         this.Data = data;
         symbol = GetNode<Sprite2D>("Backing/Background/Symbol");
-        background = GetNode<Sprite2D>("Backing/Background");
+        backing = GetNode<Sprite2D>("Backing/Background");
 
         if (data.singleUse)
         {
-            background.Texture = singleUse;
+            backing.Texture = singleUse;
         }
         else
         {
-            background.Texture = reg;
+            backing.Texture = reg;
         }
 
         var physObj = GD.Load<PackedScene>(Data.PathToPhysObj);
@@ -84,18 +84,18 @@ public partial class Card : Control
             {
                 if(grabbed)
                 {
-                    background.Scale = background.Scale.Lerp(new Vector2(1.33f, 1.33f), 0.25f);
+                    backing.Scale = backing.Scale.Lerp(new Vector2(1.33f, 1.33f), 0.25f);
 
                 }
                 else
                 {
-                    background.Scale = background.Scale.Lerp(new Vector2(1.25f, 1.25f), 0.25f);
+                    backing.Scale = backing.Scale.Lerp(new Vector2(1.25f, 1.25f), 0.25f);
 
                 }
             }
             else
             {
-                background.Scale = background.Scale.Lerp(new Vector2(0.75f, 0.75f), 0.25f);
+                backing.Scale = backing.Scale.Lerp(new Vector2(0.75f, 0.75f), 0.25f);
 
             }
 
@@ -114,7 +114,7 @@ public partial class Card : Control
         }
         else
         {
-            background.Scale = background.Scale.Lerp(new Vector2(1, 1), 0.25f);
+            backing.Scale = backing.Scale.Lerp(new Vector2(1, 1), 0.25f);
 
         }
 
@@ -192,7 +192,7 @@ public partial class Card : Control
         ReadyToSell();
                 break;
         }
-        usable = (Data.discardable || Data.playable || Data.sellable);
+        usable = (Data.buyable || Data.playable || Data.sellable);
 
     }
 
@@ -212,23 +212,23 @@ public partial class Card : Control
         UnreadyToSell();
                 break;
         }
-        usable = (Data.discardable || Data.playable || Data.sellable);
+        usable = (Data.buyable || Data.playable || Data.sellable);
     }
 
 
     void ReadyToDiscard()
     {
-        if (!grabbed || !Data.inShop)
+        if (!Data.inShop)
             return;
-        Data.discardable = true;
+        Data.buyable = true;
         GD.Print("Discardable");
     }
 
     void UnreadyToDiscard()
     {
-        if (!grabbed || !Data.inShop)
+        if (!Data.inShop)
             return;
-        Data.discardable = false;
+        Data.buyable = false;
         GD.Print("NOT Discardable");
 
     }
@@ -270,6 +270,11 @@ public partial class Card : Control
 
     }
 
+    public override string ToString()
+    {
+
+        return Data.ToString() ;
+    }
 
 
 }

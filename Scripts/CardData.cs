@@ -5,12 +5,12 @@ using static CardAssembler;
 public partial class CardData : Node
 {
 
-    public string PathToPhysObj { get; private set; }
-    public bool discardable;
-    public bool playable;
-    public bool sellable;
+    public string   PathToPhysObj { get; private set; }
+    public bool     buyable;
+    public bool     playable;
+    public bool     sellable;
     public CardSlot Slot;
-    public bool singleUse;
+    public bool     singleUse;
 
     public CardAssembler.CardType Type;
 
@@ -22,7 +22,7 @@ public partial class CardData : Node
     public CardData(string obj)
     {
         this.PathToPhysObj = obj;
-        discardable = false;
+        buyable = false;
         playable = false;
         sellable = false;
        var ps = GD.Load<PackedScene>(obj);
@@ -40,16 +40,30 @@ public partial class CardData : Node
             }
         }
 
+
     }
 
     public override string ToString()
     {
-        string other = "null";
-        if(PathToPhysObj != null)
-        {
-            other = PathToPhysObj.ToString();
-        }
-        return "Value: " + other;
+
+        string data = "" +
+              "PathToPhysObj: "  + PathToPhysObj   + "\n"
+            + "boyable: "        + buyable         + "\n"
+            + "playable: "       + playable        + "\n"
+            + "sellable: "       + sellable        + "\n"
+            + "Slot: "           + Slot            + "\n"
+            + "singleUse: "      + singleUse       + "\n"
+            + "Type: "           + Type            + "\n"
+            + "OGPosition: "     + OGPosition      + "\n"
+            + "inShop: "         + inShop          + "\n"
+            + "cost: "           + cost            + "\n"
+            + "symbol"           + symbol          + "\n"
+            ;
+
+        
+        
+       
+        return data;
     }
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
