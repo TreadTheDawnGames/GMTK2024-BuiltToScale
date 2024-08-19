@@ -1,8 +1,9 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 using static CardAssembler;
 
-public partial class CardData : Node
+public partial class CardData : Node, IComparable<CardData>
 {
 
     public string   PathToPhysObj { get; private set; }
@@ -41,8 +42,24 @@ public partial class CardData : Node
                 break;
             }
         }
+    }
 
+    public CardData(CardData oldData)
+    {
+        this.PathToPhysObj = oldData.PathToPhysObj;
+        this.buyable = oldData.buyable;
+        this.playable = oldData.playable;
+        this.sellable = oldData.sellable;
+        this.cost = oldData.cost;
+        this.symbol = oldData.symbol;
+        this.singleUse = oldData.singleUse;
+        this.aesthetic = oldData.aesthetic;
+        this.Type = oldData.Type;
+    }
 
+    public CardData Copy()
+    {
+        return new CardData(this);
     }
 
     public override string ToString()
@@ -67,13 +84,43 @@ public partial class CardData : Node
        
         return data;
     }
-    // Called when the node enters the scene tree for the first time.
-    public override void _Ready()
-	{
-	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-	}
+    public int CompareTo(CardData other)
+    {
+        /*int alp = Type.ToString().CompareTo(other.Type.ToString());
+        if (alp == 0)
+        {
+            return cost - other.cost;
+
+        }
+        else return alp;*/
+
+        if (cost == other.cost)
+        {
+            return Type.ToString().CompareTo(other.Type.ToString());
+        }
+        else
+        {
+            return cost - other.cost;
+
+        }
+
+    }
+
+    public bool IsOfCardType<T>() where T : Enum
+    {
+        
+        foreach(var enumType in Enum.GetValues(typeof(T)))
+        {
+            if(Type.ToString() == enumType.ToString())
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    
+
 }

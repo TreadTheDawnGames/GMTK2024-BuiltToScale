@@ -22,6 +22,8 @@ public partial class Card : Control
 
     bool usable;
 
+    public string name { get; private set; }
+
     uint OGMask;
 
     Godot.RichTextLabel moneyLabel;
@@ -67,6 +69,7 @@ public partial class Card : Control
 
         OGMask = GrabbableArea.CollisionMask;
         SetDrawn(isAesthetic);
+        name = data.Type.ToString() + Name;
     }
 
     public void SetDrawn(bool isDrawn)
