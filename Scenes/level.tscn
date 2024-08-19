@@ -4,12 +4,12 @@
 [ext_resource type="Texture2D" uid="uid://cypyjikxxwpw1" path="res://Assets/Sprites/Logo.png" id="2_1n2p6"]
 [ext_resource type="PackedScene" uid="uid://c74uxnvapn034" path="res://Scenes/rufus.tscn" id="2_4km2f"]
 [ext_resource type="Texture2D" uid="uid://bxqc3wjmnxfkd" path="res://Assets/Sprites/Grass.png" id="2_sjrln"]
-[ext_resource type="PackedScene" path="res://HowTo.tscn" id="2_xt7mx"]
+[ext_resource type="PackedScene" uid="uid://5gu2d0ydhkd7" path="res://HowTo.tscn" id="2_xt7mx"]
 [ext_resource type="PackedScene" uid="uid://n286cy3dbbn0" path="res://Scenes/camera.tscn" id="3_buxj5"]
 [ext_resource type="Script" path="res://HowTo.cs" id="3_tos3i"]
 [ext_resource type="Script" path="res://Scenes/LoopingBackground.cs" id="3_x7vx7"]
 [ext_resource type="PackedScene" uid="uid://xy71mg3ttuj1" path="res://Scenes/Cards/deck.tscn" id="4_vv3gu"]
-[ext_resource type="PackedScene" path="res://Scenes/reset_game_button.tscn" id="7_haaf3"]
+[ext_resource type="PackedScene" uid="uid://btyuklwkwra8f" path="res://Scenes/reset_game_button.tscn" id="7_haaf3"]
 [ext_resource type="PackedScene" uid="uid://cj6chkdqmf72v" path="res://Scenes/money_line.tscn" id="7_w53ei"]
 [ext_resource type="Script" path="res://Scenes/SignPost.cs" id="8_ocdcq"]
 
@@ -48,13 +48,13 @@ position = Vector2(1641, -1000)
 process_mode = 0
 position = Vector2(647, -49)
 
-[node name="Area2D" type="Area2D" parent="."]
-position = Vector2(1362, -37)
+[node name="HelpSignArea" type="Area2D" parent="."]
+position = Vector2(674, -37)
 collision_layer = 0
 collision_mask = 32
 script = ExtResource("8_ocdcq")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HelpSignArea"]
 position = Vector2(3, -4)
 shape = SubResource("RectangleShape2D_7a8c7")
 
@@ -96,5 +96,5 @@ metadata/_edit_use_anchors_ = true
 
 [node name="ShopSound" type="AudioStreamPlayer" parent="." groups=["ShopAudio"]]
 
-[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
-[connection signal="body_exited" from="Area2D" to="Area2D" method="_on_body_exited"]
+[connection signal="body_entered" from="HelpSignArea" to="HelpSignArea" method="_on_body_entered"]
+[connection signal="body_exited" from="HelpSignArea" to="HelpSignArea" method="_on_body_exited"]

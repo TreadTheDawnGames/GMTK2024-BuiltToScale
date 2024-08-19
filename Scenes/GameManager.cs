@@ -9,7 +9,6 @@ public partial class GameManager : Node2D
     private static GameManager instance = null;
 	AudioStreamPlayer musicPlayer;
     Camera2D cam;
-
     int moneyOwned;
 
     int score = 0;
@@ -63,8 +62,8 @@ public partial class GameManager : Node2D
         UpdateMoney(startingMoney);
 
         highScore = PlayerPrefs.GetInt("HighScore", 0);
-            DeckManager.Instance.highScoreLabel.Text = "High Score: " + (-highScore - 49).ToString();
-            DeckManager.Instance.scoreLabel.Text = "Score: " + (-score-49).ToString();
+        DeckManager.Instance.highScoreLabel.Text = "High Score: " + (-highScore - 49).ToString();
+        DeckManager.Instance.scoreLabel.Text = "Score: " + (-score-49).ToString();
     }
     public bool TriggerCard(string CardPath)
 	{
@@ -112,15 +111,18 @@ public partial class GameManager : Node2D
 
         UpdateScore();
 
-        if (Input.IsActionJustPressed("Debug-ResetSavedData"))
+        if (Input.IsActionJustPressed("Debug-PlayerPrefs"))
         {
             PlayerPrefs.DeleteAll();
-            GD.Print("Deleted PlayerPrefs");
         }
+
+
     }
 
     public bool CanBuy(int speculatedCost)
     {
+        if (speculatedCost == 0) return true;
+
         GD.Print(speculatedCost + " | " + moneyOwned);
         return moneyOwned >= speculatedCost;
     }

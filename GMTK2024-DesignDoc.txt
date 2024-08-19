@@ -116,10 +116,7 @@ Testing
 
 TODO:
 Programming:
-Deck display on start (and when discard is clicked?)
-Current/max cards in deck display
 Glue
-Shop button prompt
 
 Sound:
 Place object
@@ -132,7 +129,6 @@ New best sticker to put on game over screen
 
 Testing
 Balance
-Aspect ratio/screen size
 
 
 

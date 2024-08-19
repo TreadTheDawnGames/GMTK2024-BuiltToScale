@@ -10,6 +10,7 @@ public partial class HowTo : Node2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		
 		TargetLocation = GlobalPosition.X - 350;
 		StartLocation = GlobalPosition.X;
 	}

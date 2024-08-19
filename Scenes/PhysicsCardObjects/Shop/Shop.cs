@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using static CardAssembler;
 
@@ -9,6 +10,7 @@ public partial class Shop : TextureRect
 	Texture2D texNormal, highlighted;
     PermShopSlot[] permCardSlots = new PermShopSlot[3];
 	RandShopSlot[] randCardSlots = new RandShopSlot[4];
+
 
 	CollisionShape2D playArea;
     TextureButton closeButton;
@@ -22,13 +24,17 @@ public partial class Shop : TextureRect
 	Node2D SellForNode;
 	RichTextLabel sellAmount;
 
+	List<CardData> randCards = new List<CardData>();
 
 	int cardsBought = 0;
+	
 	
 	//Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		playArea = GetNode<CollisionShape2D>(GetParent().GetPath()+"/PlayArea/CollisionShape2D");
+
+
+        playArea = GetNode<CollisionShape2D>(GetParent().GetPath()+"/PlayArea/CollisionShape2D");
 		permCardSlots = GetChildren().OfType<PermShopSlot>().ToArray();
 		randCardSlots = GetChildren().OfType<RandShopSlot>().ToArray();
 		closeButton = GetNode<TextureButton>("Button");
@@ -50,18 +56,19 @@ public partial class Shop : TextureRect
 			GD.Print(slot.GetIndex());
 		}
 
-        CreateCard(CardType.obsidian, (CardSlot)permCardSlots[0]);
 
-        //CreateGuaranteedCard((GuaranteedCardType)0, (CardSlot)permCardSlots[0]);
+        CreateGuaranteedCard((GuaranteedCardType)0, (CardSlot)permCardSlots[0]);
         CreateGuaranteedCard((GuaranteedCardType)1, (CardSlot)permCardSlots[1]);
         CreateGuaranteedCard((GuaranteedCardType)2, (CardSlot)permCardSlots[2]);
 		
 		foreach(var slot in randCardSlots)
 		{
-			CreateCard(CardAssembler.GetWeightedRand(), slot);
+			CreateCard(CardAssembler.GetRigged(), slot);
 		}
 
-		DeckManager.Instance.atShop = true;
+
+
+        DeckManager.Instance.atShop = true;
 		PlayRandSound("res://Assets/Sounds/DoorOpen");
     }
 
@@ -78,10 +85,24 @@ public partial class Shop : TextureRect
     void CreateCard(CardAssembler.CardType type, CardSlot slot)
 	{
 		CardData data = CardAssembler.Create(type);
+
+
+		foreach(var existingCard in randCards)
+		{
+			if (existingCard.Type == type)
+			{
+				CreateCard(CardAssembler.GetRigged(), slot);
+				return;
+			}
+		}
+
 		data.Slot = slot;
 		data.OGPosition = data.Slot.Position;
 		Card card = DeckManager.Instance.SpawnCard(data, data.Slot.GlobalPosition);
 		card.SetDrawn(true);
+		randCards.Add(data);
+
+		return;
 	}
 	
 	void CreateGuaranteedCard(CardAssembler.GuaranteedCardType type, CardSlot slot)
@@ -97,11 +118,11 @@ public partial class Shop : TextureRect
     {
         playArea.SetDeferred("disabled", false);
 
-		DeckManager.Instance.ReplenishHand();
+        DeckManager.Instance.ReplenishHand();
         DeckManager.Instance.atShop = false;
 
 
-		DeckManager.Instance.RefillDeckWith();
+        DeckManager.Instance.RefillDeckWith(CardAssembler.GetRandCardTypeOfCost(5));
 
 		GameManager.Instance.SetPauseGame(false);
         PlayRandSound("res://Assets/Sounds/DoorClose");
@@ -150,7 +171,7 @@ public partial class Shop : TextureRect
                     {
 						if (GameManager.Instance.UpdateMoney(Mathf.CeilToInt(card.Data.cost * 0.22f)))
                         {
-							DeckManager.Instance.SellCard(card);
+                            DeckManager.Instance.RemoveCardFromDeck(card);
 							PlayRandSound("res://Assets/Sounds/ChaChing");
                             return true;
                         }

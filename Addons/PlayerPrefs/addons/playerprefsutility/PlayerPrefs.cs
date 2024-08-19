@@ -51,7 +51,7 @@ public static class PlayerPrefs
                 _currentUser = Registry.CurrentUser.CreateSubKey(registyPath, true);
                 _currentUser.SetValue(AppName, true);
                 GD.Print("Created Registry.CurrentUser");
-            } catch (Exception e)
+            } catch 
             {
                 useFileSystemFallback = true;
                 _currentUser = null;

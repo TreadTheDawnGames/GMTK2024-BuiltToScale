@@ -7,6 +7,7 @@ public partial class ShopArea : Area2D
 	private bool used = false;
 	private Sprite2D backSprite;
 	private RigidBody2D rigid;
+	player_char lastRufus;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -23,10 +24,11 @@ public partial class ShopArea : Area2D
 		else
 			backSprite.Texture = GD.Load<Texture2D>("res://Assets/Sprites/ShopBackClosed.png");
 
+		
+
 		if (isInteractable == true && used == false && rigid.GetCollisionLayerValue(1) == true)
 		{
-
-			if (Input.IsActionJustPressed("Debug-OpenShop"))
+			if (Input.IsActionJustPressed("OpenShop"))
 			{
 				OpenShop();
 
@@ -34,18 +36,59 @@ public partial class ShopArea : Area2D
 				used = true;
 			}
 		}
+			HandleShiftyThoughts();
 	}
+
+	void HandleShiftyThoughts()
+	{
+        if (!used && rigid.GetCollisionLayerValue(1) == true)
+        {
+            if (HasOverlappingBodies())
+            {
+                foreach (var body in GetOverlappingBodies())
+                {
+
+                    if (body is player_char)
+                    {
+
+
+                        player_char rufus = (player_char)body;
+                        lastRufus = rufus;
+                        lastRufus.ThinkShifyThoughts(true);
+
+                    }
+                }
+            }
+            else
+            {
+				if (lastRufus != null)
+				{
+	                lastRufus?.ThinkShifyThoughts(false);
+					lastRufus=null;
+				}
+            }
+        }
+        else
+        {
+			if (lastRufus != null)
+			{
+				lastRufus?.ThinkShifyThoughts(false);
+				lastRufus = null;
+			}			
+        }
+    }
 
 	public void _on_body_entered(Node2D body)
 	{
-		GD.Print("Ye!!");
+		
+
 		isInteractable = true;
 	}
 
 	public void _on_body_exited(Node2D body)
 	{
-		GD.Print("Oh.");
-		isInteractable = false;
+		
+        isInteractable = false;
 	}
 	
 	public void OpenShop()
