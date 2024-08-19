@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c74uxnvapn034"]
+[gd_scene load_steps=19 format=3 uid="uid://c74uxnvapn034"]
 
 [ext_resource type="Script" path="res://Scripts/player_char.cs" id="1_gmqms"]
 [ext_resource type="Texture2D" uid="uid://df44ha7ckulwq" path="res://Assets/Sprites/PigCarry1.png" id="2_hg50a"]
@@ -9,6 +9,10 @@
 [ext_resource type="Texture2D" uid="uid://fs7ywjhkqwwu" path="res://Assets/Sprites/PigMove3.png" id="5_h7axm"]
 [ext_resource type="Texture2D" uid="uid://cfnm6k1i1ls6x" path="res://Assets/Sprites/PigCarry4.png" id="5_m30l3"]
 [ext_resource type="Texture2D" uid="uid://cmyq31hw4mqhk" path="res://Assets/Sprites/PigMove4.png" id="6_dg0j7"]
+[ext_resource type="Texture2D" uid="uid://cvi7cn148uom3" path="res://Assets/Sprites/ShiftyThoughts/ShiftyThoughts1.png" id="10_vct6h"]
+[ext_resource type="Texture2D" uid="uid://b62vkvh10liyu" path="res://Assets/Sprites/ShiftyThoughts/ShiftyThoughts2.png" id="11_3x4u7"]
+[ext_resource type="Texture2D" uid="uid://cq2giure16pj8" path="res://Assets/Sprites/ShiftyThoughts/ShiftyThoughts3.png" id="12_hromj"]
+[ext_resource type="Texture2D" uid="uid://wu7jyana6dpi" path="res://Assets/Sprites/ShiftyThoughts/ShiftyThoughts4.png" id="13_w0vdl"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_pu1om"]
 friction = 0.0
@@ -59,6 +63,48 @@ animations = [{
 radius = 30.0
 height = 100.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_jinw8"]
+atlas = ExtResource("10_vct6h")
+region = Rect2(0, 0, 316, 270)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_w28bs"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jinw8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_3x4u7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_hromj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_w0vdl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_3x4u7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_w0vdl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_vct6h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_hromj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_vct6h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_w0vdl")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
 [node name="Rufus" type="RigidBody2D"]
 process_mode = 1
 collision_layer = 34
@@ -80,3 +126,11 @@ shape = SubResource("CapsuleShape2D_qvtxl")
 
 [node name="StepSoundPlayer" type="AudioStreamPlayer" parent="."]
 volume_db = -20.07
+
+[node name="ShiftyThoughts" type="AnimatedSprite2D" parent="."]
+z_index = 2
+position = Vector2(-2, -74)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_w28bs")
+autoplay = "default"
+frame_progress = 0.70973

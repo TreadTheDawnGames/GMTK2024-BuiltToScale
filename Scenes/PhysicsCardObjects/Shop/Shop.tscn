@@ -158,5 +158,3 @@ offset_right = 195.0
 offset_bottom = 40.0
 theme = ExtResource("8_bd07h")
 text = "20"
-
-[node name="ChaChingSound" type="AudioStreamPlayer" parent="."]

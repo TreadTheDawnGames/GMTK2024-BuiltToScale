@@ -10,13 +10,25 @@ public partial class CardSlot : Marker2D
     public override void _Ready()
     {
         base._Ready();
-        GetParent<Area2D>().AreaEntered += MarkDrawn;
+        //GetParent<Area2D>().AreaEntered += MarkDrawn;
     }
 
     void MarkDrawn(Node2D node)
     {
-        Card card = (Card)node.Owner;
-        card.SetDrawn(true);
-        card.Data.inShop = false;
+        
+       // Card card = (Card)node.Owner;
+    }
+
+    public void SetOccupied(bool occupied)
+    {
+        this.occupied = occupied;
+    }
+
+    public override string ToString()
+    {
+        string str = Name + "\n" + occupied + "\n" + GetType().ToString() + "\n" + "----------";
+
+       
+        return str;
     }
 }

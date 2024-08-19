@@ -24,7 +24,7 @@ public partial class player_char : RigidBody2D
 	int coyoteTimeMax = 10;
 	int soundTick = 2;
 	AudioStreamPlayer stepSound;
-	bool canMakeLandSound = false;
+    AnimatedSprite2D shiftyThought;
 
 	public override void _Ready()
 	{
@@ -33,6 +33,8 @@ public partial class player_char : RigidBody2D
 		cam = GetTree().Root.GetNode<Camera2D>("LevelField/Camera");
 		stepSound = GetNode<AudioStreamPlayer>("StepSoundPlayer");
 		AddToGroup("PhysicsObjects", false);
+		shiftyThought = GetNode<AnimatedSprite2D>("ShiftyThoughts");
+		shiftyThought.Hide();
 	}
 
     public override void _PhysicsProcess(double delta)
@@ -101,9 +103,8 @@ public partial class player_char : RigidBody2D
 				ApplyForce(new Vector2(0,(int)ProjectSettings.GetSetting("physics/2d/default_gravity")), new Vector2(Position.X, Position.Y - 10));
 			}
 			spd = grndspd;
-			if (coyoteTime < coyoteTimeMax && canMakeLandSound)
+			if (coyoteTime < coyoteTimeMax)
 				PlayLandSound();
-			canMakeLandSound = false;
 			coyoteTime = coyoteTimeMax;
 		}
 		else
@@ -138,23 +139,7 @@ public partial class player_char : RigidBody2D
 		pos.X = Math.Clamp(pos.X,0,1920);
 		Position = pos;
 
-		// Test spawn object
-		/*if (Input.IsActionJustPressed("Interact") && holding == null)
-		{
-			//SpawnObject("res://Scenes/PhysicsCardObjects/steelcrate.tscn");
-			/*
-			if (spawn == 1)
-			{
-				SpawnObject("res://Scenes/PhysicsCardObjects/shop.tscn");
-				spawn = 0;
-			}
-			else
-			{
-				SpawnObject("res://Scenes/PhysicsCardObjects/crate.tscn");
-				spawn = 1;
-			}
-			*//*
-		}*/
+		
 
 		// Holding object
 		if (holding != null)
@@ -327,5 +312,10 @@ public partial class player_char : RigidBody2D
 		stepSound.Stream = GD.Load<AudioStream>("res://Assets/Sounds/soLand.wav");
 
 		stepSound.Play();
+	}
+
+	public void ThinkShifyThoughts(bool isShify)
+	{
+		shiftyThought.Visible = isShify;
 	}
 }

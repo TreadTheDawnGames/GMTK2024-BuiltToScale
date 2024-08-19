@@ -1,10 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://ddk7jw447tjdf"]
+[gd_scene load_steps=3 format=3 uid="uid://btyuklwkwra8f"]
 
 [ext_resource type="Texture2D" uid="uid://csueqrbxpaw13" path="res://Assets/Sprites/Reset.png" id="1_0qq5i"]
 [ext_resource type="Script" path="res://Scenes/reset_button.cs" id="2_d3561"]
 
 [node name="ResetGameButton" type="Node2D"]
-z_index = 60
+z_index = 2000
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_0qq5i")

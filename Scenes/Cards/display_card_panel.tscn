@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dnhdsd0qb1v0p"]
+
+[ext_resource type="Texture2D" uid="uid://cuo628eyi82j3" path="res://Assets/Sprites/Deck/Shoppe/CardPanelBlank.png" id="1_bus1t"]
+[ext_resource type="Script" path="res://Scenes/Cards/DisplaySlot.cs" id="2_4q2kq"]
+
+[node name="DisplayCardPanel" type="TextureRect"]
+offset_right = 182.0
+offset_bottom = 258.0
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("1_bus1t")
+stretch_mode = 2
+
+[node name="DisplaySlot" type="Marker2D" parent="."]
+position = Vector2(3.82575, 3.82575)
+script = ExtResource("2_4q2kq")
