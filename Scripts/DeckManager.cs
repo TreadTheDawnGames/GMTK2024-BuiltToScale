@@ -146,9 +146,10 @@ public partial class DeckManager : Control
 
 		cardCountBar = GetNode<TextureProgressBar>("TextureProgressBar");
 
-		SetupDeck(CardAssembler.BalancedStarter(deckSize));
+		//SetupDeck(CardAssembler.BalancedStarter(deckSize));
+		
 		//SetupDeck(CardAssembler.OneEach()); 
-		//SetupDeck(CardAssembler.Artistic()); 
+		SetupDeck(CardAssembler.RiggedDeck()); GD.PrintErr("Incorrect deck is being used"); 
 
 		discardSpriteBacking.Hide();
 

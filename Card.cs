@@ -202,13 +202,11 @@ public partial class Card : Control
     void CardEnteredZone(Node2D node)
     {
         
-        GD.Print(node.Name);
         if (Data.aesthetic)
         {
             if(node.Name == "DiscardSlotArea")
             {
                 DeckManager.Instance.DiscardCard(this);
-                GD.Print("DiscardSlotArea");
             }
         }
         else
@@ -263,7 +261,6 @@ public partial class Card : Control
         if (!Data.inShop)
             return;
         Data.buyable = true;
-        GD.Print("Discardable");
     }
 
     void UnreadyToDiscard()
@@ -271,7 +268,6 @@ public partial class Card : Control
         if (!Data.inShop)
             return;
         Data.buyable = false;
-        GD.Print("NOT Discardable");
 
     }
 
@@ -280,7 +276,6 @@ public partial class Card : Control
         if (!grabbed || Data.inShop)
             return;
         Data.playable = true;
-        GD.Print("Playable");
 
     }
 
@@ -289,7 +284,6 @@ public partial class Card : Control
         if (Data.inShop)
             return; 
         Data.playable = false;
-        GD.Print("NOT Playable");
 
     }
 
@@ -299,7 +293,6 @@ public partial class Card : Control
         if (!grabbed || Data.inShop)
             return;
         Data.sellable = true;
-        GD.Print("Sellable");
 
     }
 
@@ -308,7 +301,6 @@ public partial class Card : Control
         if (!grabbed || Data.inShop)
             return; 
         Data.sellable = false;
-        GD.Print("NOT Sellable");
 
     }
 

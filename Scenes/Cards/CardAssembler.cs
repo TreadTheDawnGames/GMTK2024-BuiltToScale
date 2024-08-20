@@ -212,10 +212,15 @@ public static class CardAssembler
 
         return oneEach;
     }
-    public static List<CardData> Artistic()
+    public static List<CardData> RiggedDeck()
     {
         List<CardData> oneEach = new List<CardData>()
         {
+            new CardData(MakeCardPath(CardType.gascan)),
+            new CardData(MakeCardPath(CardType.gascan)),
+            new CardData(MakeCardPath(CardType.gascan)),
+            new CardData(MakeCardPath(CardType.gascan)),
+            new CardData(MakeCardPath(CardType.gascan)),
             new CardData(MakeCardPath(CardType.gascan)),
             new CardData(MakeCardPath(CardType.tree)),
             new CardData(MakeCardPath(CardType.shop)),
