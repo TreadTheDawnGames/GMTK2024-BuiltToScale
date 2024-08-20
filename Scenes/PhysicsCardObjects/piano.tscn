@@ -1,13 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://dwqmjqetbm3di"]
+[gd_scene load_steps=5 format=3 uid="uid://e551idv8ya6y"]
 
 [ext_resource type="PackedScene" uid="uid://bbsse1b5w57it" path="res://Scenes/PhysicsCardObjects/physics_object.tscn" id="1_ec5dk"]
-[ext_resource type="Texture2D" uid="uid://6dwmla6fleug" path="res://Assets/Sprites/Objects/ShipIcon.png" id="2_s3l6j"]
+[ext_resource type="Texture2D" uid="uid://cwod85rgldkqh" path="res://Assets/Sprites/Objects/PianoIcon.png" id="2_1gmfq"]
 [ext_resource type="Texture2D" uid="uid://dgs8mbvpy5ehk" path="res://Assets/Sprites/PianoFront.png" id="3_rmkpq"]
 [ext_resource type="Texture2D" uid="uid://b5drypf0ju1bq" path="res://Assets/Sprites/PianoBack.png" id="4_nvfjo"]
 
-[node name="Crate" instance=ExtResource("1_ec5dk")]
-symbol = ExtResource("2_s3l6j")
-cost = 0
+[node name="Piano" instance=ExtResource("1_ec5dk")]
+symbol = ExtResource("2_1gmfq")
+cost = 20
 metadata/HoldOffset = 50.0
 
 [node name="RigidBody2D" type="RigidBody2D" parent="." index="0"]

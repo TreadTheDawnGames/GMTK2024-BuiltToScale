@@ -8,7 +8,7 @@ using System.Reflection.Emit;
 public static class CardAssembler
 {
 
-    public enum CardType { beachball, bowl, crate, lamp, mattress, obsidian, scaffleting, ship, shop, staircase, starterbowl, steelcrate, stoneball, table, toilet, trafficCone, tree, truck, zeekplushy}
+    public enum CardType { beachball, bowl, crate, gascan, lamp, mattress, obsidian, piano, scaffleting, ship, shop, staircase, starterbowl, steelcrate, stoneball, table, toilet, trafficCone, tree, truck, zeekplushy}
     public enum GuaranteedCardType { crate, scaffleting, staircase }
     public enum StarterCardType { staircase, crate, toilet }
     public enum SpecialCardType { obsidian, shop, ship, zeekplushy }
@@ -218,7 +218,7 @@ public static class CardAssembler
         int rand = (int)(GD.Randi() % 101);
 
         //25% chance
-        if (rand >= 0 && rand < 25)
+        if (rand >= 0 && rand < 29)
         {
             CardType[] cardTypes = new CardType[]
             {
@@ -232,10 +232,11 @@ public static class CardAssembler
             return cardTypes[innerRand];
         }
         //25% chance
-        else if (rand >= 26 && rand <= 50)
+        else if (rand >= 30 && rand <= 54)
         {
             CardType[] cardTypes = new CardType[]
             {
+                CardType.piano,
                 CardType.lamp,
                 CardType.staircase,
                 CardType.table
@@ -245,7 +246,7 @@ public static class CardAssembler
             return cardTypes[innerRand];
         }
         //30% chance
-        else if (rand >= 51 && rand <= 80)
+        else if (rand >= 55 && rand <= 79)
         {
             CardType[] cardTypes = new CardType[]
             {
@@ -258,7 +259,7 @@ public static class CardAssembler
             return cardTypes[innerRand];
         }
         //19% chance
-        else if (rand >= 81 && rand <= 99)
+        else if (rand >= 80 && rand <= 99)
         {
             CardType[] cardTypes = new CardType[]
             {

@@ -31,7 +31,7 @@ public partial class MoneyLine : Node2D
 
 		line.Position = lineOffset;
 
-		nextLineAtText.Text = "Next Money Line at " + -(int)(GlobalPosition.Y * 2);
+		nextLineAtText.Text = "Next Money Line at " + -(int)(GlobalPosition.Y - 2000);
 	}
 
 	void AttemptToAward(Node2D node)
@@ -66,8 +66,8 @@ public partial class MoneyLine : Node2D
 		var ps = GD.Load<PackedScene>("res://Scenes/money_line.tscn");
 		var newLine = ps.Instantiate<MoneyLine>();
 
-		Vector2 newHeight = Position;
-		newHeight.Y = (int)(newHeight.Y * 2f);
+		Vector2 newHeight = GlobalPosition;
+		newHeight.Y = (int)(newHeight.Y - 2000f);
 
 		newLine.GlobalPosition = newHeight;
 		GetParent().CallDeferred("add_child",newLine);

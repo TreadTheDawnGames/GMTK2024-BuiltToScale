@@ -147,6 +147,7 @@ public partial class DeckManager : Control
 		cardCountBar = GetNode<TextureProgressBar>("TextureProgressBar");
 
 		SetupDeck(CardAssembler.BalancedStarter(deckSize));
+		//SetupDeck(CardAssembler.OneEach()); 
 
 		discardSpriteBacking.Hide();
 
