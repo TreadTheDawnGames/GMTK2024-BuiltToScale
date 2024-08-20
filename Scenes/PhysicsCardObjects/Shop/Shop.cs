@@ -166,7 +166,7 @@ public partial class Shop : TextureRect
 
                     sellPanel.Texture = highlighted;
 					SellForNode.Show();
-					sellAmount.Text = Mathf.CeilToInt(card.Data.cost * 0.22f).ToString(); ;
+					sellAmount.Text = Mathf.CeilToInt(card.Data.cost * 0.5f/*0.22*/).ToString(); ;
                     if (!Input.IsMouseButtonPressed(MouseButton.Left))
                     {
 						if (GameManager.Instance.UpdateMoney(Mathf.CeilToInt(card.Data.cost * 0.22f)))

@@ -240,8 +240,8 @@ public static class CardAssembler
             CardType[] cardTypes = new CardType[]
             {
                 CardType.toilet,
-                CardType.crate,
-                CardType.scaffleting,
+                //CardType.crate,
+                //CardType.scaffleting,
                 CardType.tree
             };
             int innerRand = (int)(GD.Randi() % cardTypes.Length);
@@ -255,7 +255,7 @@ public static class CardAssembler
             {
                 CardType.piano,
                 CardType.lamp,
-                CardType.staircase,
+                //CardType.staircase,
                 CardType.table
             };
             int innerRand = (int)(GD.Randi() % cardTypes.Length);
