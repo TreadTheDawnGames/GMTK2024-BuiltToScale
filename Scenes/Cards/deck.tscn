@@ -28,7 +28,7 @@ radius = 5.0
 size = Vector2(247, 295)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cn5t3"]
-size = Vector2(1825, 656)
+size = Vector2(1922, 764)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fp8rx"]
 size = Vector2(905, 86)
@@ -188,7 +188,7 @@ collision_layer = 262144
 collision_mask = 65536
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayArea"]
-position = Vector2(952.5, 644)
+position = Vector2(960, 698)
 shape = SubResource("RectangleShape2D_cn5t3")
 
 [node name="Hand" type="Area2D" parent="."]
