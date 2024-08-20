@@ -120,13 +120,13 @@ public partial class DeckManager : Control
 		instance = this;
 		cardSlots = GetNode("Hand").GetChildren().OfType<HandSlot>().ToArray<HandSlot>();
 		playArea = GetNode<Area2D>("PlayArea");
-		shuffleSound = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
+		shuffleSound = GetNode<AudioStreamPlayer>("ShuffleSounds");
 		flipSound = GetNode<AudioStreamPlayer>("CardFlipSound");
 
 		scoreLabel = GetNode<RichTextLabel>("Scores/ScoreLabel");
 		highScoreLabel = GetNode<RichTextLabel>("Scores/HighScoreLabel");
 
-		cardsInDeckButton = GetNode<TextureButton>("CardsInDeckButton");
+		cardsInDeckButton = GetNode<TextureButton>("TextureProgressBar/CardsInDeckButton");
 
 		discardArea = GetNode<Area2D>("DiscardPile");
 		discardSpriteSymbol = GetNode<Sprite2D>("DiscardPile/Backing/Symbol");
@@ -248,12 +248,17 @@ public partial class DeckManager : Control
 
 	void PlayFlipSound()
 	{
-		int rand = (int)(GD.Randi() % 2);
+		int rand = (int)(GD.Randi() % 3);
 		flipSound.Stream = GD.Load<AudioStream>("res://Assets/Sounds/Cards/FlipSounds/CardFlip" + rand + ".wav");
 
-
-
 		flipSound.Play();
+	}
+	void PlayShuffleSound()
+	{
+		int rand = (int)(GD.Randi() % 3);
+		shuffleSound.Stream = GD.Load<AudioStream>("res://Assets/Sounds/Shuffle" + rand + ".wav");
+
+        shuffleSound.Play();
 	}
 
 	public void RemoveCardFromDeck(Card card)
@@ -333,7 +338,7 @@ public partial class DeckManager : Control
 	void Shuffle()
 	{
 		GD.Print("SHUFFLED!");
-		shuffleSound.Play();
+		PlayShuffleSound();
 		foreach (CardData card in discard.Shuffled().ToList<CardData>())
 		{
 			deck.Enqueue(card);
@@ -526,7 +531,7 @@ public partial class DeckManager : Control
 		startingHand.Shuffle();
 
 
-		shuffleSound.Play();
+		PlayShuffleSound();
 		foreach (CardData card in startingHand)
 		{
 			deck.Enqueue(card);

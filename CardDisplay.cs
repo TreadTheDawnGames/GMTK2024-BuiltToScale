@@ -2,6 +2,7 @@ using Godot;
 using Medallion;
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 
 public partial class CardDisplay : Control
@@ -12,15 +13,17 @@ public partial class CardDisplay : Control
 	AnimationPlayer animator;
 	DisplaySlot[] displaySlots;
 
+	AudioStreamPlayer sounds;
+
     bool showing = false;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		displayBackground = GetNode<TextureRect>("TextureRect");
 		animator = GetNode<AnimationPlayer>("AnimationPlayer");
+		sounds = GetNode<AudioStreamPlayer>("Sounds");
 
-
-		animator.Play("RESET");
+        animator.Play("RESET");
 
 
     }
@@ -83,33 +86,50 @@ public partial class CardDisplay : Control
 	{
 		showing = !showing;
 		PopOut(showing, cards);
-	}
+		if (showing)
+		{
+            PlaySound("res://Assets/Sounds/Slide/SlideIn");
+        }
+		else
+		{
+            PlaySound("res://Assets/Sounds/Slide/SlideOut");
 
-        public void PopOut(bool isIn, List<CardData> cards)
-        {
+        }
+    }
 
-            if (animator.IsPlaying())
-            {
+	public void PopOut(bool isIn, List<CardData> cards)
+	{
 
-                animator.SpeedScale *= -1;
-            }
-            else
-            {
-                animator.SpeedScale = 1;
+		if (animator.IsPlaying())
+		{
+
+			animator.SpeedScale *= -1;
+		}
+		else
+		{
+			animator.SpeedScale = 1;
 			DisplayDeck(cards);
 
-                if (isIn)
-                {
-                    animator.PlayBackwards("Out");
+			if (isIn)
+			{
+				animator.PlayBackwards("Out");
 
-                }
-                else
-                {
-                    animator.Play("Out");
+            }
+            else
+			{
+				animator.Play("Out");
 
-                }
             }
         }
+
+	}
+
+	void PlaySound(string soundPath)
+	{
+        int rand = (int)(GD.Randi() % 3);
+        sounds.Stream = GD.Load<AudioStream>(soundPath + rand + ".wav");
+        sounds.Play();
+    }
 
 
 	

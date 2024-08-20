@@ -95,6 +95,7 @@ metadata/_edit_use_anchors_ = true
 [node name="AudioListener2D" type="AudioListener2D" parent="Camera"]
 
 [node name="ShopSound" type="AudioStreamPlayer" parent="." groups=["ShopAudio"]]
+volume_db = -10.0
 
 [connection signal="body_entered" from="HelpSignArea" to="HelpSignArea" method="_on_body_entered"]
 [connection signal="body_exited" from="HelpSignArea" to="HelpSignArea" method="_on_body_exited"]
