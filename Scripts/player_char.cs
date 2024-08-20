@@ -153,7 +153,7 @@ public partial class player_char : RigidBody2D
 		Position = pos;
 			
 		//if (Input.IsActionJustPressed("OpenShop"))
-		//	SpawnObject("res://Scenes/PhysicsCardObjects/zeekplushy.tscn");
+		//	SpawnObject("res://Scenes/PhysicsCardObjects/gascan.tscn");
 
 		// Holding object
 		if (holding != null)
