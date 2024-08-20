@@ -7,6 +7,7 @@ public partial class QuittingSprite : AnimatedSprite2D
 	public override void _Ready()
 	{
 		Hide();
+		Stop();
 		AnimationFinished += () => CheckCanQuit(allowedToQuit);
 	}
 
@@ -27,13 +28,18 @@ public partial class QuittingSprite : AnimatedSprite2D
 		{
 			Show();
 			Play("default");
-		}
+			Modulate = new Color(1, 1, 1, 0);
+
+        }
 		else if (Input.IsActionJustReleased("Quit"))
 		{
 			Hide();
 			Stop();
 		}
 		allowedToQuit = Input.IsActionPressed("Quit");
-
+		if (allowedToQuit)
+		{
+			Modulate = new Color(1,1,1,Mathf.Lerp(Modulate.A,1, 0.05f));
+		}
 	}
 }
