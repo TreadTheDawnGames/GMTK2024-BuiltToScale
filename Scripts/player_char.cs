@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using Godot;
 
 public partial class player_char : RigidBody2D
@@ -24,6 +25,7 @@ public partial class player_char : RigidBody2D
 	int soundTick = 2;
 	AudioStreamPlayer stepSound;
     AnimatedSprite2D shiftyThought;
+	bool CanMakeLandSound = false;
 
 	public override void _Ready()
 	{
@@ -82,23 +84,46 @@ public partial class player_char : RigidBody2D
 			curFrame = 0;
 		mySprite.Frame = curFrame;
 
+		if (MoveAndCollide(new Vector2(0,5), true) == null)
+			CanMakeLandSound = true;
+
+		var hit = MoveAndCollide(new Vector2(0,1), true);
 		// Jump movement
-		if (MoveAndCollide(new Vector2(0,1), true) != null)
+		if (hit != null)
 		{
+			//if (linvel.Y < 0)
+				//ApplyForce(new Vector2(0,(int)ProjectSettings.GetSetting("physics/2d/default_gravity")), new Vector2(Position.X, Position.Y - 10));
+			var vec = hit.GetNormal();
+			GD.Print(Convert.ToString(vec.X) + "," + Convert.ToString(vec.Y));
+			if (Math.Abs(vec.Y) > .4)
+			{
+				linvel.Y /= 1.5f;
+				LinearVelocity = linvel;
+			}
+			else
+			{
+				linvel.X /= 1.5f;
+				LinearVelocity = linvel;
+				ApplyForce(new Vector2(0,(int)ProjectSettings.GetSetting("physics/2d/default_gravity")), new Vector2(Position.X, Position.Y - 10));
+			}
 			spd = grndspd;
-			if (coyoteTime < coyoteTimeMax)
+			if (coyoteTime < coyoteTimeMax && CanMakeLandSound)
+			{
 				PlayLandSound();
+				CanMakeLandSound = false;
+			}
 			coyoteTime = coyoteTimeMax;
 		}
 		else
 		{
 			coyoteTime--;
+			ApplyForce(new Vector2(0,(int)ProjectSettings.GetSetting("physics/2d/default_gravity")), new Vector2(Position.X, Position.Y - 10));
 		}
 		
 		if (Input.IsActionJustPressed("Jump") && coyoteTime > 0)
 		{
 			PlayJumpSound();
-			linvel .Y = 0;
+			linvel.Y = 0;
 			LinearVelocity = linvel;
 			ApplyImpulse(new Vector2(0,maxjump), new Vector2(Position.X, Position.Y + 10));
 			coyoteTime = 0;
