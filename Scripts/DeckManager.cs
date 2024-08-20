@@ -383,7 +383,7 @@ public partial class DeckManager : Control
 			foreach (var area in discardArea.GetOverlappingAreas())
 			{
 				Card card = (Card)area.Owner;
-				if (card.Data.buyable)
+				if (card.Data.buyable && card.grabbed)
 				{
 					if (AllCards.Count >= deckSize && !card.Data.playable)
 					{
@@ -434,7 +434,7 @@ public partial class DeckManager : Control
 			{
 
 				Card card = (Card)area.Owner;
-				if (card.Data.playable)
+				if (card.Data.playable && card.grabbed)
 				{
 
 					if (!Input.IsMouseButtonPressed(MouseButton.Left))

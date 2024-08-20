@@ -161,7 +161,7 @@ public partial class Shop : TextureRect
 					
 				}
 
-                if (card.Data.sellable)
+                if (card.Data.sellable && card.grabbed)
                 {
 
                     sellPanel.Texture = highlighted;

@@ -8,10 +8,10 @@ using System.Reflection.Emit;
 public static class CardAssembler
 {
 
-    public enum CardType { beachball, bowl, crate, lamp, mattress, obsidian, scaffleting, ship, shop, staircase, starterbowl, steelcrate, stoneball, table, toilet, trafficCone, tree, truck }
+    public enum CardType { beachball, bowl, crate, lamp, mattress, obsidian, scaffleting, ship, shop, staircase, starterbowl, steelcrate, stoneball, table, toilet, trafficCone, tree, truck, zeekplushy}
     public enum GuaranteedCardType { crate, scaffleting, staircase }
     public enum StarterCardType { staircase, crate, toilet }
-    public enum SpecialCardType { obsidian, shop, ship }
+    public enum SpecialCardType { obsidian, shop, ship, zeekplushy }
 
 
     public static CardData Rand()
@@ -276,6 +276,7 @@ public static class CardAssembler
             CardType[] cardTypes = new CardType[]
              {
                 CardType.ship,
+                CardType.zeekplushy
              };
             int innerRand = (int)(GD.Randi() % cardTypes.Length);
 

@@ -117,13 +117,11 @@ Testing
 TODO:
 Programming:
 Glue
-make cards always show on top of each other
-
+make cards not think they're still being hovered when they're not
 
 Sound:
 
 Art
-Piano(?)
 Glue(?)
 
 Testing

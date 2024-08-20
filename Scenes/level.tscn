@@ -71,7 +71,7 @@ texture = ExtResource("2_sjrln")
 position = Vector2(970.5, 1150)
 shape = SubResource("RectangleShape2D_8l27s")
 
-[node name="Camera" parent="." instance=ExtResource("3_buxj5")]
+[node name="Camera" parent="." groups=["Camera"] instance=ExtResource("3_buxj5")]
 position = Vector2(960, -460)
 
 [node name="ResetGameButton" parent="Camera" instance=ExtResource("7_haaf3")]

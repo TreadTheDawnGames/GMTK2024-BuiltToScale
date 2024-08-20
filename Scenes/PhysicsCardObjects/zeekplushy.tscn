@@ -1,11 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://b5u7qqy0u1u63"]
+[gd_scene load_steps=4 format=3 uid="uid://bn24gs8hqupbc"]
 
 [ext_resource type="PackedScene" uid="uid://bbsse1b5w57it" path="res://Scenes/PhysicsCardObjects/physics_object.tscn" id="1_ato46"]
-[ext_resource type="Texture2D" uid="uid://ckwvnujyfbm05" path="res://Assets/Sprites/Objects/CrateIcon.png" id="2_dafuw"]
+[ext_resource type="Texture2D" uid="uid://do3fgq7fygmmt" path="res://Assets/Sprites/Zeek.png" id="2_sj400"]
 [ext_resource type="Texture2D" uid="uid://ok4n4snxvy0d" path="res://Assets/Sprites/ZeekPlushy.png" id="3_lg4ka"]
 
-[node name="Crate" instance=ExtResource("1_ato46")]
-symbol = ExtResource("2_dafuw")
+[node name="ZeekPlushy" instance=ExtResource("1_ato46")]
+symbol = ExtResource("2_sj400")
 metadata/HoldOffset = 50.0
 
 [node name="RigidBody2D" type="RigidBody2D" parent="." index="0"]

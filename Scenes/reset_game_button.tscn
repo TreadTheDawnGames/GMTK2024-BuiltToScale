@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://qk4x66alhfvy" path="res://Assets/Sprites/ResetWhite.png" id="2_py4uy"]
 
 [node name="ResetGameButton" type="Node2D"]
-z_index = 2000
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_0qq5i")

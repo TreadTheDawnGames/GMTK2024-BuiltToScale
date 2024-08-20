@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Data.Common;
+using System.Diagnostics;
 
 public partial class Card : Control
 {
@@ -13,7 +14,7 @@ public partial class Card : Control
     public Sprite2D backing { get; private set; }
     public Sprite2D symbol { get; private set; }
 
-    bool grabbed = false;
+    public bool grabbed = false;
     bool hovered = false;
     public bool beingDrawn = true;
 
@@ -27,11 +28,12 @@ public partial class Card : Control
     uint OGMask;
 
     Godot.RichTextLabel moneyLabel;
-
+    Rect2 myRect;
     public void SetUp(CardData data, bool isAesthetic = false)
     {
         data.aesthetic = isAesthetic;
         this.Data = data;
+
 
         symbol = GetNode<Sprite2D>("Backing/Background/Symbol");
         backing = GetNode<Sprite2D>("Backing/Background");
@@ -65,6 +67,9 @@ public partial class Card : Control
 
             MouseEntered += Hovered;
             MouseExited += Unhovered;
+            GrabbableArea.MouseEntered += Hovered;
+            GrabbableArea.MouseExited += Unhovered;
+
         }
 
         OGMask = GrabbableArea.CollisionMask;
@@ -72,6 +77,7 @@ public partial class Card : Control
         name = data.Type.ToString() + Name;
     }
 
+    
     public void SetDrawn(bool isDrawn)
     {
         GrabbableArea.CollisionMask = isDrawn ? OGMask : 0;
@@ -83,9 +89,9 @@ public partial class Card : Control
 
     public override void _Process(double delta)
     {
-        
-
         base._Process(delta);
+
+        
 
         if (hovered)
         {
@@ -138,7 +144,13 @@ public partial class Card : Control
             pos.Y = Mathf.Lerp(Position.Y, OGPos.Y, 0.1f);
 
             Position = pos;
+
         }
+/*
+        if (hovered && !Input.IsMouseButtonPressed(MouseButton.Left))
+        {
+            hovered = false;
+        }*/
 
     }
 
@@ -171,6 +183,7 @@ public partial class Card : Control
 
     void Unhovered()
     {
+        
         if (Input.IsMouseButtonPressed(MouseButton.Left))
             return;
         RemoveFromGroup("DraggableHovered");
@@ -188,6 +201,7 @@ public partial class Card : Control
 
     void CardEnteredZone(Node2D node)
     {
+        
         GD.Print(node.Name);
         if (Data.aesthetic)
         {
@@ -200,42 +214,45 @@ public partial class Card : Control
         else
         {
 
-
-        switch (node.Name)
-        {
-            case "PlayArea":
-        ReadyToPlay();
-                break;
-
-            case "DiscardPile":
-        ReadyToDiscard();
-                break;
-
-            case "SellPanel":
-        ReadyToSell();
-                break;
             
-        }
-        usable = (Data.buyable || Data.playable || Data.sellable);
+                
+            switch (node.Name)
+            {
+                case "PlayArea":
+                    ReadyToPlay();
+                    break;
 
+                case "DiscardPile":
+                    ReadyToDiscard();
+                    break;
+
+                case "SellPanel":
+                    ReadyToSell();
+                    break;
+                
+            }
+        usable = (Data.buyable || Data.playable || Data.sellable);
+            
         }
     }
 
     void CardExitedZone(Node2D node)
     {
+        
         switch (node.Name)
         {
             case "PlayArea":
-        UnreadyToPlay();
+                UnreadyToPlay();
                 break;
 
             case "DiscardPile":
-        UnreadyToDiscard();
+                UnreadyToDiscard();
                 break;
 
             case "SellPanel":
-        UnreadyToSell();
+                UnreadyToSell();
                 break;
+            
         }
         usable = (Data.buyable || Data.playable || Data.sellable);
     }
