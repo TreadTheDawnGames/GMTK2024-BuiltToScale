@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dwqmjqetbm3di"]
+[gd_scene load_steps=5 format=3 uid="uid://1ayqlmyw5d41"]
 
 [ext_resource type="PackedScene" uid="uid://bbsse1b5w57it" path="res://Scenes/PhysicsCardObjects/physics_object.tscn" id="1_ec5dk"]
 [ext_resource type="Texture2D" uid="uid://6dwmla6fleug" path="res://Assets/Sprites/Objects/ShipIcon.png" id="2_s3l6j"]
