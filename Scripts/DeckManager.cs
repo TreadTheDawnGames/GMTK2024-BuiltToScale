@@ -303,8 +303,11 @@ public partial class DeckManager : Control
 					GD.Print("Bought card: " + card.name);
 
 				}
-			}
-		}
+
+            }
+			if(!card.Data.singleUse)
+                discard.Add(card.Data);
+        }
 
 
 		PlayFlipSound();
@@ -326,7 +329,6 @@ public partial class DeckManager : Control
 			return;
 		}
 
-		discard.Add(card.Data);
 
 
 		UpdateDiscardSprite(card);
@@ -560,7 +562,7 @@ public partial class DeckManager : Control
 		card.Slot = discardSlot;
 
 		SpawnCard(card, new Vector2(960 + GD.RandRange(-400, 400), 500), true);
-		//discard.Add(card);
+		discard.Add(card);
 
 
 	}
