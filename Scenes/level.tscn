@@ -75,6 +75,7 @@ shape = SubResource("RectangleShape2D_8l27s")
 position = Vector2(960, -460)
 
 [node name="ResetGameButton" parent="Camera" instance=ExtResource("7_haaf3")]
+z_index = 100
 position = Vector2(-883, 426)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Camera"]
