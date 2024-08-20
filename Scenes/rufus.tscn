@@ -123,6 +123,9 @@ offset = Vector2(-50, -60)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_qvtxl")
 
+[node name="PopSoundPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -20.07
+
 [node name="StepSoundPlayer" type="AudioStreamPlayer" parent="."]
 volume_db = -20.07
 

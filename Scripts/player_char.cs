@@ -24,6 +24,7 @@ public partial class player_char : RigidBody2D
 	int coyoteTimeMax = 10;
 	int soundTick = 2;
 	AudioStreamPlayer stepSound;
+	AudioStreamPlayer popSound;
     AnimatedSprite2D shiftyThought;
 	bool CanMakeLandSound = false;
 
@@ -33,6 +34,7 @@ public partial class player_char : RigidBody2D
 		mySprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		cam = GetTree().Root.GetNode<Camera2D>("LevelField/Camera");
 		stepSound = GetNode<AudioStreamPlayer>("StepSoundPlayer");
+		popSound = GetNode<AudioStreamPlayer>("PopSoundPlayer");
 		AddToGroup("PhysicsObjects", false);
 		shiftyThought = GetNode<AnimatedSprite2D>("ShiftyThoughts");
 		shiftyThought.Hide();
@@ -64,7 +66,10 @@ public partial class player_char : RigidBody2D
 		// Handle animation
 		if (MoveAndCollide(new Vector2(0,1), true) == null)
 		{
-			curFrame = 1;
+			if (MoveAndCollide(new Vector2(0,6), true) == null)
+				curFrame = 1;
+			else
+				curFrame = 0;
 			soundTick = 0;
 		}
 		else if (Math.Abs(linvel.X) > 0.5)
@@ -82,6 +87,7 @@ public partial class player_char : RigidBody2D
 		}
 		else
 			curFrame = 0;
+
 		mySprite.Frame = curFrame;
 
 		if (MoveAndCollide(new Vector2(0,5), true) == null)
@@ -94,7 +100,7 @@ public partial class player_char : RigidBody2D
 			//if (linvel.Y < 0)
 				//ApplyForce(new Vector2(0,(int)ProjectSettings.GetSetting("physics/2d/default_gravity")), new Vector2(Position.X, Position.Y - 10));
 			var vec = hit.GetNormal();
-			GD.Print(Convert.ToString(vec.X) + "," + Convert.ToString(vec.Y));
+			//GD.Print(Convert.ToString(vec.X) + "," + Convert.ToString(vec.Y));
 			if (Math.Abs(vec.Y) > .4)
 			{
 				linvel.Y /= 1.5f;
@@ -145,8 +151,9 @@ public partial class player_char : RigidBody2D
 		var pos = Position;
 		pos.X = Math.Clamp(pos.X,0,1920);
 		Position = pos;
-
-		
+			
+		//if (Input.IsActionJustPressed("OpenShop"))
+		//	SpawnObject("res://Scenes/PhysicsCardObjects/zeekplushy.tscn");
 
 		// Holding object
 		if (holding != null)
@@ -220,7 +227,7 @@ public partial class player_char : RigidBody2D
 			}
 			rigid.SetCollisionMaskValue(3, false);
 			//rigid.SetCollisionMaskValue(4, false);
-			
+
 			// Place held object
 			if (Input.IsActionJustPressed("Interact") && isHolding == true)
 			{
@@ -240,6 +247,7 @@ public partial class player_char : RigidBody2D
 					((physics_object)holding).isHeld = false;
 					isHolding = false;
 					holding = null;
+					PlayPopSound();
 					pigArm.QueueFree();
 				}
 				rigid.SetCollisionMaskValue(3, false);
@@ -303,6 +311,19 @@ public partial class player_char : RigidBody2D
 			stepSound.Stream = GD.Load<AudioStream>("res://Assets/Sounds/soStep" + soundTick + ".wav");
 
 			stepSound.Play();
+		//}
+		//else
+			//soundTick = 2;
+	}
+
+	void PlayPopSound()
+	{
+		//if (soundTick != 0)
+		//{
+        	int rand = (int)(GD.Randi() % 3);
+			popSound.Stream = GD.Load<AudioStream>("res://Assets/Sounds/SpawnObject" + rand + ".wav");
+
+			popSound.Play();
 		//}
 		//else
 			//soundTick = 2;
