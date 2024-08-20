@@ -24,7 +24,7 @@ offset_bottom = 785.0
 scale = Vector2(0.5, 0.5)
 theme = ExtResource("1_ug6ee")
 text = "How to:
-A & D - Move left and right
+A & D - Move leftright
 Space - Jump
 
 Drag a card into the play area to activate it.
