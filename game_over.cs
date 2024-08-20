@@ -9,7 +9,8 @@ public partial class game_over : Node2D
 
 	public override void _Ready()
 	{
-		var cam = GetTree().Root.GetNode<Camera2D>("LevelField/Camera");
+        GetNode<Sprite2D>("NewHigh").Hide();
+        var cam = GetTree().Root.GetNode<Camera2D>("LevelField/Camera");
         TargetPos = cam.GlobalPosition;
         GlobalPosition = new Vector2(cam.GlobalPosition.X, cam.GlobalPosition.Y - 4000);
         animator = GetNode<AnimationPlayer>("AnimationPlayer");

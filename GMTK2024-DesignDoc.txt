@@ -117,6 +117,9 @@ Testing
 TODO:
 Programming:
 Glue
+make deck transparent when rufus is behind it
+make cards always show on top of each other
+
 
 Sound:
 Place object

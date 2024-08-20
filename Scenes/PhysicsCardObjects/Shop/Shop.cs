@@ -74,7 +74,7 @@ public partial class Shop : TextureRect
 
     void PlayRandSound(string pathTo)
     {
-        int rand = (int)(GD.Randi() % 2);
+        int rand = (int)(GD.Randi() % 3);
         shopSound.Stream = GD.Load<AudioStream>(pathTo + rand + ".wav");
 
 

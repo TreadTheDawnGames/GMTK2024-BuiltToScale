@@ -6,7 +6,6 @@
 
 [sub_resource type="Animation" id="Animation_3xrj8"]
 resource_name = "Out"
-length = 0.5
 tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -16,7 +15,7 @@ tracks/0/loop_wrap = true
 tracks/0/keys = {
 "handle_modes": PackedInt32Array(0, 0),
 "points": PackedFloat32Array(138, -0.25, 0, 0.25, 0, 138, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.5)
+"times": PackedFloat32Array(0, 1)
 }
 tracks/1/type = "bezier"
 tracks/1/imported = false
@@ -26,8 +25,8 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(208, -0.25, 0, 0.25, 0, 1104, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.5)
+"points": PackedFloat32Array(208, -0.25, 0, 0.25, 0, 1104, 0, -43.5, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
 }
 
 [sub_resource type="Animation" id="Animation_xielj"]
@@ -86,6 +85,7 @@ expand_mode = 2
 stretch_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="TextureRect"]
+z_index = 1
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -95,3 +95,6 @@ texture = ExtResource("3_m21d2")
 libraries = {
 "": SubResource("AnimationLibrary_fsqme")
 }
+
+[node name="Sounds" type="AudioStreamPlayer" parent="."]
+volume_db = 5.0
