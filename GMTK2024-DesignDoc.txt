@@ -117,18 +117,14 @@ Testing
 TODO:
 Programming:
 Glue
-make deck transparent when rufus is behind it
 make cards always show on top of each other
 
 
 Sound:
-Place object
 
 Art
 Piano(?)
 Glue(?)
-Gravityhamster 
-New best sticker to put on game over screen
 
 Testing
 Balance

@@ -164,7 +164,7 @@ public partial class Card : Control
             return;
         
         AddToGroup("DraggableHovered");
-        GetParent().MoveChild(this, GetParent().GetChildCount() - 1);
+        ZIndex = 500;
 
         hovered = true;
     }
@@ -175,6 +175,7 @@ public partial class Card : Control
             return;
         RemoveFromGroup("DraggableHovered");
 
+        ZIndex = 0;
 
 
         hovered = false;
