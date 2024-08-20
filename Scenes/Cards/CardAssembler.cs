@@ -212,6 +212,23 @@ public static class CardAssembler
 
         return oneEach;
     }
+    public static List<CardData> Artistic()
+    {
+        List<CardData> oneEach = new List<CardData>()
+        {
+            new CardData(MakeCardPath(CardType.gascan)),
+            new CardData(MakeCardPath(CardType.tree)),
+            new CardData(MakeCardPath(CardType.shop)),
+            new CardData(MakeCardPath(CardType.crate)),
+            new CardData(MakeCardPath(CardType.crate)),
+            new CardData(MakeCardPath(CardType.crate)),
+            new CardData(MakeCardPath(CardType.truck)),
+    };
+
+        
+
+        return oneEach;
+    }
 
     public static CardType GetWeightedRand()
     {
@@ -302,4 +319,6 @@ public static class CardAssembler
             return cardTypes[innerRand];
 
     }
+
+
 }

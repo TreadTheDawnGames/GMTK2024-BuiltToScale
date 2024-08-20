@@ -146,8 +146,9 @@ public partial class DeckManager : Control
 
 		cardCountBar = GetNode<TextureProgressBar>("TextureProgressBar");
 
-		SetupDeck(CardAssembler.BalancedStarter(deckSize));
-		//SetupDeck(CardAssembler.OneEach()); 
+		//SetupDeck(CardAssembler.BalancedStarter(deckSize));
+		SetupDeck(CardAssembler.OneEach()); 
+		//SetupDeck(CardAssembler.Artistic()); 
 
 		discardSpriteBacking.Hide();
 
@@ -525,8 +526,12 @@ public partial class DeckManager : Control
 
 		for (int i = 0; i < 4; i++)
 		{
+			if (i < sneakyDeck.Count)
+			{
+
 			startingHand.Add(sneakyDeck[i]);
 			sneakyDeck.Remove(sneakyDeck[i]);
+			}
 		}
 
 		startingHand.Shuffle();
