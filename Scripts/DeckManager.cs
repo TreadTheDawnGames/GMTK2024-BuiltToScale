@@ -113,7 +113,7 @@ public partial class DeckManager : Control
 		}
 	}
 	public bool cardHeld = false;
-
+	public bool correctDeck = false;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -148,7 +148,10 @@ public partial class DeckManager : Control
 
 		SetupDeck(CardAssembler.BalancedStarter(deckSize));
 		//SetupDeck(CardAssembler.OneEach()); 
-		//SetupDeck(CardAssembler.Artistic()); 
+		//SetupDeck(CardAssembler.DevShenaniganDeck());
+		
+		if(!correctDeck)
+		GD.PrintErr("Wrong deck Selected"); 
 
 		discardSpriteBacking.Hide();
 

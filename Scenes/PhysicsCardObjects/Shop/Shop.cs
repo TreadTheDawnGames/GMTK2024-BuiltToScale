@@ -169,7 +169,7 @@ public partial class Shop : TextureRect
 					sellAmount.Text = Mathf.CeilToInt(card.Data.cost * 0.5f/*0.22*/).ToString(); ;
                     if (!Input.IsMouseButtonPressed(MouseButton.Left))
                     {
-						if (GameManager.Instance.UpdateMoney(Mathf.CeilToInt(card.Data.cost * 0.22f)))
+						if (GameManager.Instance.UpdateMoney(Mathf.CeilToInt(card.Data.cost * 0.5f)))
                         {
                             DeckManager.Instance.RemoveCardFromDeck(card);
 							PlayRandSound("res://Assets/Sounds/ChaChing");

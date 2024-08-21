@@ -148,6 +148,7 @@ public static class CardAssembler
 
     public static List<CardData> BalancedStarter(int deckSize)
     {
+        DeckManager.Instance.correctDeck = true;
         List<CardData> starterDeck = new List<CardData>
         {
             new CardData(MakeCardPath(CardType.obsidian)),
@@ -212,17 +213,31 @@ public static class CardAssembler
 
         return oneEach;
     }
-    public static List<CardData> Artistic()
+    public static List<CardData> DevShenaniganDeck()
     {
         List<CardData> oneEach = new List<CardData>()
         {
-            new CardData(MakeCardPath(CardType.gascan)),
-            new CardData(MakeCardPath(CardType.tree)),
             new CardData(MakeCardPath(CardType.shop)),
-            new CardData(MakeCardPath(CardType.crate)),
-            new CardData(MakeCardPath(CardType.crate)),
-            new CardData(MakeCardPath(CardType.crate)),
-            new CardData(MakeCardPath(CardType.truck)),
+            new CardData(MakeCardPath(CardType.steelcrate)),
+            new CardData(MakeCardPath(CardType.steelcrate)),
+            new CardData(MakeCardPath(CardType.steelcrate)),
+            new CardData(MakeCardPath(CardType.steelcrate)),
+            new CardData(MakeCardPath(CardType.steelcrate)),
+            new CardData(MakeCardPath(CardType.steelcrate)),
+            new CardData(MakeCardPath(CardType.bowl)),
+            new CardData(MakeCardPath(CardType.bowl)),
+            new CardData(MakeCardPath(CardType.bowl)),
+            new CardData(MakeCardPath(CardType.bowl)),
+            new CardData(MakeCardPath(CardType.bowl)),
+            new CardData(MakeCardPath(CardType.bowl)),
+            new CardData(MakeCardPath(CardType.bowl)),
+            new CardData(MakeCardPath(CardType.bowl)),
+            new CardData(MakeCardPath(CardType.bowl)),
+            new CardData(MakeCardPath(CardType.bowl)),
+            new CardData(MakeCardPath(CardType.bowl)),
+            new CardData(MakeCardPath(CardType.bowl)),
+            new CardData(MakeCardPath(CardType.bowl)),
+
     };
 
         
