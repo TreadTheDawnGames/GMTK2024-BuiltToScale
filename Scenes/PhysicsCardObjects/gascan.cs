@@ -1,10 +1,13 @@
 using Godot;
 using System;
 using System.Linq;
+using System.Reflection.PortableExecutable;
 using System.Runtime.Serialization;
 
 public partial class gascan : RigidBody2D
 {
+
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -54,7 +57,7 @@ public partial class gascan : RigidBody2D
                             var e = (force * (0.5f*((RigidBody2D)obj).GlobalPosition.DistanceTo(GlobalPosition)));                //if (force > 0.0625)
                             ((RigidBody2D)obj).ApplyForce(eDir*e, GlobalPosition);
 						}
-						else if (obj.GetChild<RigidBody2D>(0) != null)
+						else if (obj.GetChildOrNull<RigidBody2D>(0) != null)
 						{
 							var child = obj.GetChild<RigidBody2D>(0);
                             /*var rigid = obj.GetChild<RigidBody2D>(0); // obj.GetNode<RigidBody2D>(obj.Name + "/RigidNode2D");
@@ -68,7 +71,7 @@ public partial class gascan : RigidBody2D
 							var objBody = (RigidBody2D)child;
 
 
-                            var force = 197500;// / ((RigidBody2D)obj).GlobalPosition.DistanceTo(GlobalPosition);
+                            var force = 10000;// / ((RigidBody2D)obj).GlobalPosition.DistanceTo(GlobalPosition);
                             var angle = (objBody).GetAngleTo(GlobalPosition);
 
                             float ex = force * (float)Math.Cos(angle);
@@ -76,20 +79,44 @@ public partial class gascan : RigidBody2D
 
 							
 							
-                            var eDir =  (objNode.GlobalPosition - GlobalPosition);
-
-
+                            var eDir =  child.GlobalPosition-GlobalPosition;
+							QueueRedraw();
+							GD.Print(eDir);
 
 							/*							var eDir = new Vector2(ex, ey) *0;
                             */
-							var length = (1 / eDir.Length());
-							var e = force / length;// force / (1/eDir.Length());				//if (force > 0.0625)
-                            ((RigidBody2D)child).ApplyForce(eDir.Normalized() * e, GlobalPosition);
+							int maxLength = 1100;
 
+							var length = eDir.Length();
+
+							/*if (eDir.Length() < maxLength)*/
+							{
+
+
+								var e = force /** length/maxLength*//*-Mathf.Pow(length,2)*/;// force / (1/eDir.Length());				//if (force > 0.0625)
+								((RigidBody2D)child).ApplyImpulse(eDir.Normalized() * e, child.ToLocal(GlobalPosition));
+							
+								
+							}
+
+							
                         }
 					}
 				}
 			}
 		}
+
+
+
+    }
+
+	public override void _Draw()
+	{
+		base._Draw();
+
+		
+
+		//DrawCircle(Position, 200f, new Color(1, 0, 0, 1));
 	}
+
 }

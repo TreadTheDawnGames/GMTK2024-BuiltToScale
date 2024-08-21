@@ -346,4 +346,13 @@ public partial class player_char : RigidBody2D
 	{
 		shiftyThought.Visible = isShify;
 	}
+
+
+    public override void _Draw()
+    {
+        base._Draw();
+		//DrawCircle(GlobalPosition-Position, 100, new Color(1,0,1, 0.5f));
+
+		
+    }
 }

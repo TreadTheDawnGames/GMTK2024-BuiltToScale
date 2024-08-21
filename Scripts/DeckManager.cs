@@ -150,7 +150,7 @@ public partial class DeckManager : Control
 		
 		//SetupDeck(CardAssembler.OneEach()); 
 
-		//SetupDeck(CardAssembler.DevShenaniganDeck());
+		SetupDeck(CardAssembler.DevShenaniganDeck());
 		
 		if(!correctDeck)
 		GD.PrintErr("Wrong deck Selected"); 

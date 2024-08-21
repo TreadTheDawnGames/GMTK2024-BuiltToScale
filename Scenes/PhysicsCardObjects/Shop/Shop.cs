@@ -63,7 +63,7 @@ public partial class Shop : TextureRect
 		
 		foreach(var slot in randCardSlots)
 		{
-			CreateCard(GetWeightedRand(), slot);
+			CreateCard(GetWeightedRandCard(), slot);
 		}
 
 
@@ -91,7 +91,7 @@ public partial class Shop : TextureRect
 		{
 			if (existingCard.Type == type)
 			{
-				CreateCard(GetWeightedRand(), slot);
+				CreateCard(GetWeightedRandCard(), slot);
 				return;
 			}
 		}

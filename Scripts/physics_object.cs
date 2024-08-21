@@ -62,4 +62,6 @@ public partial class physics_object : Node2D
             rigid.SetCollisionMaskValue(1, true);
         }
     }
+
+    
 }
