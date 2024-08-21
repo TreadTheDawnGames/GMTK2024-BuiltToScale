@@ -113,7 +113,7 @@ public partial class DeckManager : Control
 		}
 	}
 	public bool cardHeld = false;
-
+	public bool correctDeck = false;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -149,7 +149,11 @@ public partial class DeckManager : Control
 		//SetupDeck(CardAssembler.BalancedStarter(deckSize));
 		
 		//SetupDeck(CardAssembler.OneEach()); 
-		SetupDeck(CardAssembler.RiggedDeck()); GD.PrintErr("Incorrect deck is being used"); 
+
+		//SetupDeck(CardAssembler.DevShenaniganDeck());
+		
+		if(!correctDeck)
+		GD.PrintErr("Wrong deck Selected"); 
 
 		discardSpriteBacking.Hide();
 
@@ -304,8 +308,11 @@ public partial class DeckManager : Control
 					GD.Print("Bought card: " + card.name);
 
 				}
-			}
-		}
+
+            }
+			if(!card.Data.singleUse)
+                discard.Add(card.Data);
+        }
 
 
 		PlayFlipSound();
@@ -327,7 +334,6 @@ public partial class DeckManager : Control
 			return;
 		}
 
-		discard.Add(card.Data);
 
 
 		UpdateDiscardSprite(card);
@@ -561,7 +567,7 @@ public partial class DeckManager : Control
 		card.Slot = discardSlot;
 
 		SpawnCard(card, new Vector2(960 + GD.RandRange(-400, 400), 500), true);
-		//discard.Add(card);
+		discard.Add(card);
 
 
 	}

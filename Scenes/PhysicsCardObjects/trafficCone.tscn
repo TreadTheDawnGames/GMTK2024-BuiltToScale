@@ -15,6 +15,7 @@ collision_mask = 3
 mass = 3.0
 
 [node name="Sprite2D" type="Sprite2D" parent="RigidBody2D" index="0"]
+z_index = 1
 texture = ExtResource("2_1iwq7")
 centered = false
 offset = Vector2(-36, -29)

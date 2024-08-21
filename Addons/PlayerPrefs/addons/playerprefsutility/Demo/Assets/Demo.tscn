@@ -1,7 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://d3efv3kvr6onf"]
-
-[ext_resource type="Script" path="res://addons/playerprefsutility/Demo/Scripts/PF_Demo.cs" id="1_4jygy"]
-[ext_resource type="PackedScene" uid="uid://8esmg7r8ldb7" path="res://addons/playerprefsutility/Demo/Assets/player_pref_element.tscn" id="2_yrf7y"]
+[gd_scene load_steps=3 format=3 uid="uid://d3efv3kvr6onf"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6i1vt"]
 bg_color = Color(1, 1, 1, 1)
@@ -17,23 +14,13 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[node name="Control" type="Control" node_paths=PackedStringArray("keyField", "valueField", "storeButton", "retrieveButton", "warningText", "emptyListLabel", "listParent", "deleteAllButton")]
+[node name="Control" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_4jygy")
-keyField = NodePath("CenterContainer/VBoxContainer2/VBoxContainer/PlayerPref_key/MarginContainer/HBoxContainer/LineEdit")
-valueField = NodePath("CenterContainer/VBoxContainer2/VBoxContainer/PlayerPref_value/MarginContainer/HBoxContainer/LineEdit2")
-storeButton = NodePath("CenterContainer/VBoxContainer2/VBoxContainer/Buttons/MarginContainer/HBoxContainer/Button")
-retrieveButton = NodePath("CenterContainer/VBoxContainer2/VBoxContainer/Buttons/MarginContainer/HBoxContainer/Button2")
-warningText = NodePath("CenterContainer/VBoxContainer2/VBoxContainer/Label")
-emptyListLabel = NodePath("CenterContainer/VBoxContainer2/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/Label")
-listParent = NodePath("CenterContainer/VBoxContainer2/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer2")
-deleteAllButton = NodePath("CenterContainer/VBoxContainer2/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/DeleteAllButton")
-elementPrefab = ExtResource("2_yrf7y")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
