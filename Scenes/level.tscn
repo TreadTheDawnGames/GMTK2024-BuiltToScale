@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://biecsihwn6q3l"]
+[gd_scene load_steps=27 format=3 uid="uid://biecsihwn6q3l"]
 
 [ext_resource type="Script" path="res://Scenes/GameManager.cs" id="1_h1jex"]
 [ext_resource type="Texture2D" uid="uid://cypyjikxxwpw1" path="res://Assets/Sprites/Logo.png" id="2_1n2p6"]
@@ -10,7 +10,6 @@
 [ext_resource type="Script" path="res://Scenes/LoopingBackground.cs" id="3_x7vx7"]
 [ext_resource type="PackedScene" uid="uid://xy71mg3ttuj1" path="res://Scenes/Cards/deck.tscn" id="4_vv3gu"]
 [ext_resource type="PackedScene" uid="uid://btyuklwkwra8f" path="res://Scenes/reset_game_button.tscn" id="7_haaf3"]
-[ext_resource type="PackedScene" uid="uid://cj6chkdqmf72v" path="res://Scenes/money_line.tscn" id="7_w53ei"]
 [ext_resource type="Script" path="res://Scenes/SignPost.cs" id="8_ocdcq"]
 [ext_resource type="Texture2D" uid="uid://cj5jb12qo2t6j" path="res://Assets/Sprites/LoadingThingThatHasANameButIDontRememberItpng.png" id="13_c3u65"]
 [ext_resource type="Script" path="res://Scenes/QuittingSprite.cs" id="14_db2b6"]
@@ -96,7 +95,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"default",
-"speed": 6.0
+"speed": 12.0
 }]
 
 [node name="LevelField" type="Node2D"]
@@ -120,9 +119,6 @@ scroll_offset = Vector2(238.164, 389.304)
 script = ExtResource("3_x7vx7")
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
-
-[node name="MoneyLine2" parent="." instance=ExtResource("7_w53ei")]
-position = Vector2(1641, -1000)
 
 [node name="Rufus" parent="." instance=ExtResource("2_4km2f")]
 process_mode = 0
@@ -178,7 +174,7 @@ metadata/_edit_use_anchors_ = true
 [node name="QuittingSprite" type="AnimatedSprite2D" parent="Camera"]
 z_index = 2001
 sprite_frames = SubResource("SpriteFrames_4tni7")
-frame = 8
+frame = 9
 frame_progress = 1.0
 script = ExtResource("14_db2b6")
 

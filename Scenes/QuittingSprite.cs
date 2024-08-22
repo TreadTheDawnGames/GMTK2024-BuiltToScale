@@ -33,13 +33,17 @@ public partial class QuittingSprite : AnimatedSprite2D
         }
 		else if (Input.IsActionJustReleased("Quit"))
 		{
-			Hide();
-			Stop();
-		}
-		allowedToQuit = Input.IsActionPressed("Quit");
+            Play("default", -3);
+        }
+        allowedToQuit = Input.IsActionPressed("Quit");
 		if (allowedToQuit)
 		{
-			Modulate = new Color(1,1,1,Mathf.Lerp(Modulate.A,1, 0.05f));
+			Modulate = new Color(1,1,1,Mathf.Lerp(Modulate.A,1, 0.2f));
+		}
+		else
+		{
+			Modulate = new Color(1,1,1,Mathf.Lerp(Modulate.A,0, 0.2f));
+
 		}
 	}
 }

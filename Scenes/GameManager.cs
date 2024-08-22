@@ -14,6 +14,9 @@ public partial class GameManager : Node2D
     int score = 0;
     int highScore;
 
+    int moneyLineHeight = -1000;
+
+    PackedScene moneyLineScene = GD.Load<PackedScene>("res://Scenes/money_line.tscn");
     private GameManager()
     {
     }
@@ -64,13 +67,24 @@ public partial class GameManager : Node2D
         highScore = PlayerPrefs.GetInt("HighScore", 0);
         DeckManager.Instance.highScoreLabel.Text = "High Score: " + (-highScore - 49).ToString();
         DeckManager.Instance.scoreLabel.Text = "Score: " + (-score-49).ToString();
+
+        SpawnMoneyLine(moneyLineHeight);
     }
+
+    MoneyLine SpawnMoneyLine(float height)
+    {
+        var ml = moneyLineScene.Instantiate<MoneyLine>();
+        Vector2 goToHeight = new Vector2(1641, height);
+        ml.GlobalPosition = goToHeight;
+        AddChild(ml);
+        return ml;
+    }
+
     public bool TriggerCard(string CardPath)
 	{
         try
         {
-
-        return Rufus.SpawnObject(CardPath);
+            return Rufus.SpawnObject(CardPath);
         }
         catch
         {
@@ -116,6 +130,14 @@ public partial class GameManager : Node2D
             PlayerPrefs.DeleteAll();
         }
 
+        if(Instance.HasNode("Rufus") && Rufus.Position.Y < moneyLineHeight)
+        {
+            moneyLineHeight -= 2000;
+            SpawnMoneyLine(moneyLineHeight).PlayDing();
+            UpdateMoney(25);
+
+
+        }
 
     }
 
@@ -158,6 +180,21 @@ public partial class GameManager : Node2D
             PlayerPrefs.SetInt("HighScore", highScore);
         }
     }
+
     
+
+    void AwardMoney()
+    {
+        UpdateMoney(25);
+
+        var ps = GD.Load<PackedScene>("res://Scenes/money_line.tscn");
+        var newLine = ps.Instantiate<MoneyLine>();
+
+        Vector2 newHeight = GlobalPosition;
+        newHeight.Y = (int)(newHeight.Y - 2000f);
+
+        newLine.GlobalPosition = newHeight;
+        GetParent().CallDeferred("add_child", newLine);
+    }
 
 }

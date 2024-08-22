@@ -14,16 +14,9 @@ public partial class MoneyLine : Node2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		zone = GetNode<Area2D>("Area2D");
-		topZone = GetNode<Area2D>("Area2D2");
 		line = GetNode<Sprite2D>("Sprite2D");
 		nextLineAtText = GetNode<RichTextLabel>("RichTextLabel");
 		moneyDing = GetNode<AudioStreamPlayer>("MoneyDing");
-
-		zone.BodyEntered += AttemptToAward;
-		topZone.BodyEntered += AttemptToAward;
-		zone.BodyExited += EndAttemptAward;
-		topZone.BodyExited += EndAttemptAward;
 
 		Vector2 lineOffset;
 		lineOffset.Y = 0;
@@ -34,21 +27,14 @@ public partial class MoneyLine : Node2D
 		nextLineAtText.Text = "Next Money Line at " + -(int)(GlobalPosition.Y - 2000);
 	}
 
-	void AttemptToAward(Node2D node)
-	{
-		if(!ready)
-		{
-			ready = true;
-			return;
-		}
-		else
-		{
-			AwardMoney();
-		}
+	
 
-	}
+    public void PlayDing()
+    {
+        moneyDing.Play();
+    }
 
-	void EndAttemptAward(Node2D node)
+    void EndAttemptAward(Node2D node)
 	{
 		if(ready)
 		{
@@ -56,20 +42,5 @@ public partial class MoneyLine : Node2D
 		}
 	}
 
-	void AwardMoney()
-	{
-		if (!active) return;
-		active = false;
-		GameManager.Instance.UpdateMoney(25);
-		moneyDing.Play();
-
-		var ps = GD.Load<PackedScene>("res://Scenes/money_line.tscn");
-		var newLine = ps.Instantiate<MoneyLine>();
-
-		Vector2 newHeight = GlobalPosition;
-		newHeight.Y = (int)(newHeight.Y - 2000f);
-
-		newLine.GlobalPosition = newHeight;
-		GetParent().CallDeferred("add_child",newLine);
-	}
+	
 }
