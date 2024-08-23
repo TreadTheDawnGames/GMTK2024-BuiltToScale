@@ -18,7 +18,6 @@ collision_mask = 3
 input_pickable = true
 mass = 5.0
 script = ExtResource("3_xnarw")
-fuseTime = 0.5
 
 [node name="ExplosionSprite" type="Sprite2D" parent="RigidBody2D" index="0"]
 texture = ExtResource("4_5gnlu")

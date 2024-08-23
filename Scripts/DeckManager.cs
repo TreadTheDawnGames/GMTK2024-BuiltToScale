@@ -146,11 +146,11 @@ public partial class DeckManager : Control
 
 		cardCountBar = GetNode<TextureProgressBar>("TextureProgressBar");
 
-		//SetupDeck(CardAssembler.BalancedStarter(deckSize));
+		SetupDeck(CardAssembler.BalancedStarterDeck(deckSize));
 		
 		//SetupDeck(CardAssembler.OneEach()); 
 
-		SetupDeck(CardAssembler.DevShenaniganDeck());
+		//SetupDeck(CardAssembler.DevShenaniganDeck());
 		
 		if(!correctDeck)
 		GD.PrintErr("Wrong deck Selected"); 
