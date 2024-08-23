@@ -20,6 +20,12 @@ public partial class LoopingBackground : ParallaxBackground
             var inst = ps.Instantiate<Node2D>();
 			inst.GlobalPosition = new Vector2(480,-2500+nextPosition);
 			AddChild(inst);
+			
+			var ps2 = GD.Load<PackedScene>("res://Scenes/sky_color.tscn");
+            var sky = ps2.Instantiate<Node2D>();
+			sky.GlobalPosition = new Vector2(480,nextPosition);
+			AddChild(sky);
+
 			nextPosition += -5000;
 		}
 	}

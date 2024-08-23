@@ -234,13 +234,12 @@ public static class CardAssembler
             new CardData(MakeCardPath(CardType.gascan)),
             new CardData(MakeCardPath(CardType.gascan)),
             new CardData(MakeCardPath(CardType.gascan)),
-            new CardData(MakeCardPath(CardType.crate)),
-            new CardData(MakeCardPath(CardType.crate)),
-            new CardData(MakeCardPath(CardType.crate)),
-            new CardData(MakeCardPath(CardType.crate)),
-            new CardData(MakeCardPath(CardType.crate)),
-            new CardData(MakeCardPath(CardType.steelcrate)),
-            new CardData(MakeCardPath(CardType.steelcrate)),
+            new CardData(MakeCardPath(CardType.shop)),
+            new CardData(MakeCardPath(CardType.shop)),
+            new CardData(MakeCardPath(CardType.shop)),
+            new CardData(MakeCardPath(CardType.bowl)),
+            new CardData(MakeCardPath(CardType.bowl)),
+            new CardData(MakeCardPath(CardType.bowl)),
         };
 
         while(deck.Count < deckSize)

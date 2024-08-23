@@ -149,6 +149,7 @@ shape = SubResource("RectangleShape2D_8l27s")
 
 [node name="Camera" parent="." groups=["Camera"] instance=ExtResource("3_buxj5")]
 position = Vector2(960, -460)
+limit_bottom = 250
 
 [node name="ResetGameButton" parent="Camera" instance=ExtResource("7_haaf3")]
 z_index = 100

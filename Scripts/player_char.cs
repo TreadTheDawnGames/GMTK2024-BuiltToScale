@@ -126,7 +126,7 @@ public partial class player_char : RigidBody2D
 			ApplyForce(new Vector2(0,(int)ProjectSettings.GetSetting("physics/2d/default_gravity")), new Vector2(Position.X, Position.Y - 10));
 		}
 		
-		if (Input.IsActionJustPressed("Jump") && coyoteTime > 0)
+		if (Input.IsActionJustPressed("Jump") && coyoteTime > 0) /*|| Input.IsActionPressed("Jump"))*/
 		{
 			PlayJumpSound();
 			linvel.Y = 0;
@@ -344,7 +344,8 @@ public partial class player_char : RigidBody2D
 
 	public void ThinkShifyThoughts(bool isShify)
 	{
-		shiftyThought.Visible = isShify;
+		if(HasNode("ShiftyThoughts"))
+			shiftyThought.Visible = isShify;
 	}
 
 
