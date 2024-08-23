@@ -57,7 +57,7 @@ public partial class gascan : RigidBody2D
     }
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
+	public override void _PhysicsProcess(double delta)
 	{
 		if (GetCollisionLayerValue(1) != false)
 		{
@@ -125,7 +125,9 @@ public partial class gascan : RigidBody2D
             }
         }
 
-	}
+       
+
+    }
     int sineCounter = 0;
     public void Explode()
     {
@@ -151,45 +153,24 @@ public partial class gascan : RigidBody2D
                     return;
                 }
             }
-            if (obj is RigidBody2D)
+            if (obj is RigidBody2D || obj.GetChildOrNull<RigidBody2D>(0) != null)
             {
-                var child = (RigidBody2D)obj;
-
-                var force = 300;// / ((RigidBody2D)obj).GlobalPosition.DistanceTo(GlobalPosition);
-
-                var eDir = child.GlobalPosition - GlobalPosition;
-                QueueRedraw();
-
-                /*							var eDir = new Vector2(ex, ey) *0;
-                */
-                float maxLength = 750;
-
-                var length = eDir.Length();
-
-
-                if (eDir.Length() < maxLength && child != this)
+                RigidBody2D child;
+                if(obj is RigidBody2D)
                 {
-
-                    var e = force * maxLength / length;//*-Mathf.Pow(length,2)*/;// force / (1/eDir.Length());				//if (force > 0.0625)
-                    if (child is gascan)
-                    {
-                        var can = (gascan)child;
-                        fuseTime *= (float)Mathf.Clamp(can.fuse.WaitTime * (maxLength / length) * 0.5f, 0, fuseTime);
-
-                        can.StartFuse(fuseTime);
-                        continue;
-                    }
-
-                    ((RigidBody2D)child).ApplyImpulse(eDir.Normalized() * e, child.ToLocal(GlobalPosition));
-                    //child.ApplyTorqueImpulse(500);
+                     child = (RigidBody2D)obj;
+                }
+                else if (obj.GetChildOrNull<RigidBody2D>(0) != null)
+                {
+                    child = obj.GetChild<RigidBody2D>(0);
 
                 }
-            }
-            else if (obj.GetChildOrNull<RigidBody2D>(0) != null)
-            {
-                var child = obj.GetChild<RigidBody2D>(0);
+                else
+                {
+                    return;
+                }
 
-                var force = 5000;// / ((RigidBody2D)obj).GlobalPosition.DistanceTo(GlobalPosition);
+                var force = child == obj ? 300 : 5000;// / ((RigidBody2D)obj).GlobalPosition.DistanceTo(GlobalPosition);
 
                 var eDir = child.GlobalPosition - GlobalPosition;
                 QueueRedraw();
@@ -203,12 +184,24 @@ public partial class gascan : RigidBody2D
 
                 if (eDir.Length() < maxLength && child != this)
                 {
+                    var spaceState = GetWorld2D().DirectSpaceState;
+                    // use global coordinates, not local to node
+
+                    var query = PhysicsRayQueryParameters2D.Create(GlobalPosition, child.GlobalPosition, 8388608);
+                    var result = spaceState.IntersectRay(query);
+
+                    if (result.Count > 0)
+                    {
+                        GD.Print("Hit at point: ", result["position"]);
+                        continue;
+                    }
+
 
                     var e = force * maxLength / length;//*-Mathf.Pow(length,2)*/;// force / (1/eDir.Length());				//if (force > 0.0625)
                     if (child is gascan)
                     {
                         var can = (gascan)child;
-                        fuseTime *= (float)Mathf.Clamp(can.fuse.WaitTime* (length/maxLength) * 0.5f, 0.1*fuseTime, fuseTime);
+                        fuseTime *= (float)Mathf.Clamp(fuseTime* (length/maxLength) * 0.5f, 0.1*fuseTime, fuseTime);
 
                         can.StartFuse(fuseTime) ;
                         continue;
@@ -216,6 +209,11 @@ public partial class gascan : RigidBody2D
 
                     ((RigidBody2D)child).ApplyImpulse(eDir.Normalized() * e, child.ToLocal(GlobalPosition));
                     //child.ApplyTorqueImpulse(500);
+
+
+
+                    
+                   
 
                 }
             }
@@ -228,7 +226,7 @@ public partial class gascan : RigidBody2D
         {
             GD.Print(Name + ": " + fuseTime);
 
-            fuse.WaitTime = fuseTime;
+            fuse.WaitTime = fuseTime <= 0 ? 0.1f : fuseTime;
             fuse.Start() ;
         }
     }
