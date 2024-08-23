@@ -310,8 +310,6 @@ public partial class DeckManager : Control
 				}
 
             }
-			if(!card.Data.singleUse)
-                discard.Add(card.Data);
         }
 
 
@@ -334,6 +332,7 @@ public partial class DeckManager : Control
 			return;
 		}
 
+                discard.Add(card.Data);
 
 
 		UpdateDiscardSprite(card);

@@ -9,7 +9,7 @@ public static class CardAssembler
 {
 
     public enum CardType { beachball, bowl, crate, gascan, lamp, mattress, obsidian, piano, scaffleting, ship, shop, staircase, starterbowl, steelcrate, stoneball, table, toilet, trafficCone, tree, truck, zeekplushy}
-    public enum GuaranteedCardType { crate, scaffleting, staircase }
+    public enum GuaranteedCardType { obsidian /*crate*/, scaffleting, staircase }
     public enum StarterCardType { staircase, crate, toilet }
     public enum SpecialCardType { obsidian, shop, ship, zeekplushy }
 
