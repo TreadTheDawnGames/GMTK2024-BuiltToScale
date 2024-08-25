@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://1fmvsa8al8tx"]
-
-[ext_resource type="Texture2D" uid="uid://bjm1b36r8fhwh" path="res://Assets/Sprites/SkyColor.png" id="1_iox3o"]
-
-[node name="Sky" type="Sprite2D"]
-z_index = -1
-texture = ExtResource("1_iox3o")
-offset = Vector2(0, -2000)

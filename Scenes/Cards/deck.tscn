@@ -46,6 +46,32 @@ mouse_filter = 1
 script = ExtResource("1_u51mg")
 deckSize = 21
 
+[node name="CardDisplay" parent="." instance=ExtResource("15_0um8c")]
+layout_mode = 1
+
+[node name="Scores" type="Node2D" parent="."]
+position = Vector2(0, 991)
+
+[node name="HighScoreLabel" type="RichTextLabel" parent="Scores"]
+modulate = Color(0.313726, 0.313726, 0.313726, 1)
+z_index = -2
+offset_left = 10.0
+offset_top = -655.0
+offset_right = 619.0
+offset_bottom = -601.0
+theme = ExtResource("2_7hk6u")
+text = "High Score: 1500"
+
+[node name="ScoreLabel" type="RichTextLabel" parent="Scores"]
+modulate = Color(0.313726, 0.313726, 0.313726, 1)
+z_index = -2
+offset_left = 10.0
+offset_top = -600.0
+offset_right = 523.0
+offset_bottom = -405.0
+theme = ExtResource("2_7hk6u")
+text = "Score: 1000"
+
 [node name="MoneyLabel" type="RichTextLabel" parent="."]
 modulate = Color(0.26, 0.26, 0.26, 1)
 z_index = -2
@@ -224,29 +250,3 @@ shape = SubResource("RectangleShape2D_fp8rx")
 volume_db = -7.0
 
 [node name="CardFlipSound" type="AudioStreamPlayer" parent="."]
-
-[node name="Scores" type="Node2D" parent="."]
-position = Vector2(0, 991)
-
-[node name="HighScoreLabel" type="RichTextLabel" parent="Scores"]
-modulate = Color(0.313726, 0.313726, 0.313726, 1)
-z_index = -2
-offset_left = 10.0
-offset_top = -655.0
-offset_right = 619.0
-offset_bottom = -601.0
-theme = ExtResource("2_7hk6u")
-text = "High Score: 1500"
-
-[node name="ScoreLabel" type="RichTextLabel" parent="Scores"]
-modulate = Color(0.313726, 0.313726, 0.313726, 1)
-z_index = -2
-offset_left = 10.0
-offset_top = -600.0
-offset_right = 523.0
-offset_bottom = -405.0
-theme = ExtResource("2_7hk6u")
-text = "Score: 1000"
-
-[node name="CardDisplay" parent="." instance=ExtResource("15_0um8c")]
-layout_mode = 1

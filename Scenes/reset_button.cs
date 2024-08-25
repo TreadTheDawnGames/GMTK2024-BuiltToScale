@@ -22,6 +22,16 @@ public partial class reset_button : Button
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		
+			MouseFilter = MouseFilterEnum.Stop;
+
+        ProcessMode = ProcessModeEnum.Inherit;
+
+		if (GameManager.Instance.Camera.Zooming && !GameManager.Instance.Camera.GameOver)
+		{
+			MouseFilter = MouseFilterEnum.Ignore;
+
+		}
         if (hovered)
         {
             if (Input.IsMouseButtonPressed(MouseButton.Left))
@@ -46,7 +56,7 @@ public partial class reset_button : Button
         }
     }
 
-	public void _on_button_up()
+	public void _on_pressed()
 	{
 		GD.Print("Game reset start");
 		GetTree().GetFirstNodeInGroup("ResetButton").QueueFree();

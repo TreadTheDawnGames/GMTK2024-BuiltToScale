@@ -1,7 +1,8 @@
 using Godot;
 using System;
+using System.Net;
 
-public partial class LoopingBackground : ParallaxBackground
+public partial class LoopingBackground : CanvasLayer
 {
 	Node2D cam;
 	int nextPosition = 0;
@@ -17,16 +18,20 @@ public partial class LoopingBackground : ParallaxBackground
 		if (cam.GlobalPosition.Y < nextPosition)
 		{
 			var ps = GD.Load<PackedScene>("res://Scenes/cloudsBackground.tscn");
-            var inst = ps.Instantiate<Node2D>();
-			inst.GlobalPosition = new Vector2(480,-2500+nextPosition);
-			AddChild(inst);
-			
-			var ps2 = GD.Load<PackedScene>("res://Scenes/sky_color.tscn");
-            var sky = ps2.Instantiate<Node2D>();
-			sky.GlobalPosition = new Vector2(480,nextPosition);
-			AddChild(sky);
+            var inst = ps.Instantiate<Sprite2D>();
+			inst.GlobalPosition = new Vector2(0,-2500+nextPosition);
+			GetNode("ParallaxLayer").AddChild(inst);
 
-			nextPosition += -5000;
+			/*if (GameManager.Instance.Camera.Zooming)
+			{
+				FollowViewportEnabled = false;
+			}
+			else
+			{
+				FollowViewportEnabled = true;
+			}*/
+
+			nextPosition += -2500;
 		}
 	}
 }

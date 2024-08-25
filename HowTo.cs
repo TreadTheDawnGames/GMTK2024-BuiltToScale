@@ -20,16 +20,11 @@ public partial class HowTo : Node2D
 	{
 		if (appear == true)
 		{
-            var pos = GlobalPosition;
-            pos.X += (TargetLocation - pos.X) * .05f;
-            GlobalPosition = pos;
+			Modulate = Modulate.Lerp(new Color(1, 1, 1, 1), 0.25f);
 		}
 		else
 		{
-            var pos = GlobalPosition;
-            pos.X += (StartLocation - pos.X) * .05f;
-            GlobalPosition = pos;
+			Modulate = Modulate.Lerp(new Color(1, 1, 1, 0), 0.25f);
 		}
-
 	}
 }

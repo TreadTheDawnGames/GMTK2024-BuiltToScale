@@ -28,7 +28,7 @@ public partial class player_char : RigidBody2D
     AnimatedSprite2D shiftyThought;
 	bool CanMakeLandSound = false;
 
-	public override void _Ready()
+    public override void _Ready()
 	{
 		vel = new Vector2();
 		mySprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
@@ -45,14 +45,16 @@ public partial class player_char : RigidBody2D
 		var spd = airspd;
 
 		// Move camera
-		if (cam.GlobalPosition.Y > GlobalPosition.Y)
-			cam.GlobalPosition = new Vector2(cam.GlobalPosition.X, GlobalPosition.Y);
 
+
+			var linvel = LinearVelocity;
 		// Vertical movement dampening
-		var linvel = LinearVelocity;
-		if (Input.IsActionJustReleased("Jump"))
+		if (!GameManager.Instance.Camera.Zooming)
 		{
-			linvel.Y = Math.Max(linvel.Y, minjump);
+			if (Input.IsActionJustReleased("Jump"))
+			{
+				linvel.Y = Math.Max(linvel.Y, minjump);
+			}
 		}
 
 		// Horizontal movement dampening
@@ -126,7 +128,9 @@ public partial class player_char : RigidBody2D
 			ApplyForce(new Vector2(0,(int)ProjectSettings.GetSetting("physics/2d/default_gravity")), new Vector2(Position.X, Position.Y - 10));
 		}
 		
-		if (Input.IsActionJustPressed("Jump") && coyoteTime > 0) /*|| Input.IsActionPressed("Jump"))*/
+		if (!GameManager.Instance.Camera.Zooming)
+		{
+		if (Input.IsActionJustPressed("Jump") && coyoteTime > 0 /*|| Input.IsActionPressed("Jump")*/)
 		{
 			PlayJumpSound();
 			linvel.Y = 0;
@@ -134,17 +138,17 @@ public partial class player_char : RigidBody2D
 			ApplyImpulse(new Vector2(0,maxjump), new Vector2(Position.X, Position.Y + 10));
 			coyoteTime = 0;
 		}
-
 		// Horizontal movement
-		if (Input.IsActionPressed("Right"))
-		{
-			if (holding == null) mySprite.FlipH = false;
-			ApplyForce(new Vector2(spd,0));
-		}
-		if (Input.IsActionPressed("Left"))
-		{
-			if (holding == null) mySprite.FlipH = true;
-			ApplyForce(new Vector2(-spd,0));
+			if (Input.IsActionPressed("Right"))
+			{
+				if (holding == null) mySprite.FlipH = false;
+				ApplyForce(new Vector2(spd, 0));
+			}
+			if (Input.IsActionPressed("Left"))
+			{
+				if (holding == null) mySprite.FlipH = true;
+				ApplyForce(new Vector2(-spd, 0));
+			}
 		}
 
 		// Clamp position

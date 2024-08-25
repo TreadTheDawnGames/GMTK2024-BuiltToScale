@@ -220,9 +220,14 @@ public static class CardAssembler
 
         List<CardData> deck = new List<CardData>()
         {
+            new CardData(MakeCardPath(CardType.table)),
             new CardData(MakeCardPath(CardType.obsidian)),
             new CardData(MakeCardPath(CardType.obsidian)),
             new CardData(MakeCardPath(CardType.obsidian)),
+            new CardData(MakeCardPath(CardType.obsidian)),
+            new CardData(MakeCardPath(CardType.gascan)),
+            new CardData(MakeCardPath(CardType.gascan)),
+            new CardData(MakeCardPath(CardType.gascan)),
             new CardData(MakeCardPath(CardType.gascan)),
             new CardData(MakeCardPath(CardType.gascan)),
             new CardData(MakeCardPath(CardType.gascan)),
@@ -235,11 +240,6 @@ public static class CardAssembler
             new CardData(MakeCardPath(CardType.gascan)),
             new CardData(MakeCardPath(CardType.gascan)),
             new CardData(MakeCardPath(CardType.shop)),
-            new CardData(MakeCardPath(CardType.shop)),
-            new CardData(MakeCardPath(CardType.shop)),
-            new CardData(MakeCardPath(CardType.bowl)),
-            new CardData(MakeCardPath(CardType.bowl)),
-            new CardData(MakeCardPath(CardType.bowl)),
         };
 
         while(deck.Count < deckSize)
