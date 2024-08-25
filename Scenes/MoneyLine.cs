@@ -20,14 +20,28 @@ public partial class MoneyLine : Node2D
 
 		Vector2 lineOffset;
 		lineOffset.Y = 0;
-		lineOffset.X = GD.RandRange(0, 540);
+		lineOffset.X = GD.RandRange(-540, 540);
 
 		line.Position = lineOffset;
 
 		nextLineAtText.Text = "Next Money Line at " + -(int)(GlobalPosition.Y - 2000);
 	}
 
-	
+    public override void _Process(double delta)
+    {
+        base._Process(delta);
+		if (GameManager.Instance.Camera.Zooming)
+		{
+            Modulate = Modulate.Lerp(new Color(1, 1, 1, 0), 0.75f);
+		}
+		else
+		{
+
+            Modulate = Modulate.Lerp(new Color(1, 1, 1, 1), 0.1f);
+		}
+
+    }
+
 
     public void PlayDing()
     {

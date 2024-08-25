@@ -24,10 +24,15 @@ public partial class CardDisplay : Control
 		sounds = GetNode<AudioStreamPlayer>("Sounds");
 
         animator.Play("RESET");
-
+		Hide();
+		animator.AnimationFinished += (animation) => TryHide();
+    }
+	void TryHide()
+	{
+		if(showing) return;
+		Hide();
 
     }
-
     List<DisplaySlot> CreatePanels(List<CardData> cards)
 	{
 		List<DisplaySlot> cardPanels = new();
@@ -99,6 +104,7 @@ public partial class CardDisplay : Control
 
 	public void PopOut(bool isIn, List<CardData> cards)
 	{
+				Show();
 
 		if (animator.IsPlaying())
 		{
@@ -113,7 +119,6 @@ public partial class CardDisplay : Control
 			if (isIn)
 			{
 				animator.PlayBackwards("Out");
-
             }
             else
 			{

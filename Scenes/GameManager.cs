@@ -17,6 +17,8 @@ public partial class GameManager : Node2D
     int moneyLineHeight = -1000;
 
     PackedScene moneyLineScene = GD.Load<PackedScene>("res://Scenes/money_line.tscn");
+
+    public CameraZoomer Camera { get; private set; }
     private GameManager()
     {
     }
@@ -32,13 +34,14 @@ public partial class GameManager : Node2D
             return instance;
         }
     }
-    player_char Rufus;
+    public player_char Rufus { get; private set; }
     RichTextLabel moneyLabel;
     public Node2D gameOverInst;
     public override void _Ready()
     {
         base._Ready();
         instance = this;
+        Camera = GetNode<CameraZoomer>("Camera");
         moneyLabel = GetNode<RichTextLabel>("Camera/Deck/MoneyLabel");
         Instance.Rufus = GetNode<player_char>("Rufus");
         cam = GetNode<Camera2D>("Camera");
@@ -65,7 +68,7 @@ public partial class GameManager : Node2D
         UpdateMoney(startingMoney);
 
         highScore = PlayerPrefs.GetInt("HighScore", 0);
-        DeckManager.Instance.highScoreLabel.Text = "High Score: " + (-highScore - 49).ToString();
+        DeckManager.Instance.highScoreLabel.Text = "High Score: " + (-highScore -49).ToString();
         DeckManager.Instance.scoreLabel.Text = "Score: " + (-score-49).ToString();
 
         SpawnMoneyLine(moneyLineHeight);
@@ -110,17 +113,19 @@ public partial class GameManager : Node2D
         base._Process(delta);
         if (musicPlayer.VolumeDb < -20)
             musicPlayer.VolumeDb += 2 * (float)delta;
-        if (Instance.HasNode("Rufus") && Instance.Rufus.GlobalPosition.Y > cam.GlobalPosition.Y + 1080/2+60)
+        if (Instance.HasNode("Rufus") && Instance.Rufus.GlobalPosition.Y > Camera.loseHeight)
         {
             musicPlayer.VolumeDb = -15;
             musicPlayer.Stream = GD.Load<AudioStream>("res://Assets/Sounds/GameOver.wav");
             musicPlayer.Play();
             Instance.Rufus.QueueFree();
-            
+
+            Instance.Rufus = null;
+
 		    var ps = GD.Load<PackedScene>("res://Scenes/game_over.tscn");
-            var inst = ps.Instantiate<Node2D>();
+            var inst = ps.Instantiate<Control>();
             inst.AddToGroup("PhysicsObjects");
-            GetTree().Root.AddChild(inst);
+            Camera.GetNode("CanvasLayer").AddChild(inst);
         }
 
         UpdateScore();
@@ -130,7 +135,7 @@ public partial class GameManager : Node2D
             PlayerPrefs.DeleteAll();
         }
 
-        if(Instance.HasNode("Rufus") && Rufus.Position.Y < moneyLineHeight)
+        if(Instance.Rufus!=null && Rufus.Position.Y < moneyLineHeight)
         {
             moneyLineHeight -= 2000;
             SpawnMoneyLine(moneyLineHeight).PlayDing();
@@ -166,7 +171,7 @@ public partial class GameManager : Node2D
     void UpdateScore()
     {
         
-        if (Instance.HasNode("Rufus") && Mathf.CeilToInt(Rufus.GlobalPosition.Y)<score)
+        if (Instance.Rufus!=null && Mathf.CeilToInt(Rufus.GlobalPosition.Y)<score)
         {
             score = Mathf.CeilToInt(Rufus.GlobalPosition.Y);
             DeckManager.Instance.scoreLabel.Text = "Score: " + (-score-49).ToString();

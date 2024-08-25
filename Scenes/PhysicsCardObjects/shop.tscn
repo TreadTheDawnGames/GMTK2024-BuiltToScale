@@ -39,12 +39,10 @@ shape = SubResource("RectangleShape2D_qkivg")
 polygon = PackedVector2Array(-105, -19, -36, -88, 37, -88, 106, -19, 75, -19, 27, -67, -25, -67, -73, -19)
 
 [node name="Area2D" type="Area2D" parent="RigidBody2D" index="4"]
+process_mode = 3
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("5_o40gg")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidBody2D/Area2D" index="0"]
 polygon = PackedVector2Array(-90, -19, -73, -19, -25, -67, 27, -67, 75, -19, 92, -19, 92, 89, -90, 89)
-
-[connection signal="body_entered" from="RigidBody2D/Area2D" to="RigidBody2D/Area2D" method="_on_body_entered"]
-[connection signal="body_exited" from="RigidBody2D/Area2D" to="RigidBody2D/Area2D" method="_on_body_exited"]

@@ -9,11 +9,14 @@ public partial class ShopArea : Area2D
 	private RigidBody2D rigid;
 	player_char lastRufus;
 
+	physics_object Parent;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		backSprite = GetNode<Sprite2D>("../Sprite2D2");
 		rigid = GetNode<RigidBody2D>("../../RigidBody2D");
+		Parent = (physics_object)Owner;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -24,9 +27,44 @@ public partial class ShopArea : Area2D
 		else
 			backSprite.Texture = GD.Load<Texture2D>("res://Assets/Sprites/ShopBackClosed.png");
 
-		
+		if (DeckManager.Instance.atShop)
+		{
+			isInteractable = false;
+			return;
+		}
+		bool usable = (used == false && rigid.GetCollisionLayerValue(1) == true && Parent.NeverCheckAgain);
 
-		if (isInteractable == true && used == false && rigid.GetCollisionLayerValue(1) == true)
+		if (HasOverlappingBodies())
+		{
+			GD.Print("-" + Parent.Name + " has Bodies at time " + Time.GetTimeStringFromSystem() + "-");
+			foreach (var body in GetOverlappingBodies())
+			{
+				GD.Print(body.Name);
+				if (body == GameManager.Instance.Rufus && usable)
+				{
+					isInteractable = true;
+
+					continue;
+				}
+				else
+				{
+					isInteractable = false;
+				}
+			}
+			GD.Print("--------");
+		}
+		else
+		{
+			isInteractable = false;
+
+		}
+		HandleShiftyThoughts(isInteractable);
+
+		if (!isInteractable)
+		{
+			return;
+		}
+		if (isInteractable)
 		{
 			if (Input.IsActionJustPressed("OpenShop"))
 			{
@@ -36,12 +74,17 @@ public partial class ShopArea : Area2D
 				used = true;
 			}
 		}
-			HandleShiftyThoughts();
-	}
+		if (used)
+		{
+            backSprite.Texture = GD.Load<Texture2D>("res://Assets/Sprites/ShopBackClosed.png");
 
-	void HandleShiftyThoughts()
+            QueueFree();
+		}
+
+	} 
+	void HandleShiftyThoughts(bool usable)
 	{
-        if (!used && rigid.GetCollisionLayerValue(1) == true)
+        if (usable)
         {
             if (HasOverlappingBodies())
             {
@@ -81,14 +124,17 @@ public partial class ShopArea : Area2D
 	public void _on_body_entered(Node2D body)
 	{
 		
+		if(Parent.NeverCheckAgain)
+		{
 
-		isInteractable = true;
+			//isInteractable = true;
+		}
 	}
 
 	public void _on_body_exited(Node2D body)
 	{
 		
-        isInteractable = false;
+        //isInteractable = false;
 	}
 	
 	public void OpenShop()
@@ -97,5 +143,6 @@ public partial class ShopArea : Area2D
         var shop = packedScene.Instantiate();
         DeckManager.Instance.AddChild(shop);
         DeckManager.Instance.MoveChild(shop, 3);
-    }
+		HandleShiftyThoughts(false);
+	}
 }
