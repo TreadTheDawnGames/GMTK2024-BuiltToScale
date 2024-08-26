@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cee4gfk010y5o"]
+
+[ext_resource type="Texture2D" uid="uid://4sxrrvle3hni" path="res://Assets/Sprites/GlueSplotch.png" id="1_hffbo"]
+
+[node name="GlueSplotch" type="Sprite2D"]
+texture = ExtResource("1_hffbo")

@@ -20,11 +20,12 @@ collision_mask = 3
 mass = 10.0
 freeze = true
 
-[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D" index="0"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_7f8u8")
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D/CollisionShape2D" index="0"]
+position = Vector2(0, -0.5)
 texture = ExtResource("2_cft7a")
 centered = false
 offset = Vector2(-215, -21)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D" index="1"]
-position = Vector2(0, 0.5)
-shape = SubResource("RectangleShape2D_7f8u8")

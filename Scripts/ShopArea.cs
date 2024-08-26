@@ -14,13 +14,21 @@ public partial class ShopArea : Area2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		backSprite = GetNode<Sprite2D>("../Sprite2D2");
-		rigid = GetNode<RigidBody2D>("../../RigidBody2D");
-		Parent = (physics_object)Owner;
+		SetUp((physics_object)Owner);
+		Parent.SpecialNodes.Add(this);
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
+	public void SetUp(physics_object newOwner)
+	{
+		GD.Print("SettingUp");
+        backSprite = GetNodeOrNull<Sprite2D>("../Sprite2D2");
+        this.rigid = GetNodeOrNull<RigidBody2D>("../..");
+        Owner = Parent = newOwner;
+
+    }
+
+    // Called every frame. 'delta' is the elapsed time since the previous frame.
+    public override void _Process(double delta)
 	{
 		if (used == false)
 			backSprite.Texture = GD.Load<Texture2D>("res://Assets/Sprites/ShopBack.png");
@@ -32,7 +40,17 @@ public partial class ShopArea : Area2D
 			isInteractable = false;
 			return;
 		}
-		bool usable = (used == false && rigid.GetCollisionLayerValue(1) == true && Parent.NeverCheckAgain);
+		if (Owner == null|| !HasNode(rigid.GetPath())  || rigid.IsQueuedForDeletion() || rigid == null || !HasNode(Parent.GetPath())|| Parent == null)
+		{
+			GD.Print("Re-setting up");
+/*            backSprite = GetNode<Sprite2D>("../Sprite2D2");
+            this.rigid = GetNode<RigidBody2D>("../..");
+			
+*/            //SetUp((physics_object)Owner);
+            //GD.Print(Parent.ToString(), rigid, backSprite);
+            return;
+		}
+			bool usable = (used == false && rigid.GetCollisionLayerValue(1) == true && Parent.NeverCheckAgain);
 
 		if (HasOverlappingBodies())
 		{
@@ -145,4 +163,6 @@ public partial class ShopArea : Area2D
         DeckManager.Instance.MoveChild(shop, 3);
 		HandleShiftyThoughts(false);
 	}
+
+    
 }

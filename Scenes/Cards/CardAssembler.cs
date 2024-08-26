@@ -8,7 +8,7 @@ using System.Reflection.Emit;
 public static class CardAssembler
 {
 
-    public enum CardType { beachball, bowl, crate, gascan, lamp, mattress, obsidian, piano, scaffleting, ship, shop, staircase, starterbowl, steelcrate, stoneball, table, toilet, trafficCone, tree, truck, zeekplushy}
+    public enum CardType { beachball, bowl, crate, gascan, glue, lamp, mattress, obsidian, piano, scaffleting, ship, shop, staircase, starterbowl, steelcrate, stoneball, table, toilet, trafficCone, tree, truck, zeekplushy}
     public enum GuaranteedCardType { obsidian /*crate*/, scaffleting, staircase }
     public enum StarterCardType { staircase, crate, toilet }
     public enum SpecialCardType { obsidian, shop, ship, zeekplushy }
@@ -225,20 +225,19 @@ public static class CardAssembler
             new CardData(MakeCardPath(CardType.obsidian)),
             new CardData(MakeCardPath(CardType.obsidian)),
             new CardData(MakeCardPath(CardType.obsidian)),
-            new CardData(MakeCardPath(CardType.gascan)),
-            new CardData(MakeCardPath(CardType.gascan)),
-            new CardData(MakeCardPath(CardType.gascan)),
-            new CardData(MakeCardPath(CardType.gascan)),
-            new CardData(MakeCardPath(CardType.gascan)),
-            new CardData(MakeCardPath(CardType.gascan)),
-            new CardData(MakeCardPath(CardType.gascan)),
-            new CardData(MakeCardPath(CardType.gascan)),
-            new CardData(MakeCardPath(CardType.gascan)),
-            new CardData(MakeCardPath(CardType.gascan)),
-            new CardData(MakeCardPath(CardType.gascan)),
-            new CardData(MakeCardPath(CardType.gascan)),
-            new CardData(MakeCardPath(CardType.gascan)),
-            new CardData(MakeCardPath(CardType.gascan)),
+            new CardData(MakeCardPath(CardType.glue)),
+            new CardData(MakeCardPath(CardType.glue)),
+            new CardData(MakeCardPath(CardType.glue)),
+            new CardData(MakeCardPath(CardType.glue)),
+            new CardData(MakeCardPath(CardType.glue)),
+            new CardData(MakeCardPath(CardType.glue)),
+            new CardData(MakeCardPath(CardType.glue)),
+            new CardData(MakeCardPath(CardType.glue)),
+            new CardData(MakeCardPath(CardType.glue)),
+            new CardData(MakeCardPath(CardType.glue)),
+            new CardData(MakeCardPath(CardType.glue)),
+            new CardData(MakeCardPath(CardType.glue)),
+            new CardData(MakeCardPath(CardType.glue)),
             new CardData(MakeCardPath(CardType.shop)),
         };
 

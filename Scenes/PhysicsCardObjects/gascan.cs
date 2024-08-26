@@ -28,7 +28,7 @@ public partial class gascan : RigidBody2D
 	{
         Parent = GetParent<physics_object>();
         fuse = GetNode<Timer>("Fuse");
-        sprite = GetNode<Sprite2D>("Sprite2D");
+        sprite = GetNode<Sprite2D>("CollisionShape2D/Sprite2D");
         explosion = GetNode<Sprite2D>("ExplosionSprite");
         explosionSound = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
         ContactMonitor = true;

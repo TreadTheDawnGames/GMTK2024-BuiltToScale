@@ -17,11 +17,11 @@ collision_layer = 5
 collision_mask = 3
 mass = 40.0
 
-[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D" index="0"]
-texture = ExtResource("3_h0owd")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D" index="1"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D" index="0"]
 shape = SubResource("CircleShape2D_dujdr")
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D/CollisionShape2D" index="0"]
+texture = ExtResource("3_h0owd")
 
 [node name="LockedSprite" type="Sprite2D" parent="." index="1"]
 position = Vector2(1, 1)

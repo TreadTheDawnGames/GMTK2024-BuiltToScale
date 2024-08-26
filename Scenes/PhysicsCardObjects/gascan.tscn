@@ -23,16 +23,16 @@ script = ExtResource("3_xnarw")
 texture = ExtResource("4_5gnlu")
 offset = Vector2(-35.265, 18.935)
 
-[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D" index="1"]
-position = Vector2(11, -7)
-texture = ExtResource("3_odw03")
-
-[node name="CollisionShape2D" type="CollisionPolygon2D" parent="RigidBody2D" index="2"]
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="RigidBody2D" index="1"]
 position = Vector2(7, 1)
 polygon = PackedVector2Array(-29, 18, -33, 15, -33, -13, -17, -29, -6, -30, 3, -30, 4, -28, 6, -28, 14, -19, 17, -19, 19, -17, 19, -11, 20, 16, 17, 20, -11, 20)
 
-[node name="Fuse" type="Timer" parent="RigidBody2D" index="3"]
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D/CollisionShape2D" index="0"]
+position = Vector2(4, -8)
+texture = ExtResource("3_odw03")
+
+[node name="Fuse" type="Timer" parent="RigidBody2D" index="2"]
 one_shot = true
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="RigidBody2D" index="4"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="RigidBody2D" index="3"]
 stream = ExtResource("5_1abep")
