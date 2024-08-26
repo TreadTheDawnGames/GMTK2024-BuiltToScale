@@ -42,3 +42,4 @@ text = "Next Money Line at 4000"
 
 [node name="MoneyDing" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_sjv0u")
+volume_db = -10.947

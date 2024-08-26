@@ -33,7 +33,7 @@ public partial class CameraZoomer : Camera2D
         {
             absMouseWheeleDisplacement = (int)maxCamHeight;
         }
-        if (Input.IsActionPressed("SlowScrollDown"))
+        if (Input.IsActionPressed("SlowScrollDown") && !GameOver)
         {
                 ScrollableZoom();
             slowScrollTimer--;
