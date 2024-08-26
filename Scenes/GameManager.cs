@@ -118,6 +118,13 @@ public partial class GameManager : Node2D
             musicPlayer.VolumeDb = -15;
             musicPlayer.Stream = GD.Load<AudioStream>("res://Assets/Sounds/GameOver.wav");
             musicPlayer.Play();
+
+            var rufusRagPS = GD.Load<PackedScene>("res://RufusRagdoll.tscn");
+            var rufusRag = rufusRagPS.Instantiate<RigidBody2D>();
+            rufusRag.GlobalPosition = Instance.Rufus.GlobalPosition;
+            AddChild(rufusRag);
+
+
             Instance.Rufus.QueueFree();
 
             Instance.Rufus = null;

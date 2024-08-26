@@ -102,6 +102,7 @@ SlowScrollDown={
 2d_physics/layer_22="SellPanel"
 2d_physics/layer_23="DiscardSlot"
 2d_physics/layer_24="Obsidian"
+2d_physics/layer_25="Grass"
 
 [physics]
 

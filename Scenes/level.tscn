@@ -130,6 +130,7 @@ shape = SubResource("RectangleShape2D_7a8c7")
 [node name="RigidBody2D2" type="StaticBody2D" parent="."]
 z_index = -10
 position = Vector2(0, -1000)
+collision_layer = 16777217
 
 [node name="Grass" type="Sprite2D" parent="RigidBody2D2"]
 texture_filter = 1
