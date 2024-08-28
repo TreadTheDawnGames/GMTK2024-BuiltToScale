@@ -116,10 +116,7 @@ Testing
 
 TODO:
 Programming:
-Make pause not break glue.
-Destroy/hide pig arm and held object when Rufus falls.
 Update How-To.
-Add glue to shop.
 
 
 Sound:

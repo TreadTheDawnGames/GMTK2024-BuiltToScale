@@ -102,14 +102,15 @@ animations = [{
 position = Vector2(0, -120)
 script = ExtResource("1_h1jex")
 
-[node name="HowTo" parent="." instance=ExtResource("2_xt7mx")]
-position = Vector2(1752, -530)
-script = ExtResource("3_tos3i")
-
 [node name="Logo" type="Sprite2D" parent="."]
 z_index = -1000
 position = Vector2(960, -500)
 texture = ExtResource("2_1n2p6")
+
+[node name="HowTo" parent="." instance=ExtResource("2_xt7mx")]
+z_index = -99
+position = Vector2(550, -388)
+script = ExtResource("3_tos3i")
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 
