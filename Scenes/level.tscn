@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://biecsihwn6q3l"]
+[gd_scene load_steps=28 format=3 uid="uid://biecsihwn6q3l"]
 
 [ext_resource type="Script" path="res://Scenes/GameManager.cs" id="1_h1jex"]
 [ext_resource type="Texture2D" uid="uid://cypyjikxxwpw1" path="res://Assets/Sprites/Logo.png" id="2_1n2p6"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://Scenes/LoopingBackground.cs" id="3_x7vx7"]
 [ext_resource type="PackedScene" uid="uid://xy71mg3ttuj1" path="res://Scenes/Cards/deck.tscn" id="4_vv3gu"]
 [ext_resource type="PackedScene" uid="uid://btyuklwkwra8f" path="res://Scenes/reset_game_button.tscn" id="7_haaf3"]
+[ext_resource type="Texture2D" uid="uid://brw8u3ypmu2fi" path="res://Assets/Sprites/Objects/HelpSign.png" id="7_rbnjr"]
 [ext_resource type="Script" path="res://Scenes/SignPost.cs" id="8_ocdcq"]
 [ext_resource type="Texture2D" uid="uid://cj5jb12qo2t6j" path="res://Assets/Sprites/LoadingThingThatHasANameButIDontRememberItpng.png" id="13_c3u65"]
 [ext_resource type="Script" path="res://Scenes/QuittingSprite.cs" id="14_db2b6"]
@@ -125,9 +126,14 @@ collision_mask = 32
 script = ExtResource("8_ocdcq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HelpSignArea"]
-visible = false
 position = Vector2(3, -4)
 shape = SubResource("RectangleShape2D_7a8c7")
+
+[node name="Sprite2D" type="Sprite2D" parent="HelpSignArea"]
+z_index = -500
+position = Vector2(3, 37)
+texture = ExtResource("7_rbnjr")
+offset = Vector2(0, -41)
 
 [node name="RigidBody2D2" type="StaticBody2D" parent="."]
 z_index = -10
