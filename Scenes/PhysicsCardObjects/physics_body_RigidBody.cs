@@ -5,10 +5,16 @@ using static Godot.WebSocketPeer;
 
 public partial class physics_body_RigidBody : RigidBody2D
 {
+    public physics_object Parent;
+
+    public bool Static = false;
+
 	public List<Vector2> ContactPoints = new List<Vector2>();
     public override void _Ready()
     {
         base._Ready();
+        Parent = GetParent<physics_object>();
+        Static = (bool)Parent.GetMeta("Static", false);
     }
     public override void _IntegrateForces(PhysicsDirectBodyState2D state)
     {
@@ -33,7 +39,6 @@ public partial class physics_body_RigidBody : RigidBody2D
                 }
             }
         }
-                GD.Print(ContactPoints.Count);
                 
     }
 

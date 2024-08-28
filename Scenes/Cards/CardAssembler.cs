@@ -119,7 +119,7 @@ public static class CardAssembler
 
             if(card == CardType.gascan)
             {
-                if (GD.Randi() % 1 == 0)
+                if (GD.Randi() % 2 == 0)
                 {
                     rand = (int)(GD.Randi() % cards.Count);
                     card = cards[rand];
@@ -231,23 +231,37 @@ public static class CardAssembler
         if (deckSize == null)
             deckSize = DeckManager.Instance.deckSize;
 
-        List<CardData> deck = new List<CardData>()
+        DeckManager.Instance.correctDeck = true;
+        List<CardData> deck = new List<CardData>
         {
-            new CardData(MakeCardPath(CardType.table)),
             new CardData(MakeCardPath(CardType.obsidian)),
-            new CardData(MakeCardPath(CardType.gascan)),
-            new CardData(MakeCardPath(CardType.gascan)),
-            new CardData(MakeCardPath(CardType.glue)),
-            new CardData(MakeCardPath(CardType.glue)),
             new CardData(MakeCardPath(CardType.shop)),
+            new CardData(MakeCardPath(CardType.shop)),
+            new CardData(MakeCardPath(CardType.glue)),
+            new CardData(MakeCardPath(CardType.glue)),
+            new CardData(MakeCardPath(CardType.crate)),
+            new CardData(MakeCardPath(CardType.crate)),
+            new CardData(MakeCardPath(CardType.staircase)),
+            new CardData(MakeCardPath(CardType.steelcrate))
         };
 
-        while(deck.Count < deckSize)
+        while (deck.Count < Mathf.FloorToInt((float)deckSize * 0.75))
         {
-            deck.Add(Rand());
+            deck.Add(new CardData(MakeCardPath(RandType<StarterCardType>())));
+
+        }
+        while (deck.Count < deckSize)
+        {
+            deck.Add(Create(GetRandCardTypeOfCost(5)));
         }
 
-        
+
+        foreach (CardData card in deck)
+        {
+            card.inShop = false;
+        }
+
+
 
 
 
@@ -306,7 +320,8 @@ public static class CardAssembler
             CardType[] cardTypes = new CardType[]
             {
                 CardType.shop,
-                CardType.obsidian
+                CardType.obsidian,
+                CardType.glue
             };
             int innerRand = (int)(GD.Randi() % cardTypes.Length);
 

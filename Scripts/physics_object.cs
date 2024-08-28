@@ -21,6 +21,8 @@ public partial class physics_object : Node2D
     public bool selecting = false;
 
     public List<Node> SpecialNodes = new List<Node>();
+    [Signal]
+    public delegate void ItemPlacedEventHandler();
 
     public override void _Ready()
     {
@@ -34,6 +36,7 @@ public partial class physics_object : Node2D
             GetAllSprites(node);
         }
         GD.Print(SpriteList.Count + " " + Name + " sprites");
+        
     }
     
     void GetAllSprites(Node starterNode)
@@ -104,6 +107,7 @@ public partial class physics_object : Node2D
                     Modulate = modu;
                     rigids[0].SetCollisionLayerValue(1, true);
                     rigids[0].SetCollisionMaskValue(2, true);
+                    EmitSignal(SignalName.ItemPlaced);
                     NeverCheckAgain = true;
                     if (rigids[0].HasNode("RigidBody2DBackground"))
                     {

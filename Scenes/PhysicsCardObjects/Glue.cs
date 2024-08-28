@@ -7,10 +7,13 @@ public partial class Glue : Area2D
 {
 	PackedScene splotchPS = GD.Load<PackedScene>("res://Scenes/PhysicsCardObjects/glue_splotch.tscn");
 	physics_object Parent;
+	AudioStreamPlayer glueSound;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		Parent = GetParent<physics_object>();
+		glueSound = GetNode<AudioStreamPlayer>(Parent.GetPath() + "/GlueSound");
+		glueSound.Finished += Parent.QueueFree;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -29,10 +32,14 @@ public partial class Glue : Area2D
 		if (Parent.NeverCheckAgain)
 		{
 			GD.Print("Placed");
-			Parent.QueueFree();
+			//Parent.Hide();
+			Parent.SetDeferred("visible", false);
+			SetDeferred("monitoring", false);
+		//			Parent.QueueFree();
 		}
-		
 
+		if (!Monitoring)
+			return;
         if (!HasOverlappingBodies())
             return;
 
@@ -51,11 +58,12 @@ public partial class Glue : Area2D
 			gluingTarget = potentialGluingTarget.GetParent<physics_object>();
 			gluingTarget.selecting = true;
 
-
+		
 
 		//for every rigidbody owned by the gluingTarget
 		foreach (var rigid in gluingTarget.rigids)
 		{
+
 			foreach (Sprite2D sprite in gluingTarget.SpriteList)
 			{
 				if (targetSpritelist.Contains(sprite))
@@ -101,25 +109,25 @@ public partial class Glue : Area2D
 					//set flag to false (for animation)
 					gluingTarget.selecting = false;
 
+                    
+                    //foreach existing splotch
+                    //delete splotch
 
-					//foreach existing splotch
-					//delete splotch
+                    //check for active collision points
+                    //foreach collision point
+                    //instantiate splotch
+                    //splotch.position = collisionPoint.position
+                    //gluingtarget.addchild(splotch)
 
-					//check for active collision points
-					//foreach collision point
-					//instantiate splotch
-					//splotch.position = collisionPoint.position
-					//gluingtarget.addchild(splotch)
+                    //					GetWorld2D().DirectSpaceState.IntersectShape()
 
-					//					GetWorld2D().DirectSpaceState.IntersectShape()
-
-					/*var theThing = rigid.CreateShapeOwner(rigid);
+                    /*var theThing = rigid.CreateShapeOwner(rigid);
 					rigid.shapeID
 					var c_shape = rigid.ShapeOwnerGetShape(theThing,) //to get the collision Shape2D
 
 var intersect_list = c_shape.collide_and_get_contacts(Matrix32 local_xform, Shape2D with_shape, Matrix32 shape_xform)*/
 
-					if(rigid is physics_body_RigidBody)
+                    if (rigid is physics_body_RigidBody)
 					{
 						var pbrb = (physics_body_RigidBody)rigid;
 						foreach(var contactPoint in pbrb.ContactPoints)
@@ -132,6 +140,7 @@ var intersect_list = c_shape.collide_and_get_contacts(Matrix32 local_xform, Shap
 						splotch.Position = pbrb.ToLocal(contactPoint);
 							pbrb.AddChild(splotch);
 						}
+						pbrb.Parent = gluingTarget;
 					}
 
 
@@ -170,6 +179,7 @@ var intersect_list = c_shape.collide_and_get_contacts(Matrix32 local_xform, Shap
 		if (Parent.NeverCheckAgain)
 		{
 			//set flag to false (for animation)
+			PlayGlueSound();
 			gluingTarget.selecting = false;
 		}
 
@@ -255,6 +265,14 @@ var intersect_list = c_shape.collide_and_get_contacts(Matrix32 local_xform, Shap
             }
             gluingTarget.SpecialNodes.Add(node);
         }
+    }
+
+    void PlayGlueSound()
+    {
+        int rand = (int)(GD.Randi() % 2);
+        glueSound.Stream = GD.Load<AudioStream>("res://Assets/Sounds/Cards/GlueSounds/Glue" + rand + ".wav");
+
+        glueSound.Play();
     }
 }
 

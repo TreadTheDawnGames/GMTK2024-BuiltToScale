@@ -12,7 +12,7 @@ size = Vector2(430, 43)
 symbol = ExtResource("2_pkrib")
 cost = 50
 singleUse = true
-metadata/HoldOffset = 2000.0
+metadata/HoldOffset = 5000.0
 metadata/Static = true
 
 [node name="RigidBody2D" type="RigidBody2D" parent="." index="0"]

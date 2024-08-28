@@ -8,7 +8,7 @@ public partial class RufusRagdoll : RigidBody2D
 	{
 
 		//ApplyTorqueImpulse(50);
-		Rotation = GD.Randi() %1 == 0 ? 25 : -25;
+		Rotation = GD.Randi() %2 == 0 ? 25 : -25;
 			AddToGroup("PhysicsObjects");
 	}
 

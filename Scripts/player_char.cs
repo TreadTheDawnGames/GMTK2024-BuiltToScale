@@ -28,6 +28,7 @@ public partial class player_char : RigidBody2D
     AnimatedSprite2D shiftyThought;
 	bool CanMakeLandSound = false;
 
+
     public override void _Ready()
 	{
 		vel = new Vector2();
@@ -260,6 +261,7 @@ public partial class player_char : RigidBody2D
 					holding = null;
 					PlayPopSound();
 					pigArm.QueueFree();
+					pigArm = null;
 				}
 				rigid.SetCollisionMaskValue(3, false);
 				//rigid.SetCollisionMaskValue(4, false);
@@ -359,12 +361,23 @@ public partial class player_char : RigidBody2D
 			shiftyThought.Visible = isShify;
 	}
 
+	public void Despawn()
+	{
+		if(pigArm!=null)
+		{
+			pigArm.QueueFree();
+		}
+		if (holding != null)
+		{
+			holding.QueueFree();
+		}
 
-    public override void _Draw()
-    {
-        base._Draw();
-		//DrawCircle(GlobalPosition-Position, 100, new Color(1,0,1, 0.5f));
 
-		
+        var rufusRagPS = GD.Load<PackedScene>("res://RufusRagdoll.tscn");
+        var rufusRag = rufusRagPS.Instantiate<RigidBody2D>();
+        rufusRag.GlobalPosition = GlobalPosition;
+        GetTree().Root.AddChild(rufusRag);
+		rufusRag.GetNode<Sprite2D>("Sprite2D").FlipH = mySprite.FlipH;
+		QueueFree();
     }
 }

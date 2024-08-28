@@ -116,13 +116,16 @@ Testing
 
 TODO:
 Programming:
-Glue
-make cards not think they're still being hovered when they're not
+Make pause not break glue.
+Destroy/hide pig arm and held object when Rufus falls.
+Update How-To.
+Add glue to shop.
+
 
 Sound:
 
 Art
-Glue(?)
+Shopping cart?
 
 Testing
 Balance

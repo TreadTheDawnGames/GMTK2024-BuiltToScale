@@ -97,6 +97,35 @@ public partial class GameManager : Node2D
 
     public void SetPauseGame(bool isPaused)
     {
+        Instance.Rufus.ProcessMode = isPaused? ProcessModeEnum.Disabled: ProcessModeEnum.Inherit;
+
+        foreach (var node in GetTree().GetNodesInGroup("PhysicsObjects"))
+        {
+            
+            if(node is RigidBody2D)
+            {
+                var rigid = node as RigidBody2D;
+                rigid.Freeze = isPaused;
+            }
+
+            if (node is physics_object)
+            {
+               
+                var po = node as physics_object;
+                foreach (var rigid in po.rigids)
+                {
+                    var spclRigid = rigid as physics_body_RigidBody;
+
+                    if (spclRigid.Static)
+                    {
+                        continue;
+                    }
+
+                    rigid.Freeze = isPaused;
+                }
+            }
+        }
+/*
         if (isPaused == true)
         {
             foreach (var physObj in GetTree().GetNodesInGroup("PhysicsObjects"))
@@ -106,7 +135,7 @@ public partial class GameManager : Node2D
         {
             foreach (var physObj in GetTree().GetNodesInGroup("PhysicsObjects"))
                 physObj.ProcessMode = ProcessModeEnum.Inherit;
-        }
+        }*/
     }
     public override void _Process(double delta)
     {
@@ -119,13 +148,10 @@ public partial class GameManager : Node2D
             musicPlayer.Stream = GD.Load<AudioStream>("res://Assets/Sounds/GameOver.wav");
             musicPlayer.Play();
 
-            var rufusRagPS = GD.Load<PackedScene>("res://RufusRagdoll.tscn");
-            var rufusRag = rufusRagPS.Instantiate<RigidBody2D>();
-            rufusRag.GlobalPosition = Instance.Rufus.GlobalPosition;
-            AddChild(rufusRag);
+            
 
 
-            Instance.Rufus.QueueFree();
+            Instance.Rufus.Despawn();
 
             Instance.Rufus = null;
 

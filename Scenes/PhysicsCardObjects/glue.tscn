@@ -12,7 +12,7 @@ size = Vector2(45.7465, 78.1277)
 
 [node name="glue" instance=ExtResource("1_psi0f")]
 symbol = ExtResource("2_xrlry")
-metadata/HoldOffset = 500.0
+metadata/HoldOffset = 5000.0
 metadata/Static = true
 
 [node name="RigidBody2D" type="RigidBody2D" parent="." index="0"]
@@ -37,3 +37,5 @@ script = ExtResource("4_3akxd")
 position = Vector2(3.19895, 0.0703524)
 rotation = 0.314159
 shape = SubResource("RectangleShape2D_6lq4j")
+
+[node name="GlueSound" type="AudioStreamPlayer" parent="." index="2"]
