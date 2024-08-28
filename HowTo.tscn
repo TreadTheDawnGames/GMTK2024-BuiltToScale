@@ -25,7 +25,7 @@ mouse_filter = 2
 theme = ExtResource("1_ug6ee")
 text = "How to:
 A & D - Move left and right
-Space/W - Jump
+Space / W - Jump
 S + Scroll Wheel - Zoom out
 
 Drag a card into the play area to activate it.

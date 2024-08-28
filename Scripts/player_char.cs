@@ -128,18 +128,18 @@ public partial class player_char : RigidBody2D
 			coyoteTime--;
 			ApplyForce(new Vector2(0,(int)ProjectSettings.GetSetting("physics/2d/default_gravity")), new Vector2(Position.X, Position.Y - 10));
 		}
-		
+
 		if (!GameManager.Instance.Camera.Zooming)
 		{
-		if (Input.IsActionJustPressed("Jump") && coyoteTime > 0 /*|| Input.IsActionPressed("Jump")*/)
-		{
-			PlayJumpSound();
-			linvel.Y = 0;
-			LinearVelocity = linvel;
-			ApplyImpulse(new Vector2(0,maxjump), new Vector2(Position.X, Position.Y + 10));
-			coyoteTime = 0;
-		}
-		// Horizontal movement
+			if (Input.IsActionJustPressed("Jump") && coyoteTime > 0 /*|| Input.IsActionPressed("Jump")*/)
+			{
+				PlayJumpSound();
+				linvel.Y = 0;
+				LinearVelocity = linvel;
+				ApplyImpulse(new Vector2(0, maxjump), new Vector2(Position.X, Position.Y + 10));
+				coyoteTime = 0;
+			}
+			// Horizontal movement
 			if (Input.IsActionPressed("Right"))
 			{
 				if (holding == null) mySprite.FlipH = false;
