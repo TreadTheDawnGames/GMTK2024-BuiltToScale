@@ -112,16 +112,24 @@ public partial class GameManager : Node2D
             {
                
                 var po = node as physics_object;
-                foreach (var rigid in po.rigids)
+                if (po.rigids.Count > 0)
                 {
-                    var spclRigid = rigid as physics_body_RigidBody;
 
-                    if (spclRigid.Static)
+                    foreach (var rigid in po.rigids)
                     {
-                        continue;
-                    }
+                        if (rigid is physics_body_RigidBody)
+                        {
 
-                    rigid.Freeze = isPaused;
+                            var spclRigid = rigid as physics_body_RigidBody;
+
+                            if (spclRigid.Static)
+                            {
+                                continue;
+                            }
+
+                            rigid.Freeze = isPaused;
+                        }
+                    }
                 }
             }
         }
