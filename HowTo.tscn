@@ -19,8 +19,9 @@ anchor_bottom = -0.103704
 offset_left = -120.0
 offset_top = -213.0
 offset_right = 1334.0
-offset_bottom = 1081.0
+offset_bottom = 631.0
 scale = Vector2(0.5, 0.5)
+mouse_filter = 2
 theme = ExtResource("1_ug6ee")
 text = "How to:
 A & D - Move left and right

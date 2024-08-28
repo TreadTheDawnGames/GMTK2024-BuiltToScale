@@ -15,7 +15,6 @@ public partial class gascan : physics_body_RigidBody
 
     Sprite2D sprite, explosion;
 
-    physics_object Parent;
 
     [Export]
     float fuseTime = 0.75f;
@@ -26,7 +25,7 @@ public partial class gascan : physics_body_RigidBody
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-        Parent = GetParent<physics_object>();
+        base._Ready();
         fuse = GetNode<Timer>("Fuse");
         sprite = GetNode<Sprite2D>("CollisionShape2D/Sprite2D");
         explosion = GetNode<Sprite2D>("ExplosionSprite");
@@ -40,6 +39,12 @@ public partial class gascan : physics_body_RigidBody
         MouseEntered += Hovered;
         MouseExited += Unhovered;
 
+        var connections = GetIncomingConnections();
+        for(int i = 0; i< connections.Count; i++)
+        {
+            GD.Print(connections[i]);
+        }
+
         explosion.Hide();
         explosion.Scale = Vector2.Zero;
 
@@ -47,6 +52,7 @@ public partial class gascan : physics_body_RigidBody
 
     void Hovered()
     {
+        GD.Print("Hovered");
         Parent.selecting = true;
         sineCounter = 0;
 
