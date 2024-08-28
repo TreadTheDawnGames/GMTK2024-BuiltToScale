@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d0bytuox4nu7h"]
+
+[ext_resource type="Script" path="res://Scripts/FixedJoint.cs" id="1_m0uia"]
+
+[node name="FixedJoint" type="PinJoint2D"]
+script = ExtResource("1_m0uia")

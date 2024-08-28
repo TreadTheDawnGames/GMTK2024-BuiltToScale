@@ -122,6 +122,7 @@ centered = false
 offset = Vector2(-50, -60)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CapsuleShape2D_qvtxl")
 
 [node name="StepSoundPlayer" type="AudioStreamPlayer" parent="."]

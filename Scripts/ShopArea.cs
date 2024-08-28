@@ -16,6 +16,7 @@ public partial class ShopArea : Area2D
 	{
 		SetUp((physics_object)Owner);
 		Parent.SpecialNodes.Add(this);
+		//GD.Print(Parent.SpriteList.Count+ " Shop sprites");
 	}
 
 	public void SetUp(physics_object newOwner)
@@ -42,7 +43,7 @@ public partial class ShopArea : Area2D
 		}
 		if (Owner == null|| !HasNode(rigid.GetPath())  || rigid.IsQueuedForDeletion() || rigid == null || !HasNode(Parent.GetPath())|| Parent == null)
 		{
-			GD.Print("Re-setting up");
+			//GD.Print("Re-setting up");
 /*            backSprite = GetNode<Sprite2D>("../Sprite2D2");
             this.rigid = GetNode<RigidBody2D>("../..");
 			
@@ -54,10 +55,10 @@ public partial class ShopArea : Area2D
 
 		if (HasOverlappingBodies())
 		{
-			GD.Print("-" + Parent.Name + " has Bodies at time " + Time.GetTimeStringFromSystem() + "-");
+			//GD.Print("-" + Parent.Name + " has Bodies at time " + Time.GetTimeStringFromSystem() + "-");
 			foreach (var body in GetOverlappingBodies())
 			{
-				GD.Print(body.Name);
+				//GD.Print(body.Name);
 				if (body == GameManager.Instance.Rufus && usable)
 				{
 					isInteractable = true;
@@ -69,7 +70,7 @@ public partial class ShopArea : Area2D
 					isInteractable = false;
 				}
 			}
-			GD.Print("--------");
+			//GD.Print("--------");
 		}
 		else
 		{
@@ -95,7 +96,7 @@ public partial class ShopArea : Area2D
 		if (used)
 		{
             backSprite.Texture = GD.Load<Texture2D>("res://Assets/Sprites/ShopBackClosed.png");
-
+			Parent.SpecialNodes.Remove(this);
             QueueFree();
 		}
 

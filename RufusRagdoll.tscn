@@ -1,7 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://cg2edf41gpxvg"]
+[gd_scene load_steps=5 format=3 uid="uid://cg2edf41gpxvg"]
 
 [ext_resource type="Script" path="res://RufusRagdoll.cs" id="1_boqq0"]
 [ext_resource type="Texture2D" uid="uid://bo7s40rlbsaqg" path="res://Assets/Sprites/PigXEYE1.png" id="1_dngaf"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ynpy1"]
+bounce = 0.25
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_54tan"]
 radius = 32.0
@@ -9,6 +12,7 @@ height = 102.0
 
 [node name="RufusRagdoll" type="RigidBody2D"]
 mass = 0.5
+physics_material_override = SubResource("PhysicsMaterial_ynpy1")
 max_contacts_reported = 3
 contact_monitor = true
 script = ExtResource("1_boqq0")

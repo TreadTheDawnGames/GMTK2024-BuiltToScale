@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Reflection.PortableExecutable;
 using System.Runtime.Serialization;
 
-public partial class gascan : RigidBody2D
+public partial class gascan : physics_body_RigidBody
 {
     bool exploded = false;
 
@@ -47,13 +47,17 @@ public partial class gascan : RigidBody2D
 
     void Hovered()
     {
-        hovered = true;
+        Parent.selecting = true;
         sineCounter = 0;
+
+        hovered = true;
     }
 
     void Unhovered()
     {
         hovered = false;
+        if(fuse.TimeLeft!>0)
+        Parent.selecting = false;
     }
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -222,7 +226,11 @@ public partial class gascan : RigidBody2D
 
     public void StartFuse(float fuseTime)
     {
-        if(fuse.TimeLeft <= 0)
+        Parent.SpriteList.Remove(explosion);
+        Parent.selecting = true;
+/*        Parent.SpriteList.Remove(sprite);
+        Reparent(GetTree().Root);
+*/        if(fuse.TimeLeft <= 0)
         {
             GD.Print(Name + ": " + fuseTime);
 

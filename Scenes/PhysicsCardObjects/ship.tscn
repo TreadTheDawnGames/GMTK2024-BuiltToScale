@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://1ayqlmyw5d41"]
+[gd_scene load_steps=6 format=3 uid="uid://1ayqlmyw5d41"]
 
 [ext_resource type="PackedScene" uid="uid://bbsse1b5w57it" path="res://Scenes/PhysicsCardObjects/physics_object.tscn" id="1_ec5dk"]
 [ext_resource type="Texture2D" uid="uid://6dwmla6fleug" path="res://Assets/Sprites/Objects/ShipIcon.png" id="2_s3l6j"]
 [ext_resource type="Texture2D" uid="uid://dkxrcyjopgkvs" path="res://Assets/Sprites/ShipBase.png" id="3_efll1"]
+[ext_resource type="Script" path="res://Scenes/PhysicsCardObjects/physics_body_RigidBody.cs" id="3_f2hp3"]
 [ext_resource type="Texture2D" uid="uid://ciiremhnuqclr" path="res://Assets/Sprites/ShipSail.png" id="4_qwf1k"]
 
 [node name="Crate" instance=ExtResource("1_ec5dk")]
@@ -14,6 +15,7 @@ metadata/HoldOffset = 50.0
 collision_layer = 5
 collision_mask = 3
 mass = 10.0
+script = ExtResource("3_f2hp3")
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="RigidBody2D" index="0"]
 polygon = PackedVector2Array(-21, 59, -42, 59, -96, 50, -136, 41, -176, 26, -193, 10, -207, -1, -221, -19, -233, -48, -239, -73, -239, -103, -237, -108, -218, -126, -199, -136, -189, -140, -183, -140, -172, -137, -161, -133, -120, -118, -109, -109, -107, -105, -107, -91, -110, -75, -111, -69, -111, -64, -102, -59, -72, -53, -50, -51, -32, -48, -16, -47, 3, -47, 23, -51, 45, -52, 76, -60, 112, -69, 132, -74, 139, -75, 148, -75, 153, -80, 158, -81, 164, -82, 181, -102, 203, -119, 192, -126, 176, -131, 173, -136, 177, -139, 185, -142, 192, -144, 199, -145, 208, -142, 215, -140, 222, -137, 228, -133, 257, -115, 267, -109, 275, -101, 283, -91, 286, -82, 287, -71, 285, -64, 282, -52, 271, -42, 263, -39, 240, -39, 234, -41, 226, -46, 224, -47, 210, -29, 198, -15, 190, -6, 168, 9, 139, 24, 109, 36, 79, 46, 47, 54)

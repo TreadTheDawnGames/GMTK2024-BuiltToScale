@@ -33,7 +33,14 @@ public partial class CameraZoomer : Camera2D
         {
             absMouseWheeleDisplacement = (int)maxCamHeight;
         }
-        if (Input.IsActionPressed("SlowScrollDown") && !GameOver)
+        
+
+        if (Input.IsActionPressed("FullZoomOut") && !timerActive)
+        {
+            FullZoomOut(0.25f);
+            return;
+        }
+        else if (Input.IsActionPressed("SlowScrollDown") && !GameOver)
         {
                 ScrollableZoom();
             slowScrollTimer--;
@@ -48,16 +55,12 @@ public partial class CameraZoomer : Camera2D
             {
                 timerActive = false;
             }
+            return;
         }
-        
-
-        if (Input.IsActionPressed("FullZoomOut") && !timerActive)
-        {
-            FullZoomOut(0.25f);
-        }
-        if (Input.IsActionPressed("ZoomOut") && !GameOver && !timerActive)
+        else if (Input.IsActionPressed("ZoomOut") && !GameOver && !timerActive)
         {
             ScrollableZoom();
+            return;
         }
         else if (!GameOver &&!Input.IsActionPressed("FullZoomOut")&&!timerActive && !Input.IsActionPressed("SlowScrollDown"))
         {
@@ -108,7 +111,6 @@ public partial class CameraZoomer : Camera2D
         }
 
 
-        GD.Print("Displacement: " + absMouseWheeleDisplacement);
 
         if(absMouseWheeleDisplacement >= maxCamHeight)
         {

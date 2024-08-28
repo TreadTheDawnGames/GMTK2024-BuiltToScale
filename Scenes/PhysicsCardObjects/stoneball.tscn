@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://cds53pvfg7epf"]
+[gd_scene load_steps=7 format=3 uid="uid://cds53pvfg7epf"]
 
 [ext_resource type="PackedScene" uid="uid://bbsse1b5w57it" path="res://Scenes/PhysicsCardObjects/physics_object.tscn" id="1_uwe44"]
 [ext_resource type="Texture2D" uid="uid://drodfbhotmxqb" path="res://Assets/Sprites/Objects/StoneBallIcon.png" id="2_astvo"]
 [ext_resource type="Texture2D" uid="uid://bb4p0qmdm2y7f" path="res://Assets/Sprites/StoneBallLighting.png" id="2_jabpf"]
+[ext_resource type="Script" path="res://Scenes/PhysicsCardObjects/physics_body_RigidBody.cs" id="3_f7iua"]
 [ext_resource type="Texture2D" uid="uid://cxvn8q43034sv" path="res://Assets/Sprites/StoneBallUnlit.png" id="3_h0owd"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dujdr"]
@@ -16,6 +17,7 @@ metadata/HoldOffset = 60.0
 collision_layer = 5
 collision_mask = 3
 mass = 40.0
+script = ExtResource("3_f7iua")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D" index="0"]
 shape = SubResource("CircleShape2D_dujdr")

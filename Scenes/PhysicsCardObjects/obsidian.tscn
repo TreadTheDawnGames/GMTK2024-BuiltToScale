@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dpr1kgerrcm2w"]
+[gd_scene load_steps=6 format=3 uid="uid://dpr1kgerrcm2w"]
 
 [ext_resource type="PackedScene" uid="uid://bbsse1b5w57it" path="res://Scenes/PhysicsCardObjects/physics_object.tscn" id="1_ifh3u"]
 [ext_resource type="Texture2D" uid="uid://cmg1mthgo0yra" path="res://Assets/Sprites/Obsidian.png" id="2_cft7a"]
 [ext_resource type="Texture2D" uid="uid://ckfb1x5s0wfq5" path="res://Assets/Sprites/Objects/ObsidianIcon.png" id="2_pkrib"]
+[ext_resource type="Script" path="res://Scenes/PhysicsCardObjects/physics_body_RigidBody.cs" id="3_5wbdw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7f8u8"]
 size = Vector2(430, 43)
@@ -18,7 +19,7 @@ metadata/Static = true
 collision_layer = 8388613
 collision_mask = 3
 mass = 10.0
-freeze = true
+script = ExtResource("3_5wbdw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D" index="0"]
 position = Vector2(0, 0.5)

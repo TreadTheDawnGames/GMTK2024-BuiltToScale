@@ -247,8 +247,15 @@ public partial class player_char : RigidBody2D
 					rigid.MoveAndCollide(new Vector2(-.1f,.1f), true) == null)
 				{
 					if ((bool)holding.GetMeta("Static") == false)
+					{
 						rigid.Freeze = false;
-					((physics_object)holding).isHeld = false;
+					}
+					else
+					{
+                        rigid.FreezeMode = FreezeModeEnum.Kinematic;
+
+                    }
+                    ((physics_object)holding).isHeld = false;
 					isHolding = false;
 					holding = null;
 					PlayPopSound();
@@ -278,7 +285,7 @@ public partial class player_char : RigidBody2D
 		rigid.SetCollisionLayerValue(1, false);
 		rigid.SetCollisionMaskValue(2, false);
 		rigid.Freeze = true;
-		holding = inst;
+        holding = inst;
 		
 		((physics_object)holding).isHeld = true;
 

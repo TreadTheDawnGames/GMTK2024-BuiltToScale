@@ -161,6 +161,7 @@ collision_layer = 4194304
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DiscardPile/DiscardSlot/DiscardSlotArea"]
+visible = false
 shape = SubResource("CircleShape2D_grbxb")
 
 [node name="Coin" type="Sprite2D" parent="."]
@@ -187,6 +188,7 @@ collision_mask = 32
 script = ExtResource("12_mmyah")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TextureProgressBar/Area2D"]
+visible = false
 position = Vector2(94.5, 137.5)
 shape = SubResource("RectangleShape2D_n7tvj")
 
@@ -214,6 +216,7 @@ collision_layer = 262144
 collision_mask = 65536
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayArea"]
+visible = false
 position = Vector2(952.5, 644)
 shape = SubResource("RectangleShape2D_cn5t3")
 
@@ -243,6 +246,7 @@ position = Vector2(344, 0)
 script = ExtResource("12_evolk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hand"]
+visible = false
 position = Vector2(83.5, 33)
 shape = SubResource("RectangleShape2D_fp8rx")
 

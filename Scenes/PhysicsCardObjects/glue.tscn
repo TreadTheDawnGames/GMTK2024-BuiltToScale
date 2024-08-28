@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://5bl3wxgm6xvd"]
 
 [ext_resource type="PackedScene" uid="uid://bbsse1b5w57it" path="res://Scenes/PhysicsCardObjects/physics_object.tscn" id="1_psi0f"]
-[ext_resource type="Texture2D" uid="uid://b0qyh12a4iuef" path="res://Assets/Sprites/Objects/GlueIcon.png" id="2_02dpx"]
+[ext_resource type="Texture2D" uid="uid://b0qyh12a4iuef" path="res://Assets/Sprites/Objects/GlueIcon.png" id="2_xrlry"]
 [ext_resource type="Texture2D" uid="uid://bi45na1a8lgc6" path="res://Assets/Sprites/Glue.png" id="3_gqdnc"]
 [ext_resource type="Script" path="res://Scenes/PhysicsCardObjects/Glue.cs" id="4_3akxd"]
 
@@ -11,7 +11,7 @@
 size = Vector2(45.7465, 78.1277)
 
 [node name="glue" instance=ExtResource("1_psi0f")]
-symbol = ExtResource("2_02dpx")
+symbol = ExtResource("2_xrlry")
 metadata/HoldOffset = 500.0
 metadata/Static = true
 
