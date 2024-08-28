@@ -12,6 +12,9 @@ public partial class physics_object : Node2D
     [Export]
     public bool singleUse;
 
+    [Export]
+    public CardData.BackingColor backingColor { get; private set; } = CardData.BackingColor.green;
+
     public List<RigidBody2D> rigids = new();
     public List<Node> shapesList = new List<Node>();
     public List<Sprite2D> SpriteList { get; private set; } = new List<Sprite2D>();

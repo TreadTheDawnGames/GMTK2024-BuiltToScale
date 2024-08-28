@@ -12,6 +12,7 @@ size = Vector2(430, 43)
 symbol = ExtResource("2_pkrib")
 cost = 50
 singleUse = true
+backingColor = 1
 metadata/HoldOffset = 5000.0
 metadata/Static = true
 

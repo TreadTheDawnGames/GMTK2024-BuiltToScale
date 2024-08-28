@@ -5,9 +5,7 @@ using System.Diagnostics;
 
 public partial class Card : Control
 {
-    [Export]
-    Texture2D reg, singleUse;
-
+    
     Area2D GrabbableArea;
     public CardData Data{get; private set;}
 
@@ -22,6 +20,7 @@ public partial class Card : Control
     public Vector2 OGPos;
 
     bool usable;
+
 
     public string name { get; private set; }
 
@@ -38,14 +37,7 @@ public partial class Card : Control
         symbol = GetNode<Sprite2D>("Backing/Background/Symbol");
         backing = GetNode<Sprite2D>("Backing/Background");
 
-        if (data.singleUse)
-        {
-            backing.Texture = singleUse;
-        }
-        else
-        {
-            backing.Texture = reg;
-        }
+            backing.Texture = GD.Load<Texture2D>("res://Assets/Sprites/Deck/Cards/BackingColors/"+data.backingColor.ToString()+".png");
 
         var physObj = GD.Load<PackedScene>(Data.PathToPhysObj);
 

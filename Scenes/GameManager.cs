@@ -14,7 +14,7 @@ public partial class GameManager : Node2D
     int score = 0;
     int highScore;
 
-    int moneyLineHeight = -1000;
+    int moneyLineHeight = -880;
 
     PackedScene moneyLineScene = GD.Load<PackedScene>("res://Scenes/money_line.tscn");
 
@@ -68,8 +68,8 @@ public partial class GameManager : Node2D
         UpdateMoney(startingMoney);
 
         highScore = PlayerPrefs.GetInt("HighScore", 0);
-        DeckManager.Instance.highScoreLabel.Text = "High Score: " + (-highScore -49).ToString();
-        DeckManager.Instance.scoreLabel.Text = "Score: " + (-score-49).ToString();
+        DeckManager.Instance.highScoreLabel.Text = "High Score: " + (-highScore -169).ToString();
+        DeckManager.Instance.scoreLabel.Text = "Score: " + (-score-169).ToString();
 
         SpawnMoneyLine(moneyLineHeight);
     }
@@ -166,6 +166,13 @@ public partial class GameManager : Node2D
         if (Input.IsActionJustPressed("Debug-PlayerPrefs"))
         {
             PlayerPrefs.DeleteAll();
+        } 
+        
+        if (Input.IsActionJustPressed("FullScreenToggle"))
+        {
+            var mode = DisplayServer.WindowGetMode() == DisplayServer.WindowMode.Windowed ? DisplayServer.WindowMode.Fullscreen : DisplayServer.WindowMode.Windowed;
+            DisplayServer.WindowSetMode(mode);
+            //PlayerPrefs.DeleteAll();
         }
 
         if(Instance.Rufus!=null && Rufus.Position.Y < moneyLineHeight)
@@ -207,14 +214,14 @@ public partial class GameManager : Node2D
         if (Instance.Rufus!=null && Mathf.CeilToInt(Rufus.GlobalPosition.Y)<score)
         {
             score = Mathf.CeilToInt(Rufus.GlobalPosition.Y);
-            DeckManager.Instance.scoreLabel.Text = "Score: " + (-score-49).ToString();
+            DeckManager.Instance.scoreLabel.Text = "Score: " + (-score-169).ToString();
         }
         
 
         if(score < highScore)
         {
             highScore = score;
-            DeckManager.Instance.highScoreLabel.Text = "High Score: " + (-highScore-49).ToString();
+            DeckManager.Instance.highScoreLabel.Text = "High Score: " + (-highScore-169).ToString();
             PlayerPrefs.SetInt("HighScore", highScore);
         }
     }

@@ -10,6 +10,7 @@
 [node name="GasCan" instance=ExtResource("1_eex58")]
 symbol = ExtResource("2_uxiqh")
 cost = 5
+backingColor = 3
 metadata/HoldOffset = 20.0
 
 [node name="RigidBody2D" type="RigidBody2D" parent="." index="0"]

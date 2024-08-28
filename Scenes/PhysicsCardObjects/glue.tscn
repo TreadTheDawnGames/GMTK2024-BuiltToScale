@@ -12,6 +12,7 @@ size = Vector2(45.7465, 78.1277)
 
 [node name="glue" instance=ExtResource("1_psi0f")]
 symbol = ExtResource("2_xrlry")
+backingColor = 2
 metadata/HoldOffset = 5000.0
 metadata/Static = true
 
