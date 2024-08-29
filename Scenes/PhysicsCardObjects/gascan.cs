@@ -90,7 +90,7 @@ public partial class gascan : physics_body_RigidBody
 
 				if (nowvel > 50 && Parent.NeverCheckAgain)
 				{
-                    StartFuse(fuseTime);
+                    StartFuse(0.01f);
 //                  Explode();
 
 				}

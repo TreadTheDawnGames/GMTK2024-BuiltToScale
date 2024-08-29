@@ -324,6 +324,7 @@ public partial class DeckManager : Control
 			ReplenishHand();
 		}
 
+		UpdateDiscardSprite(card);
 
 		if (card.Data.singleUse && !card.Data.buyable)
 		{
@@ -335,7 +336,6 @@ public partial class DeckManager : Control
                 discard.Add(card.Data);
 
 
-		UpdateDiscardSprite(card);
 
 
 		card.QueueFree();

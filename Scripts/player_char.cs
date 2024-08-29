@@ -131,7 +131,7 @@ public partial class player_char : RigidBody2D
 
 		if (!GameManager.Instance.Camera.Zooming)
 		{
-			if (Input.IsActionJustPressed("Jump") && coyoteTime > 0 || Input.IsActionPressed("Jump"))
+			if (Input.IsActionJustPressed("Jump") && coyoteTime > 0/* || Input.IsActionPressed("Jump")*/)
 			{
 				PlayJumpSound();
 				linvel.Y = 0;
@@ -250,6 +250,7 @@ public partial class player_char : RigidBody2D
 					if ((bool)holding.GetMeta("Static") == false)
 					{
 						rigid.Freeze = false;
+						rigid.LinearVelocity = LinearVelocity;
 					}
 					else
 					{
