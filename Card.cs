@@ -17,6 +17,7 @@ public partial class Card : Control
     public bool beingDrawn = true;
 
     Vector2 grabbedOffset;
+    Vector2 lastMousePos;
     public Vector2 OGPos;
 
     bool usable;
@@ -106,6 +107,10 @@ public partial class Card : Control
 
             }
 
+
+            
+
+
             if (Input.IsMouseButtonPressed(MouseButton.Left) && !grabbed)
             {
                 if (IsOnTop())
@@ -116,8 +121,23 @@ public partial class Card : Control
             }
             else if (!Input.IsMouseButtonPressed(MouseButton.Left) && grabbed)
             {
+                
+                    var spaceState = GetWorld2D().DirectSpaceState;
+                    // use global coordinates, not local to node
+                    var query = PhysicsRayQueryParameters2D.Create(lastMousePos, GetGlobalMousePosition(), 65536);
+                    var result = spaceState.IntersectRay(query);
+
+                    if (result.Count == 0)
+                    {
+                        hovered = false;
+                    }
                 grabbed = false;
             }
+
+
+
+
+            lastMousePos = GetGlobalMousePosition();
         }
         else
         {

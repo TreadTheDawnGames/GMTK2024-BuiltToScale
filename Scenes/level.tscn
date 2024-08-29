@@ -10,7 +10,7 @@
 [ext_resource type="Script" path="res://Scenes/LoopingBackground.cs" id="3_x7vx7"]
 [ext_resource type="PackedScene" uid="uid://xy71mg3ttuj1" path="res://Scenes/Cards/deck.tscn" id="4_vv3gu"]
 [ext_resource type="PackedScene" uid="uid://btyuklwkwra8f" path="res://Scenes/reset_game_button.tscn" id="7_haaf3"]
-[ext_resource type="Texture2D" path="res://Assets/Sprites/Objects/HelpSign.png" id="7_rbnjr"]
+[ext_resource type="Texture2D" uid="uid://brw8u3ypmu2fi" path="res://Assets/Sprites/Objects/HelpSign.png" id="7_rbnjr"]
 [ext_resource type="Script" path="res://Scenes/SignPost.cs" id="8_ocdcq"]
 [ext_resource type="Texture2D" uid="uid://cj5jb12qo2t6j" path="res://Assets/Sprites/LoadingThingThatHasANameButIDontRememberItpng.png" id="13_c3u65"]
 [ext_resource type="Script" path="res://Scenes/QuittingSprite.cs" id="14_db2b6"]
