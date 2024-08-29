@@ -176,12 +176,12 @@ public partial class GameManager : Node2D
             PlayerPrefs.DeleteAll();
         } 
         
-        if (Input.IsActionJustPressed("FullScreenToggle"))
+        /*if (Input.IsActionJustPressed("FullScreenToggle"))
         {
             var mode = DisplayServer.WindowGetMode() == DisplayServer.WindowMode.Windowed ? DisplayServer.WindowMode.Fullscreen : DisplayServer.WindowMode.Windowed;
             DisplayServer.WindowSetMode(mode);
             //PlayerPrefs.DeleteAll();
-        }
+        }*/
 
         if(Instance.Rufus!=null && Rufus.Position.Y < moneyLineHeight)
         {
