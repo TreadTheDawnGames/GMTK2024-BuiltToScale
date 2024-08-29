@@ -6,7 +6,8 @@
 [node name="Node2D" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(232, -8)
+position = Vector2(236, -8)
+scale = Vector2(0.950495, 1)
 texture = ExtResource("2_o0m5d")
 
 [node name="HowTo" type="RichTextLabel" parent="."]
@@ -17,9 +18,9 @@ anchor_top = -0.724074
 anchor_right = 0.233333
 anchor_bottom = -0.103704
 offset_left = -120.0
-offset_top = -221.0
+offset_top = -237.0
 offset_right = 1334.0
-offset_bottom = 655.0
+offset_bottom = 693.0
 scale = Vector2(0.5, 0.5)
 mouse_filter = 2
 theme = ExtResource("1_ug6ee")
@@ -28,6 +29,7 @@ A & D - Move left and right
 Space / W - Jump
 S + Scroll Wheel / Z / X - Zoom out
 F11 - Toggle full screen
+Esc (hold) - Quit
 
 Drag a card into the play area to activate it.
 

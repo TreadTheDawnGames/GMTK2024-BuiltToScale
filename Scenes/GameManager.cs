@@ -171,19 +171,19 @@ public partial class GameManager : Node2D
 
         UpdateScore();
 
-        if (Input.IsActionJustPressed("Debug-PlayerPrefs"))
+        /*if (Input.IsActionJustPressed("Debug-PlayerPrefs"))
         {
             PlayerPrefs.DeleteAll();
-        } 
-        
-        /*if (Input.IsActionJustPressed("FullScreenToggle"))
+        } */
+
+        if (Input.IsActionJustPressed("FullScreenToggle"))
         {
             var mode = DisplayServer.WindowGetMode() == DisplayServer.WindowMode.Windowed ? DisplayServer.WindowMode.Fullscreen : DisplayServer.WindowMode.Windowed;
             DisplayServer.WindowSetMode(mode);
             //PlayerPrefs.DeleteAll();
-        }*/
+        }
 
-        if(Instance.Rufus!=null && Rufus.Position.Y < moneyLineHeight)
+        if (Instance.Rufus!=null && Rufus.Position.Y < moneyLineHeight)
         {
             moneyLineHeight -= 2000;
             SpawnMoneyLine(moneyLineHeight).PlayDing();
