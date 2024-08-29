@@ -131,7 +131,7 @@ public partial class player_char : RigidBody2D
 
 		if (!GameManager.Instance.Camera.Zooming)
 		{
-			if (Input.IsActionJustPressed("Jump") && coyoteTime > 0 /*|| Input.IsActionPressed("Jump")*/)
+			if (Input.IsActionJustPressed("Jump") && coyoteTime > 0 || Input.IsActionPressed("Jump"))
 			{
 				PlayJumpSound();
 				linvel.Y = 0;
