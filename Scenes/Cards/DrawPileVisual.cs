@@ -21,18 +21,33 @@ public partial class DrawPileVisual : Area2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		if (HasOverlappingBodies())
+        /*	if (HasOverlappingBodies())
+            {
+                var graphic = drawPileGraphic.Modulate;
+                    graphic.A = Mathf.Lerp(drawPileGraphic.Modulate.A, 0.15f, 0.5f);
+                drawPileGraphic.Modulate = graphic;
+            }
+            else
+            {
+                var graphic = drawPileGraphic.Modulate;
+                graphic.A = Mathf.Lerp(drawPileGraphic.Modulate.A, 1f, 0.25f);
+                drawPileGraphic.Modulate = graphic;
+            }
+    */
+        if (GameManager.Instance.Rufus != null && GameManager.Instance.Rufus.GlobalPosition.X > 1650)
 		{
-			var graphic = drawPileGraphic.Modulate;
-				graphic.A = Mathf.Lerp(drawPileGraphic.Modulate.A, 0.15f, 0.5f);
-			drawPileGraphic.Modulate = graphic;
-		}
-		else
-		{
+
+            var graphic = drawPileGraphic.Modulate;
+            graphic.A = Mathf.Lerp(drawPileGraphic.Modulate.A, 0.15f, 0.5f);
+            drawPileGraphic.Modulate = graphic;
+        }
+        else
+        {
             var graphic = drawPileGraphic.Modulate;
             graphic.A = Mathf.Lerp(drawPileGraphic.Modulate.A, 1f, 0.25f);
             drawPileGraphic.Modulate = graphic;
         }
+
         if (hovered)
         {
 			if (Input.IsMouseButtonPressed(MouseButton.Left))

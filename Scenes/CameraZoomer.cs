@@ -19,7 +19,7 @@ public partial class CameraZoomer : Camera2D
     public override void _Ready()
 	{
 		Home = GlobalPosition;
-		Deck = GetNode<Control>("Deck");
+		Deck = GetNode<Control>("CanvasLayer/Deck");
 		ResetButton = GetNode<Control>("CanvasLayer/ResetGameButton");
         maxCamHeight = -460;
         slowScrollTimer = slowScrollTimerMax;

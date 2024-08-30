@@ -27,7 +27,7 @@ theme = ExtResource("1_ug6ee")
 text = "How to:
 A & D - Move left and right
 Space / W - Jump
-S + Scroll Wheel / Z / X - Zoom out
+S + Scroll Wheel / Ctrl / Alt - Zoom out
 F11 - Toggle full screen
 Esc (hold) - Quit
 

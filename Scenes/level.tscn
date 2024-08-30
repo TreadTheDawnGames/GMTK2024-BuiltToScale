@@ -165,6 +165,14 @@ motion_scale = Vector2(0.25, 0.25)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Camera"]
 
+[node name="Deck" parent="Camera/CanvasLayer" instance=ExtResource("4_vv3gu")]
+z_index = 1000
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
+
 [node name="ResetGameButton" parent="Camera/CanvasLayer" instance=ExtResource("7_haaf3")]
 z_index = 100
 offset_left = 79.0
@@ -192,19 +200,6 @@ sprite_frames = SubResource("SpriteFrames_4tni7")
 frame = 9
 frame_progress = 1.0
 script = ExtResource("14_db2b6")
-
-[node name="Deck" parent="Camera" instance=ExtResource("4_vv3gu")]
-z_index = 1000
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = -960.0
-offset_top = -540.0
-offset_right = -960.0
-offset_bottom = -540.0
-grow_horizontal = 1
-grow_vertical = 1
-metadata/_edit_use_anchors_ = true
 
 [node name="AudioListener2D" type="AudioListener2D" parent="Camera"]
 

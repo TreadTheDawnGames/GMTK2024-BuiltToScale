@@ -116,7 +116,6 @@ Testing
 
 TODO:
 Programming:
-Update How-To.
 
 
 Sound:

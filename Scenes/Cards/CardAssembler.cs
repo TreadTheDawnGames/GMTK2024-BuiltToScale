@@ -235,14 +235,29 @@ public static class CardAssembler
         List<CardData> deck = new List<CardData>
         {
             new CardData(MakeCardPath(CardType.obsidian)),
-            new CardData(MakeCardPath(CardType.shop)),
-            new CardData(MakeCardPath(CardType.shop)),
+            new CardData(MakeCardPath(CardType.obsidian)),
+            new CardData(MakeCardPath(CardType.obsidian)),
+            new CardData(MakeCardPath(CardType.gascan)),
+            new CardData(MakeCardPath(CardType.gascan)),
+            new CardData(MakeCardPath(CardType.gascan)),
+            new CardData(MakeCardPath(CardType.gascan)),
+            new CardData(MakeCardPath(CardType.gascan)),
+            new CardData(MakeCardPath(CardType.gascan)),
+            new CardData(MakeCardPath(CardType.gascan)),
+            new CardData(MakeCardPath(CardType.gascan)),
             new CardData(MakeCardPath(CardType.glue)),
             new CardData(MakeCardPath(CardType.glue)),
-            new CardData(MakeCardPath(CardType.crate)),
-            new CardData(MakeCardPath(CardType.crate)),
-            new CardData(MakeCardPath(CardType.staircase)),
-            new CardData(MakeCardPath(CardType.steelcrate))
+            new CardData(MakeCardPath(CardType.glue)),
+            new CardData(MakeCardPath(CardType.glue)),
+            new CardData(MakeCardPath(CardType.zeekplushy)),
+            new CardData(MakeCardPath(CardType.zeekplushy)),
+            new CardData(MakeCardPath(CardType.zeekplushy)),
+            new CardData(MakeCardPath(CardType.shop)),
+            new CardData(MakeCardPath(CardType.shop)),
+            new CardData(MakeCardPath(CardType.shop)),
+            new CardData(MakeCardPath(CardType.shop)),
+            new CardData(MakeCardPath(CardType.shop)),
+            new CardData(MakeCardPath(CardType.shop)),
         };
 
         while (deck.Count < Mathf.FloorToInt((float)deckSize * 0.75))

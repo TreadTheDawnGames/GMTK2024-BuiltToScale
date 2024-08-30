@@ -42,7 +42,7 @@ public partial class GameManager : Node2D
         base._Ready();
         instance = this;
         Camera = GetNode<CameraZoomer>("Camera");
-        moneyLabel = GetNode<RichTextLabel>("Camera/Deck/MoneyLabel");
+        moneyLabel = GetNode<RichTextLabel>("Camera/CanvasLayer/Deck/MoneyLabel");
         Instance.Rufus = GetNode<player_char>("Rufus");
         cam = GetNode<Camera2D>("Camera");
         if (!GetTree().Root.HasNode("MusicPlayer"))

@@ -188,7 +188,6 @@ collision_mask = 32
 script = ExtResource("12_mmyah")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TextureProgressBar/Area2D"]
-visible = false
 position = Vector2(94.5, 137.5)
 shape = SubResource("RectangleShape2D_n7tvj")
 
