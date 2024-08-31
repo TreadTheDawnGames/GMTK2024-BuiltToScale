@@ -114,6 +114,8 @@ public partial class GameManager : Node2D
                 var po = node as physics_object;
                 if (po.rigids.Count > 0)
                 {
+                    if (po.isHeld)
+                        continue;
 
                     foreach (var rigid in po.rigids)
                     {
@@ -126,6 +128,8 @@ public partial class GameManager : Node2D
                             {
                                 continue;
                             }
+
+                            
 
                             rigid.Freeze = isPaused;
                         }

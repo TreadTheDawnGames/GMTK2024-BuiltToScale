@@ -21,10 +21,12 @@ public partial class HowTo : Node2D
 		if (appear == true)
 		{
 			Modulate = Modulate.Lerp(new Color(1, 1, 1, 1), 0.25f);
+			Scale = Scale.Lerp(new Vector2(1,1), 0.25f);
 		}
 		else
 		{
 			Modulate = Modulate.Lerp(new Color(1, 1, 1, 0), 0.25f);
+			Scale = Scale.Lerp(new Vector2(0,0), 0.25f);
 		}
 	}
 }

@@ -110,7 +110,7 @@ texture = ExtResource("2_1n2p6")
 
 [node name="HowTo" parent="." instance=ExtResource("2_xt7mx")]
 z_index = -99
-position = Vector2(550, -388)
+position = Vector2(686, -122)
 script = ExtResource("3_tos3i")
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
