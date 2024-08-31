@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://c3786xr80l1t1"]
+[gd_scene load_steps=5 format=3 uid="uid://cnvnxa3j2d2wn"]
 
 [ext_resource type="PackedScene" uid="uid://bbsse1b5w57it" path="res://Scenes/PhysicsCardObjects/physics_object.tscn" id="1_bn1aw"]
 [ext_resource type="Texture2D" uid="uid://denpeagdbuuuo" path="res://Assets/Sprites/Gameblecore.png" id="2_5fj6e"]

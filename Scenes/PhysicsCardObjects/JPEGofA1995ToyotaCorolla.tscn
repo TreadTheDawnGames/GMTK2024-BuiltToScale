@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://b1gubiq5yirhg"]
+[gd_scene load_steps=5 format=3 uid="uid://c8bpk6lhowapm"]
 
 [ext_resource type="PackedScene" uid="uid://bbsse1b5w57it" path="res://Scenes/PhysicsCardObjects/physics_object.tscn" id="1_s4kdb"]
 [ext_resource type="Texture2D" uid="uid://crwdc0sw1b7m1" path="res://Assets/Sprites/Objects/JPEDIcon.png" id="2_lrjym"]

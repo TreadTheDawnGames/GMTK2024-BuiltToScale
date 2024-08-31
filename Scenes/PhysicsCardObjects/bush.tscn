@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://o7p5ckt0k35w"]
+[gd_scene load_steps=4 format=3 uid="uid://d0s46o60xyoy8"]
 
 [ext_resource type="PackedScene" uid="uid://bbsse1b5w57it" path="res://Scenes/PhysicsCardObjects/physics_object.tscn" id="1_2wefy"]
 [ext_resource type="Texture2D" uid="uid://bnw8j0kpl81t7" path="res://Assets/Sprites/Bush.png" id="2_474pq"]

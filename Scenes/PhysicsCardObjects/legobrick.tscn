@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://ya1ugca3i3cn"]
+[gd_scene load_steps=5 format=3 uid="uid://dchnfkthouqjo"]
 
 [ext_resource type="PackedScene" uid="uid://bbsse1b5w57it" path="res://Scenes/PhysicsCardObjects/physics_object.tscn" id="1_qjvvf"]
 [ext_resource type="Texture2D" uid="uid://bjgphowuyalum" path="res://Assets/Sprites/Objects/brickicon.png" id="2_uirp1"]

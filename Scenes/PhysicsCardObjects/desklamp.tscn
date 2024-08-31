@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dc4cl3qe86ra7"]
+[gd_scene load_steps=4 format=3 uid="uid://be5gjoqkv77ir"]
 
 [ext_resource type="PackedScene" uid="uid://bbsse1b5w57it" path="res://Scenes/PhysicsCardObjects/physics_object.tscn" id="1_dp1il"]
 [ext_resource type="Texture2D" uid="uid://dboe5e4gumhpk" path="res://Assets/Sprites/DeskLamp.png" id="2_gb8od"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://22n5u6x7tpv6"]
+[gd_scene load_steps=5 format=3 uid="uid://dja4717w0kbxf"]
 
 [ext_resource type="PackedScene" uid="uid://bbsse1b5w57it" path="res://Scenes/PhysicsCardObjects/physics_object.tscn" id="1_4bu4i"]
 [ext_resource type="Texture2D" uid="uid://csnwgompidjeg" path="res://Assets/Sprites/Objects/bridgeicon.png" id="2_my53u"]

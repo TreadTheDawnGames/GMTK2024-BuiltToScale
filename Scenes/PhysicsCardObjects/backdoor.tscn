@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://chyg8me5wm7ey"]
+[gd_scene load_steps=5 format=3 uid="uid://diww66am344iv"]
 
 [ext_resource type="PackedScene" uid="uid://bbsse1b5w57it" path="res://Scenes/PhysicsCardObjects/physics_object.tscn" id="1_qamo2"]
 [ext_resource type="Texture2D" uid="uid://bbvtyf2acoe8h" path="res://Assets/Sprites/Door.png" id="2_m7gov"]
