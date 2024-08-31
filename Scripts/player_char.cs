@@ -16,7 +16,7 @@ public partial class player_char : RigidBody2D
 	int curFrame = 0;
 	AnimatedSprite2D mySprite;
 	Node2D holding = null;
-	bool isHolding = false;
+	public bool isHolding = false;
 	Node2D pigArm;
 	Camera2D cam;
 	int spawn;

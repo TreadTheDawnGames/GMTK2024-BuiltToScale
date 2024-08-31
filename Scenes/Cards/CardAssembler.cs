@@ -8,9 +8,9 @@ using System.Reflection.Emit;
 public static class CardAssembler
 {
 
-    public enum CardType { beachball, /*bowl,*/ crate, gascan, glue, lamp, mattress, obsidian, piano, scaffleting, ship, shop, staircase, /*starterbowl*/ steelcrate, stoneball, table, toilet, trafficCone, tree, truck, zeekplushy}
+    public enum CardType {desklamp, tungstoncube, gamblecore, trashcan, legobrick, JPEGofA1995ToyotaCorolla, daveramsey, backdoor, bush, citybridge, CommicallyLargeUSBStick, beachball, /*bowl,*/ crate, gascan, glue, lamp, mattress, obsidian, piano, scaffleting, ship, shop, staircase, /*starterbowl*/ steelcrate, stoneball, table, toilet, trafficCone, tree, truck, zeekplushy}
     public enum GuaranteedCardType {crate, scaffleting, staircase }
-    public enum StarterCardType { staircase, crate, toilet }
+    public enum StarterCardType { staircase, crate, toilet}
     public enum SpecialCardType { obsidian, shop, ship, zeekplushy }
 
 
@@ -296,21 +296,35 @@ public static class CardAssembler
                 CardType.toilet,
                 //CardType.crate,
                 //CardType.scaffleting,
-                CardType.tree
+                CardType.tree,
+                CardType.legobrick
             };
             int innerRand = (int)(GD.Randi() % cardTypes.Length);
 
             return cardTypes[innerRand];
         }
-        //25% chance
-        else if (rand >= 30 && rand <= 54)
+        //20% chance
+        else if (rand >= 30 && rand <= 49)
         {
             CardType[] cardTypes = new CardType[]
             {
                 CardType.piano,
                 CardType.lamp,
+                CardType.backdoor,
                 //CardType.staircase,
                 CardType.table
+            };
+            int innerRand = (int)(GD.Randi() % cardTypes.Length);
+
+            return cardTypes[innerRand];
+        }
+        //5% chance
+        else if (rand >= 50 && rand <= 54)
+        {
+            CardType[] cardTypes = new CardType[]
+            {
+                CardType.citybridge,
+                CardType.CommicallyLargeUSBStick
             };
             int innerRand = (int)(GD.Randi() % cardTypes.Length);
 
@@ -324,7 +338,12 @@ public static class CardAssembler
                 CardType.steelcrate,
                 CardType.stoneball,
                 CardType.truck,
-                CardType.mattress
+                CardType.mattress,
+                CardType.desklamp,
+                //CardType.tungstoncube,
+                CardType.trashcan,
+                CardType.backdoor,
+                CardType.bush
             };
             int innerRand = (int)(GD.Randi() % cardTypes.Length);
             return cardTypes[innerRand];
@@ -336,7 +355,8 @@ public static class CardAssembler
             {
                 CardType.shop,
                 CardType.obsidian,
-                CardType.glue
+                CardType.glue,
+                CardType.gamblecore
             };
             int innerRand = (int)(GD.Randi() % cardTypes.Length);
 
@@ -349,7 +369,9 @@ public static class CardAssembler
             CardType[] cardTypes = new CardType[]
              {
                 CardType.ship,
-                CardType.zeekplushy
+                CardType.zeekplushy,
+                CardType.JPEGofA1995ToyotaCorolla,
+                CardType.daveramsey
              };
             int innerRand = (int)(GD.Randi() % cardTypes.Length);
 
