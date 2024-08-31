@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://c84ljpaunhd72"]
+
+[ext_resource type="PackedScene" uid="uid://bbsse1b5w57it" path="res://Scenes/PhysicsCardObjects/physics_object.tscn" id="1_j4mb1"]
+[ext_resource type="Texture2D" uid="uid://kxcc0q0804dj" path="res://Assets/Sprites/Objects/USBIcon.png" id="2_85d2j"]
+[ext_resource type="Texture2D" uid="uid://c1if640twf8sl" path="res://Assets/Sprites/CommicallyLargeUSBStick.png" id="2_v8pmw"]
+[ext_resource type="Script" path="res://Scenes/PhysicsCardObjects/physics_body_RigidBody.cs" id="3_5vxhw"]
+
+[node name="Crate" instance=ExtResource("1_j4mb1")]
+symbol = ExtResource("2_85d2j")
+cost = 25
+metadata/HoldOffset = 80.0
+
+[node name="RigidBody2D" type="RigidBody2D" parent="." index="0"]
+collision_layer = 5
+collision_mask = 3
+mass = 20.0
+script = ExtResource("3_5vxhw")
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="RigidBody2D" index="0"]
+polygon = PackedVector2Array(-57, -208, -50, -215, -17, -219, 56, -219, 63, -218, 65, -211, 65, -168, 62, -148, 62, -121, 72, -121, 79, -123, 82, -123, 87, -118, 89, -107, 88, -80, 87, -50, 86, -39, 88, -34, 89, -22, 91, 42, 91, 113, 95, 153, 95, 193, 93, 206, 90, 213, 82, 218, 39, 220, -40, 220, -72, 219, -82, 217, -89, 217, -96, 210, -95, 139, -91, 96, -91, 77, -92, 69, -92, 34, -87, -70, -87, -112, -82, -118, -73, -120, -61, -121, -56, -146)
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D/CollisionShape2D" index="0"]
+texture = ExtResource("2_v8pmw")

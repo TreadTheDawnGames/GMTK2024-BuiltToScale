@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://chyg8me5wm7ey"]
+
+[ext_resource type="PackedScene" uid="uid://bbsse1b5w57it" path="res://Scenes/PhysicsCardObjects/physics_object.tscn" id="1_qamo2"]
+[ext_resource type="Texture2D" uid="uid://bbvtyf2acoe8h" path="res://Assets/Sprites/Door.png" id="2_m7gov"]
+[ext_resource type="Texture2D" uid="uid://c7ulw45dhx4js" path="res://Assets/Sprites/Objects/dooricon.png" id="2_rixe1"]
+[ext_resource type="Script" path="res://Scenes/PhysicsCardObjects/physics_body_RigidBody.cs" id="3_apoqf"]
+
+[node name="Crate" instance=ExtResource("1_qamo2")]
+symbol = ExtResource("2_rixe1")
+cost = 20
+metadata/HoldOffset = 50.0
+
+[node name="RigidBody2D" type="RigidBody2D" parent="." index="0"]
+collision_layer = 5
+collision_mask = 3
+mass = 12.0
+script = ExtResource("3_apoqf")
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="RigidBody2D" index="0"]
+polygon = PackedVector2Array(-62, -100, -60, -104, -49, -113, 55, -118, 58, -117, 63, -111, 64, -89, 68, -74, 68, -63, 62, -30, 62, 1, 65, 103, 65, 109, 57, 117, 10, 118, 4, 119, -42, 119, -52, 117, -58, 117, -68, 108, -68, 60, -60, -25, -58, -62)
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D/CollisionShape2D" index="0"]
+texture = ExtResource("2_m7gov")

@@ -85,7 +85,7 @@ public partial class ShopArea : Area2D
 		}
 		if (isInteractable)
 		{
-			if (Input.IsActionJustPressed("OpenShop"))
+			if (Input.IsActionJustPressed("OpenShop") && ((GameManager.Instance.Rufus == null) || (GameManager.Instance.Rufus != null && GameManager.Instance.Rufus.isHolding == false)))
 			{
 				OpenShop();
 
@@ -103,7 +103,7 @@ public partial class ShopArea : Area2D
 	} 
 	void HandleShiftyThoughts(bool usable)
 	{
-        if (usable)
+        if (usable && ((GameManager.Instance.Rufus == null) || (GameManager.Instance.Rufus != null && GameManager.Instance.Rufus.isHolding == false)))
         {
             if (HasOverlappingBodies())
             {

@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://o7p5ckt0k35w"]
+
+[ext_resource type="PackedScene" uid="uid://bbsse1b5w57it" path="res://Scenes/PhysicsCardObjects/physics_object.tscn" id="1_2wefy"]
+[ext_resource type="Texture2D" uid="uid://bnw8j0kpl81t7" path="res://Assets/Sprites/Bush.png" id="2_474pq"]
+[ext_resource type="Script" path="res://Scenes/PhysicsCardObjects/physics_body_RigidBody.cs" id="3_hww21"]
+
+[node name="Crate" instance=ExtResource("1_2wefy")]
+symbol = ExtResource("2_474pq")
+cost = 5
+metadata/HoldOffset = 50.0
+
+[node name="RigidBody2D" type="RigidBody2D" parent="." index="0"]
+collision_layer = 5
+collision_mask = 3
+mass = 2.0
+gravity_scale = 2.0
+linear_damp = 2.0
+script = ExtResource("3_hww21")
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="RigidBody2D" index="0"]
+polygon = PackedVector2Array(-39, 33, -45, 30, -54, 21, -56, 17, -56, 7, -51, -1, -43, -6, -37, -8, -37, -20, -36, -24, -27, -32, -20, -34, -5, -34, 3, -30, 10, -22, 14, -22, 20, -24, 26, -24, 30, -21, 36, -16, 39, -6, 48, -5, 54, 0, 56, 3, 56, 18, 54, 23, 46, 30, 33, 33)
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D/CollisionShape2D" index="0"]
+texture = ExtResource("2_474pq")
