@@ -6,7 +6,6 @@ public partial class GameManager : Node2D
     [Export]
     int startingMoney = 20;
 
-    private static GameManager instance = null;
 	AudioStreamPlayer musicPlayer;
     Camera2D cam;
     int moneyOwned;
@@ -23,6 +22,7 @@ public partial class GameManager : Node2D
     {
     }
 
+    private static GameManager instance = null;
     public static GameManager Instance
     {
         get

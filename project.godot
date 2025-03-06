@@ -10,15 +10,20 @@ config_version=5
 
 [application]
 
-config/name="GMTK2024-BuiltToScale"
+config/name="Babel or Bacon - CSharp"
+config/tags=PackedStringArray("arcade", "cards", "jamgame", "platformer")
 run/main_scene="res://Scenes/level.tscn"
 config/features=PackedStringArray("4.2", "C#", "GL Compatibility")
+boot_splash/bg_color=Color(1, 1, 1, 1)
+boot_splash/image="res://Assets/Sprites/Logos/TTDGandGravityhamster.png"
 config/icon="res://Assets/Sprites/icon.svg"
+boot_splash/minimum_display_time=1500
 
 [display]
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+window/size/mode=3
 window/size/window_width_override=960
 window/size/window_height_override=540
 window/stretch/mode="viewport"

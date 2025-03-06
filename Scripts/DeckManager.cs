@@ -370,7 +370,7 @@ public partial class DeckManager : Control
 		spawnedCard.SetUp(data, isAesthetic);
 		return spawnedCard;
 	}
-
+	//////////////////////////////////////////////////
 	bool CheckForDiscard()
 	{
 		if (buyForNode.Visible)
@@ -557,7 +557,7 @@ public partial class DeckManager : Control
 		cardCountBar.Value = deck.Count;
 
 	}
-
+	
 	public void AddCardToDeckFromBank(CardAssembler.CardType type = CardAssembler.CardType.beachball)
 	{
 
@@ -570,7 +570,6 @@ public partial class DeckManager : Control
 
 
 	}
-
 	public void RefillDeckWith(CardAssembler.CardType type = CardAssembler.CardType.beachball)
 	{
 		int cardsToDraw = deckSize - AllCards.Count;
@@ -582,18 +581,8 @@ public partial class DeckManager : Control
 
 	void DisplayDeck(List<CardData> cards)
 	{
-
 		cardDisplay.TogglePanelVisibility(cards);
-
-
-
-
-
-
 	}
-
-
-	
 
 	void DoDisplay()
 	{
@@ -610,6 +599,5 @@ public partial class DeckManager : Control
 				cardDisplayActivated = true;
 			}
 		}
-
 	}
 }
