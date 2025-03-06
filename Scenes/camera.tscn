@@ -1,3 +1,6 @@
-[gd_scene format=3 uid="uid://n286cy3dbbn0"]
+[gd_scene load_steps=2 format=3 uid="uid://n286cy3dbbn0"]
+
+[ext_resource type="Script" path="res://Scenes/CameraZoomer.cs" id="1_8ge05"]
 
 [node name="Camera" type="Camera2D"]
+script = ExtResource("1_8ge05")

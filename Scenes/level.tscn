@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scenes/GameManager.cs" id="1_h1jex"]
 [ext_resource type="Texture2D" uid="uid://cypyjikxxwpw1" path="res://Assets/Sprites/Logo.png" id="2_1n2p6"]
-[ext_resource type="PackedScene" uid="uid://c74uxnvapn034" path="res://Scenes/rufus.tscn" id="2_4km2f"]
+[ext_resource type="PackedScene" uid="uid://h7hueb1nnjfg" path="res://Scenes/rufus.tscn" id="2_4km2f"]
 [ext_resource type="Texture2D" uid="uid://bxqc3wjmnxfkd" path="res://Assets/Sprites/Grass.png" id="2_sjrln"]
 [ext_resource type="PackedScene" uid="uid://5gu2d0ydhkd7" path="res://HowTo.tscn" id="2_xt7mx"]
 [ext_resource type="PackedScene" uid="uid://n286cy3dbbn0" path="res://Scenes/camera.tscn" id="3_buxj5"]
@@ -10,7 +10,7 @@
 [ext_resource type="Script" path="res://Scenes/LoopingBackground.cs" id="3_x7vx7"]
 [ext_resource type="PackedScene" uid="uid://xy71mg3ttuj1" path="res://Scenes/Cards/deck.tscn" id="4_vv3gu"]
 [ext_resource type="PackedScene" uid="uid://btyuklwkwra8f" path="res://Scenes/reset_game_button.tscn" id="7_haaf3"]
-[ext_resource type="PackedScene" uid="uid://cj6chkdqmf72v" path="res://Scenes/money_line.tscn" id="7_w53ei"]
+[ext_resource type="Texture2D" uid="uid://brw8u3ypmu2fi" path="res://Assets/Sprites/Objects/HelpSign.png" id="7_rbnjr"]
 [ext_resource type="Script" path="res://Scenes/SignPost.cs" id="8_ocdcq"]
 [ext_resource type="Texture2D" uid="uid://cj5jb12qo2t6j" path="res://Assets/Sprites/LoadingThingThatHasANameButIDontRememberItpng.png" id="13_c3u65"]
 [ext_resource type="Script" path="res://Scenes/QuittingSprite.cs" id="14_db2b6"]
@@ -96,33 +96,24 @@ animations = [{
 }],
 "loop": false,
 "name": &"default",
-"speed": 6.0
+"speed": 12.0
 }]
 
 [node name="LevelField" type="Node2D"]
+position = Vector2(0, -120)
 script = ExtResource("1_h1jex")
-
-[node name="HowTo" parent="." instance=ExtResource("2_xt7mx")]
-position = Vector2(2080, -530)
-script = ExtResource("3_tos3i")
 
 [node name="Logo" type="Sprite2D" parent="."]
 z_index = -1000
 position = Vector2(960, -500)
 texture = ExtResource("2_1n2p6")
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-scale = Vector2(2, 2)
-transform = Transform2D(2, 0, 0, 2, 0, 0)
-follow_viewport_enabled = true
-follow_viewport_scale = 0.5
-scroll_offset = Vector2(238.164, 389.304)
-script = ExtResource("3_x7vx7")
+[node name="HowTo" parent="." instance=ExtResource("2_xt7mx")]
+z_index = -99
+position = Vector2(686, -122)
+script = ExtResource("3_tos3i")
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
-
-[node name="MoneyLine2" parent="." instance=ExtResource("7_w53ei")]
-position = Vector2(1641, -1000)
 
 [node name="Rufus" parent="." instance=ExtResource("2_4km2f")]
 process_mode = 0
@@ -138,49 +129,79 @@ script = ExtResource("8_ocdcq")
 position = Vector2(3, -4)
 shape = SubResource("RectangleShape2D_7a8c7")
 
+[node name="Sprite2D" type="Sprite2D" parent="HelpSignArea"]
+z_index = -500
+position = Vector2(3, 37)
+texture = ExtResource("7_rbnjr")
+offset = Vector2(0, -41)
+
 [node name="RigidBody2D2" type="StaticBody2D" parent="."]
 z_index = -10
 position = Vector2(0, -1000)
+collision_layer = 16777217
 
 [node name="Grass" type="Sprite2D" parent="RigidBody2D2"]
 texture_filter = 1
-position = Vector2(960, 760)
+position = Vector2(960, 1144)
 texture = ExtResource("2_sjrln")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D2"]
-position = Vector2(970.5, 1150)
+visible = false
+position = Vector2(960, 1150)
 shape = SubResource("RectangleShape2D_8l27s")
 
 [node name="Camera" parent="." groups=["Camera"] instance=ExtResource("3_buxj5")]
-position = Vector2(960, -460)
+position = Vector2(960, -340)
 
-[node name="ResetGameButton" parent="Camera" instance=ExtResource("7_haaf3")]
-z_index = 100
-position = Vector2(-883, 426)
+[node name="ParallaxBackground" type="ParallaxBackground" parent="Camera"]
+scale = Vector2(2, 2)
+transform = Transform2D(2, 0, 0, 2, 0, 0)
+follow_viewport_scale = 0.5
+scroll_ignore_camera_zoom = true
+script = ExtResource("3_x7vx7")
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Camera/ParallaxBackground"]
+motion_scale = Vector2(0.25, 0.25)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Camera"]
-follow_viewport_enabled = true
 
-[node name="Deck" parent="Camera" instance=ExtResource("4_vv3gu")]
+[node name="Deck" parent="Camera/CanvasLayer" instance=ExtResource("4_vv3gu")]
+z_index = 1000
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
-offset_left = -960.0
-offset_top = -540.0
-offset_right = -960.0
-offset_bottom = -540.0
 grow_horizontal = 1
 grow_vertical = 1
-metadata/_edit_use_anchors_ = true
 
-[node name="AudioListener2D" type="AudioListener2D" parent="Camera"]
+[node name="ResetGameButton" parent="Camera/CanvasLayer" instance=ExtResource("7_haaf3")]
+z_index = 100
+offset_left = 79.0
+offset_top = 1007.0
+offset_right = 176.0
+offset_bottom = 1090.0
 
-[node name="QuittingSprite" type="AnimatedSprite2D" parent="Camera"]
+[node name="Control" type="Control" parent="Camera/CanvasLayer"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="QuittingSprite" type="AnimatedSprite2D" parent="Camera/CanvasLayer/Control"]
 z_index = 2001
 sprite_frames = SubResource("SpriteFrames_4tni7")
-frame = 8
+frame = 9
 frame_progress = 1.0
 script = ExtResource("14_db2b6")
+
+[node name="AudioListener2D" type="AudioListener2D" parent="Camera"]
 
 [node name="ShopSound" type="AudioStreamPlayer" parent="." groups=["ShopAudio"]]
 volume_db = -10.0

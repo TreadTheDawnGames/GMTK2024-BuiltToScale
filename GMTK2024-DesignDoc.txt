@@ -116,13 +116,12 @@ Testing
 
 TODO:
 Programming:
-Glue
-make cards not think they're still being hovered when they're not
+
 
 Sound:
 
 Art
-Glue(?)
+Shopping cart?
 
 Testing
 Balance

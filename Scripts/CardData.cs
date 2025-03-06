@@ -21,6 +21,11 @@ public partial class CardData : Node, IComparable<CardData>
     public int cost;
     public Texture2D symbol;
     public bool aesthetic;
+
+    public enum BackingColor { green, orange, blue, red }
+    public BackingColor backingColor { get; private set; }
+
+
     public CardData(string obj)
     {
         this.PathToPhysObj = obj;
@@ -32,6 +37,7 @@ public partial class CardData : Node, IComparable<CardData>
         cost = myObject.cost;
         symbol = myObject.symbol;
         singleUse = myObject.singleUse;
+        backingColor = myObject.backingColor;
         aesthetic = false;
 
         foreach (CardType type in Enum.GetValues(typeof(CardType)))
@@ -54,6 +60,7 @@ public partial class CardData : Node, IComparable<CardData>
         this.symbol = oldData.symbol;
         this.singleUse = oldData.singleUse;
         this.aesthetic = oldData.aesthetic;
+        this.backingColor = oldData.backingColor;
         this.Type = oldData.Type;
     }
 

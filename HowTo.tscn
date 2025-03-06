@@ -6,31 +6,45 @@
 [node name="Node2D" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-z_index = -2000
+position = Vector2(236, -243)
+scale = Vector2(0.950495, 1)
 texture = ExtResource("2_o0m5d")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(1.13687e-13, 1)
+rotation = -0.823271
+scale = Vector2(0.950495, 1)
+texture = ExtResource("2_o0m5d")
+region_enabled = true
+region_rect = Rect2(0.134618, 474, 15.8654, 16.1343)
 
 [node name="HowTo" type="RichTextLabel" parent="."]
 modulate = Color(0.26, 0.26, 0.26, 1)
-z_index = -100
 anchors_preset = -1
 anchor_left = -0.0333334
 anchor_top = -0.724074
 anchor_right = 0.233333
 anchor_bottom = -0.103704
-offset_left = -119.0
-offset_top = -215.0
-offset_right = 381.0
-offset_bottom = 785.0
+offset_left = -120.0
+offset_top = -472.0
+offset_right = 1334.0
+offset_bottom = 458.0
 scale = Vector2(0.5, 0.5)
+mouse_filter = 2
 theme = ExtResource("1_ug6ee")
 text = "How to:
 A & D - Move left and right
-Space - Jump
+Space / W - Jump
+S + Scroll Wheel / Z / X / Ctrl / Alt - Zoom out
+F11 - Toggle full screen
+Esc (hold) - Quit
 
 Drag a card into the play area to activate it.
 
 Right click - Place activated object
 Q & E - Rotate object left and right
 
-Pass the next money line to get more money to spend at a shop."
-metadata/_edit_use_anchors_ = true
+Pass the next money line to get more money to spend at a shop.
+You can also get money by selling cards at shops, but if you do not buy cards to replace them, your deck will automatically refill with low-tier cards.
+
+The orange card is single use and will be replaced by a low tier card."

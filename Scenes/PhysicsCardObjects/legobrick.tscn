@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://dchnfkthouqjo"]
+
+[ext_resource type="PackedScene" uid="uid://bbsse1b5w57it" path="res://Scenes/PhysicsCardObjects/physics_object.tscn" id="1_qjvvf"]
+[ext_resource type="Texture2D" uid="uid://bjgphowuyalum" path="res://Assets/Sprites/Objects/brickicon.png" id="2_uirp1"]
+[ext_resource type="Script" path="res://Scenes/PhysicsCardObjects/physics_body_RigidBody.cs" id="3_rxgmd"]
+[ext_resource type="Texture2D" uid="uid://dc8xs2u6vssw3" path="res://Assets/Sprites/LegoBrick.png" id="4_qx6rc"]
+
+[node name="Crate" instance=ExtResource("1_qjvvf")]
+symbol = ExtResource("2_uirp1")
+metadata/HoldOffset = 50.0
+
+[node name="RigidBody2D" type="RigidBody2D" parent="." index="0"]
+collision_layer = 5
+collision_mask = 3
+mass = 10.0
+script = ExtResource("3_rxgmd")
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="RigidBody2D" index="0"]
+polygon = PackedVector2Array(-92, 21, -89, -20, -82, -23, -75, -23, -71, -26, -70, -32, -64, -39, -56, -41, -46, -41, -38, -37, -37, -43, -29, -49, -16, -49, -6, -46, -7, -50, -1, -54, 10, -55, 21, -50, 31, -56, 44, -55, 49, -52, 53, -48, 53, -44, 59, -45, 64, -45, 74, -39, 78, -33, 79, -30, 86, -28, 91, -23, 93, -18, 91, 17, 86, 24, -36, 57, -47, 57)
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D/CollisionShape2D" index="0"]
+texture = ExtResource("4_qx6rc")

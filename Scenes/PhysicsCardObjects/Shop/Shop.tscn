@@ -19,9 +19,9 @@ size = Vector2(182, 258)
 [node name="Shop" type="TextureRect"]
 process_mode = 3
 offset_left = 370.0
-offset_top = 235.0
+offset_top = 198.0
 offset_right = 1516.0
-offset_bottom = 1071.0
+offset_bottom = 1034.0
 mouse_filter = 2
 texture = ExtResource("1_qvxdu")
 script = ExtResource("2_fnms8")
@@ -30,104 +30,104 @@ highlighted = ExtResource("4_fwsi0")
 
 [node name="Button" type="TextureButton" parent="."]
 layout_mode = 0
-offset_left = 1005.0
-offset_top = 61.0
-offset_right = 1045.0
-offset_bottom = 101.0
+offset_left = 1026.0
+offset_top = 137.0
+offset_right = 1106.0
+offset_bottom = 177.0
 texture_normal = ExtResource("5_ygibs")
 texture_pressed = ExtResource("6_lvy7b")
 texture_hover = ExtResource("7_4fql8")
 
 [node name="PermShopSlot1" type="Marker2D" parent="."]
-position = Vector2(359, 121)
+position = Vector2(359, 185)
 script = ExtResource("3_vtxsv")
 
 [node name="PermShopSlot2" type="Marker2D" parent="."]
-position = Vector2(587, 124)
+position = Vector2(587, 188)
 script = ExtResource("3_vtxsv")
 
 [node name="PermShopSlot3" type="Marker2D" parent="."]
-position = Vector2(845, 128)
+position = Vector2(845, 192)
 script = ExtResource("3_vtxsv")
 
 [node name="RandShopSlot1" type="Marker2D" parent="."]
-position = Vector2(110, 458)
+position = Vector2(110, 522)
 script = ExtResource("4_ar5e3")
 
 [node name="RandShopSlot2" type="Marker2D" parent="."]
-position = Vector2(359, 462)
+position = Vector2(359, 526)
 script = ExtResource("4_ar5e3")
 
 [node name="RandShopSlot3" type="Marker2D" parent="."]
-position = Vector2(607, 467)
+position = Vector2(607, 531)
 script = ExtResource("4_ar5e3")
 
 [node name="RandShopSlot4" type="Marker2D" parent="."]
-position = Vector2(840, 466)
+position = Vector2(840, 530)
 script = ExtResource("4_ar5e3")
 
 [node name="CardPanel1" type="TextureRect" parent="."]
 layout_mode = 0
 offset_left = 350.0
-offset_top = 112.0
+offset_top = 176.0
 offset_right = 532.0
-offset_bottom = 370.0
+offset_bottom = 434.0
 texture = ExtResource("2_umod0")
 
 [node name="CardPanel2" type="TextureRect" parent="."]
 layout_mode = 0
 offset_left = 578.0
-offset_top = 115.0
+offset_top = 179.0
 offset_right = 760.0
-offset_bottom = 373.0
+offset_bottom = 437.0
 texture = ExtResource("2_umod0")
 
 [node name="CardPanel3" type="TextureRect" parent="."]
 layout_mode = 0
 offset_left = 836.0
-offset_top = 119.0
+offset_top = 183.0
 offset_right = 1018.0
-offset_bottom = 377.0
+offset_bottom = 441.0
 texture = ExtResource("2_umod0")
 
 [node name="CardPanel4" type="TextureRect" parent="."]
 layout_mode = 0
 offset_left = 101.0
-offset_top = 449.0
+offset_top = 513.0
 offset_right = 283.0
-offset_bottom = 707.0
+offset_bottom = 771.0
 texture = ExtResource("2_umod0")
 
 [node name="CardPanel5" type="TextureRect" parent="."]
 layout_mode = 0
 offset_left = 350.0
-offset_top = 453.0
+offset_top = 517.0
 offset_right = 532.0
-offset_bottom = 711.0
+offset_bottom = 775.0
 texture = ExtResource("2_umod0")
 
 [node name="CardPanel6" type="TextureRect" parent="."]
 layout_mode = 0
 offset_left = 598.0
-offset_top = 458.0
+offset_top = 522.0
 offset_right = 780.0
-offset_bottom = 716.0
+offset_bottom = 780.0
 texture = ExtResource("2_umod0")
 
 [node name="CardPanel7" type="TextureRect" parent="."]
 layout_mode = 0
 offset_left = 831.0
-offset_top = 457.0
+offset_top = 521.0
 offset_right = 1013.0
-offset_bottom = 715.0
+offset_bottom = 779.0
 texture = ExtResource("2_umod0")
 
 [node name="SellPanelVisual" type="TextureRect" parent="."]
 layout_mode = 0
 offset_left = 108.0
-offset_top = 115.0
+offset_top = 179.0
 offset_right = 290.0
-offset_bottom = 373.0
+offset_bottom = 437.0
 texture = ExtResource("6_p2ua3")
 
 [node name="SellPanel" type="Area2D" parent="SellPanelVisual"]

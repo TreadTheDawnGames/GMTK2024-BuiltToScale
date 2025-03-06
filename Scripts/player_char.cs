@@ -16,7 +16,7 @@ public partial class player_char : RigidBody2D
 	int curFrame = 0;
 	AnimatedSprite2D mySprite;
 	Node2D holding = null;
-	bool isHolding = false;
+	public bool isHolding = false;
 	Node2D pigArm;
 	Camera2D cam;
 	int spawn;
@@ -28,7 +28,8 @@ public partial class player_char : RigidBody2D
     AnimatedSprite2D shiftyThought;
 	bool CanMakeLandSound = false;
 
-	public override void _Ready()
+
+    public override void _Ready()
 	{
 		vel = new Vector2();
 		mySprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
@@ -45,14 +46,16 @@ public partial class player_char : RigidBody2D
 		var spd = airspd;
 
 		// Move camera
-		if (cam.GlobalPosition.Y > GlobalPosition.Y)
-			cam.GlobalPosition = new Vector2(cam.GlobalPosition.X, GlobalPosition.Y);
 
+
+			var linvel = LinearVelocity;
 		// Vertical movement dampening
-		var linvel = LinearVelocity;
-		if (Input.IsActionJustReleased("Jump"))
+		if (!GameManager.Instance.Camera.Zooming)
 		{
-			linvel.Y = Math.Max(linvel.Y, minjump);
+			if (Input.IsActionJustReleased("Jump"))
+			{
+				linvel.Y = Math.Max(linvel.Y, minjump);
+			}
 		}
 
 		// Horizontal movement dampening
@@ -125,26 +128,28 @@ public partial class player_char : RigidBody2D
 			coyoteTime--;
 			ApplyForce(new Vector2(0,(int)ProjectSettings.GetSetting("physics/2d/default_gravity")), new Vector2(Position.X, Position.Y - 10));
 		}
-		
-		if (Input.IsActionJustPressed("Jump") && coyoteTime > 0)
-		{
-			PlayJumpSound();
-			linvel.Y = 0;
-			LinearVelocity = linvel;
-			ApplyImpulse(new Vector2(0,maxjump), new Vector2(Position.X, Position.Y + 10));
-			coyoteTime = 0;
-		}
 
-		// Horizontal movement
-		if (Input.IsActionPressed("Right"))
+		if (!GameManager.Instance.Camera.Zooming)
 		{
-			if (holding == null) mySprite.FlipH = false;
-			ApplyForce(new Vector2(spd,0));
-		}
-		if (Input.IsActionPressed("Left"))
-		{
-			if (holding == null) mySprite.FlipH = true;
-			ApplyForce(new Vector2(-spd,0));
+			if (Input.IsActionJustPressed("Jump") && coyoteTime > 0/* || Input.IsActionPressed("Jump")*/)
+			{
+				PlayJumpSound();
+				linvel.Y = 0;
+				LinearVelocity = linvel;
+				ApplyImpulse(new Vector2(0, maxjump), new Vector2(Position.X, Position.Y + 10));
+				coyoteTime = 0;
+			}
+			// Horizontal movement
+			if (Input.IsActionPressed("Right"))
+			{
+				if (holding == null) mySprite.FlipH = false;
+				ApplyForce(new Vector2(spd, 0));
+			}
+			if (Input.IsActionPressed("Left"))
+			{
+				if (holding == null) mySprite.FlipH = true;
+				ApplyForce(new Vector2(-spd, 0));
+			}
 		}
 
 		// Clamp position
@@ -243,12 +248,21 @@ public partial class player_char : RigidBody2D
 					rigid.MoveAndCollide(new Vector2(-.1f,.1f), true) == null)
 				{
 					if ((bool)holding.GetMeta("Static") == false)
+					{
 						rigid.Freeze = false;
-					((physics_object)holding).isHeld = false;
+						rigid.LinearVelocity = LinearVelocity;
+					}
+					else
+					{
+                        rigid.FreezeMode = FreezeModeEnum.Kinematic;
+
+                    }
+                    ((physics_object)holding).isHeld = false;
 					isHolding = false;
 					holding = null;
 					PlayPopSound();
 					pigArm.QueueFree();
+					pigArm = null;
 				}
 				rigid.SetCollisionMaskValue(3, false);
 				//rigid.SetCollisionMaskValue(4, false);
@@ -274,7 +288,7 @@ public partial class player_char : RigidBody2D
 		rigid.SetCollisionLayerValue(1, false);
 		rigid.SetCollisionMaskValue(2, false);
 		rigid.Freeze = true;
-		holding = inst;
+        holding = inst;
 		
 		((physics_object)holding).isHeld = true;
 
@@ -344,6 +358,27 @@ public partial class player_char : RigidBody2D
 
 	public void ThinkShifyThoughts(bool isShify)
 	{
-		shiftyThought.Visible = isShify;
+		if(HasNode("ShiftyThoughts"))
+			shiftyThought.Visible = isShify;
 	}
+
+	public void Despawn()
+	{
+		if(pigArm!=null)
+		{
+			pigArm.QueueFree();
+		}
+		if (holding != null)
+		{
+			holding.QueueFree();
+		}
+
+
+        var rufusRagPS = GD.Load<PackedScene>("res://RufusRagdoll.tscn");
+        var rufusRag = rufusRagPS.Instantiate<RigidBody2D>();
+        rufusRag.GlobalPosition = GlobalPosition;
+        GetTree().Root.AddChild(rufusRag);
+		rufusRag.GetNode<Sprite2D>("Sprite2D").FlipH = mySprite.FlipH;
+		QueueFree();
+    }
 }

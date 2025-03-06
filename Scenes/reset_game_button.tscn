@@ -5,7 +5,9 @@
 [ext_resource type="Script" path="res://Scenes/reset_button.cs" id="2_d3561"]
 [ext_resource type="Texture2D" uid="uid://qk4x66alhfvy" path="res://Assets/Sprites/ResetWhite.png" id="2_py4uy"]
 
-[node name="ResetGameButton" type="Node2D"]
+[node name="ResetGameButton" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_0qq5i")
@@ -21,6 +23,7 @@ texture = ExtResource("2_py4uy")
 [node name="Button" type="Button" parent="."]
 light_mask = 0
 visibility_layer = 0
+layout_mode = 0
 offset_left = -48.0
 offset_top = -41.0
 offset_right = -40.0
@@ -29,4 +32,4 @@ scale = Vector2(12.0081, 10.2447)
 focus_mode = 0
 script = ExtResource("2_d3561")
 
-[connection signal="pressed" from="Button" to="Button" method="_on_button_up"]
+[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]

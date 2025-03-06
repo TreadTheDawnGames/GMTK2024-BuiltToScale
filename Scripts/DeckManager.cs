@@ -113,7 +113,7 @@ public partial class DeckManager : Control
 		}
 	}
 	public bool cardHeld = false;
-
+	public bool correctDeck = false;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -146,9 +146,14 @@ public partial class DeckManager : Control
 
 		cardCountBar = GetNode<TextureProgressBar>("TextureProgressBar");
 
-		SetupDeck(CardAssembler.BalancedStarter(deckSize));
+		SetupDeck(CardAssembler.BalancedStarterDeck(deckSize));
+		
 		//SetupDeck(CardAssembler.OneEach()); 
-		//SetupDeck(CardAssembler.Artistic()); 
+
+		//SetupDeck(CardAssembler.DevShenaniganDeck());
+		
+		if(!correctDeck)
+		GD.PrintErr("Wrong deck Selected"); 
 
 		discardSpriteBacking.Hide();
 
@@ -303,8 +308,9 @@ public partial class DeckManager : Control
 					GD.Print("Bought card: " + card.name);
 
 				}
-			}
-		}
+
+            }
+        }
 
 
 		PlayFlipSound();
@@ -318,6 +324,7 @@ public partial class DeckManager : Control
 			ReplenishHand();
 		}
 
+		UpdateDiscardSprite(card);
 
 		if (card.Data.singleUse && !card.Data.buyable)
 		{
@@ -326,10 +333,9 @@ public partial class DeckManager : Control
 			return;
 		}
 
-		discard.Add(card.Data);
+                discard.Add(card.Data);
 
 
-		UpdateDiscardSprite(card);
 
 
 		card.QueueFree();
@@ -364,7 +370,7 @@ public partial class DeckManager : Control
 		spawnedCard.SetUp(data, isAesthetic);
 		return spawnedCard;
 	}
-
+	//////////////////////////////////////////////////
 	bool CheckForDiscard()
 	{
 		if (buyForNode.Visible)
@@ -551,7 +557,7 @@ public partial class DeckManager : Control
 		cardCountBar.Value = deck.Count;
 
 	}
-
+	
 	public void AddCardToDeckFromBank(CardAssembler.CardType type = CardAssembler.CardType.beachball)
 	{
 
@@ -560,11 +566,10 @@ public partial class DeckManager : Control
 		card.Slot = discardSlot;
 
 		SpawnCard(card, new Vector2(960 + GD.RandRange(-400, 400), 500), true);
-		//discard.Add(card);
+		discard.Add(card);
 
 
 	}
-
 	public void RefillDeckWith(CardAssembler.CardType type = CardAssembler.CardType.beachball)
 	{
 		int cardsToDraw = deckSize - AllCards.Count;
@@ -576,18 +581,8 @@ public partial class DeckManager : Control
 
 	void DisplayDeck(List<CardData> cards)
 	{
-
 		cardDisplay.TogglePanelVisibility(cards);
-
-
-
-
-
-
 	}
-
-
-	
 
 	void DoDisplay()
 	{
@@ -604,6 +599,5 @@ public partial class DeckManager : Control
 				cardDisplayActivated = true;
 			}
 		}
-
 	}
 }

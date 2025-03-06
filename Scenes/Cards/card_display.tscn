@@ -61,25 +61,21 @@ _data = {
 }
 
 [node name="CardDisplay" type="Control"]
+z_index = 505
 layout_mode = 3
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 grow_horizontal = 2
-mouse_filter = 2
 script = ExtResource("1_xtb1y")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
 offset_left = 162.0
 offset_top = 1110.0
 offset_right = 1708.0
 offset_bottom = 2032.0
-grow_horizontal = 2
-mouse_filter = 2
+mouse_filter = 0
 texture = ExtResource("2_tk88s")
 expand_mode = 2
 stretch_mode = 2

@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://gjv5skx37px4"]
+[gd_scene load_steps=5 format=3 uid="uid://gjv5skx37px4"]
 
 [ext_resource type="PackedScene" uid="uid://bbsse1b5w57it" path="res://Scenes/PhysicsCardObjects/physics_object.tscn" id="1_r5dms"]
 [ext_resource type="Texture2D" uid="uid://dk8siwff01j5r" path="res://Assets/Sprites/Objects/TruckIcon.png" id="2_4crcm"]
+[ext_resource type="Script" path="res://Scenes/PhysicsCardObjects/physics_body_RigidBody.cs" id="3_7db36"]
 [ext_resource type="Texture2D" uid="uid://1o0hlovknesb" path="res://Assets/Sprites/Truck.png" id="3_q1d37"]
 
 [node name="lamp" instance=ExtResource("1_r5dms")]
@@ -13,13 +14,14 @@ position = Vector2(1, -24)
 collision_layer = 5
 collision_mask = 3
 mass = 10.0
+script = ExtResource("3_7db36")
 
-[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D" index="0"]
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="RigidBody2D" index="0"]
+polygon = PackedVector2Array(-175, -30, -169, -36, -162, -38, -159, 4, -52, 4, -45, -35, -45.3314, -46.5979, -47, -105, -43, -110, -27, -115, 22, -115, 48, -114, 54, -113, 65, -108, 77, -97, 85, -90, 91, -80, 104, -53, 106, -51, 108, -47, 108, -43, 115, -44, 129, -44, 133, -43, 145, -43, 152, -41, 157, -38, 161, -37, 165, -34, 167, -33, 179, -21, 179, -3, 177, 26, 178, 47, 178, 51, 177, 53, 172, 57, 162, 58, 142, 58, 140, 57, 136, 53, 133, 46, 133, 52, 130, 59, 123, 66, 119, 68, 106, 68, 100, 67, 96, 64, 92, 59, 89, 54, 88, 46, 87, 51, 85, 54, 79, 57, 69, 58, 47, 58, 36, 57, 17, 56, -2, 55, -25, 56, -51, 58, -79, 58, -82, 57, -84, 55, -85, 53, -86, 57, -88, 61, -95, 68, -99, 70, -115, 70, -118, 69, -125, 62, -128, 54, -129, 52, -133, 56, -138, 56, -145, 55, -158, 57, -166, 57, -169, 55, -171, 52, -173, 43, -174, 36, -177, 23, -178, 15, -178, -11)
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D/CollisionShape2D" index="0"]
 z_index = 1
 position = Vector2(-151, 65)
 texture = ExtResource("3_q1d37")
 centered = false
 offset = Vector2(-27, -180)
-
-[node name="CollisionShape2D" type="CollisionPolygon2D" parent="RigidBody2D" index="1"]
-polygon = PackedVector2Array(-175, -30, -169, -36, -162, -38, -159, 4, -52, 4, -45, -35, -45.3314, -46.5979, -47, -105, -43, -110, -27, -115, 22, -115, 48, -114, 54, -113, 65, -108, 77, -97, 85, -90, 91, -80, 104, -53, 106, -51, 108, -47, 108, -43, 115, -44, 129, -44, 133, -43, 145, -43, 152, -41, 157, -38, 161, -37, 165, -34, 167, -33, 179, -21, 179, -3, 177, 26, 178, 47, 178, 51, 177, 53, 172, 57, 162, 58, 142, 58, 140, 57, 136, 53, 133, 46, 133, 52, 130, 59, 123, 66, 119, 68, 106, 68, 100, 67, 96, 64, 92, 59, 89, 54, 88, 46, 87, 51, 85, 54, 79, 57, 69, 58, 47, 58, 36, 57, 17, 56, -2, 55, -25, 56, -51, 58, -79, 58, -82, 57, -84, 55, -85, 53, -86, 57, -88, 61, -95, 68, -99, 70, -115, 70, -118, 69, -125, 62, -128, 54, -129, 52, -133, 56, -138, 56, -145, 55, -158, 57, -166, 57, -169, 55, -171, 52, -173, 43, -174, 36, -177, 23, -178, 15, -178, -11)

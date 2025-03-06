@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cymvy0ptrmbi8"]
+[gd_scene load_steps=6 format=3 uid="uid://cymvy0ptrmbi8"]
 
 [ext_resource type="PackedScene" uid="uid://bbsse1b5w57it" path="res://Scenes/PhysicsCardObjects/physics_object.tscn" id="1_hb87e"]
 [ext_resource type="Texture2D" uid="uid://dthnu6jsr1d2" path="res://Assets/Sprites/Objects/SteelcrateIcon.png" id="2_w0afq"]
 [ext_resource type="Texture2D" uid="uid://c2wn66y3mb2yy" path="res://Assets/Sprites/Steelcrate.png" id="3_7tk3u"]
+[ext_resource type="Script" path="res://Scenes/PhysicsCardObjects/physics_body_RigidBody.cs" id="3_foe1m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2avjj"]
 size = Vector2(192, 192)
@@ -16,9 +17,10 @@ metadata/HoldOffset = 80.0
 collision_layer = 5
 collision_mask = 3
 mass = 60.0
+script = ExtResource("3_foe1m")
 
-[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D" index="0"]
-texture = ExtResource("3_7tk3u")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D" index="1"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D" index="0"]
 shape = SubResource("RectangleShape2D_2avjj")
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D/CollisionShape2D" index="0"]
+texture = ExtResource("3_7tk3u")

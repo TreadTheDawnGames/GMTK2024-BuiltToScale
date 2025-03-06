@@ -14,41 +14,41 @@ public partial class MoneyLine : Node2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		zone = GetNode<Area2D>("Area2D");
-		topZone = GetNode<Area2D>("Area2D2");
 		line = GetNode<Sprite2D>("Sprite2D");
 		nextLineAtText = GetNode<RichTextLabel>("RichTextLabel");
 		moneyDing = GetNode<AudioStreamPlayer>("MoneyDing");
 
-		zone.BodyEntered += AttemptToAward;
-		topZone.BodyEntered += AttemptToAward;
-		zone.BodyExited += EndAttemptAward;
-		topZone.BodyExited += EndAttemptAward;
-
 		Vector2 lineOffset;
 		lineOffset.Y = 0;
-		lineOffset.X = GD.RandRange(0, 540);
+		lineOffset.X = GD.RandRange(-540, 540);
 
 		line.Position = lineOffset;
 
 		nextLineAtText.Text = "Next Money Line at " + -(int)(GlobalPosition.Y - 2000);
 	}
 
-	void AttemptToAward(Node2D node)
-	{
-		if(!ready)
+    public override void _Process(double delta)
+    {
+        base._Process(delta);
+		if (GameManager.Instance.Camera.Zooming)
 		{
-			ready = true;
-			return;
+            Modulate = Modulate.Lerp(new Color(1, 1, 1, 0), 0.75f);
 		}
 		else
 		{
-			AwardMoney();
+
+            Modulate = Modulate.Lerp(new Color(1, 1, 1, 1), 0.1f);
 		}
 
-	}
+    }
 
-	void EndAttemptAward(Node2D node)
+
+    public void PlayDing()
+    {
+        moneyDing.Play();
+    }
+
+    void EndAttemptAward(Node2D node)
 	{
 		if(ready)
 		{
@@ -56,20 +56,5 @@ public partial class MoneyLine : Node2D
 		}
 	}
 
-	void AwardMoney()
-	{
-		if (!active) return;
-		active = false;
-		GameManager.Instance.UpdateMoney(25);
-		moneyDing.Play();
-
-		var ps = GD.Load<PackedScene>("res://Scenes/money_line.tscn");
-		var newLine = ps.Instantiate<MoneyLine>();
-
-		Vector2 newHeight = GlobalPosition;
-		newHeight.Y = (int)(newHeight.Y - 2000f);
-
-		newLine.GlobalPosition = newHeight;
-		GetParent().CallDeferred("add_child",newLine);
-	}
+	
 }

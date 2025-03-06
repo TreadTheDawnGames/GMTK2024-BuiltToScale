@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dwrh7ncs2ry26"]
+[gd_scene load_steps=6 format=3 uid="uid://dwrh7ncs2ry26"]
 
 [ext_resource type="PackedScene" uid="uid://bbsse1b5w57it" path="res://Scenes/PhysicsCardObjects/physics_object.tscn" id="1_7utca"]
 [ext_resource type="Texture2D" uid="uid://bjxhd3yee1afm" path="res://Assets/Sprites/Objects/BowlIcon.png" id="2_qqfd2"]
 [ext_resource type="Texture2D" uid="uid://by7f4pcq7sy23" path="res://Assets/Sprites/BowlBase.png" id="3_fmjqw"]
+[ext_resource type="Script" path="res://Scenes/PhysicsCardObjects/physics_body_RigidBody.cs" id="3_xkut7"]
 [ext_resource type="Texture2D" uid="uid://cb3fbgppse6fl" path="res://Assets/Sprites/BowlBack.png" id="4_ql141"]
 
 [node name="Bowl" instance=ExtResource("1_7utca")]
@@ -14,16 +15,16 @@ metadata/HoldOffset = 50.0
 collision_layer = 5
 collision_mask = 3
 mass = 10.0
+script = ExtResource("3_xkut7")
 
-[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D" index="0"]
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="RigidBody2D" index="0"]
+polygon = PackedVector2Array(-57, -16, -52, 2, -48, 10, -40, 15, -29, 19, -13, 22, 6, 24, 19, 24, 32, 21, 37, 18, 46, 11, 56, -5, 59, -13, 59, -6, 59, 3, 57, 9, 53, 17, 42, 28, 29, 34, 23, 35, 3, 35, -21, 32, -35, 28, -44, 24, -53, 15, -58, 2)
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D/CollisionShape2D" index="0"]
 z_index = 1
 position = Vector2(0.5, 1.5)
 texture = ExtResource("3_fmjqw")
 
-[node name="Sprite2D3" type="Sprite2D" parent="RigidBody2D" index="1"]
-z_index = -1
-position = Vector2(0.5, 1.5)
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D/CollisionShape2D/Sprite2D" index="0"]
+z_index = -2
 texture = ExtResource("4_ql141")
-
-[node name="CollisionShape2D" type="CollisionPolygon2D" parent="RigidBody2D" index="2"]
-polygon = PackedVector2Array(-57, -16, -52, 2, -48, 10, -40, 15, -29, 19, -13, 22, 6, 24, 19, 24, 32, 21, 37, 18, 46, 11, 56, -5, 59, -13, 59, -6, 59, 3, 57, 9, 53, 17, 42, 28, 29, 34, 23, 35, 3, 35, -21, 32, -35, 28, -44, 24, -53, 15, -58, 2)

@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://dja4717w0kbxf"]
+
+[ext_resource type="PackedScene" uid="uid://bbsse1b5w57it" path="res://Scenes/PhysicsCardObjects/physics_object.tscn" id="1_4bu4i"]
+[ext_resource type="Texture2D" uid="uid://csnwgompidjeg" path="res://Assets/Sprites/Objects/bridgeicon.png" id="2_my53u"]
+[ext_resource type="Texture2D" uid="uid://blg7hehwttjci" path="res://Assets/Sprites/CityBridge.png" id="2_pl64o"]
+[ext_resource type="Script" path="res://Scenes/PhysicsCardObjects/physics_body_RigidBody.cs" id="3_enqnf"]
+
+[node name="Crate" instance=ExtResource("1_4bu4i")]
+symbol = ExtResource("2_my53u")
+cost = 35
+metadata/HoldOffset = 90.0
+
+[node name="RigidBody2D" type="RigidBody2D" parent="." index="0"]
+collision_layer = 5
+collision_mask = 3
+mass = 50.0
+script = ExtResource("3_enqnf")
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="RigidBody2D" index="0"]
+polygon = PackedVector2Array(-198, 55, -201, 51, -201, 39, -200, 33, -201, 28, -201, 24, -196, 22, -124, 23, -12, 18, 142, 14, 197, 13, 201, 17, 199, 49, 195, 53, 151, 55, 143, 56, 114, 68, 101, 81, 94, 96, 91, 112, 91, 129, 86, 134, 60, 134, 56, 129, 55, 102, 49, 82, 44, 72, 35, 65, 21, 60, 9, 58, 2, 58, -14, 61, -23, 66, -31, 74, -35, 84, -40, 97, -44, 111, -44, 131, -48, 135, -80, 133, -84, 128, -84, 117, -84, 100, -87, 89, -91, 80, -97, 74, -106, 68, -118, 63, -131, 59, -145, 57, -175, 56)
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D/CollisionShape2D" index="0"]
+texture = ExtResource("2_pl64o")

@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://c8bpk6lhowapm"]
+
+[ext_resource type="PackedScene" uid="uid://bbsse1b5w57it" path="res://Scenes/PhysicsCardObjects/physics_object.tscn" id="1_s4kdb"]
+[ext_resource type="Texture2D" uid="uid://crwdc0sw1b7m1" path="res://Assets/Sprites/Objects/JPEDIcon.png" id="2_lrjym"]
+[ext_resource type="Script" path="res://Scenes/PhysicsCardObjects/physics_body_RigidBody.cs" id="3_p1cg7"]
+[ext_resource type="Texture2D" uid="uid://e7gao58lpuyv" path="res://Assets/Sprites/JPEGofA1995ToyotaCorolla.png" id="4_b2c8j"]
+
+[node name="Crate" instance=ExtResource("1_s4kdb")]
+symbol = ExtResource("2_lrjym")
+cost = 20
+metadata/HoldOffset = 300.0
+
+[node name="RigidBody2D" type="RigidBody2D" parent="." index="0"]
+collision_layer = 5
+collision_mask = 3
+mass = 20.0
+script = ExtResource("3_p1cg7")
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="RigidBody2D" index="0"]
+polygon = PackedVector2Array(-220, 301, -220, -301, 220, -301, 219, 301)
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D/CollisionShape2D" index="0"]
+texture = ExtResource("4_b2c8j")

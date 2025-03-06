@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ddtv7683ht0ki"
-path="res://.godot/imported/CardFront.png-173dfb5e4b881f8eb0b3f34ad2071e75.ctex"
+uid="uid://csnwgompidjeg"
+path="res://.godot/imported/bridgeicon.png-e9715b8edef431ac4ce4784754fc4e10.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Deck/Cards/CardFront.png"
-dest_files=["res://.godot/imported/CardFront.png-173dfb5e4b881f8eb0b3f34ad2071e75.ctex"]
+source_file="res://Assets/Sprites/Objects/bridgeicon.png"
+dest_files=["res://.godot/imported/bridgeicon.png-e9715b8edef431ac4ce4784754fc4e10.ctex"]
 
 [params]
 

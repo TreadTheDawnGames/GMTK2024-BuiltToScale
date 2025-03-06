@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://0t3dawan26jq"]
+[gd_scene load_steps=5 format=3 uid="uid://0t3dawan26jq"]
 
 [ext_resource type="PackedScene" uid="uid://bbsse1b5w57it" path="res://Scenes/PhysicsCardObjects/physics_object.tscn" id="1_hegvx"]
 [ext_resource type="Texture2D" uid="uid://ba283hkod0sq3" path="res://Assets/Sprites/lamp.png" id="2_5jnss"]
 [ext_resource type="Texture2D" uid="uid://doe5u43sd65c2" path="res://Assets/Sprites/Objects/lampIcon.png" id="2_plkvp"]
+[ext_resource type="Script" path="res://Scenes/PhysicsCardObjects/physics_body_RigidBody.cs" id="3_vef5t"]
 
 [node name="lamp" instance=ExtResource("1_hegvx")]
 symbol = ExtResource("2_plkvp")
@@ -13,11 +14,12 @@ metadata/HoldOffset = 50.0
 collision_layer = 5
 collision_mask = 3
 mass = 10.0
+script = ExtResource("3_vef5t")
 
-[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D" index="0"]
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="RigidBody2D" index="0"]
+polygon = PackedVector2Array(-27, 28, -26, 24, -21, 20, -15, 17, -7, 17, -5, 13, -5, -136, -7, -137, -10, -140, -15, -161, -19, -161, -19, -163, -7, -175, -2, -175, -3, -176, -3, -178, -1, -180, 1, -180, 3, -178, 3, -176, 2, -175, 8, -175, 20, -163, 20, -161, 16, -161, 11, -140, 9, -137, 6, -136, 6, 13, 8, 17, 17, 17, 22, 20, 27, 24, 28, 28)
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D/CollisionShape2D" index="0"]
 texture = ExtResource("2_5jnss")
 centered = false
 offset = Vector2(-27, -180)
-
-[node name="CollisionShape2D" type="CollisionPolygon2D" parent="RigidBody2D" index="1"]
-polygon = PackedVector2Array(-27, 28, -26, 24, -21, 20, -15, 17, -7, 17, -5, 13, -5, -136, -7, -137, -10, -140, -15, -161, -19, -161, -19, -163, -7, -175, -2, -175, -3, -176, -3, -178, -1, -180, 1, -180, 3, -178, 3, -176, 2, -175, 8, -175, 20, -163, 20, -161, 16, -161, 11, -140, 9, -137, 6, -136, 6, 13, 8, 17, 17, 17, 22, 20, 27, 24, 28, 28)

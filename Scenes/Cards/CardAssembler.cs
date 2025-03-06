@@ -8,9 +8,9 @@ using System.Reflection.Emit;
 public static class CardAssembler
 {
 
-    public enum CardType { beachball, bowl, crate, gascan, lamp, mattress, obsidian, piano, scaffleting, ship, shop, staircase, starterbowl, steelcrate, stoneball, table, toilet, trafficCone, tree, truck, zeekplushy}
-    public enum GuaranteedCardType { crate, scaffleting, staircase }
-    public enum StarterCardType { staircase, crate, toilet }
+    public enum CardType {desklamp, tungstoncube, gamblecore, trashcan, legobrick, JPEGofA1995ToyotaCorolla, daveramsey, backdoor, bush, citybridge, CommicallyLargeUSBStick, beachball, /*bowl,*/ crate, gascan, glue, lamp, mattress, obsidian, piano, scaffleting, ship, shop, staircase, /*starterbowl*/ steelcrate, stoneball, table, toilet, trafficCone, tree, truck, zeekplushy}
+    public enum GuaranteedCardType {crate, scaffleting, staircase }
+    public enum StarterCardType { staircase, crate, toilet}
     public enum SpecialCardType { obsidian, shop, ship, zeekplushy }
 
 
@@ -43,7 +43,7 @@ public static class CardAssembler
         return MakeCardPath(RandType<T>());
     }
 
-    static string GetRandStarter()
+    static string GetRandStarterCard()
     {
         int rand = (int)(GD.Randi() % 3);
         return GetStarterObjectPath((StarterCardType)rand);
@@ -109,11 +109,24 @@ public static class CardAssembler
             }
         }
 
+
+
         int rand;
         if (cards.Count > 0)
         {
             rand = (int)(GD.Randi() % cards.Count);
-            return cards[rand];
+            var card = cards[rand];
+
+            if(card == CardType.gascan)
+            {
+                if (GD.Randi() % 2 == 0)
+                {
+                    rand = (int)(GD.Randi() % cards.Count);
+                    card = cards[rand];
+                }
+            }
+
+            return card;
         }
         else
         {
@@ -146,8 +159,9 @@ public static class CardAssembler
         return starterDeck;
     }
 
-    public static List<CardData> BalancedStarter(int deckSize)
+    public static List<CardData> BalancedStarterDeck(int deckSize)
     {
+        DeckManager.Instance.correctDeck = true;
         List<CardData> starterDeck = new List<CardData>
         {
             new CardData(MakeCardPath(CardType.obsidian)),
@@ -178,7 +192,7 @@ public static class CardAssembler
         return starterDeck;
     }
 
-    public static List<CardData> Starter()
+    public static List<CardData> StarterDeck()
     {
         List<CardData> starterDeck = new List<CardData>
         {
@@ -188,7 +202,7 @@ public static class CardAssembler
 
         while (starterDeck.Count < 10)
         {
-            starterDeck.Add(new CardData(GetRandStarter()));
+            starterDeck.Add(new CardData(GetRandStarterCard()));
         }
 
         foreach (CardData card in starterDeck)
@@ -201,7 +215,7 @@ public static class CardAssembler
     }
 
 
-    public static List<CardData> OneEach()
+    public static List<CardData> OneEachDeck()
     {
         List<CardData> oneEach = new List<CardData>();
 
@@ -212,25 +226,65 @@ public static class CardAssembler
 
         return oneEach;
     }
-    public static List<CardData> Artistic()
+    public static List<CardData> DevShenaniganDeck(int? deckSize = null)
     {
-        List<CardData> oneEach = new List<CardData>()
+        if (deckSize == null)
+            deckSize = DeckManager.Instance.deckSize;
+
+        DeckManager.Instance.correctDeck = true;
+        List<CardData> deck = new List<CardData>
         {
+            new CardData(MakeCardPath(CardType.obsidian)),
+            new CardData(MakeCardPath(CardType.obsidian)),
+            new CardData(MakeCardPath(CardType.obsidian)),
             new CardData(MakeCardPath(CardType.gascan)),
-            new CardData(MakeCardPath(CardType.tree)),
+            new CardData(MakeCardPath(CardType.gascan)),
+            new CardData(MakeCardPath(CardType.gascan)),
+            new CardData(MakeCardPath(CardType.gascan)),
+            new CardData(MakeCardPath(CardType.gascan)),
+            new CardData(MakeCardPath(CardType.gascan)),
+            new CardData(MakeCardPath(CardType.gascan)),
+            new CardData(MakeCardPath(CardType.gascan)),
+            new CardData(MakeCardPath(CardType.glue)),
+            new CardData(MakeCardPath(CardType.glue)),
+            new CardData(MakeCardPath(CardType.glue)),
+            new CardData(MakeCardPath(CardType.glue)),
+            new CardData(MakeCardPath(CardType.zeekplushy)),
+            new CardData(MakeCardPath(CardType.zeekplushy)),
+            new CardData(MakeCardPath(CardType.zeekplushy)),
             new CardData(MakeCardPath(CardType.shop)),
-            new CardData(MakeCardPath(CardType.crate)),
-            new CardData(MakeCardPath(CardType.crate)),
-            new CardData(MakeCardPath(CardType.crate)),
-            new CardData(MakeCardPath(CardType.truck)),
-    };
+            new CardData(MakeCardPath(CardType.shop)),
+            new CardData(MakeCardPath(CardType.shop)),
+            new CardData(MakeCardPath(CardType.shop)),
+            new CardData(MakeCardPath(CardType.shop)),
+            new CardData(MakeCardPath(CardType.shop)),
+        };
 
-        
+        while (deck.Count < Mathf.FloorToInt((float)deckSize * 0.75))
+        {
+            deck.Add(new CardData(MakeCardPath(RandType<StarterCardType>())));
 
-        return oneEach;
+        }
+        while (deck.Count < deckSize)
+        {
+            deck.Add(Create(GetRandCardTypeOfCost(5)));
+        }
+
+
+        foreach (CardData card in deck)
+        {
+            card.inShop = false;
+        }
+
+
+
+
+
+
+        return deck;
     }
 
-    public static CardType GetWeightedRand()
+    public static CardType GetWeightedRandCard()
     {
         int rand = (int)(GD.Randi() % 101);
 
@@ -240,23 +294,37 @@ public static class CardAssembler
             CardType[] cardTypes = new CardType[]
             {
                 CardType.toilet,
-                CardType.crate,
-                CardType.scaffleting,
-                CardType.tree
+                //CardType.crate,
+                //CardType.scaffleting,
+                CardType.tree,
+                CardType.legobrick
             };
             int innerRand = (int)(GD.Randi() % cardTypes.Length);
 
             return cardTypes[innerRand];
         }
-        //25% chance
-        else if (rand >= 30 && rand <= 54)
+        //20% chance
+        else if (rand >= 30 && rand <= 49)
         {
             CardType[] cardTypes = new CardType[]
             {
                 CardType.piano,
                 CardType.lamp,
-                CardType.staircase,
+                CardType.backdoor,
+                //CardType.staircase,
                 CardType.table
+            };
+            int innerRand = (int)(GD.Randi() % cardTypes.Length);
+
+            return cardTypes[innerRand];
+        }
+        //5% chance
+        else if (rand >= 50 && rand <= 54)
+        {
+            CardType[] cardTypes = new CardType[]
+            {
+                CardType.citybridge,
+                CardType.CommicallyLargeUSBStick
             };
             int innerRand = (int)(GD.Randi() % cardTypes.Length);
 
@@ -270,7 +338,12 @@ public static class CardAssembler
                 CardType.steelcrate,
                 CardType.stoneball,
                 CardType.truck,
-                CardType.mattress
+                CardType.mattress,
+                CardType.desklamp,
+                //CardType.tungstoncube,
+                CardType.trashcan,
+                CardType.backdoor,
+                CardType.bush
             };
             int innerRand = (int)(GD.Randi() % cardTypes.Length);
             return cardTypes[innerRand];
@@ -281,7 +354,9 @@ public static class CardAssembler
             CardType[] cardTypes = new CardType[]
             {
                 CardType.shop,
-                CardType.obsidian
+                CardType.obsidian,
+                CardType.glue,
+                CardType.gamblecore
             };
             int innerRand = (int)(GD.Randi() % cardTypes.Length);
 
@@ -294,7 +369,9 @@ public static class CardAssembler
             CardType[] cardTypes = new CardType[]
              {
                 CardType.ship,
-                CardType.zeekplushy
+                CardType.zeekplushy,
+                CardType.JPEGofA1995ToyotaCorolla,
+                CardType.daveramsey
              };
             int innerRand = (int)(GD.Randi() % cardTypes.Length);
 
@@ -305,7 +382,7 @@ public static class CardAssembler
     }
 
 
-    public static CardType GetRigged()
+    public static CardType GetRiggedCard()
     {
             CardType[] cardTypes = new CardType[]
             {
